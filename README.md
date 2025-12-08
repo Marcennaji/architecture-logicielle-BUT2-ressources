@@ -1,4 +1,6 @@
-# Syllabus — R4.01 Architecture logicielle (BUT2)
+# Module R4.01 Architecture logicielle (BUT2)
+
+Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 ## 🎯 Objectifs du module
 
@@ -50,19 +52,19 @@
 
 Ce planning est volontairement souple : chaque TD indique ce qui est **prioritaire** et ce qui relève du **bonus**.
 
-## 💡 Message clé du module
-
-> **L'IA est une excellente codeuse, pas (encore) une ingénieure logicielle.**
->
-> Un *codeur* maîtrise un langage et produit du code qui fonctionne.  
-> Un *ingénieur logiciel* conçoit des systèmes cohérents, maintenables, évolutifs.
->
-> **Ce cours vise à faire de vous des ingénieurs, pas juste des codeurs assistés par IA.**
-
 ## 📖 Références
 
-- **Clean Architecture** — Robert C. Martin
-- **Domain-Driven Design** — Eric Evans
-- **Building Microservices** — Sam Newman
+### Architecture hexagonale
+- [Architecture Hexagonale — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) *(article original, EN)*
+- [Architecture hexagonale : 3 principes et un exemple — OCTO](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation/) *(FR)*
+
+### Principes fondamentaux
+- [Principes SOLID — Grafikart](https://grafikart.fr/tutoriels/solid-principles-2153) *(vidéo FR)*
+- [Écrivez du code Python maintenable — OpenClassrooms](https://openclassrooms.com/fr/courses/7415611-ecrivez-du-code-python-maintenable) *(cours gratuit FR)*
+
+### Outils utilisés
 - [Documentation FastAPI](https://fastapi.tiangolo.com/)
 - [Documentation pytest](https://docs.pytest.org/)
+
+### Pour aller plus loin
+- 📘 **Modern Software Engineering** — David Farley *(EN)* : vision pragmatique de l'ingénierie logicielle moderne
