@@ -2,7 +2,7 @@
 
 ## 🎯 Objectifs du module
 
-- Comprendre **pourquoi** l'architecture logicielle est essentielle — notamment à l'ère des assistants IA.
+- Comprendre **pourquoi** l'architecture logicielle est essentielle
 - Maîtriser les **principes fondamentaux** d'une bonne architecture : cohésion, couplage, dépendances, inversion de dépendances.
 - Connaître les principales **familles d'architectures** (monolithe, N-tiers, MVC, microservices, event-driven, hexagonale…).
 - Savoir **structurer une application** selon l'architecture hexagonale (Ports & Adapters).
