@@ -6,6 +6,7 @@ Ces guides sont à consulter tout au long du module :
 
 - [Guide de démarrage](guides/demarrage.md) ⚠️ **À suivre AVANT le TD0**
 - [Workflow de développement](guides/workflow_de_developpement.md)
+- [Git - Aide-mémoire](guides/git_aide_memoire.md) 🖥️ **Commandes Git essentielles**
 - [Guide des tests](guides/comment_tester.md)
 - [Critères d'évaluation](evaluation.md) 📊 **Comment vous serez évalués**
 

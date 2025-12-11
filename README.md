@@ -20,7 +20,7 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 ## 📚 Ressources du cours
 
-### Cours magistraux
+### Cours magistraux (CM)
 
 | Document | Description |
 |----------|-------------|
@@ -80,7 +80,6 @@ Ce planning est volontairement souple : chaque TD indique ce qui est **prioritai
 ## 📖 Références
 
 ### Architecture hexagonale
-- [Architecture Hexagonale — Alistair Cockburn](https://alistair.cockburn.us/hexagonal-architecture/) *(article original, EN)*
 - [Architecture hexagonale : 3 principes et un exemple — OCTO](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation/) *(FR)*
 
 ### Principes fondamentaux

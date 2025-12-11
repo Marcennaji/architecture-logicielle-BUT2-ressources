@@ -169,3 +169,9 @@ git push origin td1 --force
 ### Comment voir les commentaires de review ?
 
 Sur GitHub, dans l'onglet **Pull requests** de votre repo, puis dans la section **Files changed** de votre PR.
+
+---
+
+## Ressources complémentaires
+
+- [Git - Aide-mémoire](git_aide_memoire.md) : Commandes Git essentielles (ligne de commande + VS Code)
