@@ -71,19 +71,53 @@ En salle de TD, l'accès aux assistants IA est **bloqué par le proxy réseau**.
 
 ## 🎯 Évaluation des TD (8/20)
 
-**6 exercices pratiques** réalisés en présentiel (TD1 à TD6) :
-- Durée : 30 min à 1h30 selon la complexité
+### Format des TD
+
+Chaque TD (TD1 à TD7) peut s'étaler sur **plusieurs séances** selon la complexité :
+- TD simple (domain, utils) : 1 séance (~2h30)
+- TD complexe (SQLite, API REST) : 2-3 séances (~5-7h)
+
+À la **fin de chaque TD** (pas à chaque séance), un **exercice noté** valide vos acquis :
+- Durée : 30 min à 1h30
+- Contexte : En présentiel, **sans accès IA**
 - Notation : ~1-1.5 pts par exercice
-- Format : code à écrire sur votre machine, commit à la fin
-- **Sans accès IA**
 
-**Exemples d'exercices** :
-- TD1 : Ajouter une méthode `Ticket.reopen()` avec tests
-- TD2 : Implémenter le use case `AssignTicket`
-- TD3 : Créer l'adapter SQLite pour `UserRepository`
-- TD4 : Ajouter l'endpoint API `/tickets/{id}/comments`
+### 📋 Modalités de rendu
 
-**L'enseignant passe dans les rangs, vérifie votre code, et note en direct.**
+**Pendant la séance d'évaluation** :
+
+1. L'enseignant annonce l'exercice et la **deadline** (ex: 16h30)
+2. Vous créez une branche dédiée (ex: `td3-exercice`)
+3. Vous codez, testez, commitez
+4. Vous pushez **avant la deadline**
+
+**⚠️ IMPORTANT** : Seuls les commits **dans la fenêtre horaire** sont évalués.
+
+```bash
+# Exemple : exercice du TD3 le 15/01/2025 de 15h30 à 16h30
+git checkout -b td3-exercice
+# ... vous codez ...
+git add .
+git commit -m "feat(td3): ajout CommentRepository SQLite"
+git push origin td3-exercice
+# ⏰ Commit AVANT 16h30 impératif !
+```
+
+**Notation** : L'enseignant récupère vos commits via leur **timestamp** et évalue le code en différé.
+
+### Exemples d'exercices notés
+
+- **Fin TD1** (Domain) : "Ajoutez la méthode `Ticket.reopen()` avec ses tests"
+- **Fin TD2** (Use cases) : "Implémentez le use case `ReassignTicket`"
+- **Fin TD3** (SQLite) : "Ajoutez la persistance pour `Comment` via SQLite"
+- **Fin TD4** (API REST) : "Créez l'endpoint `PATCH /tickets/{id}/priority`"
+
+### ⚖️ Règles
+
+- ✅ Commit dans les temps → Évalué normalement
+- ⏰ Commit hors délai (> 5 min) → Pénalité -50%
+- ❌ Commit hors délai (> 30 min) → 0/1.5
+- 🚫 Absence non justifiée → Exercice de rattrapage à faire
 
 ---
 
