@@ -1,5 +1,15 @@
+# Fichiers de travail enseignant (ne pas publier)
 cm/README_PRESENTATION.md
 HOWTO.md
 scripts/*
 claude.md
 td/email_td0.md
+
+# Fichiers Copilot (instructions privées)
+.github/copilot-instructions.md
+
+# Contexte projet (notes internes)
+project_goal_and_context.md
+
+# Exports (slides générés)
+export/
