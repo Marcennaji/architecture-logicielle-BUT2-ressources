@@ -1,0 +1,13 @@
+# TDs non encore publiés (gardés en local jusqu'au moment approprié)
+# Décommentez au fur et à mesure de la publication
+
+# TD01_domain_modeling.md
+TD02_usecases_ports.md
+TD03_repository_sql.md
+TD04_api_rest.md
+TD05_auth_jwt.md
+TD06_tests_ci.md
+TD07_extensions.md
+
+# Grille d'évaluation (réservée à l'enseignant)
+grille_evaluation.md

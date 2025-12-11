@@ -2,6 +2,7 @@
 marp: true
 theme: default
 paginate: true
+size: 4:3
 title: CM1 — Fondamentaux de l'architecture logicielle
 style: |
   section {
@@ -35,20 +36,21 @@ Comprendre **pourquoi** on parle d’architecture logicielle et découvrir les *
 
 ---
 
-## 🧩 Plan du cours
+## 🧩 Plan du cours (1/2)
 
 1. Pourquoi une architecture logicielle ?  
 2. Notions clés : cohésion, couplage, responsabilités  
 3. Panorama des architectures :
-   - Monolithique
-   - N-tiers / en couches
-   - MVC / MVVM
-   - SOA
-   - Microservices
-   - Event-driven
-   - Architectures centrées domaine (Clean, Hexagonale…)
-4. Patterns utiles encore aujourd’hui  
-5. Rôle des briques logicielles (frameworks, APIs, services web, accès aux données)  
+   - Monolithique, N-tiers, MVC/MVVM
+   - SOA, Microservices, Event-driven
+   - Architectures centrées domaine
+
+---
+
+## 🧩 Plan du cours (2/2)
+
+4. Patterns utiles encore aujourd'hui  
+5. Rôle des briques logicielles  
 6. Mini-exercice de synthèse
 
 ---
@@ -87,9 +89,9 @@ Une bonne architecture doit aider à :
 
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante
+## 🤖 Pourquoi l'architecture devient PLUS importante (1/2)
 
-1. **L'IA suit des instructions, elle ne prend pas de décisions stratégiques**
+1. **L'IA suit des instructions, pas de décisions stratégiques**
    - Elle peut respecter une architecture… *si vous lui expliquez laquelle*
    - Elle ne sait pas si votre contexte justifie une exception
 
@@ -97,12 +99,15 @@ Une bonne architecture doit aider à :
    - Sans direction claire → accumulation rapide de dette technique
    - L'IA produit du code cohérent *localement*, mais pas toujours *globalement*
 
+---
+
+## 🤖 Pourquoi l'architecture devient PLUS importante (2/2)
+
 3. **L'IA est un amplificateur**
    - Bonne architecture + IA → productivité décuplée ✅
    - Pas d'architecture + IA → chaos à grande vitesse ❌
 
 4. **Votre valeur = les décisions que l'IA ne peut pas prendre**
-   Par exemple :
    - Où placer la frontière entre domaine et infrastructure ?
    - Ce couplage est-il acceptable *dans ce contexte* ?
    - Faut-il sacrifier la pureté pour la simplicité ici ?
@@ -119,12 +124,17 @@ Elle code (en général) très bien. Mais elle a besoin que **vous** lui donniez
 - 🚧 Les contraintes (quelles règles respecter ?)
 - ⚖️ Les arbitrages (quand faire une exception ?)
 
-💡 **L'IA est une excellente codeuse, pas (encore) une ingénieure logicielle.**
+---
+
+## 💡 Codeur vs Ingénieur
+
+**L'IA est une excellente codeuse, pas (encore) une ingénieure logicielle.**
 
 Un **codeur** maîtrise un langage et produit du code qui fonctionne.  
 Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
 
-*Ce cours vise à faire de vous des ingénieurs, pas juste des codeurs assistés par IA.*
+> *Ce cours vise à faire de vous des ingénieurs,  
+> pas juste des codeurs assistés par IA.*
 
 ---
 
@@ -349,17 +359,22 @@ On parle parfois de :
 
 ---
 
-## 🧱 4. Patterns (motifs) utiles en architecture
+## 🧱 4. Patterns utiles (1/2)
 
-Quelques « briques » que l’on retrouve souvent :
+Quelques « briques » que l'on retrouve souvent :
 
-- **Repository** : encapsule l’accès aux données (ex : `UserRepository`)
+- **Repository** : encapsule l'accès aux données (ex : `UserRepository`)
 - **Service** métier : porte les règles métier (ex : `OrderService`)
 - **Factory / Builder** : crée des objets complexes
-- **DTO (Data Transfer Object)** : objets pour transporter les données entre couches
+- **DTO (Data Transfer Object)** : transporte les données entre couches
+
+---
+
+## 🧱 4. Patterns utiles (2/2)
+
 - **Mapper** : convertit entités ↔ DTO
-- **Observer / Pub-Sub** : réagir à des événements (listeners, handlers)
-- **Dependency Injection (DI)** : délègue la création des dépendances à un conteneur
+- **Observer / Pub-Sub** : réagir à des événements
+- **Dependency Injection (DI)** : délègue la création des dépendances
 
 📌 Objectif : les connaître de nom, savoir **reconnaître** quand on les voit.
 
