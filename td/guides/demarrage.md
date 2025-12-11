@@ -4,7 +4,7 @@
 
 **Cette procédure DOIT être suivie AVANT d'arriver au TD0.**
 
-En suivant cette procédure maintenant, vous gagnerez **40 minutes** lors du TD0 et pourrez vous concentrer directement sur le code et le workflow Git/GitHub.
+En suivant cette procédure maintenant, vous gagnerez du temps lors du TD0 et pourrez vous concentrer directement sur le code et le workflow Git/GitHub.
 
 **Temps estimé** : 15-20 minutes
 
