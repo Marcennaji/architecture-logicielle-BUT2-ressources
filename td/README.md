@@ -12,18 +12,16 @@ Ces guides sont à consulter tout au long du module :
 
 ## 📋 Liste des TDs
 
-| TD | Titre | Statut | Lien |
-|----|-------|--------|------|
-| TD0 | Prise en main | ✅ Disponible | [TD0_prise_en_main.md](TD0_prise_en_main.md) |
-| TD1 | Modélisation du domaine | 🔒 Bientôt | - |
-| TD2 | Use cases et ports | 🔒 Bientôt | - |
-| TD3 | Repository SQL | 🔒 Bientôt | - |
-| TD4 | API REST | 🔒 Bientôt | - |
-| TD5 | Authentification JWT | 🔒 Bientôt | - |
-| TD6 | Tests et CI | 🔒 Bientôt | - |
-| TD7 | Extensions | 🔒 Bientôt | - |
+| TD | Titre | Durée | Statut | Lien |
+|----|-------|-------|--------|------|
+| TD0 | Prise en main | 2h | ✅ Disponible | [TD0_prise_en_main.md](TD0_prise_en_main.md) |
+| TD1 | Modélisation du domaine | 3h | 🔒 Bientôt | - |
+| TD2 | Use cases et ports | 3h | 🔒 Bientôt | - |
+| TD3 | Repository SQLite | 5h | 🔒 Bientôt | - |
+| TD4 | API REST avec FastAPI | 5h | 🔒 Bientôt | - |
 
-> 💡 Les TDs sont publiés progressivement au fur et à mesure de l'avancement du module.
+> 💡 **Volume total** : 18h de TD en présentiel + ~10h de travail à la maison.  
+> Les TDs sont publiés progressivement au fur et à mesure de l'avancement du module.
 
 ## 🎯 Template de code
 

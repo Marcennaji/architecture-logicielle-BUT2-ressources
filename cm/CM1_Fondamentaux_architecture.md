@@ -45,8 +45,8 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
    - Gestion des dépendances
    - Séparation des responsabilités
    - Inversion de dépendances
-4. Panorama des architectures (survol)
-5. Mini-exercice de synthèse
+4. **Architecture hexagonale** (Ports & Adapters)
+5. Présentation du projet ticketing
 
 ---
 
@@ -393,7 +393,7 @@ Le métier connaît MySQL                      ▲
 - Pour tester : on injecte un fake
 - Changer de DB : on crée un nouvel adaptateur
 
-👉 **C'est le cœur de l'architecture hexagonale (CM2).**
+👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
 
 ---
 
@@ -411,97 +411,347 @@ Le métier connaît MySQL                      ▲
 
 ---
 
-## 🏛 4. Panorama des architectures (survol)
+## 🛡️ 4. Architecture hexagonale (Ports & Adapters)
 
-Il existe de nombreuses architectures. Voici les principales familles :
+### 4.1 Le problème à résoudre
 
-| Architecture | Idée clé |
-|--------------|----------|
-| **Monolithique** | Tout en un bloc déployable |
-| **N-tiers / Couches** | Séparation horizontale (UI / Métier / Data) |
-| **MVC / MVVM** | Pattern pour les interfaces utilisateur |
-| **SOA** | Services métier mutualisés (grands SI) |
-| **Microservices** | Petits services autonomes et indépendants |
-| **Event-Driven** | Communication par événements asynchrones |
-| **Hexagonale / Clean** | Le métier au centre, indépendant de la technique |
+❌ **Code "framework-first" typique** :
 
-📖 **Document de référence détaillé** : `architectures_reference.md`
+```python
+@app.post("/tickets")
+def create_ticket(request: Request, db: Session = Depends(get_db)):
+    data = request.json()
+    
+    # Validation métier dans le controller 😬
+    if len(data["title"]) < 3:
+        raise HTTPException(400, "Titre trop court")
+    
+    # Accès direct à la DB 😬
+    ticket = TicketModel(title=data["title"], status="open")
+    db.add(ticket)
+    db.commit()
+    
+    return {"id": ticket.id}
+```
 
----
-
-## 4.1 Ce qu'il faut retenir
-
-**Monolithe vs Microservices :**
-- Monolithe = simple, adapté aux petites équipes
-- Microservices = complexe, pour grandes organisations
-- 💡 Un **monolithe bien structuré** > des microservices mal maîtrisés
-
-**Architecture en couches :**
-- Modèle classique, compris par tous
-- ⚠️ Attention aux "couches passoires" qui n'apportent rien
-
-**Architectures centrées domaine (Hexagonale, Clean…) :**
-- Le métier ne dépend pas de la technique
-- C'est ce qu'on étudiera en **CM2** et dans le projet
+**Problèmes :**
+- 🧪 Impossible de tester la règle métier sans lancer FastAPI + DB
+- 🔄 Changer de framework = tout réécrire
+- 🐛 Logique métier éparpillée partout
 
 ---
 
-## 4.2 Comment choisir ?
+### 4.2 La solution : séparer le métier de la technique
 
-La bonne architecture dépend du **contexte** :
+**Principe central de l'hexagonale :**
 
-| Critère | Question |
-|---------|----------|
-| Taille de l'équipe | Petite équipe → monolithe. Grande → peut-être microservices |
-| Complexité métier | Logique simple → couches. Complexe → hexagonale |
-| Durée de vie | Court terme → simple. Long terme → investir dans la structure |
-| Besoin de tests | Fort → architectures avec inversion de dépendances |
-| Scalabilité | Forte et différenciée → microservices |
+> **Le domaine métier au centre, indépendant de toute technique.**  
+> La technique s'adapte au métier, pas l'inverse.
 
-👉 **Pas de solution universelle.** L'important est de **justifier** son choix.
+```text
+┌────────────────────────────────────────────────────────────┐
+│                      ADAPTERS                              │
+│  (FastAPI, SQLAlchemy, SMTP, APIs externes...)             │
+│                                                            │
+│  ┌──────────────────────────────────────────────────────┐ │
+│  │              APPLICATION LAYER                       │ │
+│  │   (Use Cases : orchestration métier + ports)         │ │
+│  │                                                      │ │
+│  │  ┌─────────────────────────────────────────────┐    │ │
+│  │  │          DOMAIN LAYER                       │    │ │
+│  │  │  (Entités, Règles métier, Value Objects)    │    │ │
+│  │  │  ⚠️ ZÉRO import technique                    │    │ │
+│  │  └─────────────────────────────────────────────┘    │ │
+│  └──────────────────────────────────────────────────────┘ │
+└────────────────────────────────────────────────────────────┘
 
----
-
-## 📝 5. Mini-exercice (discussion)
-
-Contexte : application de **gestion d'emprunts de livres** pour une médiathèque.  
-
-Fonctionnalités :
-- Gérer les utilisateurs et les livres
-- Gérer les emprunts & retours
-- Envoyer des rappels par email
-- Générer quelques statistiques
-
-**Questions :**
-1. Quels **principes** sont importants ici ?
-2. Comment isoleriez-vous l'envoi d'email du métier ?
-3. Quelle architecture vous semble adaptée ?
-
-🎯 Objectif : **appliquer les principes** vus aujourd'hui.
+        Dependencies flow INWARD →
+```
 
 ---
 
-## 🎯 Récapitulatif du CM1
+### 4.3 Les 3 couches
 
-Vous devez maintenant :
+#### 🟢 DOMAIN (le cœur)
 
-✅ Comprendre **pourquoi** l'architecture est essentielle (encore plus avec l'IA)
+**Contenu :**
+- Entités (`Ticket`, `User`)
+- Règles métier (`ticket.assign_to()`, `ticket.close()`)
+- Value Objects (`TicketStatus`, `Email`)
 
-✅ Maîtriser les **principes fondamentaux** :
+**Règle d'or :**
+> Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)
+
+```python
+# domain/ticket.py
+from dataclasses import dataclass
+from enum import Enum
+
+class Status(Enum):
+    OPEN = "open"
+    IN_PROGRESS = "in_progress"
+    RESOLVED = "resolved"
+    CLOSED = "closed"
+
+@dataclass
+class Ticket:
+    id: int
+    title: str
+    status: Status
+    assignee_id: int | None = None
+    
+    def assign(self, user_id: int) -> None:
+        """Règle métier : on ne peut assigner qu'un ticket ouvert."""
+        if self.status != Status.OPEN:
+            raise ValueError("Impossible d'assigner un ticket non ouvert")
+        self.assignee_id = user_id
+        self.status = Status.IN_PROGRESS
+```
+
+---
+
+### 4.3 Les 3 couches (suite)
+
+#### 🔵 PORTS (interfaces)
+
+Des **contrats** (interfaces) définis par le métier :
+
+```python
+# ports/ticket_repository.py
+from abc import ABC, abstractmethod
+from domain.ticket import Ticket
+
+class TicketRepository(ABC):
+    """Port de sortie pour la persistance."""
+    
+    @abstractmethod
+    def save(self, ticket: Ticket) -> None:
+        pass
+    
+    @abstractmethod
+    def get(self, ticket_id: int) -> Ticket | None:
+        pass
+    
+    @abstractmethod
+    def list_all(self) -> list[Ticket]:
+        pass
+```
+
+👉 Le métier **définit** ce dont il a besoin, sans savoir **comment** c'est implémenté.
+
+---
+
+### 4.3 Les 3 couches (fin)
+
+#### 🟡 APPLICATION (orchestration)
+
+**Use cases** qui coordonnent le métier et les ports :
+
+```python
+# application/usecases/create_ticket.py
+from domain.ticket import Ticket, Status
+from ports.ticket_repository import TicketRepository
+
+class CreateTicket:
+    def __init__(self, ticket_repository: TicketRepository):
+        self.repository = ticket_repository  # Injection de dépendance
+    
+    def execute(self, title: str) -> Ticket:
+        ticket = Ticket(
+            id=None,  # Généré par le repository
+            title=title,
+            status=Status.OPEN
+        )
+        self.repository.save(ticket)
+        return ticket
+```
+
+#### 🔴 ADAPTERS (implémentations)
+
+**Implémentations concrètes** des ports :
+
+```python
+# adapters/db/ticket_repository_inmemory.py
+class InMemoryTicketRepository(TicketRepository):
+    def __init__(self):
+        self.tickets: dict[int, Ticket] = {}
+        self.next_id = 1
+    
+    def save(self, ticket: Ticket) -> None:
+        if ticket.id is None:
+            ticket.id = self.next_id
+            self.next_id += 1
+        self.tickets[ticket.id] = ticket
+```
+
+---
+
+### 4.4 Pourquoi c'est puissant ?
+
+✅ **Testabilité** :
+```python
+# Test du domaine (ZÉRO dépendance)
+def test_cannot_assign_closed_ticket():
+    ticket = Ticket(id=1, title="Bug", status=Status.CLOSED)
+    with pytest.raises(ValueError):
+        ticket.assign(user_id=42)
+
+# Test du use case (InMemory fake)
+def test_create_ticket():
+    repo = InMemoryTicketRepository()
+    use_case = CreateTicket(repo)
+    ticket = use_case.execute("Bug critique")
+    assert ticket.status == Status.OPEN
+```
+
+✅ **Évolutivité** : Passer de InMemory → SQLite → PostgreSQL sans toucher au métier
+
+✅ **Clarté** : Chaque couche a un rôle précis
+
+---
+
+### 4.5 Le flux de dépendances
+
+```text
+❌ Architecture classique (mauvais) :
+
+┌──────────┐
+│   API    │
+└────┬─────┘
+     │ dépend de
+     ▼
+┌──────────┐
+│  Métier  │
+└────┬─────┘
+     │ dépend de
+     ▼
+┌──────────┐
+│    DB    │
+└──────────┘
+
+Le métier dépend de la DB ❌
+
+
+✅ Architecture hexagonale (bon) :
+
+┌──────────┐          ┌──────────┐
+│   API    │          │    DB    │
+└────┬─────┘          └────┬─────┘
+     │                     │
+     │ implémente          │ implémente
+     ▼                     ▼
+┌─────────────────────────────────┐
+│  Métier (définit les ports)     │
+│  Application (use cases)        │
+│  Domain (entités + règles)      │
+└─────────────────────────────────┘
+
+Le métier ne dépend de RIEN ✅
+```
+
+---
+
+## 🎯 5. Le projet : Ticketing System
+
+### 5.1 Vue d'ensemble
+
+Vous allez implémenter un **système de tickets** (simplifié) en architecture hexagonale.
+
+**Domaine métier :**
+- `Ticket` : id, titre, statut, assigné à
+- `User` : id, username
+- `Status` : OPEN, IN_PROGRESS, RESOLVED, CLOSED
+
+**Use cases :**
+- Créer un ticket
+- Assigner un ticket à un utilisateur
+- Changer le statut d'un ticket
+- Récupérer un ticket / liste de tickets
+
+**Adapters :**
+- Persistance : InMemory → SQLite
+- API : FastAPI (REST)
+
+---
+
+### 5.2 Progression des TDs
+
+| TD | Objectif | Couche |
+|----|----------|--------|
+| **TD0** | Setup environnement, workflow Git | - |
+| **TD1** | Modéliser le domaine (`Ticket`, `User`, `Status`) | Domain |
+| **TD2** | Créer les use cases et ports | Application + Ports |
+| **TD3** | Implémenter le repository SQL | Adapters (DB) |
+| **TD4** | Exposer l'API REST | Adapters (API) |
+
+**Bonus (TD5-TD7)** : Auth JWT, tests CI, notifications
+
+---
+
+### 5.3 Évaluation
+
+📊 **Répartition** :
+- 30% : Projet final (GitHub, code fonctionnel)
+- 40% : Exercices de TD (livrables intermédiaires)
+- 30% : QCM (2 × 15% : mi-parcours + final)
+
+⚠️ **Important** :
+- 70% de la note **sans IA** (TD présentiel + QCM)
+- L'IA est **autorisée** pour le projet à la maison
+- Mais **comprendre** l'architecture reste indispensable
+
+📖 Grille détaillée : `td/evaluation.md`
+
+---
+
+### 5.4 Ressources
+
+📦 **Template de code** :  
+https://github.com/Marcennaji/ticketing_starter
+
+📚 **Documentation TDs** :  
+https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
+
+🔧 **Technologies** :
+- Python 3.11+
+- FastAPI (web framework)
+- SQLAlchemy (ORM)
+- pytest (tests)
+
+🚀 **Prérequis** : Guide de démarrage à suivre **AVANT le TD0**
+
+---
+
+## 🎯 Récapitulatif
+
+Vous avez maintenant :
+
+✅ Compris **pourquoi** l'architecture est essentielle (encore plus avec l'IA)
+
+✅ Maîtrisé les **principes fondamentaux** :
 - Cohésion, couplage, dépendances
 - Séparation des responsabilités
 - Inversion de dépendances
 
-✅ Connaître les **grandes familles d'architectures** (cf. document de référence)
+✅ Découvert l'**architecture hexagonale** :
+- Domain (métier pur)
+- Ports (interfaces)
+- Application (use cases)
+- Adapters (implémentations)
 
-➡ **Prochain cours (CM2)** : Architecture hexagonale (Ports & Adapters) en détail.
+✅ Une vision du **projet ticketing**
+
+➡ **Prochaine étape** : TD0 (prise en main environnement + workflow)
 
 ---
 
-# 🏁 Fin du CM1
+# 🏁 Fin du cours
 
-📂 Les slides et le document de référence sont disponibles sur le dépôt GitHub.
+📂 Les slides sont disponibles sur le dépôt GitHub.
 
-📖 **À consulter** : `architectures_reference.md` — fiches détaillées sur chaque architecture.
+📖 **Ressources complémentaires** :
+- `architectures_reference.md` — panorama des architectures
+- `td/guides/demarrage.md` — **à suivre AVANT le TD0**
+- `td/evaluation.md` — grille d'évaluation détaillée
 
 ❓ Questions ?

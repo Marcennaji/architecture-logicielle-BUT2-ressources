@@ -24,9 +24,8 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 | Document | Description |
 |----------|-------------|
-| [CM1 : Fondamentaux de l'architecture](cm/CM1_Fondamentaux_architecture.md) | Pourquoi l'architecture ? Principes fondamentaux |
-| [CM2 : Architecture hexagonale](cm/CM2_architecture_hexagonale.md) | Ports & Adapters, Domain/Application/Adapters |
-| [Architectures de référence](cm/architectures_reference.md) | Fiches de référence sur les architectures |
+| [CM : Fondamentaux et architecture hexagonale](cm/CM1_Fondamentaux_architecture.md) | Pourquoi l'architecture ? Principes fondamentaux • Architecture hexagonale |
+| [Architectures de référence](cm/architectures_reference.md) | Fiches de référence sur les architectures (lecture autonome) |
 
 ### Travaux dirigés
 
@@ -55,14 +54,15 @@ Le template de démarrage (code à compléter) est dans un repository séparé :
 
 ## 🗓 Planning indicatif
 
-### Cours magistraux (2 × 2h)
+### Cours magistral (1 × 2h)
 
 | CM | Titre | Contenu |
 |----|-------|---------|
-| **CM1** | Fondamentaux de l'architecture | Pourquoi l'architecture ? • Architecture à l'ère de l'IA • Principes (cohésion, couplage, dépendances) • Panorama des architectures |
-| **CM2** | Architecture hexagonale | Ports & Adapters • Domain / Application / Adapters • Exemples de code • Tests • Comparaison avec Clean/MVC |
+| **CM** | Fondamentaux et architecture hexagonale | Pourquoi l'architecture ? • Architecture à l'ère de l'IA • Principes (cohésion, couplage, dépendances) • Architecture hexagonale (Ports & Adapters) • Présentation du projet |
 
-### Travaux dirigés
+**Volume total du module** : 2h CM + 20h TD = **22h** (sur calendrier)
+
+### Travaux dirigés (10 séances × 2h)
 
 | TD | Titre | Contenu |
 |----|-------|---------|

@@ -13,8 +13,6 @@ En suivant cette procédure maintenant, vous gagnerez du temps lors du TD0 et po
 - ✅ Voir votre repository `ticketing` sur votre compte GitHub
 - ✅ Voir "Marcennaji" dans la liste de vos collaborateurs GitHub
 
-Si vous n'avez pas fait cette procédure, vous perdrez du temps en TD pendant que les autres avanceront.
-
 ---
 
 ## 🚀 Premier TD

@@ -417,7 +417,7 @@ Les dépendances pointent **vers l'intérieur** (vers le domaine).
 
 ### 💡 Point clé
 
-> C'est l'architecture que vous étudierez en détail dans le **CM2** et que vous mettrez en œuvre dans le **projet fil rouge**.
+> C'est l'architecture que vous étudierez en détail dans le **CM** et que vous mettrez en œuvre dans le **projet fil rouge**.
 
 ---
 
