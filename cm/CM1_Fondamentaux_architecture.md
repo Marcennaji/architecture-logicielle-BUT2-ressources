@@ -54,7 +54,7 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
 
 Sans vraie architecture, on obtient vite :
 
-- Du **code spaghetti** 🍝
+- Du **code spaghetti** 🍝 *(délicieux au restaurant, cauchemardesque dans le code)*
 - Une application **difficile à comprendre**
 - Des bugs qui reviennent en boucle
 - Une application **impossible à tester**
@@ -127,6 +127,8 @@ Un **codeur** maîtrise un langage et produit du code qui fonctionne.
 Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
 
 *Ce cours vise à faire de vous des ingénieurs, pas juste des "super codeurs" assistés par IA.*
+
+⚠️ *Sinon dans 5 ans, vous serez remplacés par GPT-12. Mais avec une bonne base en architecture, vous serez ceux qui dirigent GPT-12.* 😉
 
 ---
 
@@ -335,6 +337,8 @@ class OrderManager:
 
 → 7 raisons de changer cette classe = 7 sources de bugs potentiels à chaque modif.
 
+💬 *"Cette classe s'appelle God Object... mais elle a surtout créé le chaos en 7 jours."*
+
 ---
 
 ## 3.4 Séparation — la bonne approche
@@ -358,12 +362,16 @@ class LoyaltyService:         # Points fidélité
 
 ---
 
-## 3.5 Inversion de dépendances (1/2)
+## 3.5 Inversion de dépendances (1/3)
 
 > **Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau.  
 > Les deux doivent dépendre d'abstractions.**
 
 C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagonale.
+
+---
+
+## 3.5 Inversion de dépendances (2/3)
 
 ```text
 ❌ Classique (problème) :              ✅ Inversé (solution) :
@@ -387,7 +395,7 @@ Le métier connaît MySQL                      ▲
 
 ---
 
-## 3.5 Inversion — pourquoi c'est puissant ? (2/2)
+## 3.5 Inversion — pourquoi c'est puissant ? (3/3)
 
 **Avant (dépendance classique) :**
 - Le métier dépend de la base de données
@@ -401,6 +409,43 @@ Le métier connaît MySQL                      ▲
 - Changer de DB : on crée un nouvel adaptateur
 
 👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
+
+---
+
+## 3.6 Le rôle des tests dans l'architecture
+
+> **Les tests ne servent pas qu'à détecter les bugs.  
+> Ils révèlent (et forcent) la qualité de votre architecture.**
+
+**Code difficile à tester = Code mal architecturé**
+
+Si vous devez :
+- Instancier 15 dépendances pour tester une fonction → ❌ Trop couplé
+- Lancer une DB pour tester une règle métier → ❌ Pas d'inversion de dépendances
+- Mocker la moitié de l'application → ❌ Faible cohésion
+
+👉 **Les tests sont un détecteur de problèmes architecturaux.**
+
+---
+
+## 3.6 TDD : piloter l'architecture par les tests
+
+**TDD (Test-Driven Development)** : Écrire le test **AVANT** le code.
+
+```text
+1. ✍️  Écrire un test qui échoue (Red)
+2. ✅  Écrire le code minimal pour passer (Green)
+3. ♻️  Refactorer pour améliorer (Refactor)
+```
+
+**Pourquoi ça améliore l'architecture ?**
+
+- ✅ **Force la testabilité** : Vous ne pouvez pas écrire de test si le code n'est pas testable
+- ✅ **Réduit le couplage** : Pour mocker facilement, il faut des abstractions
+- ✅ **Impose la cohésion** : Un test complexe = trop de responsabilités
+- ✅ **Garantit l'inversion** : Le test devient le "client" qui définit l'interface
+
+💡 *TDD ne garantit pas une bonne architecture, mais une mauvaise architecture ne survit pas au TDD.*
 
 ---
 
@@ -442,7 +487,8 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 ```
 
 **Problèmes :**
-- 🧪 Impossible de tester la règle métier sans lancer FastAPI + DB
+- 🧪 Impossible de tester la règle métier sans lancer FastAPI + DB  
+  *"Pour tester 3 lignes, tu installes MySQL, tu lances un serveur web, tu fais un café..."* ☕
 - 🔄 Changer de framework = tout réécrire
 - 🐛 Logique métier éparpillée partout
 
@@ -681,6 +727,8 @@ Le métier ne dépend de RIEN ✅
 💡 **Message clé :**  
 > Un monolithe bien architecturé (hexagonal) bat des microservices mal conçus 99% du temps.
 
+*Un monolithe bien conçu, c'est comme une maison bien organisée. Des microservices mal conçus, c'est un village sans plan d'urbanisme.* 🏠
+
 **Votre projet** = monolithe hexagonal : simple, testable, maintenable, évolutif 🎯
 
 ---
@@ -696,7 +744,7 @@ Le métier ne dépend de RIEN ✅
    - Impossible de faire sans inversion de dépendances
 
 2. ⏱️ **Adaptée au format** : Ni trop simple, ni trop complexe pour 20h
-   - Microservices = trop (orchestration, déploiement distribué)
+   - Microservices = trop (orchestration, déploiement distribué)  
    - Layered classique = trop permissif (risque de mauvaises pratiques)
 
 ---
