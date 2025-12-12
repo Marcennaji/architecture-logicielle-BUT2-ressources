@@ -54,7 +54,7 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
 
 Sans vraie architecture, on obtient vite :
 
-- Du **code spaghetti** 🍝 *(délicieux au restaurant, cauchemardesque dans le code)*
+- Du **code spaghetti** 🍝 *(un plat sympa, mais vite indigeste dans ce contexte)*
 - Une application **difficile à comprendre**
 - Des bugs qui reviennent en boucle
 - Une application **impossible à tester**
@@ -111,7 +111,7 @@ Une bonne architecture doit aider à :
 
 ---
 
-## 🎯 À retenir !
+## 🎯 À retenir ! (1/2)
 
 > **L'IA est semblable à un développeur expérimenté et ultra-rapide…  
 > …qui débarque sur votre projet sans en connaître l'histoire ni la vision.**
@@ -121,14 +121,18 @@ Elle code (en général) très bien. Mais elle a besoin que **vous** lui donniez
 - 🚧 Les contraintes (quelles règles respecter ?)
 - ⚖️ Les arbitrages (quand faire une exception ?)
 
-💡 **Certaines IA sont de très bonnes codeuses, aucune n'est (encore) une ingénieure logicielle.**
+---
+
+## 🎯 À retenir ! (2/2)
+
+💡 **Certaines IA sont de très bonnes codeuses, aucune n'est une ingénieure logicielle.**
 
 Un **codeur** maîtrise un langage et produit du code qui fonctionne.  
-Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
+Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs. Il fait preuve d'esprit critique et a une vision globale.
 
-*Ce cours vise à faire de vous des ingénieurs, pas juste des "super codeurs" assistés par IA.*
+*Maîtriser les concepts fondamentaux d'une bonne architecture, contribue fortement à faire de vous des ingénieurs logiciel, pas juste des "super codeurs" assistés par IA.*
 
-⚠️ *Sinon dans 5 ans, vous serez remplacés par GPT-12. Mais avec une bonne base en architecture, vous serez ceux qui dirigent GPT-12.* 😉
+⚠️ *Sinon, dans 3 ans, vous serez remplacés par GPT-12. Car les IA ne demandent jamais d'augmentation de salaire.* 
 
 ---
 
@@ -775,15 +779,14 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 - `User` : id, username
 - `Status` : OPEN, IN_PROGRESS, RESOLVED, CLOSED
 
+---
+### 5.1 Vue d'ensemble (2/2)
+
 **Use cases :**
 - Créer un ticket
 - Assigner un ticket à un utilisateur
 - Changer le statut d'un ticket
 - Récupérer un ticket / liste de tickets
-
----
-
-### 5.1 Vue d'ensemble (2/2)
 
 **Adapters :**
 - Persistance : InMemory → SQLite
