@@ -143,6 +143,8 @@ Pour chaque extrait (2 points) :
 
 **Barème détaillé :**
 
+> 💡 Les exercices ci-dessous sont des **exemples typiques** de violations architecturales. Le jour du contrôle, vous analyserez 3 extraits de code concrets présentant des problèmes **similaires** (mais pas nécessairement identiques). Le barème sera appliqué de manière équivalente.
+
 #### Exercice 1 : Violation de la règle de dépendance (2 pts)
 - **Contexte** : Code du domain important directement SQLAlchemy ou FastAPI
 - **Diagnostic** (0.75 pt) :
