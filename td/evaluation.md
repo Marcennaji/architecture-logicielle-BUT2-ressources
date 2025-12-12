@@ -8,8 +8,7 @@
 |-----------|-------|-------------|
 | **Projet final** | 6/20 (30%) | Code du ticketing system complet (livraison fin de module) |
 | **Travaux en TD** | 8/20 (40%) | Exercices pratiques chronométrés (présentiel, sans IA) |
-| **QCM intermédiaire** | 3/20 (15%) | Concepts de base (mi-module, après TD3) |
-| **QCM final** | 3/20 (15%) | Concepts avancés (fin de module, après TD7) |
+| **Contrôle final** | 6/20 (30%) | Analyse de code - Diagnostic architectural (fin de module, après TD4) |
 
 ---
 
@@ -25,7 +24,7 @@ Vous **pouvez** utiliser des assistants IA (ChatGPT, Claude, GitHub Copilot, etc
 
 **Pourquoi ?** Parce qu'en 2025, savoir **utiliser efficacement** les IA fait partie des compétences attendues d'un développeur.
 
-**⚠️ Attention** : L'IA ne vous garantit PAS une bonne note si vous ne comprenez pas ce qu'elle génère. Les travaux en TD (40%) et les QCM (30%) se font **sans IA** et révèlent votre vraie compréhension.
+**⚠️ Attention** : L'IA ne vous garantit PAS une bonne note si vous ne comprenez pas ce qu'elle génère. Les travaux en TD (40%) et le contrôle final (30%) se font **sans IA** et révèlent votre vraie compréhension.
 
 ### 🚫 Bloquée pendant les TD (présentiel)
 
@@ -58,10 +57,10 @@ En salle de TD, l'accès aux assistants IA est **bloqué par le proxy réseau**.
 - Tests d'intégration API (end-to-end)
 
 ### Bonus (0-1 pt)
-- Authentification JWT, notifications, audit logs
-- Adapters supplémentaires (Redis, monitoring)
+- Extensions architecturales pertinentes
 - Qualité exceptionnelle du code
 - Messages de commits clairs, README complet, code formaté
+- Tests particulièrement exhaustifs
 
 ---
 
@@ -69,14 +68,14 @@ En salle de TD, l'accès aux assistants IA est **bloqué par le proxy réseau**.
 
 ### Format des TDs
 
-**Module complet** : TD0 à TD4 sur 18h de présentiel (9 séances de 2h)
+**Module complet** : TD0 à TD4 sur 20h de présentiel (10 séances × 2h)
 
 Répartition :
 - **TD0** (2h) : Prise en main - Workflow Git/GitHub
-- **TD1** (3h) : Domain - Entités et règles métier
-- **TD2** (3h) : Use cases et ports - Architecture hexagonale
-- **TD3** (5h) : Repository SQLite - Persistence
-- **TD4** (5h) : API REST - Endpoints FastAPI
+- **TD1** (4h) : Domain - Entités et règles métier
+- **TD2** (4h) : Use cases et ports - Architecture hexagonale
+- **TD3** (4h) : Repository SQLite - Persistence
+- **TD4** (6h) : API REST - Endpoints FastAPI
 
 À la **fin de chaque TD** (sauf TD0), un **exercice noté** valide vos acquis :
 - Durée : 30 min à 1h30
@@ -117,46 +116,94 @@ git push origin td3-exercice
 
 - ✅ Commit dans les temps → Évalué normalement
 - ⏰ Commit hors délai (> 5 min) → Pénalité -50%
-- ❌ Commit hors délai (> 30 min) → 0/1.5
+- ❌ Commit hors délai (> 30 min) → 0/2
 - 🚫 Absence non justifiée → Exercice de rattrapage à faire
 
 ---
 
-## 📝 Évaluation des QCM (6/20)
+## 📝 Contrôle final - Analyse de code (6/20)
 
-### QCM intermédiaire (3/20) - Mi-module
+### Format
 
-**Quand** : Après TD3 (mi-janvier)
+**Quand** : Fin de module (après TD4)
 
-**Format** :
-- Durée : 30 minutes
-- 15-20 questions
-- QCM + questions courtes
+**Durée** : 45 minutes
 
-**Contenu** :
-- Principes de l'architecture hexagonale
-- Rôle du domain, des ports, des adapters
-- Règle de dépendance et inversion de contrôle
-- Séparation des responsabilités
-- Patterns de base (Repository, Use Case)
+**Support** : Moodle (questions à réponse courte/texte libre)
 
-### QCM final (3/20) - Fin de module
+**Contexte** : Sans IA, sans documentation (seules vos connaissances)
 
-**Quand** : Après TD4 (début février)
+### Structure de l'épreuve
 
-**Format** :
-- Durée : 30 minutes
-- 15-20 questions
-- QCM + questions courtes
+Vous analysez **3 extraits de code Python** présentant des problèmes architecturaux.
 
-**Contenu** :
-- Architecture complète (domain → ports → adapters)
-- SQLAlchemy et persistence
-- FastAPI et API REST
-- Trade-offs architecturaux (quand utiliser quoi ?)
-- Bonnes pratiques (tests, séparation des responsabilités)
-- Analyse de code (identifier les violations)
-- Choix de design justifiés
+Pour chaque extrait (2 points) :
+1. **Diagnostic** (0.75 pt) : Identifier le(s) problème(s) architectural/architecturaux
+2. **Correction** (1.25 pt) : Proposer une solution respectant l'architecture hexagonale
+
+**Barème détaillé :**
+
+#### Exercice 1 : Violation de la règle de dépendance (2 pts)
+- **Contexte** : Code du domain important directement SQLAlchemy ou FastAPI
+- **Diagnostic** (0.75 pt) :
+  - 0.75 pt : Identifie clairement la violation ("le domain dépend de l'infrastructure")
+  - 0.5 pt : Identifie partiellement ("problème d'import")
+  - 0 pt : N'identifie pas le problème
+- **Correction** (1.25 pt) :
+  - 1.25 pt : Propose une solution complète (port + adapter, inversion de dépendance)
+  - 0.75 pt : Solution partielle (retire l'import mais ne propose pas d'alternative)
+  - 0.25 pt : Vague ("il faut séparer les couches")
+  - 0 pt : Pas de solution ou solution incorrecte
+
+#### Exercice 2 : Logique métier dans l'adapter (2 pts)
+- **Contexte** : Repository ou API router contenant de la logique métier
+- **Diagnostic** (0.75 pt) :
+  - 0.75 pt : "La logique métier doit être dans le domain, pas dans l'adapter"
+  - 0.5 pt : "Ce code n'est pas au bon endroit"
+  - 0 pt : Ne voit pas le problème
+- **Correction** (1.25 pt) :
+  - 1.25 pt : Déplace la logique dans le domain (méthode d'entité ou use case)
+  - 0.75 pt : Identifie où déplacer mais sans préciser comment
+  - 0.25 pt : Solution floue
+  - 0 pt : Pas de solution
+
+#### Exercice 3 : Use case couplé à l'infrastructure (2 pts)
+- **Contexte** : Use case qui instancie directement un repository SQLite ou appelle des détails SQL
+- **Diagnostic** (0.75 pt) :
+  - 0.75 pt : "Le use case ne doit pas connaître les détails d'implémentation du repository"
+  - 0.5 pt : "Trop de couplage"
+  - 0 pt : Ne détecte pas le problème
+- **Correction** (1.25 pt) :
+  - 1.25 pt : Injection de dépendance via port (interface abstraite)
+  - 0.75 pt : Mentionne l'injection de dépendance sans détailler
+  - 0.25 pt : "Utiliser une interface"
+  - 0 pt : Pas de solution
+
+**Total : 6 points**
+
+### Exemples de problèmes à identifier
+
+- ❌ Domain qui importe `sqlalchemy`, `fastapi`, `requests`
+- ❌ Entité avec méthodes `.save()` ou `.delete()` (responsabilité du repository)
+- ❌ Use case qui construit des requêtes SQL directement
+- ❌ API router avec validation métier (devrait être dans le domain)
+- ❌ Repository avec logique de calcul métier
+- ❌ Dépendances circulaires entre couches
+- ❌ Adapter qui connaît les détails du domain au lieu de passer par un port
+
+### Critères de réussite
+
+- **Excellent (5-6/6)** : Diagnostique précis + solutions complètes et justifiées
+- **Bon (3.5-4.5/6)** : Identifie les problèmes + solutions partielles ou imprécises
+- **Passable (2-3/6)** : Détecte certains problèmes mais solutions vagues
+- **Insuffisant (< 2/6)** : Ne détecte pas les violations ou solutions incorrectes
+
+### Conseils de préparation
+
+1. **Relisez votre code de projet** : Où avez-vous mis chaque responsabilité ?
+2. **Révisez les principes** : Règle de dépendance, séparation des couches
+3. **Pratiquez l'analyse** : Prenez des exemples de code et demandez-vous "Qu'est-ce qui cloche ?"
+4. **Connaissez les patterns** : Repository, Use Case, Dependency Injection
 
 ---
 
@@ -164,13 +211,13 @@ git push origin td3-exercice
 
 ### Temps de travail attendu
 
-**En présentiel (obligatoire)** : 18h de TD réparties sur 9 séances
+**En présentiel (obligatoire)** : 20h de TD réparties sur 10 séances
 
 **À la maison** :
 - Avec IA (utilisation intelligente) : **8-10h**
 - Sans IA ou IA mal utilisée : **15-20h**
 
-**Total réaliste** : ~28h de travail étudiant (présentiel + maison)
+**Total réaliste** : ~30h de travail étudiant (présentiel + maison)
 
 ### Comment utiliser l'IA efficacement
 
@@ -193,13 +240,13 @@ git push origin td3-exercice
 - ❌ Le debugging (pourquoi ce test échoue ?)
 - ❌ L'adaptation au contexte du projet
 
-**70% de votre note** (TD + QCM) se passe **sans IA** → Impossible de valider le module en trichant.
+**70% de votre note** (TD + Contrôle) se passe **sans IA** → Impossible de valider le module en trichant.
 
 ### Conseils pratiques
 
 1. **En TD** : Codez vous-même, posez des questions, comprenez
 2. **À la maison** : Utilisez l'IA pour accélérer, mais relisez tout
-3. **Avant les QCM** : Révisez les concepts, pas les syntaxes
+3. **Avant le contrôle** : Révisez les principes architecturaux, pratiquez l'analyse de code
 4. **Projet final** : Code fonctionnel > Code parfait
 
 ---
@@ -209,18 +256,16 @@ git push origin td3-exercice
 ### Étudiant "IA only" (vient peu en TD)
 - Projet final : 5/6 (IA génère du bon code)
 - TD : 2-3/8 (absent ou en difficulté sans IA)
-- QCM intermédiaire : 0.5/3
-- QCM final : 0.5/3
-- **Total : 8-11.5/20** ❌ Module non validé
+- Contrôle final : 0.5-1/6 (ne comprend pas l'architecture)
+- **Total : 7.5-10/20** ❌ Module non validé
 
 ### Étudiant assidu (comprend les concepts)
 - Projet final : 4-5/6 (code correct, même avec aide IA)
 - TD : 6-7/8 (réussit les exercices en autonomie)
-- QCM intermédiaire : 2-2.5/3
-- QCM final : 2-2.5/3
+- Contrôle final : 4-5/6 (diagnostique bien, propose des solutions)
 - **Total : 14-17/20** ✅ Module validé
 
-**Moralité** : L'IA peut aider pour le projet (30%), mais ne remplace pas la compréhension pour les TD (40%) et les QCM (30%).
+**Moralité** : L'IA peut aider pour le projet (30%), mais ne remplace pas la compréhension pour les TD (40%) et le contrôle (30%).
 
 ---
 
@@ -242,7 +287,7 @@ git push origin td3-exercice
 - Tout le socle impeccable
 - Tests exhaustifs avec bonne couverture
 - Code exemplaire (nommage, découpage, documentation)
-- Une ou plusieurs fonctionnalités bonus (auth, notifs, etc.)
+- Extensions architecturales pertinentes (si implémentées)
 
 ## ❓ Questions fréquentes
 
@@ -256,11 +301,11 @@ En **pratiquant** régulièrement et en **comprenant** ce que vous faites. L'IA 
 **Non.** Un étudiant qui utilise l'IA sans comprendre :
 - Projet : ~5/6 (code fonctionnel mais générique)
 - TD : ~2-3/8 (bloqué sans IA en présentiel)
-- QCM : ~1/6 (concepts non maîtrisés)
-- **Total : ~8-11/20** → Module non validé
+- Contrôle : ~0.5-1/6 (ne sait pas analyser le code)
+- **Total : ~7.5-10/20** → Module non validé
 
 ### Dois-je tout implémenter dans le projet ?
-Non. Le **socle minimal** (CRUD + tests) suffit. Les bonus sont optionnels.
+Non. Le **socle minimal** (CRUD + tests + architecture hexagonale) suffit pour valider le module. Les extensions sont optionnelles et valorisées dans la note bonus.
 
 ### Comment sont notés les tests ?
 - Présence de tests : ✅
@@ -275,15 +320,13 @@ Oui, tant que vous respectez les **principes** de l'architecture hexagonale (sé
 - 2+ absences : Impact significatif sur la note (TD = 40%)
 - **Conseil** : Venez en TD, c'est là que vous apprenez vraiment.
 
-### Les QCM sont-ils difficiles ?
-Non. Ce sont des **questions de compréhension** (pas de code à écrire) :
-- QCM intermédiaire : concepts de base ("Qu'est-ce qu'un port ?", "Rôle du domain ?")
-- QCM final : concepts avancés ("Quand utiliser CQRS ?", "Trade-offs architecture ?")
+### Le contrôle final est-il difficile ?
+Non, si vous avez **compris** l'architecture. Ce n'est pas un piège :
+- Vous analysez du code Python simple
+- Les problèmes sont des violations classiques (domain qui importe SQLAlchemy, etc.)
+- Vous devez juste **expliquer** ce qui cloche et **comment** le corriger
 
-Si vous avez suivi les TD et compris les concepts, c'est accessible.
-
-### Puis-je rattraper un mauvais QCM intermédiaire ?
-Oui ! Le QCM final (15%) permet de compenser. Un étudiant qui progresse peut rattraper son retard.
+Si vous avez suivi les TD et compris pourquoi on structure le code ainsi, c'est accessible.
 
 ## ❓ Questions fréquentes
 

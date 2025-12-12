@@ -684,8 +684,6 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 | **TD3** | Implémenter le repository SQL | Adapters (DB) |
 | **TD4** | Exposer l'API REST | Adapters (API) |
 
-**Bonus (TD5-TD7)** : Auth JWT, tests CI, notifications
-
 ---
 
 ### 5.3 Évaluation
@@ -693,10 +691,10 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 📊 **Répartition** :
 - 30% : Projet final (GitHub, code fonctionnel)
 - 40% : Exercices de TD (livrables intermédiaires)
-- 30% : QCM (2 × 15% : mi-parcours + final)
+- 30% : Contrôle final (analyse de code architectural)
 
 ⚠️ **Important** :
-- 70% de la note **sans IA** (TD présentiel + QCM)
+- 70% de la note **sans IA** (TD présentiel + Contrôle)
 - L'IA est **autorisée** pour le projet à la maison
 - Mais **comprendre** l'architecture reste indispensable
 

@@ -20,7 +20,7 @@ Ces guides sont à consulter tout au long du module :
 | TD3 | Repository SQLite | 5h | 🔒 Bientôt | - |
 | TD4 | API REST avec FastAPI | 5h | 🔒 Bientôt | - |
 
-> 💡 **Volume total** : 18h de TD en présentiel + ~10h de travail à la maison.  
+> 💡 **Volume total** : 20h de TD en présentiel + ~10h de travail à la maison.  
 > Les TDs sont publiés progressivement au fur et à mesure de l'avancement du module.
 
 ## 🎯 Template de code

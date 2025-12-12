@@ -14,7 +14,7 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 ## 📌 Projet fil rouge
 
 - Sujet : **Gestionnaire de tickets / workflow** (type Trello / Jira minimal).
-- Réalisé au fil des TD/TP (~70h).
+- Réalisé au fil des TD (TD0-TD4, 20h présentiel + travail maison).
 - Dépôt propre à chaque étudiant, créé à partir d'un **bootstrap** commun.
 - Les TD servent de **guides de progression**.
 
@@ -40,9 +40,6 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 - TD2 : Use cases et ports 🔒 *Bientôt*
 - TD3 : Repository SQL 🔒 *Bientôt*
 - TD4 : API REST 🔒 *Bientôt*
-- TD5 : Authentification JWT 🔒 *Bientôt*
-- TD6 : Tests et CI 🔒 *Bientôt*
-- TD7 : Extensions 🔒 *Bientôt*
 
 👉 [Accéder à tous les TDs](td/README.md)
 
@@ -62,7 +59,7 @@ Le template de démarrage (code à compléter) est dans un repository séparé :
 
 **Volume total du module** : 2h CM + 20h TD = **22h** (sur calendrier)
 
-### Travaux dirigés (10 séances × 2h)
+### Travaux dirigés (TD0-TD4)
 
 | TD | Titre | Contenu |
 |----|-------|---------|
@@ -71,11 +68,8 @@ Le template de démarrage (code à compléter) est dans un repository séparé :
 | **TD2** | Use cases et ports | Cas d'usage, ports entrants et sortants |
 | **TD3** | Adapters persistance | Repository abstrait + implémentation SQLite |
 | **TD4** | API REST | Adapter FastAPI, tests d'intégration |
-| **TD5** | Authentification | JWT, rôles, sécurité |
-| **TD6** | Tests et CI | Couverture, refactoring, intégration continue |
-| **TD7** | Extensions | Notifications, métriques, événements (bonus) |
 
-Ce planning est volontairement souple : chaque TD indique ce qui est **prioritaire** et ce qui relève du **bonus**.
+Ce planning couvre le socle minimal de l'architecture hexagonale. Les fonctionnalités avancées (authentification, notifications, etc.) peuvent être ajoutées en bonus.
 
 ## 📖 Références
 
