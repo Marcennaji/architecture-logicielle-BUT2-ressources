@@ -28,7 +28,7 @@ style: |
 # 🧱 CM1 : Fondamentaux de l'architecture logicielle
 
 🎓 BUT Informatique — Ressource R4.01 « Architecture logicielle »  
-👨‍🏫 Enseignant·e : _à compléter_  
+👨‍🏫 Enseignant : Marc Ennaji  
 
 🛠 Objectif du cours :  
 Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser les **principes fondamentaux** qui guident toute bonne conception.
@@ -80,13 +80,13 @@ Une bonne architecture doit aider à :
 
 ## 🤖 2. Et avec GitHub Copilot, ChatGPT & co ?
 
-**« L'IA code à ma place, donc l'architecture, ouf, plus besoin… »**
+**« L'IA génère du code super vite… Du coup l'architecture, c'est moins important ? »**
 
 ❌ **FAUX.** C'est même l'inverse.
 
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante
+## 🤖 Pourquoi l'architecture devient PLUS importante (1/2)
 
 1. **L'IA suit des instructions, elle ne prend pas de décisions stratégiques**
    - Elle peut respecter une architecture… *si vous lui expliquez laquelle*
@@ -95,6 +95,10 @@ Une bonne architecture doit aider à :
 2. **Plus on génère vite, plus on a besoin de vision**
    - Sans direction claire → accumulation rapide de dette technique
    - L'IA produit du code cohérent *localement*, mais pas toujours *globalement*
+
+---
+
+## 🤖 Pourquoi l'architecture devient PLUS importante (2/2)
 
 3. **L'IA est un amplificateur**
    - Bonne architecture + IA → productivité décuplée ✅
@@ -117,12 +121,12 @@ Elle code (en général) très bien. Mais elle a besoin que **vous** lui donniez
 - 🚧 Les contraintes (quelles règles respecter ?)
 - ⚖️ Les arbitrages (quand faire une exception ?)
 
-💡 **L'IA est une excellente codeuse, pas (encore) une ingénieure logicielle.**
+💡 **Certaines IA sont de très bonnes codeuses, aucune n'est (encore) une ingénieure logicielle.**
 
 Un **codeur** maîtrise un langage et produit du code qui fonctionne.  
 Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
 
-*Ce cours vise à faire de vous des ingénieurs, pas juste des codeurs assistés par IA.*
+*Ce cours vise à faire de vous des ingénieurs, pas juste des "super codeurs" assistés par IA.*
 
 ---
 
@@ -151,6 +155,9 @@ class ShoppingCart:
     def calculate_total(self): ...
     def apply_discount(self, code): ...
 ```
+
+---
+## 3.1 La cohésion
 
 ❌ **Faible cohésion** (problème) :
 ```python
@@ -242,7 +249,7 @@ class OrderService:
 
 ---
 
-## 3.3 Les dépendances
+## 3.3 Les dépendances (1/2)
 
 Une **dépendance** = quelque chose dont votre code a besoin pour fonctionner.
 
@@ -259,7 +266,7 @@ Types de dépendances :
 
 ---
 
-## 3.3 Visualiser les dépendances
+## 3.3 Visualiser les dépendances (2/2)
 
 ```text
 ❌ Dépendances directes partout :
@@ -279,7 +286,7 @@ Le code métier connaît TOUT. Impossible à tester, impossible à faire évolue
 
 ---
 
-## 3.3 Dépendances — la bonne approche
+## 3.3 Dépendances — la bonne approche (3/3)
 
 ```text
 ✅ Le métier ne connaît que des interfaces :
@@ -351,7 +358,7 @@ class LoyaltyService:         # Points fidélité
 
 ---
 
-## 3.5 Inversion de dépendances
+## 3.5 Inversion de dépendances (1/2)
 
 > **Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau.  
 > Les deux doivent dépendre d'abstractions.**
@@ -380,7 +387,7 @@ Le métier connaît MySQL                      ▲
 
 ---
 
-## 3.5 Inversion — pourquoi c'est puissant ?
+## 3.5 Inversion — pourquoi c'est puissant ? (2/2)
 
 **Avant (dépendance classique) :**
 - Le métier dépend de la base de données
@@ -470,7 +477,7 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 
 ---
 
-### 4.3 Les 3 couches
+### 4.3 Les 3 couches (1/3)
 
 #### 🟢 DOMAIN (le cœur)
 
@@ -481,6 +488,10 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 
 **Règle d'or :**
 > Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)
+
+---
+
+### 4.3 Les 3 couches — exemple DOMAIN (2/3)
 
 ```python
 # domain/ticket.py
@@ -510,7 +521,7 @@ class Ticket:
 
 ---
 
-### 4.3 Les 3 couches (suite)
+### 4.3 Les 3 couches — PORTS (3/4)
 
 #### 🔵 PORTS (interfaces)
 
@@ -537,11 +548,15 @@ class TicketRepository(ABC):
         pass
 ```
 
+---
+
+### 4.3 Les 3 couches — PORTS suite (4/4)
+
 👉 Le métier **définit** ce dont il a besoin, sans savoir **comment** c'est implémenté.
 
 ---
 
-### 4.3 Les 3 couches (fin)
+### 4.3 Les 3 couches — APPLICATION (5/5)
 
 #### 🟡 APPLICATION (orchestration)
 
@@ -566,7 +581,9 @@ class CreateTicket:
         return ticket
 ```
 
-#### 🔴 ADAPTERS (implémentations)
+---
+
+### 4.3 Les 3 couches — ADAPTERS (6/6)
 
 **Implémentations concrètes** des ports :
 
@@ -613,7 +630,7 @@ def test_create_ticket():
 ### 4.5 Le flux de dépendances
 
 ```text
-❌ Architecture classique (mauvais) :
+❌ Architecture en couches traditionnelle (problématique !) :
 
 ┌──────────┐
 │   API    │
@@ -651,9 +668,57 @@ Le métier ne dépend de RIEN ✅
 
 ---
 
+### 4.6 Monolithe ≠ Mal structuré
+
+**Confusion fréquente :** *Monolithe = code spaghetti ?*  
+**❌ FAUX.** Monolithe et architecture en couches sont **indépendants**.
+
+|  | **Monolithe** (1 déploiement) | **Distribué** (N services) |
+|---|---|---|
+| **Bien structuré** | ✅ Monolithe modulaire<br>(Hexa, DDD) | ✅ Microservices<br>bien conçus |
+| **Mal structuré** | ❌ Big ball of mud<br>(tout mélangé) | ❌ Distributed monolith<br>(services couplés) |
+
+💡 **Message clé :**  
+> Un monolithe bien architecturé (hexagonal) bat des microservices mal conçus 99% du temps.
+
+**Votre projet** = monolithe hexagonal : simple, testable, maintenable, évolutif 🎯
+
+---
+
+### 4.7 Pourquoi l'hexagonale pour ce module ? (1/2)
+
+**Question légitime :** *Pourquoi pas microservices, CQRS, ou une autre architecture ?*
+
+**Réponses :**
+
+1. 📚 **Pédagogique** : Elle **impose** structurellement les bons principes
+   - Séparation domaine/infrastructure visible immédiatement
+   - Impossible de faire sans inversion de dépendances
+
+2. ⏱️ **Adaptée au format** : Ni trop simple, ni trop complexe pour 20h
+   - Microservices = trop (orchestration, déploiement distribué)
+   - Layered classique = trop permissif (risque de mauvaises pratiques)
+
+---
+
+### 4.7 Pourquoi l'hexagonale pour ce module ? (2/2)
+
+3. 🧪 **Naturellement testable** : Tests par couche sans dépendances
+   - Domain : pur (0 mock)
+   - Use cases : fake repository (pas de vraie DB)
+   - E2E : API complète
+
+4. 🌍 **Transférable** : Fondation pour comprendre toutes les archi modernes
+   - Clean Architecture, Onion, DDD → mêmes concepts
+   - Compatible TDD, microservices, event-driven
+
+> *L'hexagonale n'est pas "meilleure", mais c'est la plus **formatrice** pour apprendre les fondamentaux.*
+
+---
+
 ## 🎯 5. Le projet : Ticketing System
 
-### 5.1 Vue d'ensemble
+### 5.1 Vue d'ensemble (1/2)
 
 Vous allez implémenter un **système de tickets** (simplifié) en architecture hexagonale.
 
@@ -667,6 +732,10 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 - Assigner un ticket à un utilisateur
 - Changer le statut d'un ticket
 - Récupérer un ticket / liste de tickets
+
+---
+
+### 5.1 Vue d'ensemble (2/2)
 
 **Adapters :**
 - Persistance : InMemory → SQLite
@@ -720,7 +789,7 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
 ---
 
-## 🎯 Récapitulatif
+## 🎯 Récapitulatif (1/2)
 
 Vous avez maintenant :
 
@@ -730,6 +799,10 @@ Vous avez maintenant :
 - Cohésion, couplage, dépendances
 - Séparation des responsabilités
 - Inversion de dépendances
+
+---
+
+## 🎯 Récapitulatif (2/2)
 
 ✅ Découvert l'**architecture hexagonale** :
 - Domain (métier pur)
