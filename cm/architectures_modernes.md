@@ -128,10 +128,10 @@ Elle code (en général) très bien. Mais elle a besoin que **vous** lui donniez
 
 ## 💡 Codeur vs Ingénieur
 
-**L'IA est une excellente codeuse, pas (encore) une ingénieure logicielle.**
+**L'IA est une bonne codeuse, pas (encore) une ingénieure logicielle.**
 
 Un **codeur** maîtrise un langage et produit du code qui fonctionne.  
-Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
+Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs, fait preuve de jugement sans appliquer aveuglément des règles.
 
 > *Ce cours vise à faire de vous des ingénieurs,  
 > pas juste des codeurs assistés par IA.*

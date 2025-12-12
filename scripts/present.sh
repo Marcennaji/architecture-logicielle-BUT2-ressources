@@ -2,15 +2,14 @@
 # Lance la présentation HTML d'un cours dans le navigateur par défaut.
 #
 # Usage :
-#   ./scripts/present.sh CM1_architectures_modernes
-#   ./scripts/present.sh CM2_architecture_hexagonale
+#   ./scripts/present.sh CM1_Fondamentaux_architecture
 
 set -e
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$ROOT_DIR"
 
-NAME="${1:-CM1_architectures_modernes}"
+NAME="${1:-CM1_Fondamentaux_architecture}"
 HTML_FILE="$ROOT_DIR/export/${NAME}.html"
 
 if [ ! -f "$HTML_FILE" ]; then
