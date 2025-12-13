@@ -20,6 +20,9 @@ style: |
     padding: 0.1em 0.3em;
     border-radius: 3px;
   }
+  pre code {
+    font-size: 0.75em;
+  }
   table {
     font-size: 0.9em;
   }
@@ -27,8 +30,8 @@ style: |
 
 # 🧱 CM1 : Fondamentaux de l'architecture logicielle
 
-🎓 BUT Informatique — Ressource R4.01 « Architecture logicielle »  
-👨‍🏫 Enseignant : Marc Ennaji  
+BUT Informatique — Ressource R4.01 « Architecture logicielle »  
+Enseignant : Marc Ennaji  
 
 🛠 Objectif du cours :  
 Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser les **principes fondamentaux** qui guident toute bonne conception.
@@ -38,7 +41,7 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
 ## 🧩 Plan du cours
 
 1. Pourquoi une architecture logicielle ?
-2. L'architecture à l'ère de l'IA — **message clé** 🤖
+2. L'architecture à l'ère des assistants de codage IA
 3. **Principes fondamentaux** :
    - Cohésion
    - Couplage
@@ -54,7 +57,7 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
 
 Sans vraie architecture, on obtient vite :
 
-- Du **code spaghetti** 🍝 *(un plat sympa, mais vite indigeste dans ce contexte)*
+- Du **code spaghetti** 🍝 *(attention aux indigestions)*
 - Une application **difficile à comprendre**
 - Des bugs qui reviennent en boucle
 - Une application **impossible à tester**
@@ -78,61 +81,85 @@ Une bonne architecture doit aider à :
 
 ---
 
-## 🤖 2. Et avec GitHub Copilot, ChatGPT & co ?
+## 🤖 2. L'ère du "vibe coding" et des assistants IA
 
-**« L'IA génère du code super vite… Du coup l'architecture, c'est moins important ? »**
+**« Avec GitHub Copilot, ChatGPT, Cursor... je code par "intuition" et ça marche.  
+Du coup l'architecture, c'est moins important ? »**
 
 ❌ **FAUX.** C'est même l'inverse.
 
+💬 *Le "vibe coding" (coder à l'instinct avec l'IA) a sa place pour prototyper ou explorer.  
+Mais en production sans maîtrise des fondamentaux → dette technique garantie.*
+
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante (1/2)
+## 🤖 Pourquoi l'architecture devient PLUS importante (1/3)
 
-1. **L'IA suit des instructions, elle ne prend pas de décisions stratégiques**
+1. **"Vibe coding" = productivité à court terme, chaos à moyen terme**
+   - L'IA + votre intuition → Code qui marche *maintenant*
+   - Mais sans vision architecturale → Dette technique exponentielle
+   - *Dans 6 mois : "Qui a écrit ce code ?" — Spoiler : c'était vous + l'IA*
+
+2. **L'IA suit des instructions, elle ne conçoit pas de systèmes**
    - Elle peut respecter une architecture… *si vous lui expliquez laquelle*
-   - Elle ne sait pas si votre contexte justifie une exception
-
-2. **Plus on génère vite, plus on a besoin de vision**
-   - Sans direction claire → accumulation rapide de dette technique
-   - L'IA produit du code cohérent *localement*, mais pas toujours *globalement*
+   - Elle ne sait pas si votre "vibe" justifie une exception aux règles
+   - Elle amplifie vos décisions (bonnes **ou** mauvaises)
 
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante (2/2)
+## 🤖 Pourquoi l'architecture devient PLUS importante (2/3)
 
-3. **L'IA est un amplificateur**
-   - Bonne architecture + IA → productivité décuplée ✅
-   - Pas d'architecture + IA → chaos à grande vitesse ❌
+3. **Le "vibe" ne scale pas (sauf si c'est le vibe d'un expert)**
+   - 100 lignes de code → Intuition suffit (même pour un junior)
+   - 10 000 lignes → Il faut une structure claire
+   - 100 000 lignes → Seule l'intuition **fondée sur des principes** fonctionne
+   - *Le "vibe" d'un senior avec 10 ans d'expérience ≠ le "vibe" d'un junior qui découvre*
 
-4. **Votre valeur = les décisions que l'IA ne peut pas prendre**
-   - Où placer la frontière entre domaine et infrastructure ?
-   - Ce couplage est-il acceptable *dans ce contexte* ?
-   - Faut-il sacrifier la pureté pour la simplicité ici ?
+---
+
+## 🤖 Pourquoi l'architecture devient PLUS importante (3/3)
+
+4. **Votre valeur = comprendre le système, pas juste taper du code**
+   - IA + "vibe" → N'importe qui peut générer du code fonctionnel
+   - Ingénieur → Seuls ceux qui maîtrisent les concepts peuvent concevoir un système cohérent
+   - Questions que l'IA ne peut pas trancher :
+     * Où placer la frontière domaine/infrastructure ?
+     * Ce couplage est-il acceptable *dans ce contexte* ?
+     * Faut-il sacrifier la pureté pour la simplicité ici ?
 
 ---
 
 ## 🎯 À retenir ! (1/2)
 
-> **L'IA est semblable à un développeur expérimenté et ultra-rapide…  
-> …qui débarque sur votre projet sans en connaître l'histoire ni la vision.**
+> **IA + "vibe coding + maîtrise insuffisante de l'archi" = conduire une Ferrari sans permis.**  
+> Vous allez vite… droit dans le mur.
 
-Elle code (en général) très bien. Mais elle a besoin que **vous** lui donniez :
-- 🧭 La direction (quelle architecture ?)
-- 🚧 Les contraintes (quelles règles respecter ?)
-- ⚖️ Les arbitrages (quand faire une exception ?)
+**Usages légitimes du "vibe coding" :**
+- ✅ Prototypage rapide / POC
+- ✅ Scripts one-shot
+- ✅ Exploration d'une nouvelle techno
+
+**Mais en production, le "vibe" sans fondamentaux = illusion de compétence :**
+- ✅ Ça marche maintenant (court terme)
+- ❌ Ça ne scale pas (moyen terme)
+- ❌ Personne ne comprend le code dans 3 mois (long terme)
 
 ---
 
 ## 🎯 À retenir ! (2/2)
 
-💡 **Certaines IA sont de très bonnes codeuses, aucune n'est une ingénieure logicielle.**
+💡 **L'IA code très bien. Aucune IA n'est ingénieure logicielle.**
 
-Un **codeur** maîtrise un langage et produit du code qui fonctionne.  
-Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs. Il fait preuve d'esprit critique et a une vision globale.
+Un **"vibe coder"** génère du code qui fonctionne *maintenant*.  
+Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
 
-*Maîtriser les concepts fondamentaux d'une bonne architecture, contribue fortement à faire de vous des ingénieurs logiciel, pas juste des "super codeurs" assistés par IA.*
+**L'intuition a de la valeur... quand elle est fondée sur l'expérience :**
+- Senior qui "vibe" = 10 ans de patterns intégrés → souvent juste ✅
+- Junior qui "vibe" = copier-coller sans comprendre → dette technique ❌
 
-⚠️ *Sinon, dans 3 ans, vous serez remplacés par GPT-12. Car les IA ne demandent jamais d'augmentation de salaire.* 
+**Ce cours vous apprend les fondamentaux** pour que, dans 5 ou 10 ans :
+- Votre intuition soit fiable
+- Vous ne soyez pas remplacés par GPT-12 + un stagiaire qui "vibe" 💸 
 
 ---
 
@@ -211,55 +238,25 @@ Tout est connecté à tout
 
 ---
 
-## 3.2 Le couplage — exemple concret
+## 3.2 Le couplage — comparaison
 
-❌ **Fort couplage** — le service connaît l'implémentation :
-
-```python
-class OrderService:
-    def __init__(self):
-        self.db = MySQLDatabase()  # ❌ Dépendance directe à MySQL
-        self.mailer = SmtpMailer() # ❌ Dépendance directe à SMTP
-    
-    def create_order(self, order):
-        self.db.insert("orders", order)  # ❌ Couplé à MySQL
-        self.mailer.send(order.customer_email, "Commande créée")
-```
-
-**Problèmes :**
-- Impossible de tester sans MySQL et serveur SMTP
-- Changer de base de données = réécrire le service
-- Changer de système d'email = réécrire le service
+| ❌ **Fort couplage** | ✅ **Faible couplage** |
+|---------------------|------------------------|
+| **Code :** | **Code :** |
+| `class OrderService:` | `class OrderService:` |
+| `  self.db = MySQLDatabase()` | `  def __init__(self, repo: OrderRepository,` |
+| `  self.mailer = SmtpMailer()` | `                notifier: Notifier):` |
+|  | `    self.repo = repo  # Interface` |
+| **Problèmes :** | **Bénéfices :** |
+| • Impossible de tester sans MySQL/SMTP | • Testable avec fakes |
+| • Changer de DB = réécrire le service | • Changer MySQL → PostgreSQL = 0 impact |
+| • Changer d'email = réécrire | • Changer SMTP → SMS = 0 impact |
 
 ---
 
-## 3.2 Le couplage — solution
-
-✅ **Faible couplage** — le service dépend d'abstractions :
-
-```python
-class OrderService:
-    def __init__(self, repository: OrderRepository, notifier: Notifier):
-        self.repository = repository  # ✅ Interface
-        self.notifier = notifier      # ✅ Interface
-    
-    def create_order(self, order):
-        self.repository.save(order)
-        self.notifier.notify(order.customer_email, "Commande créée")
-```
-
-**Bénéfices :**
-- ✅ Testable avec des mocks/fakes
-- ✅ On peut changer MySQL → PostgreSQL sans toucher au service
-- ✅ On peut changer SMTP → SMS → Push sans toucher au service
-
----
-
-## 3.3 Les dépendances (1/2)
+## 3.3 Les dépendances
 
 Une **dépendance** = quelque chose dont votre code a besoin pour fonctionner.
-
-Types de dépendances :
 
 | Type | Exemples | Risque |
 |------|----------|--------|
@@ -269,54 +266,6 @@ Types de dépendances :
 | **Bibliothèques** | PDF, logging, validation | Obsolescence, failles |
 
 👉 **Plus votre code dépend directement de ces éléments, plus il est fragile.**
-
----
-
-## 3.3 Visualiser les dépendances (2/2)
-
-```text
-❌ Dépendances directes partout :
-
-┌─────────────┐     ┌─────────────┐     ┌─────────────┐
-│   Service   │────►│   MySQL     │     │   Stripe    │
-│   Métier    │────►│   Driver    │     │    API      │
-│             │────►│             │     │             │
-└─────────────┘     └─────────────┘     └─────────────┘
-       │
-       └────────────────────────────────►┌─────────────┐
-                                         │   SMTP      │
-                                         └─────────────┘
-
-Le code métier connaît TOUT. Impossible à tester, impossible à faire évoluer.
-```
-
----
-
-## 3.3 Dépendances — la bonne approche (3/3)
-
-```text
-✅ Le métier ne connaît que des interfaces :
-
-                    ┌─────────────────┐
-                    │  MySQL Driver   │
-                    └────────┬────────┘
-                             │ implémente
-                             ▼
-┌─────────────┐     ┌─────────────────┐
-│   Service   │────►│  <<interface>>  │
-│   Métier    │     │   Repository    │
-└─────────────┘     └─────────────────┘
-       │                     ▲
-       │                     │ implémente
-       │            ┌────────┴────────┐
-       │            │  Fake (tests)   │
-       │            └─────────────────┘
-       │
-       └──────────►┌─────────────────┐
-                   │  <<interface>>  │
-                   │    Notifier     │
-                   └─────────────────┘
-```
 
 ---
 
@@ -341,8 +290,6 @@ class OrderManager:
 
 → 7 raisons de changer cette classe = 7 sources de bugs potentiels à chaque modif.
 
-💬 *"Cette classe s'appelle God Object... mais elle a surtout créé le chaos en 7 jours."*
-
 ---
 
 ## 3.4 Séparation — la bonne approche
@@ -366,7 +313,7 @@ class LoyaltyService:         # Points fidélité
 
 ---
 
-## 3.5 Inversion de dépendances (1/3)
+## 3.5 Inversion de dépendances
 
 > **Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau.  
 > Les deux doivent dépendre d'abstractions.**
@@ -375,42 +322,29 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
 
 ---
 
-## 3.5 Inversion de dépendances (2/3)
+## 3.5 Inversion — avant/après
 
 ```text
 ❌ Classique (problème) :              ✅ Inversé (solution) :
 
-┌──────────────┐                      ┌──────────────┐
-│    Métier    │                      │    Métier    │
-└──────┬───────┘                      └──────┬───────┘
-       │ dépend de                           │ définit
-       ▼                                     ▼
-┌──────────────┐                      ┌──────────────┐
-│   Database   │                      │ <<interface>>│
-└──────────────┘                      │  Repository  │
-                                      └──────────────┘
-Le métier connaît MySQL                      ▲
-                                             │ implémente
-                                      ┌──────┴───────┐
-                                      │   Database   │
-                                      └──────────────┘
-                                      La DB connaît l'interface
++--------------+                      +-----------------------------+
+|    Métier    |                      | +---------------------+   |
++------+-------+                      | | Métier              |   |
+       |                              | +---------------------+   |
+       | dépend de                    | | <<interface>>       |   | DOMAINE
+       v                              | | Repository          |   |
++--------------+                      | +-----------^---------+   |
+|   Database   |                      +-------------|--------------+
++--------------+                                    |
+                                                    | implémente
+Le métier connaît MySQL                             |
+                                            +-----------------+
+                                            | Database (MySQL)|
+                                            +-----------------+
 ```
 
----
-
-## 3.5 Inversion — pourquoi c'est puissant ? (3/3)
-
-**Avant (dépendance classique) :**
-- Le métier dépend de la base de données
-- Pour tester le métier, il faut une vraie DB
-- Changer de DB = modifier le métier
-
-**Après (dépendance inversée) :**
-- Le métier définit ce dont il a besoin (interface)
-- La DB s'adapte au contrat du métier
-- Pour tester : on injecte un fake
-- Changer de DB : on crée un nouvel adaptateur
+**Avant :** Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
+**Après :** Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter
 
 👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
 
@@ -442,12 +376,10 @@ Si vous devez :
 3. ♻️  Refactorer pour améliorer (Refactor)
 ```
 
-**Pourquoi ça améliore l'architecture ?**
-
-- ✅ **Force la testabilité** : Vous ne pouvez pas écrire de test si le code n'est pas testable
-- ✅ **Réduit le couplage** : Pour mocker facilement, il faut des abstractions
-- ✅ **Impose la cohésion** : Un test complexe = trop de responsabilités
-- ✅ **Garantit l'inversion** : Le test devient le "client" qui définit l'interface
+**Bénéfices architecturaux :**
+- Force la testabilité et réduit le couplage
+- Impose la cohésion (test complexe = trop de responsabilités)
+- Garantit l'inversion (le test définit l'interface)
 
 💡 *TDD ne garantit pas une bonne architecture, mais une mauvaise architecture ne survit pas au TDD.*
 
@@ -506,23 +438,23 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 > La technique s'adapte au métier, pas l'inverse.
 
 ```text
-┌────────────────────────────────────────────────────────────┐
-│                      ADAPTERS                              │
-│  (FastAPI, SQLAlchemy, SMTP, APIs externes...)             │
-│                                                            │
-│  ┌──────────────────────────────────────────────────────┐ │
-│  │              APPLICATION LAYER                       │ │
-│  │   (Use Cases : orchestration métier + ports)         │ │
-│  │                                                      │ │
-│  │  ┌─────────────────────────────────────────────┐    │ │
-│  │  │          DOMAIN LAYER                       │    │ │
-│  │  │  (Entités, Règles métier, Value Objects)    │    │ │
-│  │  │  ⚠️ ZÉRO import technique                    │    │ │
-│  │  └─────────────────────────────────────────────┘    │ │
-│  └──────────────────────────────────────────────────────┘ │
-└────────────────────────────────────────────────────────────┘
++----------------------------------------------------------+
+|                      ADAPTERS                            |
+|  (FastAPI, SQLAlchemy, SMTP, APIs externes...)           |
+|                                                          |
+|  +----------------------------------------------------+  |
+|  |              APPLICATION LAYER                     |  |
+|  |   (Use Cases : orchestration métier + ports)       |  |
+|  |                                                    |  |
+|  |  +-------------------------------------------+     |  |
+|  |  |          DOMAIN LAYER                     |     |  |
+|  |  |  (Entités, Règles métier, Value Objects)  |     |  |
+|  |  |  ⚠️ ZÉRO import technique                |     |  |
+|  |  +-------------------------------------------+     |  |
+|  +----------------------------------------------------+  |
++----------------------------------------------------------+
 
-        Dependencies flow INWARD →
+        Dependencies flow INWARD ->
 ```
 
 ---
@@ -580,33 +512,23 @@ Des **contrats** (interfaces) définis par le métier :
 ```python
 # ports/ticket_repository.py
 from abc import ABC, abstractmethod
-from domain.ticket import Ticket
 
 class TicketRepository(ABC):
-    """Port de sortie pour la persistance."""
+    @abstractmethod
+    def save(self, ticket: Ticket) -> None: pass
     
     @abstractmethod
-    def save(self, ticket: Ticket) -> None:
-        pass
+    def get(self, ticket_id: int) -> Ticket | None: pass
     
     @abstractmethod
-    def get(self, ticket_id: int) -> Ticket | None:
-        pass
-    
-    @abstractmethod
-    def list_all(self) -> list[Ticket]:
-        pass
+    def list_all(self) -> list[Ticket]: pass
 ```
-
----
-
-### 4.3 Les 3 couches — PORTS suite (4/4)
 
 👉 Le métier **définit** ce dont il a besoin, sans savoir **comment** c'est implémenté.
 
 ---
 
-### 4.3 Les 3 couches — APPLICATION (5/5)
+### 4.3 Les 3 couches — APPLICATION (4/5)
 
 #### 🟡 APPLICATION (orchestration)
 
@@ -614,26 +536,19 @@ class TicketRepository(ABC):
 
 ```python
 # application/usecases/create_ticket.py
-from domain.ticket import Ticket, Status
-from ports.ticket_repository import TicketRepository
-
 class CreateTicket:
     def __init__(self, ticket_repository: TicketRepository):
-        self.repository = ticket_repository  # Injection de dépendance
+        self.repository = ticket_repository
     
     def execute(self, title: str) -> Ticket:
-        ticket = Ticket(
-            id=None,  # Généré par le repository
-            title=title,
-            status=Status.OPEN
-        )
+        ticket = Ticket(id=None, title=title, status=Status.OPEN)
         self.repository.save(ticket)
         return ticket
 ```
 
 ---
 
-### 4.3 Les 3 couches — ADAPTERS (6/6)
+### 4.3 Les 3 couches — ADAPTERS (5/5)
 
 **Implémentations concrètes** des ports :
 
@@ -677,83 +592,23 @@ def test_create_ticket():
 
 ---
 
-### 4.5 Le flux de dépendances
+### 4.6 Justification pédagogique (1/2)
 
-```text
-❌ Architecture en couches traditionnelle (problématique !) :
-
-┌──────────┐
-│   API    │
-└────┬─────┘
-     │ dépend de
-     ▼
-┌──────────┐
-│  Métier  │
-└────┬─────┘
-     │ dépend de
-     ▼
-┌──────────┐
-│    DB    │
-└──────────┘
-
-Le métier dépend de la DB ❌
-
-
-✅ Architecture hexagonale (bon) :
-
-┌──────────┐          ┌──────────┐
-│   API    │          │    DB    │
-└────┬─────┘          └────┬─────┘
-     │                     │
-     │ implémente          │ implémente
-     ▼                     ▼
-┌─────────────────────────────────┐
-│  Métier (définit les ports)     │
-│  Application (use cases)        │
-│  Domain (entités + règles)      │
-└─────────────────────────────────┘
-
-Le métier ne dépend de RIEN ✅
-```
-
----
-
-### 4.6 Monolithe ≠ Mal structuré
-
-**Confusion fréquente :** *Monolithe = code spaghetti ?*  
-**❌ FAUX.** Monolithe et architecture en couches sont **indépendants**.
-
-|  | **Monolithe** (1 déploiement) | **Distribué** (N services) |
-|---|---|---|
-| **Bien structuré** | ✅ Monolithe modulaire<br>(Hexa, DDD) | ✅ Microservices<br>bien conçus |
-| **Mal structuré** | ❌ Big ball of mud<br>(tout mélangé) | ❌ Distributed monolith<br>(services couplés) |
-
-💡 **Message clé :**  
-> Un monolithe bien architecturé (hexagonal) bat des microservices mal conçus 99% du temps.
-
-*Un monolithe bien conçu, c'est comme une maison bien organisée. Des microservices mal conçus, c'est un village sans plan d'urbanisme.* 🏠
-
-**Votre projet** = monolithe hexagonal : simple, testable, maintenable, évolutif 🎯
-
----
-
-### 4.7 Pourquoi l'hexagonale pour ce module ? (1/2)
-
-**Question légitime :** *Pourquoi pas microservices, CQRS, ou une autre architecture ?*
+**Question légitime :** *Pourquoi l'hexagonale et pas une autre architecture ?*
 
 **Réponses :**
 
-1. 📚 **Pédagogique** : Elle **impose** structurellement les bons principes
+1. 📚 **Impose structurellement les bons principes**
    - Séparation domaine/infrastructure visible immédiatement
-   - Impossible de faire sans inversion de dépendances
+   - Impossible de contourner l'inversion de dépendances
 
-2. ⏱️ **Adaptée au format** : Ni trop simple, ni trop complexe pour 20h
-   - Microservices = trop (orchestration, déploiement distribué)  
-   - Layered classique = trop permissif (risque de mauvaises pratiques)
+2. ⏱️ **Adaptée au format 20h TD**
+   - Ni trop simple (layered classique), ni trop complexe (microservices)
+   - Juste assez de contraintes pour apprendre les fondamentaux
 
 ---
 
-### 4.7 Pourquoi l'hexagonale pour ce module ? (2/2)
+### 4.6 Justification pédagogique (2/2)
 
 3. 🧪 **Naturellement testable** : Tests par couche sans dépendances
    - Domain : pur (0 mock)
@@ -764,7 +619,7 @@ Le métier ne dépend de RIEN ✅
    - Clean Architecture, Onion, DDD → mêmes concepts
    - Compatible TDD, microservices, event-driven
 
-> *L'hexagonale n'est pas "meilleure", mais c'est la plus **formatrice** pour apprendre les fondamentaux.*
+> **💡 Pour aller plus loin :** Voir les annexes pour comparaisons détaillées des architectures et discussion monolithe vs microservices
 
 ---
 
@@ -846,7 +701,7 @@ Vous avez maintenant :
 
 ✅ Compris **pourquoi** l'architecture est essentielle (encore plus avec l'IA)
 
-✅ Maîtrisé les **principes fondamentaux** :
+✅ Découvert les **principes fondamentaux** :
 - Cohésion, couplage, dépendances
 - Séparation des responsabilités
 - Inversion de dépendances
@@ -867,13 +722,23 @@ Vous avez maintenant :
 
 ---
 
+## 📚 Pour aller plus loin
+
+**Annexes du cours (PDF) :**
+- [Comparaison des architectures](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf) — Layered, MVC, MVVM, Microservices, Hexagonale
+- [Architecture vs Design](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_architecture_vs_design.pdf) — Clarification conceptuelle
+- [TDD et architecture](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf) — Les tests comme détecteur de qualité
+- [Monolithe vs Microservices](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf) — Démystifier le monolithe
+
+**Articles de référence (français) :**
+- [Architecture Hexagonale : trois principes et un exemple](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation) (OCTO Technology)
+- [Hexagonal Architecture expliquée simplement](https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier) (Les Dieux du Code)
+
+---
+
 # 🏁 Fin du cours
 
-📂 Les slides sont disponibles sur le dépôt GitHub.
+📂 **Toutes les ressources sont sur GitHub :**  
+https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
-📖 **Ressources complémentaires** :
-- `architectures_reference.md` — panorama des architectures
-- `td/guides/demarrage.md` — **à suivre AVANT le TD0**
-- `td/evaluation.md` — grille d'évaluation détaillée
-
-❓ Questions ?
+❓ **Questions ?**
