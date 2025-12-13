@@ -24,8 +24,8 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 | Document | Description |
 |----------|-------------|
-| [CM : Fondamentaux et architecture hexagonale](cm/CM1_Fondamentaux_architecture.md) | Pourquoi l'architecture ? Principes fondamentaux • Architecture hexagonale |
-| [Architectures de référence](cm/architectures_reference.md) | Fiches de référence sur les architectures (lecture autonome) |
+| [CM : Fondamentaux et architecture hexagonale](export/CM1_Fondamentaux_architecture.pdf) | Pourquoi l'architecture ? Principes fondamentaux • Architecture hexagonale |
+| [Architectures de référence](export/architectures_reference.pdf) | Fiches de référence sur les architectures (lecture autonome) |
 
 ### Travaux dirigés
 
