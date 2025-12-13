@@ -327,14 +327,14 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
 ```text
 ❌ Classique (problème) :              ✅ Inversé (solution) :
 
-+--------------+                      +-----------------------------+
++--------------+                      +---------------------------+
 |    Métier    |                      | +---------------------+   |
 +------+-------+                      | | Métier              |   |
        |                              | +---------------------+   |
        | dépend de                    | | <<interface>>       |   | DOMAINE
        v                              | | Repository          |   |
 +--------------+                      | +-----------^---------+   |
-|   Database   |                      +-------------|--------------+
+|   Database   |                      +-------------|-------------+
 +--------------+                                    |
                                                     | implémente
 Le métier connaît MySQL                             |
@@ -449,7 +449,7 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 |  |  +-------------------------------------------+     |  |
 |  |  |          DOMAIN LAYER                     |     |  |
 |  |  |  (Entités, Règles métier, Value Objects)  |     |  |
-|  |  |  ⚠️ ZÉRO import technique                |     |  |
+|  |  |  ZÉRO import technique                    |     |  |
 |  |  +-------------------------------------------+     |  |
 |  +----------------------------------------------------+  |
 +----------------------------------------------------------+
