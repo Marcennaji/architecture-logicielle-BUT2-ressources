@@ -268,7 +268,7 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
 **Progression réaliste :**
 - TD1 : Domain (2h) → faisable
 - TD2 : Use cases + Ports (4h) → on comprend l'inversion
-- TD3 : Repository SQL (4h) → on voit la puissance des adapters
+- TD3 : Repository SQLite (4h) → on voit la puissance des adapters
 - TD4 : API REST (4h) → on assemble tout
 
 ---

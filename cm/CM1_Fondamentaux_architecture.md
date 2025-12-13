@@ -656,7 +656,7 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 | **TD0** | Setup environnement, workflow Git | - |
 | **TD1** | Modéliser le domaine (`Ticket`, `User`, `Status`) | Domain |
 | **TD2** | Créer les use cases et ports | Application + Ports |
-| **TD3** | Implémenter le repository SQL | Adapters (DB) |
+| **TD3** | Implémenter le repository SQLite | Adapters (DB) |
 | **TD4** | Exposer l'API REST | Adapters (API) |
 
 ---
@@ -688,7 +688,7 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 🔧 **Technologies** :
 - Python 3.11+
 - FastAPI (web framework)
-- SQLAlchemy (ORM)
+- SQLite (base de données, module `sqlite3` intégré)
 - pytest (tests)
 
 🚀 **Prérequis** : Guide de démarrage à suivre **AVANT le TD0**

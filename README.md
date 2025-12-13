@@ -38,7 +38,7 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 - [TD0 : Prise en main](td/TD0_prise_en_main.md) ✅ Disponible
 - TD1 : Modélisation du domaine 🔒 *Bientôt*
 - TD2 : Use cases et ports 🔒 *Bientôt*
-- TD3 : Repository SQL 🔒 *Bientôt*
+- TD3 : Repository SQLite 🔒 *Bientôt*
 - TD4 : API REST 🔒 *Bientôt*
 
 👉 [Accéder à tous les TDs](td/README.md)
