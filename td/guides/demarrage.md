@@ -95,7 +95,7 @@ Si vous avez des erreurs, consultez la section "Problèmes fréquents" ci-dessou
 
 ### PC fixes, ou PC portables attribués personnellement (compte personnel)
 
-Le dossier persiste entre les séances :
+Le dossier persiste entre les séances. A chaque début de TD, faire :
 
 ```bash
 cd ticketing
@@ -104,7 +104,7 @@ source scripts/init.sh
 
 ### PC portables qui restent à l'IUT (compte partagé avec d'autres étudiants)
 
-Rien ne persiste, il faut tout recloner :
+Rien ne persiste, il faut tout recloner à chaque début de TD:
 
 ```bash
 git clone https://github.com/VOTRE-USERNAME/ticketing.git
