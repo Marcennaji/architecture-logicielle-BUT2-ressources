@@ -42,7 +42,7 @@ pytest
 
 **Checklist** :
 - [ ] Mon repository `ticketing` existe sur mon compte GitHub
-- [ ] J'ai ajouté `Marcennaji` comme collaborateur (rôle Read)
+- [ ] J'ai ajouté `Marcennaji` comme collaborateur (rôle **Triage**)
 - [ ] Le projet est cloné sur ma machine
 - [ ] La commande `pytest` fonctionne et tous les tests passent
 - [ ] Je vois `(.venv)` au début de ma ligne de commande
