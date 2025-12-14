@@ -9,12 +9,18 @@ Chaque TD doit être développé sur une **branche dédiée**, puis soumis via u
 ```
 main (stable)
   │
-  ├── td1 → PR → review → merge → tag TD1
+  ├── td1 → PR → auto-validation → merge → tag TD1
   │
-  ├── td2 → PR → review → merge → tag TD2
+  ├── td2 → PR → auto-validation → merge → tag TD2
   │
-  └── ...
+  ├── td3 → PR → auto-validation → merge → tag TD3
+  │
+  └── td4 → PR → auto-validation → merge → tag TD4
 ```
+
+> 💡 **Note** : Les TD ne sont pas corrigés individuellement. Vous vous auto-validez via les checklists des PR. L'enseignant évaluera le **projet final complet** (tag TD4) pour l'appréciation globale.
+
+> ⚠️ **Support disponible** : Si vous rencontrez des difficultés sur un TD, **contactez l'enseignant** pendant les séances ou par email. Ne restez pas bloqué !
 
 ## Étape par étape
 
@@ -55,58 +61,54 @@ git push origin td1
    - **Titre** : `TD1 - [Votre description]`
    - **Description** : Le template contient des checklists à cocher (architecture, tests, qualité)
    - **Checklist spécifique au TD** : Ajoutez les points demandés dans l'énoncé du TD
-   - **Questions/remarques** : N'hésitez pas à poser des questions à l'enseignant
+   - **Questions/remarques** : Notez vos difficultés ou interrogations (optionnel)
 5. Cliquez sur **Create pull request**
 
 > 💡 **Conseil** : Prenez le temps de cocher les checklists **avant** de créer la PR. Cela vous permet de vérifier que vous n'avez rien oublié !
 
-> ⚠️ **Important** : Ne mergez PAS la PR vous-même ! Attendez la review.
+> ℹ️ **Tous les TD** : Vous pouvez merger vous-même après auto-validation via les checklists.
 
-### 5. Recevoir la review
+### 5. Auto-validation
 
-Votre enseignant va :
-- Lire votre code
-- Ajouter des **commentaires ligne par ligne** (si nécessaire)
-- Demander des modifications si nécessaire
-- **Valider la PR** en laissant un commentaire explicite : "✅ Validé, vous pouvez merger"
+1. Relisez votre code et vérifiez les checklists de la PR
+2. Assurez-vous que tous les tests passent (`pytest`)
+3. Si tout est OK, passez à l'étape 7 (merger)
 
-Vous recevrez une notification GitHub pour chaque commentaire.
+> 💡 Les checklists du template de PR sont votre guide d'auto-évaluation.
 
-### 6. Corriger si demandé
+> 📊 **Évaluation finale** : L'enseignant évaluera votre **projet complet** (tag TD4) en fin de module pour donner une appréciation globale sur l'architecture, les fonctionnalités, les tests et la qualité du code.
 
-Si des modifications sont demandées :
+### 6. Corriger si nécessaire
+
+Si vous détectez des problèmes lors de l'auto-validation, corrigez-les avant de merger :
 
 ```bash
-# Vous êtes toujours sur la branche td1
+# Vous êtes toujours sur la branche (td1, td2, td3 ou td4)
 git add .
-git commit -m "fix: correction suite à la review"
-git push origin td1
+git commit -m "fix: correction après relecture"
+git push origin td1  # ou td2, td3, td4
 ```
 
 La PR se met à jour automatiquement avec vos nouveaux commits.
 
-### 7. Merger et créer un tag (après validation)
+### 7. Merger et créer un tag
 
-Une fois la PR **validée** par l'enseignant (commentaire "✅ Validé, vous pouvez merger") :
+Une fois les checklists vérifiées et les tests OK :
 
 1. **Vous mergez la PR** sur GitHub (bouton "Merge pull request")
 2. Confirmez le merge (bouton "Confirm merge")
-3. **Vérifiez que le merge a réussi** : vous devez voir un message "Pull request successfully merged and closed" avec une coche violette ✅
-4. Seulement après cette confirmation, supprimez la branche distante (bouton "Delete branch")
+3. **Vérifiez que le merge a réussi** : message "Pull request successfully merged and closed" ✅
+4. Supprimez la branche distante (bouton "Delete branch")
 5. **Créez un tag** pour marquer la version finale :
 
 ```bash
 git checkout main
 git pull origin main
-git tag TD1
+git tag TD1  # ou TD2, TD3, TD4
 git push origin TD1
 ```
 
-> ⚠️ **Important** : Ne mergez pas avant la validation explicite de l'enseignant !
-
 > 💡 **Sécurité** : La suppression de branche sur GitHub ne supprime que la branche **distante**. Votre branche locale reste intacte. Si vous avez un doute, vérifiez d'abord que le merge apparaît bien dans l'historique de `main` avant de supprimer quoi que ce soit.
-
-> 💡 **Bon à savoir** : Tous les commentaires de review restent accessibles après le merge dans l'historique de la PR (onglet "Pull requests" → filtre "Closed").
 
 ## Résumé des commandes
 
@@ -155,7 +157,7 @@ Une bonne description de PR contient :
 
 ## FAQ
 
-### Puis-je continuer à travailler pendant la review ?
+### Puis-je continuer à travailler sur le TD suivant avant de merger le TD actuel ?
 
 Oui ! Créez une nouvelle branche pour le TD suivant :
 
@@ -197,9 +199,14 @@ git checkout -b td1 <hash-du-commit>
 
 **En cas de doute**, contactez l'enseignant AVANT de faire des manipulations hasardeuses.
 
-### Comment voir les commentaires de review ?
+### J'ai des difficultés sur un TD, que faire ?
 
-Sur GitHub, dans l'onglet **Pull requests** de votre repo, puis dans la section **Files changed** de votre PR.
+**Ne restez pas bloqué !** Contactez l'enseignant :
+- Pendant les séances TD (levez la main)
+- Par email avec une description claire du problème
+- En incluant le lien vers votre PR si pertinent
+
+L'enseignant est là pour vous aider à progresser tout au long du module.
 
 ---
 

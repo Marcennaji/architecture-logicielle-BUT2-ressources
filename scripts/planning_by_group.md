@@ -22,10 +22,10 @@
 | 21/01/2026 | Mer | 15:45-17:45 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 12h |
 | 27/01/2026 | Mar | 08:15-10:15 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
-| 24/03/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 18h |
-| 31/03/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 20h |
+| 31/03/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
+| 15/04/2026 | Mar | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
 
-**Total présentiel : 20h** (10 séances)
+**Total présentiel : 20h** (9 séances TD + 1 contrôle)
 
 ---
 
@@ -41,10 +41,10 @@
 | 21/01/2026 | Mer | 13:30-15:30 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 12h |
 | 27/01/2026 | Mar | 10:30-12:30 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
-| 24/03/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 18h |
-| 31/03/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 20h |
+| 31/03/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
+| 15/04/2026 | Mar | 10:30-12:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
 
-**Total présentiel : 20h** (10 séances)
+**Total présentiel : 20h** (9 séances TD + 1 contrôle)
 
 ---
 
@@ -60,10 +60,10 @@
 | 21/01/2026 | Mer | 10:30-12:30 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 12h |
 | 27/01/2026 | Mar | 13:30-15:30 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
-| 24/03/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 18h |
-| 31/03/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 20h |
+| 31/03/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
+| 15/04/2026 | Mar | 13:30-15:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
 
-**Total présentiel : 20h** (10 séances)
+**Total présentiel : 20h** (9 séances TD + 1 contrôle)
 
 ---
 
@@ -79,10 +79,10 @@
 | 25/03/2026 | Mer | 13:30-15:30 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 12h |
 | 31/03/2026 | Mar | 15:45-17:45 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 01/04/2026 | Mer | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
-| 08/04/2026 | Mer | 08:15-10:15 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 18h |
-| 08/04/2026 | Mer | 10:30-12:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 20h |
+| 08/04/2026 | Mer | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
+| 22/04/2026 | Mer | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
 
-**Total présentiel : 20h** (10 séances)
+**Total présentiel : 20h** (9 séances TD + 1 contrôle)
 
 ---
 

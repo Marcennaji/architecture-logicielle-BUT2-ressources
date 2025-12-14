@@ -42,25 +42,25 @@
 | 03/02/2026 | 2B I | Mar | 10:30-12:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 52h |
 | 03/02/2026 | 2C I | Mar | 13:30-15:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 54h |
 | 03/02/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD2** | Use cases + ports (début) - TicketRepository port + InMemory | 56h |
-| 24/03/2026 | 2A I | Mar | 08:15-10:15 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 58h |
-| 24/03/2026 | 2B I | Mar | 10:30-12:30 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 60h |
-| 24/03/2026 | 2C I | Mar | 13:30-15:30 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 62h |
-| 24/03/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD2** | Use cases + ports (fin) - 5 use cases + tests | 64h |
-| 25/03/2026 | 2D I | Mer | 13:30-15:30 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 66h |
-| 31/03/2026 | 2A I | Mar | 08:15-10:15 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 68h |
-| 31/03/2026 | 2B I | Mar | 10:30-12:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 70h |
-| 31/03/2026 | 2C I | Mar | 13:30-15:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 72h |
-| 31/03/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 74h |
-| 01/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 76h |
-| 08/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (milieu) - 5 endpoints + tests e2e | 78h |
-| 08/04/2026 | 2D I | Mer | 10:30-12:30 | 2h | **TD4** | API REST (fin) - Finalisation + revue | 80h |
+| 24/03/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD2** | Use cases + ports (fin) - 5 use cases + tests | 58h |
+| 25/03/2026 | 2D I | Mer | 13:30-15:30 | 2h | **TD3** | Repository SQLite (début) - Schéma DB + implémentation | 60h |
+| 31/03/2026 | 2A I | Mar | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 62h |
+| 31/03/2026 | 2B I | Mar | 10:30-12:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 64h |
+| 31/03/2026 | 2C I | Mar | 13:30-15:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 66h |
+| 31/03/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 68h |
+| 01/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 70h |
+| 08/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 72h |
+| 15/04/2026 | 2A I | Mar | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 74h |
+| 15/04/2026 | 2B I | Mar | 10:30-12:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 76h |
+| 15/04/2026 | 2C I | Mar | 13:30-15:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 78h |
+| 22/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 80h |
 
 ---
 
 ## 📊 Statistiques
 
-- **Total séances** : 41 (1 CM + 40 TD)
-- **Groupe 2A I** : 20h
-- **Groupe 2B I** : 20h
-- **Groupe 2C I** : 20h
-- **Groupe 2D I** : 20h
+- **Total séances** : 41 (1 CM + 36 séances TD + 4 contrôles finaux)
+- **Groupe 2A I** : 20h (18h TD + 2h contrôle)
+- **Groupe 2B I** : 20h (18h TD + 2h contrôle)
+- **Groupe 2C I** : 20h (18h TD + 2h contrôle)
+- **Groupe 2D I** : 20h (18h TD + 2h contrôle)
