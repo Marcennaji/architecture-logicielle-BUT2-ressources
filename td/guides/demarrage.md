@@ -93,7 +93,7 @@ Si vous avez des erreurs, consultez la section "Problèmes fréquents" ci-dessou
 
 ## 🔄 TD suivants
 
-### PC fixes (compte personnel)
+### PC fixes, ou PC portables attribués personnellement (compte personnel)
 
 Le dossier persiste entre les séances :
 
@@ -102,7 +102,7 @@ cd ticketing
 source scripts/init.sh
 ```
 
-### PC portables (compte partagé)
+### PC portables qui restent à l'IUT (compte partagé avec d'autres étudiants)
 
 Rien ne persiste, il faut tout recloner :
 
@@ -114,9 +114,9 @@ source scripts/init.sh
 
 > 💡 Gardez votre token à portée de main, il sera demandé à chaque clone.
 
-### Fin de séance sur portables (⚠️ OBLIGATOIRE)
+### Fin de séance sur portables restant à l'IUT (⚠️ OBLIGATOIRE)
 
-Sur les **PC portables**, supprimez votre dossier en fin de séance :
+Sur les **PC portables restant à l'IUT**, supprimez votre dossier en fin de séance :
 
 ```bash
 cd ~
