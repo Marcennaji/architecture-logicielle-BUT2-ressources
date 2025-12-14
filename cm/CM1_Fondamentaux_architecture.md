@@ -296,7 +296,9 @@ class LoyaltyService:         # Points fidélité
 C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagonale.
 
 ---
+
 ## 3.5 Inversion — avant/après
+
 ```text
 ❌ Classique (problème)              ✅ Inversé (solution)
 
@@ -310,8 +312,21 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
                                              │
                                         Database MySQL
 ```
-Avant : Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
-Après : Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter
+
+---
+## 3.5 Inversion — conséquences
+
+**❌ Avant (approche classique) :**  
+- Le code métier dépend directement de `MySQLDatabase`
+- Pour tester : il faut installer MySQL, configurer la connexion, créer les tables...
+- Pour changer de DB : il faut réécrire tout le code métier qui utilise MySQL
+- Le métier est **couplé** à l'infrastructure
+
+**✅ Après (inversion) :**  
+- Le métier définit `TicketRepository` (interface abstraite)
+- Pour tester : on injecte un `FakeRepository` en mémoire → tests rapides et isolés
+- Pour changer de DB : on crée un nouvel adaptateur → **zéro impact** sur le métier
+- Le métier est **indépendant** de l'infrastructure
 👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
 
 ---
