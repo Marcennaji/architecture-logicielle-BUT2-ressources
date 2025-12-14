@@ -11,7 +11,7 @@ En suivant cette procédure maintenant, vous gagnerez du temps lors du TD0 et po
 **Vérification de réussite** : Au début du TD0, vous devez être capable de :
 - ✅ Lancer la commande `pytest` dans votre projet et voir tous les tests passer
 - ✅ Voir votre repository `ticketing` sur votre compte GitHub
-- ✅ Voir "Marcennaji" dans la liste de vos collaborateurs GitHub
+- ✅ Voir "Marcennaji" dans la liste de vos collaborateurs GitHub (avec le rôle **Triage**)
 
 ---
 
@@ -56,10 +56,10 @@ GitHub n'accepte plus les mots de passe pour Git. Vous devez créer un **token**
 2. Dans le menu de gauche → **Collaborators and teams**
 3. Cliquez sur **Add people**
 4. Recherchez `Marcennaji`
-5. Sélectionnez le rôle **Triage** (permet la review et l'approbation de code)
+5. Sélectionnez le rôle **Triage** (permet la review de code et les commentaires de validation)
 6. Cliquez sur **Add Marcennaji to this repository**
 
-> ⚠️ **Obligatoire** : Sans cela, je ne pourrai pas reviewer votre code ni approuver vos Pull Requests !
+> ⚠️ **Obligatoire** : Sans cela, je ne pourrai pas reviewer votre code ni valider vos Pull Requests !
 
 ### 5. Cloner et initialiser
 

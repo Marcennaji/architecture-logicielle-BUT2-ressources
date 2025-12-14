@@ -51,10 +51,14 @@ git push origin td1
 1. Allez sur votre repo GitHub
 2. Vous verrez un bandeau proposant de créer une PR pour `td1`
 3. Cliquez sur **Compare & pull request**
-4. Remplissez :
+4. Remplissez le template de PR qui s'affiche automatiquement :
    - **Titre** : `TD1 - [Votre description]`
-   - **Description** : Résumez ce que vous avez implémenté
+   - **Description** : Le template contient des checklists à cocher (architecture, tests, qualité)
+   - **Checklist spécifique au TD** : Ajoutez les points demandés dans l'énoncé du TD
+   - **Questions/remarques** : N'hésitez pas à poser des questions à l'enseignant
 5. Cliquez sur **Create pull request**
+
+> 💡 **Conseil** : Prenez le temps de cocher les checklists **avant** de créer la PR. Cela vous permet de vérifier que vous n'avez rien oublié !
 
 > ⚠️ **Important** : Ne mergez PAS la PR vous-même ! Attendez la review.
 
@@ -62,9 +66,9 @@ git push origin td1
 
 Votre enseignant va :
 - Lire votre code
-- Ajouter des **commentaires ligne par ligne**
+- Ajouter des **commentaires ligne par ligne** (si nécessaire)
 - Demander des modifications si nécessaire
-- **Approuver** la PR quand tout est validé (bouton "Approve")
+- **Valider la PR** en laissant un commentaire explicite : "✅ Validé, vous pouvez merger"
 
 Vous recevrez une notification GitHub pour chaque commentaire.
 
@@ -81,9 +85,9 @@ git push origin td1
 
 La PR se met à jour automatiquement avec vos nouveaux commits.
 
-### 7. Merger et créer un tag (après approbation)
+### 7. Merger et créer un tag (après validation)
 
-Une fois la PR **approuvée** par l'enseignant (✅ "Approved") :
+Une fois la PR **validée** par l'enseignant (commentaire "✅ Validé, vous pouvez merger") :
 
 1. **Vous mergez la PR** sur GitHub (bouton "Merge pull request")
 2. Confirmez le merge (bouton "Confirm merge")
@@ -97,7 +101,7 @@ git tag TD1
 git push origin TD1
 ```
 
-> ⚠️ **Important** : Ne mergez pas avant l'approbation de l'enseignant !
+> ⚠️ **Important** : Ne mergez pas avant la validation explicite de l'enseignant !
 
 > 💡 **Bon à savoir** : Tous les commentaires de review restent accessibles après le merge dans l'historique de la PR (onglet "Pull requests" → filtre "Closed").
 
