@@ -310,8 +310,8 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
                                              │
                                         Database MySQL
 ```
-**Avant :** Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
-**Après :** Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter
+Avant : Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
+Après : Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter
 👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
 
 ---
