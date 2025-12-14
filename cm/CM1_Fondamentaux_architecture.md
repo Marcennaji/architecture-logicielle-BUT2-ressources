@@ -296,9 +296,7 @@ class LoyaltyService:         # Points fidélité
 C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagonale.
 
 ---
-
 ## 3.5 Inversion — avant/après
-
 ```text
 ❌ Classique (problème)              ✅ Inversé (solution)
 
@@ -312,10 +310,8 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
                                              │
                                         Database MySQL
 ```
-
 **Avant :** Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
 **Après :** Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter
-
 👉 **C'est le cœur de l'architecture hexagonale** (voir partie 4).
 
 ---
@@ -412,7 +408,6 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 - 🐛 Logique métier éparpillée partout
 
 ---
-
 ### 4.2 La solution : séparer le métier de la technique
 
 **Principe central de l'hexagonale :**
@@ -674,7 +669,7 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 
 ### 5.4 Ressources
 
-📦 **Template de code** :  
+📦 **Template de code du projet Ticketing** :  
 https://github.com/Marcennaji/ticketing_starter
 
 📚 **Documentation TDs** :  
