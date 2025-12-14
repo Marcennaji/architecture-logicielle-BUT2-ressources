@@ -53,6 +53,18 @@ Comprendre **pourquoi** l'architecture logicielle est essentielle et maîtriser 
 
 ---
 
+## 🎯 Ce que vous allez construire
+
+Vous allez appliquer ces principes sur un **projet fil rouge** :
+
+- 🎫 **Système de tickets** (simplifié, type Trello/Jira)
+- 🏛 **Architecture hexagonale imposée** (vous comprendrez pourquoi)
+- ⏱ **20h de TD** pour maîtriser les fondamentaux
+
+➡️ **Ce CM vous donne les clés pour réussir le projet.**
+
+---
+
 ## 🚀 1. Pourquoi parler d'architecture ?
 
 Sans vraie architecture, on obtient vite :
@@ -81,85 +93,48 @@ Une bonne architecture doit aider à :
 
 ---
 
-## 🤖 2. L'ère du "vibe coding" et des assistants IA
+## 🤖 2. L'architecture à l'ère de l'IA
 
-**« Avec GitHub Copilot, ChatGPT, Cursor... je code par "intuition" et ça marche.  
-Du coup l'architecture, c'est moins important ? »**
+**« Avec Copilot, ChatGPT, Cursor... je code par "intuition" et ça marche.  
+L'architecture, c'est moins important ? »**
 
 ❌ **FAUX.** C'est même l'inverse.
 
-💬 *Le "vibe coding" (coder à l'instinct avec l'IA) a sa place pour prototyper ou explorer.  
+💬 *Le "vibe coding" (coder à l'instinct avec l'IA) a sa place pour prototyper.  
 Mais en production sans maîtrise des fondamentaux → dette technique garantie.*
 
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante (1/3)
+## 🤖 Pourquoi l'architecture devient PLUS importante
 
-1. **"Vibe coding" = productivité à court terme, chaos à moyen terme**
+1. **"Vibe coding" = productivité court terme, chaos moyen terme**
    - L'IA + votre intuition → Code qui marche *maintenant*
    - Mais sans vision architecturale → Dette technique exponentielle
    - *Dans 6 mois : "Qui a écrit ce code ?" — Spoiler : c'était vous + l'IA*
 
-2. **L'IA suit des instructions, elle ne conçoit pas de systèmes**
-   - Elle peut respecter une architecture… *si vous lui expliquez laquelle*
-   - Elle ne sait pas si votre "vibe" justifie une exception aux règles
+2. **L'IA ne conçoit pas de systèmes**
+   - Elle respecte une architecture *si vous lui expliquez laquelle*
    - Elle amplifie vos décisions (bonnes **ou** mauvaises)
 
----
-
-## 🤖 Pourquoi l'architecture devient PLUS importante (2/3)
-
-3. **Le "vibe" ne scale pas (sauf si c'est le vibe d'un expert)**
-   - 100 lignes de code → Intuition suffit (même pour un junior)
-   - 10 000 lignes → Il faut une structure claire
-   - 100 000 lignes → Seule l'intuition **fondée sur des principes** fonctionne
-   - *Le "vibe" d'un senior avec 10 ans d'expérience ≠ le "vibe" d'un junior qui découvre*
+3. **Le "vibe" ne scale pas**
+   - 100 lignes → intuition OK | 10 000 lignes → structure nécessaire | 100 000 lignes → principes indispensables
 
 ---
 
-## 🤖 Pourquoi l'architecture devient PLUS importante (3/3)
+## 🎯 À retenir !
 
-4. **Votre valeur = comprendre le système, pas juste taper du code**
-   - IA + "vibe" → N'importe qui peut générer du code fonctionnel
-   - Ingénieur → Seuls ceux qui maîtrisent les concepts peuvent concevoir un système cohérent
-   - Questions que l'IA ne peut pas trancher :
-     * Où placer la frontière domaine/infrastructure ?
-     * Ce couplage est-il acceptable *dans ce contexte* ?
-     * Faut-il sacrifier la pureté pour la simplicité ici ?
+> **💡 L'IA code très bien. Aucune IA n'est ingénieure logicielle.**
 
----
-
-## 🎯 À retenir ! (1/2)
-
-> **IA + "vibe coding + maîtrise insuffisante de l'archi" = conduire une Ferrari sans permis.**  
-> Vous allez vite… droit dans le mur.
+**Votre valeur** = comprendre le système, pas juste générer du code.
 
 **Usages légitimes du "vibe coding" :**
 - ✅ Prototypage rapide / POC
 - ✅ Scripts one-shot
-- ✅ Exploration d'une nouvelle techno
 
-**Mais en production, le "vibe" sans fondamentaux = illusion de compétence :**
-- ✅ Ça marche maintenant (court terme)
-- ❌ Ça ne scale pas (moyen terme)
-- ❌ Personne ne comprend le code dans 3 mois (long terme)
+**Mais en production sans fondamentaux = illusion de compétence :**
+- Ça marche maintenant → mais ça ne scale pas → personne ne comprend dans 3 mois
 
----
-
-## 🎯 À retenir ! (2/2)
-
-💡 **L'IA code très bien. Aucune IA n'est ingénieure logicielle.**
-
-Un **"vibe coder"** génère du code qui fonctionne *maintenant*.  
-Un **ingénieur logiciel** conçoit des systèmes cohérents, maintenables, évolutifs.
-
-**L'intuition a de la valeur... quand elle est fondée sur l'expérience :**
-- Senior qui "vibe" = 10 ans de patterns intégrés → souvent juste ✅
-- Junior qui "vibe" = copier-coller sans comprendre → dette technique ❌
-
-**Ce cours vous apprend les fondamentaux** pour que, dans 5 ou 10 ans :
-- Votre intuition soit fiable
-- Vous ne soyez pas remplacés par GPT-12 + un stagiaire qui "vibe" 💸 
+**💡 Ce cours vous donne les fondamentaux** pour concevoir des systèmes cohérents que l'IA pourra ensuite vous aider à implémenter.
 
 ---
 
@@ -325,22 +300,17 @@ C'est le **D** de SOLID — et c'est **fondamental** pour l'architecture hexagon
 ## 3.5 Inversion — avant/après
 
 ```text
-❌ Classique (problème) :              ✅ Inversé (solution) :
+❌ Classique (problème)              ✅ Inversé (solution)
 
-+--------------+                      +---------------------------+
-|    Métier    |                      | +---------------------+   |
-+------+-------+                      | | Métier              |   |
-       |                              | +---------------------+   |
-       | dépend de                    | | <<interface>>       |   | DOMAINE
-       v                              | | Repository          |   |
-+--------------+                      | +-----------^---------+   |
-|   Database   |                      +-------------|-------------+
-+--------------+                                    |
-                                                    | implémente
-Le métier connaît MySQL                             |
-                                            +-----------------+
-                                            | Database (MySQL)|
-                                            +-----------------+
+    Métier                          +------------------+
+      │                             |    Métier        |
+      │ dépend de                   |                  |
+      ↓                             |  <<interface>>   |
+  Database MySQL                    |    Repository    |
+                                    +--------↑---------+
+                                             │ implémente
+                                             │
+                                        Database MySQL
 ```
 
 **Avant :** Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier  
@@ -399,6 +369,19 @@ Si vous devez :
 
 ---
 
+## 🧩 Pause conceptuelle
+
+**Récapitulatif rapide :**
+
+✅ **5 principes fondamentaux** = outils universels pour évaluer et concevoir du code  
+✅ **1 objectif commun** = code maintenable, testable, évolutif
+
+**❓ Questions avant de passer à l'architecture hexagonale ?**
+
+> *Prochain sujet : comment ces principes se concrétisent dans une architecture réelle*
+
+---
+
 ## 🛡️ 4. Architecture hexagonale (Ports & Adapters)
 
 ### 4.1 Le problème à résoudre
@@ -440,7 +423,7 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 ```text
 +----------------------------------------------------------+
 |                      ADAPTERS                            |
-|  (FastAPI, SQLAlchemy, SMTP, APIs externes...)           |
+|  (FastAPI, SQLite, SMTP, APIs externes...)               |
 |                                                          |
 |  +----------------------------------------------------+  |
 |  |              APPLICATION LAYER                     |  |
@@ -623,6 +606,18 @@ def test_create_ticket():
 
 ---
 
+## ❓ Questions ou clarifications ?
+
+**Avant de passer au projet concret :**
+
+- Architecture hexagonale claire ?
+- Différence Domain / Ports / Application / Adapters ?
+- Inversion de dépendances compréhensible ?
+
+> *Prochain sujet : votre projet fil rouge (système de tickets)*
+
+---
+
 ## 🎯 5. Le projet : Ticketing System
 
 ### 5.1 Vue d'ensemble (1/2)
@@ -695,50 +690,20 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
 ---
 
-## 🎯 Récapitulatif (1/2)
+## 🎯 Récapitulatif & prochaines étapes
 
-Vous avez maintenant :
+**Vous avez maintenant :**
 
-✅ Compris **pourquoi** l'architecture est essentielle (encore plus avec l'IA)
-
-✅ Découvert les **principes fondamentaux** :
-- Cohésion, couplage, dépendances
-- Séparation des responsabilités
-- Inversion de dépendances
-
----
-
-## 🎯 Récapitulatif (2/2)
-
-✅ Découvert l'**architecture hexagonale** :
-- Domain (métier pur)
-- Ports (interfaces)
-- Application (use cases)
-- Adapters (implémentations)
-
+✅ Compris **pourquoi** l'architecture est essentielle (encore plus avec l'IA)  
+✅ Découvert les **5 principes fondamentaux**  
+✅ Découvert l'**architecture hexagonale** (Domain, Ports, Application, Adapters)  
 ✅ Une vision du **projet ticketing**
 
-➡ **Prochaine étape** : TD0 (prise en main environnement + workflow)
+**🚀 Prochaine étape :** TD0 (prise en main environnement + workflow)
 
----
+**📚 Ressources complémentaires :**
+- Annexes (PDF) : [Comparaison architectures](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf), [TDD](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf), [Monolithe vs Microservices](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf)
+- Articles : [Architecture Hexagonale (OCTO)](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation), [Hexagonale expliquée (Les Dieux du Code)](https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier)
+- Toutes les ressources : https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
-## 📚 Pour aller plus loin
-
-**Annexes du cours (PDF) :**
-- [Comparaison des architectures](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf) — Layered, MVC, MVVM, Microservices, Hexagonale
-- [Architecture vs Design](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_architecture_vs_design.pdf) — Clarification conceptuelle
-- [TDD et architecture](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf) — Les tests comme détecteur de qualité
-- [Monolithe vs Microservices](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf) — Démystifier le monolithe
-
-**Articles de référence (français) :**
-- [Architecture Hexagonale : trois principes et un exemple](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation) (OCTO Technology)
-- [Hexagonal Architecture expliquée simplement](https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier) (Les Dieux du Code)
-
----
-
-# 🏁 Fin du cours
-
-📂 **Toutes les ressources sont sur GitHub :**  
-https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
-
-❓ **Questions ?**
+**❓ Questions ?**

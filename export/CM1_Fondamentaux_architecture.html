@@ -52,7 +52,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h1 id="%F0%9F%A7%B1-cm1--fondamentaux-de-larchitecture-logicielle"><img class="emoji" draggable="false" alt="🧱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9f1.svg" data-marp-twemoji=""/> CM1 : Fondamentaux de l'architecture logicielle</h1>
 <p>BUT Informatique — Ressource R4.01 « Architecture logicielle »<br />
 Enseignant : Marc Ennaji</p>
@@ -103,7 +103,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h2 id="%F0%9F%A7%A9-plan-du-cours"><img class="emoji" draggable="false" alt="🧩" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e9.svg" data-marp-twemoji=""/> Plan du cours</h2>
 <ol>
 <li>Pourquoi une architecture logicielle ?</li>
@@ -165,17 +165,15 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%9A%80-1-pourquoi-parler-darchitecture"><img class="emoji" draggable="false" alt="🚀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f680.svg" data-marp-twemoji=""/> 1. Pourquoi parler d'architecture ?</h2>
-<p>Sans vraie architecture, on obtient vite :</p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%8E%AF-ce-que-vous-allez-construire"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Ce que vous allez construire</h2>
+<p>Vous allez appliquer ces principes sur un <strong>projet fil rouge</strong> :</p>
 <ul>
-<li>Du <strong>code spaghetti</strong> <img class="emoji" draggable="false" alt="🍝" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f35d.svg" data-marp-twemoji=""/> <em>(attention aux indigestions)</em></li>
-<li>Une application <strong>difficile à comprendre</strong></li>
-<li>Des bugs qui reviennent en boucle</li>
-<li>Une application <strong>impossible à tester</strong></li>
-<li>Une appli qui ne supporte pas bien les évolutions</li>
+<li><img class="emoji" draggable="false" alt="🎫" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3ab.svg" data-marp-twemoji=""/> <strong>Système de tickets</strong> (simplifié, type Trello/Jira)</li>
+<li><img class="emoji" draggable="false" alt="🏛" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3db.svg" data-marp-twemoji=""/> <strong>Architecture hexagonale imposée</strong> (vous comprendrez pourquoi)</li>
+<li><img class="emoji" draggable="false" alt="⏱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/23f1.svg" data-marp-twemoji=""/> <strong>20h de TD</strong> pour maîtriser les fondamentaux</li>
 </ul>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> L'architecture sert à organiser le logiciel pour qu'il soit <strong>vivable</strong> sur le long terme.</p>
+<p><img class="emoji" draggable="false" alt="➡️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/27a1.svg" data-marp-twemoji=""/> <strong>Ce CM vous donne les clés pour réussir le projet.</strong></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="4" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -221,19 +219,17 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-objectifs-dune-bonne-architecture"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Objectifs d'une bonne architecture</h2>
-<p>Une bonne architecture doit aider à :</p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%9A%80-1-pourquoi-parler-darchitecture"><img class="emoji" draggable="false" alt="🚀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f680.svg" data-marp-twemoji=""/> 1. Pourquoi parler d'architecture ?</h2>
+<p>Sans vraie architecture, on obtient vite :</p>
 <ul>
-<li><img class="emoji" draggable="false" alt="🔧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f527.svg" data-marp-twemoji=""/> <strong>Maintenir</strong> : corriger, faire évoluer</li>
-<li><img class="emoji" draggable="false" alt="📦" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4e6.svg" data-marp-twemoji=""/> <strong>Modulariser</strong> : pouvoir changer une partie sans tout casser</li>
-<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> <strong>Tester</strong> : isoler le métier pour le tester sans tout l'environnement</li>
-<li><img class="emoji" draggable="false" alt="🌱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f331.svg" data-marp-twemoji=""/> <strong>Faire évoluer</strong> : ajouter des fonctionnalités sans tout réécrire</li>
-<li><img class="emoji" draggable="false" alt="🙋‍♀️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f64b-200d-2640-fe0f.svg" data-marp-twemoji=""/> <strong>Comprendre</strong> : nouveaux développeurs qui arrivent sur le projet</li>
+<li>Du <strong>code spaghetti</strong> <img class="emoji" draggable="false" alt="🍝" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f35d.svg" data-marp-twemoji=""/> <em>(attention aux indigestions)</em></li>
+<li>Une application <strong>difficile à comprendre</strong></li>
+<li>Des bugs qui reviennent en boucle</li>
+<li>Une application <strong>impossible à tester</strong></li>
+<li>Une appli qui ne supporte pas bien les évolutions</li>
 </ul>
-<blockquote>
-<p><em>Plus l'architecture est pensée, moins on &quot;jette et réécrit&quot; les applis.</em></p>
-</blockquote>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> L'architecture sert à organiser le logiciel pour qu'il soit <strong>vivable</strong> sur le long terme.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="5" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -279,13 +275,19 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%A4%96-2-l%C3%A8re-du-vibe-coding-et-des-assistants-ia"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> 2. L'ère du &quot;vibe coding&quot; et des assistants IA</h2>
-<p><strong>« Avec GitHub Copilot, ChatGPT, Cursor... je code par &quot;intuition&quot; et ça marche.<br />
-Du coup l'architecture, c'est moins important ? »</strong></p>
-<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>FAUX.</strong> C'est même l'inverse.</p>
-<p><img class="emoji" draggable="false" alt="💬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4ac.svg" data-marp-twemoji=""/> <em>Le &quot;vibe coding&quot; (coder à l'instinct avec l'IA) a sa place pour prototyper ou explorer.<br />
-Mais en production sans maîtrise des fondamentaux → dette technique garantie.</em></p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%8E%AF-objectifs-dune-bonne-architecture"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Objectifs d'une bonne architecture</h2>
+<p>Une bonne architecture doit aider à :</p>
+<ul>
+<li><img class="emoji" draggable="false" alt="🔧" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f527.svg" data-marp-twemoji=""/> <strong>Maintenir</strong> : corriger, faire évoluer</li>
+<li><img class="emoji" draggable="false" alt="📦" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4e6.svg" data-marp-twemoji=""/> <strong>Modulariser</strong> : pouvoir changer une partie sans tout casser</li>
+<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> <strong>Tester</strong> : isoler le métier pour le tester sans tout l'environnement</li>
+<li><img class="emoji" draggable="false" alt="🌱" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f331.svg" data-marp-twemoji=""/> <strong>Faire évoluer</strong> : ajouter des fonctionnalités sans tout réécrire</li>
+<li><img class="emoji" draggable="false" alt="🙋‍♀️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f64b-200d-2640-fe0f.svg" data-marp-twemoji=""/> <strong>Comprendre</strong> : nouveaux développeurs qui arrivent sur le projet</li>
+</ul>
+<blockquote>
+<p><em>Plus l'architecture est pensée, moins on &quot;jette et réécrit&quot; les applis.</em></p>
+</blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="6" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -331,26 +333,13 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%A4%96-pourquoi-larchitecture-devient-plus-importante-13"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> Pourquoi l'architecture devient PLUS importante (1/3)</h2>
-<ol>
-<li>
-<p><strong>&quot;Vibe coding&quot; = productivité à court terme, chaos à moyen terme</strong></p>
-<ul>
-<li>L'IA + votre intuition → Code qui marche <em>maintenant</em></li>
-<li>Mais sans vision architecturale → Dette technique exponentielle</li>
-<li><em>Dans 6 mois : &quot;Qui a écrit ce code ?&quot; — Spoiler : c'était vous + l'IA</em></li>
-</ul>
-</li>
-<li>
-<p><strong>L'IA suit des instructions, elle ne conçoit pas de systèmes</strong></p>
-<ul>
-<li>Elle peut respecter une architecture… <em>si vous lui expliquez laquelle</em></li>
-<li>Elle ne sait pas si votre &quot;vibe&quot; justifie une exception aux règles</li>
-<li>Elle amplifie vos décisions (bonnes <strong>ou</strong> mauvaises)</li>
-</ul>
-</li>
-</ol>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%A4%96-2-larchitecture-%C3%A0-l%C3%A8re-de-lia"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> 2. L'architecture à l'ère de l'IA</h2>
+<p><strong>« Avec Copilot, ChatGPT, Cursor... je code par &quot;intuition&quot; et ça marche.<br />
+L'architecture, c'est moins important ? »</strong></p>
+<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>FAUX.</strong> C'est même l'inverse.</p>
+<p><img class="emoji" draggable="false" alt="💬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4ac.svg" data-marp-twemoji=""/> <em>Le &quot;vibe coding&quot; (coder à l'instinct avec l'IA) a sa place pour prototyper.<br />
+Mais en production sans maîtrise des fondamentaux → dette technique garantie.</em></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="7" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -396,20 +385,33 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%A4%96-pourquoi-larchitecture-devient-plus-importante-23"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> Pourquoi l'architecture devient PLUS importante (2/3)</h2>
-<ol start="3">
-<li><strong>Le &quot;vibe&quot; ne scale pas (sauf si c'est le vibe d'un expert)</strong>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%A4%96-pourquoi-larchitecture-devient-plus-importante"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> Pourquoi l'architecture devient PLUS importante</h2>
+<ol>
+<li>
+<p><strong>&quot;Vibe coding&quot; = productivité court terme, chaos moyen terme</strong></p>
 <ul>
-<li>100 lignes de code → Intuition suffit (même pour un junior)</li>
-<li>10 000 lignes → Il faut une structure claire</li>
-<li>100 000 lignes → Seule l'intuition <strong>fondée sur des principes</strong> fonctionne</li>
-<li><em>Le &quot;vibe&quot; d'un senior avec 10 ans d'expérience ≠ le &quot;vibe&quot; d'un junior qui découvre</em></li>
+<li>L'IA + votre intuition → Code qui marche <em>maintenant</em></li>
+<li>Mais sans vision architecturale → Dette technique exponentielle</li>
+<li><em>Dans 6 mois : &quot;Qui a écrit ce code ?&quot; — Spoiler : c'était vous + l'IA</em></li>
+</ul>
+</li>
+<li>
+<p><strong>L'IA ne conçoit pas de systèmes</strong></p>
+<ul>
+<li>Elle respecte une architecture <em>si vous lui expliquez laquelle</em></li>
+<li>Elle amplifie vos décisions (bonnes <strong>ou</strong> mauvaises)</li>
+</ul>
+</li>
+<li>
+<p><strong>Le &quot;vibe&quot; ne scale pas</strong></p>
+<ul>
+<li>100 lignes → intuition OK | 10 000 lignes → structure nécessaire | 100 000 lignes → principes indispensables</li>
 </ul>
 </li>
 </ol>
 </section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-marpit-fragments="3" data-paginate="true" data-theme="default" data-style="section {
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="8" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
   color: #1f1f1f;
 }
@@ -453,23 +455,22 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%A4%96-pourquoi-larchitecture-devient-plus-importante-33"><img class="emoji" draggable="false" alt="🤖" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f916.svg" data-marp-twemoji=""/> Pourquoi l'architecture devient PLUS importante (3/3)</h2>
-<ol start="4">
-<li><strong>Votre valeur = comprendre le système, pas juste taper du code</strong>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%8E%AF-%C3%A0-retenir"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> À retenir !</h2>
+<blockquote>
+<p><strong><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> L'IA code très bien. Aucune IA n'est ingénieure logicielle.</strong></p>
+</blockquote>
+<p><strong>Votre valeur</strong> = comprendre le système, pas juste générer du code.</p>
+<p><strong>Usages légitimes du &quot;vibe coding&quot; :</strong></p>
 <ul>
-<li>IA + &quot;vibe&quot; → N'importe qui peut générer du code fonctionnel</li>
-<li>Ingénieur → Seuls ceux qui maîtrisent les concepts peuvent concevoir un système cohérent</li>
-<li>Questions que l'IA ne peut pas trancher :
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Prototypage rapide / POC</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Scripts one-shot</li>
+</ul>
+<p><strong>Mais en production sans fondamentaux = illusion de compétence :</strong></p>
 <ul>
-<li data-marpit-fragment="1">Où placer la frontière domaine/infrastructure ?</li>
-<li data-marpit-fragment="2">Ce couplage est-il acceptable <em>dans ce contexte</em> ?</li>
-<li data-marpit-fragment="3">Faut-il sacrifier la pureté pour la simplicité ici ?</li>
+<li>Ça marche maintenant → mais ça ne scale pas → personne ne comprend dans 3 mois</li>
 </ul>
-</li>
-</ul>
-</li>
-</ol>
+<p><strong><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> Ce cours vous donne les fondamentaux</strong> pour concevoir des systèmes cohérents que l'IA pourra ensuite vous aider à implémenter.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="9" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -515,23 +516,14 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-%C3%A0-retenir--12"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> À retenir ! (1/2)</h2>
-<blockquote>
-<p><strong>IA + &quot;vibe coding + maîtrise insuffisante de l'archi&quot; = conduire une Ferrari sans permis.</strong><br />
-Vous allez vite… droit dans le mur.</p>
-</blockquote>
-<p><strong>Usages légitimes du &quot;vibe coding&quot; :</strong></p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%A7%A0-3-principes-fondamentaux"><img class="emoji" draggable="false" alt="🧠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e0.svg" data-marp-twemoji=""/> 3. Principes fondamentaux</h2>
+<p>Ces principes sont <strong>universels</strong> — ils s'appliquent quelle que soit l'architecture choisie.</p>
+<p>Les maîtriser, c'est pouvoir :</p>
 <ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Prototypage rapide / POC</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Scripts one-shot</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Exploration d'une nouvelle techno</li>
-</ul>
-<p><strong>Mais en production, le &quot;vibe&quot; sans fondamentaux = illusion de compétence :</strong></p>
-<ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Ça marche maintenant (court terme)</li>
-<li><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Ça ne scale pas (moyen terme)</li>
-<li><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Personne ne comprend le code dans 3 mois (long terme)</li>
+<li>Évaluer la qualité d'un code existant</li>
+<li>Guider une IA efficacement</li>
+<li>Faire les bons choix de conception</li>
 </ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="10" data-paginate="true" data-theme="default" data-style="section {
@@ -578,21 +570,19 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-%C3%A0-retenir--22"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> À retenir ! (2/2)</h2>
-<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> <strong>L'IA code très bien. Aucune IA n'est ingénieure logicielle.</strong></p>
-<p>Un <strong>&quot;vibe coder&quot;</strong> génère du code qui fonctionne <em>maintenant</em>.<br />
-Un <strong>ingénieur logiciel</strong> conçoit des systèmes cohérents, maintenables, évolutifs.</p>
-<p><strong>L'intuition a de la valeur... quand elle est fondée sur l'expérience :</strong></p>
-<ul>
-<li>Senior qui &quot;vibe&quot; = 10 ans de patterns intégrés → souvent juste <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/></li>
-<li>Junior qui &quot;vibe&quot; = copier-coller sans comprendre → dette technique <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/></li>
-</ul>
-<p><strong>Ce cours vous apprend les fondamentaux</strong> pour que, dans 5 ou 10 ans :</p>
-<ul>
-<li>Votre intuition soit fiable</li>
-<li>Vous ne soyez pas remplacés par GPT-12 + un stagiaire qui &quot;vibe&quot; <img class="emoji" draggable="false" alt="💸" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4b8.svg" data-marp-twemoji=""/></li>
-</ul>
+;" data-marpit-pagination-total="40">
+<h2 id="31-la-coh%C3%A9sion">3.1 La cohésion</h2>
+<blockquote>
+<p><strong>Ce qui va ensemble doit rester ensemble.</strong></p>
+</blockquote>
+<p>Une classe, un module, un service doit avoir une <strong>responsabilité claire et focalisée</strong>.</p>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Forte cohésion</strong> (bien) :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ShoppingCart</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_item</span>(<span class="hljs-params">self, item</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">remove_item</span>(<span class="hljs-params">self, item</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_total</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">apply_discount</span>(<span class="hljs-params">self, code</span>): ...
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="11" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -638,15 +628,14 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%A7%A0-3-principes-fondamentaux"><img class="emoji" draggable="false" alt="🧠" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e0.svg" data-marp-twemoji=""/> 3. Principes fondamentaux</h2>
-<p>Ces principes sont <strong>universels</strong> — ils s'appliquent quelle que soit l'architecture choisie.</p>
-<p>Les maîtriser, c'est pouvoir :</p>
-<ul>
-<li>Évaluer la qualité d'un code existant</li>
-<li>Guider une IA efficacement</li>
-<li>Faire les bons choix de conception</li>
-</ul>
+;" data-marpit-pagination-total="40">
+<h2 id="31-la-coh%C3%A9sion-1">3.1 La cohésion</h2>
+<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Faible cohésion</strong> (problème) :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ShoppingCart</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_item</span>(<span class="hljs-params">self, item</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_email</span>(<span class="hljs-params">self, to, subject</span>): ...  <span class="hljs-comment"># <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Rien à voir !</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_pdf_report</span>(<span class="hljs-params">self</span>): ...      <span class="hljs-comment"># <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Pas sa responsabilité</span>
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="12" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -692,19 +681,21 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="31-la-coh%C3%A9sion">3.1 La cohésion</h2>
-<blockquote>
-<p><strong>Ce qui va ensemble doit rester ensemble.</strong></p>
-</blockquote>
-<p>Une classe, un module, un service doit avoir une <strong>responsabilité claire et focalisée</strong>.</p>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Forte cohésion</strong> (bien) :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ShoppingCart</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_item</span>(<span class="hljs-params">self, item</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">remove_item</span>(<span class="hljs-params">self, item</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_total</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">apply_discount</span>(<span class="hljs-params">self, code</span>): ...
-</code></pre>
+;" data-marpit-pagination-total="40">
+<h2 id="31-la-coh%C3%A9sion--pourquoi-cest-important">3.1 La cohésion — pourquoi c'est important ?</h2>
+<p><strong>Faible cohésion = problèmes garantis :</strong></p>
+<ul>
+<li><img class="emoji" draggable="false" alt="🐛" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f41b.svg" data-marp-twemoji=""/> Modifications à un endroit cassent des choses sans rapport</li>
+<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> Tests difficiles : il faut mocker des choses non liées</li>
+<li><img class="emoji" draggable="false" alt="🤯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f92f.svg" data-marp-twemoji=""/> Code difficile à comprendre : &quot;cette classe fait quoi exactement ?&quot;</li>
+<li><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f504.svg" data-marp-twemoji=""/> Réutilisation impossible : tout est mélangé</li>
+</ul>
+<p><strong>Forte cohésion = bénéfices :</strong></p>
+<ul>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Code auto-documenté par sa structure</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Tests ciblés et simples</li>
+<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Évolutions localisées</li>
+</ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="13" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -750,13 +741,20 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="31-la-coh%C3%A9sion-1">3.1 La cohésion</h2>
-<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Faible cohésion</strong> (problème) :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">ShoppingCart</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">add_item</span>(<span class="hljs-params">self, item</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_email</span>(<span class="hljs-params">self, to, subject</span>): ...  <span class="hljs-comment"># <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Rien à voir !</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_pdf_report</span>(<span class="hljs-params">self</span>): ...      <span class="hljs-comment"># <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Pas sa responsabilité</span>
+;" data-marpit-pagination-total="40">
+<h2 id="32-le-couplage">3.2 Le couplage</h2>
+<blockquote>
+<p><strong>Moins les modules dépendent les uns des autres, mieux c'est.</strong></p>
+</blockquote>
+<p>Le couplage mesure à quel point un module est <strong>lié</strong> à d'autres.</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">Fort couplage                      Faible couplage
+      A ←──────→ B                      A ──→ Interface ←── B
+      │          │                           (contrat)
+      ↓          ↓
+      C ←──────→ D                 Les modules ne se connaissent 
+                                   que via des abstractions
+Tout est connecté à tout
+→ Modifier A impacte B, C, D
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="14" data-paginate="true" data-theme="default" data-style="section {
@@ -803,127 +801,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="31-la-coh%C3%A9sion--pourquoi-cest-important">3.1 La cohésion — pourquoi c'est important ?</h2>
-<p><strong>Faible cohésion = problèmes garantis :</strong></p>
-<ul>
-<li><img class="emoji" draggable="false" alt="🐛" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f41b.svg" data-marp-twemoji=""/> Modifications à un endroit cassent des choses sans rapport</li>
-<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> Tests difficiles : il faut mocker des choses non liées</li>
-<li><img class="emoji" draggable="false" alt="🤯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f92f.svg" data-marp-twemoji=""/> Code difficile à comprendre : &quot;cette classe fait quoi exactement ?&quot;</li>
-<li><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f504.svg" data-marp-twemoji=""/> Réutilisation impossible : tout est mélangé</li>
-</ul>
-<p><strong>Forte cohésion = bénéfices :</strong></p>
-<ul>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Code auto-documenté par sa structure</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Tests ciblés et simples</li>
-<li><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Évolutions localisées</li>
-</ul>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-theme="default" data-style="section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-" lang="en-US" data-marpit-pagination="15" style="--paginate:true;--theme:default;--style:section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-;" data-marpit-pagination-total="43">
-<h2 id="32-le-couplage">3.2 Le couplage</h2>
-<blockquote>
-<p><strong>Moins les modules dépendent les uns des autres, mieux c'est.</strong></p>
-</blockquote>
-<p>Le couplage mesure à quel point un module est <strong>lié</strong> à d'autres.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">Fort couplage                      Faible couplage
-      A ←──────→ B                      A ──→ Interface ←── B
-      │          │                           (contrat)
-      ↓          ↓
-      C ←──────→ D                 Les modules ne se connaissent 
-                                   que via des abstractions
-Tout est connecté à tout
-→ Modifier A impacte B, C, D
-</code></pre>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-theme="default" data-style="section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-" lang="en-US" data-marpit-pagination="16" style="--paginate:true;--theme:default;--style:section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h2 id="32-le-couplage--comparaison">3.2 Le couplage — comparaison</h2>
 <table>
 <thead>
@@ -972,6 +850,148 @@ table {
 </tbody>
 </table>
 </section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="15" data-paginate="true" data-theme="default" data-style="section {
+  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+  color: #1f1f1f;
+}
+h1, h2, h3 {
+  color: #004f9f;
+}
+h1 {
+  border-bottom: 2px solid #d0d7de;
+  padding-bottom: 0.3em;
+}
+code {
+  background: #f6f8fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre code {
+  font-size: 0.75em;
+}
+table {
+  font-size: 0.9em;
+}
+" lang="en-US" data-marpit-pagination="15" style="--paginate:true;--theme:default;--style:section {
+  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+  color: #1f1f1f;
+}
+h1, h2, h3 {
+  color: #004f9f;
+}
+h1 {
+  border-bottom: 2px solid #d0d7de;
+  padding-bottom: 0.3em;
+}
+code {
+  background: #f6f8fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre code {
+  font-size: 0.75em;
+}
+table {
+  font-size: 0.9em;
+}
+;" data-marpit-pagination-total="40">
+<h2 id="33-les-d%C3%A9pendances">3.3 Les dépendances</h2>
+<p>Une <strong>dépendance</strong> = quelque chose dont votre code a besoin pour fonctionner.</p>
+<table>
+<thead>
+<tr>
+<th>Type</th>
+<th>Exemples</th>
+<th>Risque</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Infrastructure</strong></td>
+<td>Base de données, système de fichiers</td>
+<td>Changement coûteux</td>
+</tr>
+<tr>
+<td><strong>Framework</strong></td>
+<td>Spring, Django, Symfony</td>
+<td>Couplage au cycle de vie du framework</td>
+</tr>
+<tr>
+<td><strong>Services externes</strong></td>
+<td>API paiement, météo, IA</td>
+<td>Indisponibilité, changements d'API</td>
+</tr>
+<tr>
+<td><strong>Bibliothèques</strong></td>
+<td>PDF, logging, validation</td>
+<td>Obsolescence, failles</td>
+</tr>
+</tbody>
+</table>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>Plus votre code dépend directement de ces éléments, plus il est fragile.</strong></p>
+</section>
+</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="16" data-paginate="true" data-theme="default" data-style="section {
+  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+  color: #1f1f1f;
+}
+h1, h2, h3 {
+  color: #004f9f;
+}
+h1 {
+  border-bottom: 2px solid #d0d7de;
+  padding-bottom: 0.3em;
+}
+code {
+  background: #f6f8fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre code {
+  font-size: 0.75em;
+}
+table {
+  font-size: 0.9em;
+}
+" lang="en-US" data-marpit-pagination="16" style="--paginate:true;--theme:default;--style:section {
+  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
+  color: #1f1f1f;
+}
+h1, h2, h3 {
+  color: #004f9f;
+}
+h1 {
+  border-bottom: 2px solid #d0d7de;
+  padding-bottom: 0.3em;
+}
+code {
+  background: #f6f8fa;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+pre code {
+  font-size: 0.75em;
+}
+table {
+  font-size: 0.9em;
+}
+;" data-marpit-pagination-total="40">
+<h2 id="34-s%C3%A9paration-des-responsabilit%C3%A9s">3.4 Séparation des responsabilités</h2>
+<blockquote>
+<p><strong>Chaque composant doit avoir UNE raison de changer.</strong></p>
+</blockquote>
+<p>C'est le principe <strong>SRP</strong> (Single Responsibility Principle).</p>
+<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Classe &quot;God Object&quot;</strong> qui fait tout :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderManager</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_order</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate_payment</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_confirmation_email</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_invoice_pdf</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_stock</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_shipping</span>(<span class="hljs-params">self</span>): ...
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">apply_loyalty_points</span>(<span class="hljs-params">self</span>): ...
+</code></pre>
+<p>→ 7 raisons de changer cette classe = 7 sources de bugs potentiels à chaque modif.</p>
+</section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="17" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
   color: #1f1f1f;
@@ -1016,41 +1036,23 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="33-les-d%C3%A9pendances">3.3 Les dépendances</h2>
-<p>Une <strong>dépendance</strong> = quelque chose dont votre code a besoin pour fonctionner.</p>
-<table>
-<thead>
-<tr>
-<th>Type</th>
-<th>Exemples</th>
-<th>Risque</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Infrastructure</strong></td>
-<td>Base de données, système de fichiers</td>
-<td>Changement coûteux</td>
-</tr>
-<tr>
-<td><strong>Framework</strong></td>
-<td>Spring, Django, Symfony</td>
-<td>Couplage au cycle de vie du framework</td>
-</tr>
-<tr>
-<td><strong>Services externes</strong></td>
-<td>API paiement, météo, IA</td>
-<td>Indisponibilité, changements d'API</td>
-</tr>
-<tr>
-<td><strong>Bibliothèques</strong></td>
-<td>PDF, logging, validation</td>
-<td>Obsolescence, failles</td>
-</tr>
-</tbody>
-</table>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>Plus votre code dépend directement de ces éléments, plus il est fragile.</strong></p>
+;" data-marpit-pagination-total="40">
+<h2 id="34-s%C3%A9paration--la-bonne-approche">3.4 Séparation — la bonne approche</h2>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Chaque responsabilité isolée</strong> :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span>:           <span class="hljs-comment"># Création de commande</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">PaymentService</span>:         <span class="hljs-comment"># Validation paiement  </span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">NotificationService</span>:    <span class="hljs-comment"># Envoi emails/SMS</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">InvoiceGenerator</span>:       <span class="hljs-comment"># Génération PDF</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">StockService</span>:           <span class="hljs-comment"># Gestion stock</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">ShippingCalculator</span>:     <span class="hljs-comment"># Calcul livraison</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">LoyaltyService</span>:         <span class="hljs-comment"># Points fidélité</span>
+</code></pre>
+<p><strong>Avantages :</strong></p>
+<ul>
+<li>Chaque classe est simple et focalisée</li>
+<li>On peut modifier le calcul de livraison sans risquer de casser les emails</li>
+<li>On peut tester chaque responsabilité indépendamment</li>
+</ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="18" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1096,23 +1098,13 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="34-s%C3%A9paration-des-responsabilit%C3%A9s">3.4 Séparation des responsabilités</h2>
+;" data-marpit-pagination-total="40">
+<h2 id="35-inversion-de-d%C3%A9pendances">3.5 Inversion de dépendances</h2>
 <blockquote>
-<p><strong>Chaque composant doit avoir UNE raison de changer.</strong></p>
+<p><strong>Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau.<br />
+Les deux doivent dépendre d'abstractions.</strong></p>
 </blockquote>
-<p>C'est le principe <strong>SRP</strong> (Single Responsibility Principle).</p>
-<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Classe &quot;God Object&quot;</strong> qui fait tout :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderManager</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">create_order</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">validate_payment</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">send_confirmation_email</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">generate_invoice_pdf</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">update_stock</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">calculate_shipping</span>(<span class="hljs-params">self</span>): ...
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">apply_loyalty_points</span>(<span class="hljs-params">self</span>): ...
-</code></pre>
-<p>→ 7 raisons de changer cette classe = 7 sources de bugs potentiels à chaque modif.</p>
+<p>C'est le <strong>D</strong> de SOLID — et c'est <strong>fondamental</strong> pour l'architecture hexagonale.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="19" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1158,23 +1150,23 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="34-s%C3%A9paration--la-bonne-approche">3.4 Séparation — la bonne approche</h2>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Chaque responsabilité isolée</strong> :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">OrderService</span>:           <span class="hljs-comment"># Création de commande</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">PaymentService</span>:         <span class="hljs-comment"># Validation paiement  </span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">NotificationService</span>:    <span class="hljs-comment"># Envoi emails/SMS</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">InvoiceGenerator</span>:       <span class="hljs-comment"># Génération PDF</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">StockService</span>:           <span class="hljs-comment"># Gestion stock</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">ShippingCalculator</span>:     <span class="hljs-comment"># Calcul livraison</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">LoyaltyService</span>:         <span class="hljs-comment"># Points fidélité</span>
+;" data-marpit-pagination-total="40">
+<h2 id="35-inversion--avantapr%C3%A8s">3.5 Inversion — avant/après</h2>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text"><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Classique (problème)              <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Inversé (solution)
+
+    Métier                          +------------------+
+      │                             |    Métier        |
+      │ dépend de                   |                  |
+      ↓                             |  &lt;&lt;interface&gt;&gt;   |
+  Database MySQL                    |    Repository    |
+                                    +--------↑---------+
+                                             │ implémente
+                                             │
+                                        Database MySQL
 </code></pre>
-<p><strong>Avantages :</strong></p>
-<ul>
-<li>Chaque classe est simple et focalisée</li>
-<li>On peut modifier le calcul de livraison sans risquer de casser les emails</li>
-<li>On peut tester chaque responsabilité indépendamment</li>
-</ul>
+<p><strong>Avant :</strong> Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier<br />
+<strong>Après :</strong> Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter</p>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>C'est le cœur de l'architecture hexagonale</strong> (voir partie 4).</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="20" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1220,13 +1212,20 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="35-inversion-de-d%C3%A9pendances">3.5 Inversion de dépendances</h2>
+;" data-marpit-pagination-total="40">
+<h2 id="36-le-r%C3%B4le-des-tests-dans-larchitecture">3.6 Le rôle des tests dans l'architecture</h2>
 <blockquote>
-<p><strong>Les modules de haut niveau ne doivent pas dépendre des modules de bas niveau.<br />
-Les deux doivent dépendre d'abstractions.</strong></p>
+<p><strong>Les tests ne servent pas qu'à détecter les bugs.<br />
+Ils révèlent (et forcent) la qualité de votre architecture.</strong></p>
 </blockquote>
-<p>C'est le <strong>D</strong> de SOLID — et c'est <strong>fondamental</strong> pour l'architecture hexagonale.</p>
+<p><strong>Code difficile à tester = Code mal architecturé</strong></p>
+<p>Si vous devez :</p>
+<ul>
+<li>Instancier 15 dépendances pour tester une fonction → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Trop couplé</li>
+<li>Lancer une DB pour tester une règle métier → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Pas d'inversion de dépendances</li>
+<li>Mocker la moitié de l'application → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Faible cohésion</li>
+</ul>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>Les tests sont un détecteur de problèmes architecturaux.</strong></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="21" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1272,28 +1271,20 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="35-inversion--avantapr%C3%A8s">3.5 Inversion — avant/après</h2>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text"><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Classique (problème) :              <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Inversé (solution) :
-
-+--------------+                      +---------------------------+
-|    Métier    |                      | +---------------------+   |
-+------+-------+                      | | Métier              |   |
-       |                              | +---------------------+   |
-       | dépend de                    | | &lt;&lt;interface&gt;&gt;       |   | DOMAINE
-       v                              | | Repository          |   |
-+--------------+                      | +-----------^---------+   |
-|   Database   |                      +-------------|-------------+
-+--------------+                                    |
-                                                    | implémente
-Le métier connaît MySQL                             |
-                                            +-----------------+
-                                            | Database (MySQL)|
-                                            +-----------------+
+;" data-marpit-pagination-total="40">
+<h2 id="36-tdd--piloter-larchitecture-par-les-tests">3.6 TDD : piloter l'architecture par les tests</h2>
+<p><strong>TDD (Test-Driven Development)</strong> : Écrire le test <strong>AVANT</strong> le code.</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">1. <img class="emoji" draggable="false" alt="✍" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/270d.svg" data-marp-twemoji=""/>  Écrire un test qui échoue (Red)
+2. <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/>  Écrire le code minimal pour passer (Green)
+3. <img class="emoji" draggable="false" alt="♻" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/267b.svg" data-marp-twemoji=""/>  Refactorer pour améliorer (Refactor)
 </code></pre>
-<p><strong>Avant :</strong> Métier dépend de la DB → Tester = installer MySQL → Changer de DB = réécrire métier<br />
-<strong>Après :</strong> Métier définit l'interface → Tester = injecter un fake → Changer de DB = nouvel adapter</p>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>C'est le cœur de l'architecture hexagonale</strong> (voir partie 4).</p>
+<p><strong>Bénéfices architecturaux :</strong></p>
+<ul>
+<li>Force la testabilité et réduit le couplage</li>
+<li>Impose la cohésion (test complexe = trop de responsabilités)</li>
+<li>Garantit l'inversion (le test définit l'interface)</li>
+</ul>
+<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> <em>TDD ne garantit pas une bonne architecture, mais une mauvaise architecture ne survit pas au TDD.</em></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="22" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1339,20 +1330,39 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="36-le-r%C3%B4le-des-tests-dans-larchitecture">3.6 Le rôle des tests dans l'architecture</h2>
-<blockquote>
-<p><strong>Les tests ne servent pas qu'à détecter les bugs.<br />
-Ils révèlent (et forcent) la qualité de votre architecture.</strong></p>
-</blockquote>
-<p><strong>Code difficile à tester = Code mal architecturé</strong></p>
-<p>Si vous devez :</p>
-<ul>
-<li>Instancier 15 dépendances pour tester une fonction → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Trop couplé</li>
-<li>Lancer une DB pour tester une règle métier → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Pas d'inversion de dépendances</li>
-<li>Mocker la moitié de l'application → <img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> Faible cohésion</li>
-</ul>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>Les tests sont un détecteur de problèmes architecturaux.</strong></p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%8E%AF-r%C3%A9capitulatif-des-principes"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Récapitulatif des principes</h2>
+<table>
+<thead>
+<tr>
+<th>Principe</th>
+<th>Question à se poser</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cohésion</strong></td>
+<td>Cette classe/module a-t-elle une responsabilité claire et unique ?</td>
+</tr>
+<tr>
+<td><strong>Couplage</strong></td>
+<td>Si je modifie ce module, combien d'autres sont impactés ?</td>
+</tr>
+<tr>
+<td><strong>Dépendances</strong></td>
+<td>Mon code métier dépend-il directement de la technique ?</td>
+</tr>
+<tr>
+<td><strong>Responsabilités</strong></td>
+<td>Combien de raisons cette classe a-t-elle de changer ?</td>
+</tr>
+<tr>
+<td><strong>Inversion</strong></td>
+<td>Qui définit les interfaces : le métier ou la technique ?</td>
+</tr>
+</tbody>
+</table>
+<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> <strong>Ces principes guident TOUTES les décisions architecturales.</strong></p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="23" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1398,20 +1408,15 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="36-tdd--piloter-larchitecture-par-les-tests">3.6 TDD : piloter l'architecture par les tests</h2>
-<p><strong>TDD (Test-Driven Development)</strong> : Écrire le test <strong>AVANT</strong> le code.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">1. <img class="emoji" draggable="false" alt="✍" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/270d.svg" data-marp-twemoji=""/>  Écrire un test qui échoue (Red)
-2. <img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/>  Écrire le code minimal pour passer (Green)
-3. <img class="emoji" draggable="false" alt="♻" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/267b.svg" data-marp-twemoji=""/>  Refactorer pour améliorer (Refactor)
-</code></pre>
-<p><strong>Bénéfices architecturaux :</strong></p>
-<ul>
-<li>Force la testabilité et réduit le couplage</li>
-<li>Impose la cohésion (test complexe = trop de responsabilités)</li>
-<li>Garantit l'inversion (le test définit l'interface)</li>
-</ul>
-<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> <em>TDD ne garantit pas une bonne architecture, mais une mauvaise architecture ne survit pas au TDD.</em></p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%A7%A9-pause-conceptuelle"><img class="emoji" draggable="false" alt="🧩" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9e9.svg" data-marp-twemoji=""/> Pause conceptuelle</h2>
+<p><strong>Récapitulatif rapide :</strong></p>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>5 principes fondamentaux</strong> = outils universels pour évaluer et concevoir du code<br />
+<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>1 objectif commun</strong> = code maintenable, testable, évolutif</p>
+<p><strong><img class="emoji" draggable="false" alt="❓" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2753.svg" data-marp-twemoji=""/> Questions avant de passer à l'architecture hexagonale ?</strong></p>
+<blockquote>
+<p><em>Prochain sujet : comment ces principes se concrétisent dans une architecture réelle</em></p>
+</blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="24" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1457,39 +1462,32 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-r%C3%A9capitulatif-des-principes"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Récapitulatif des principes</h2>
-<table>
-<thead>
-<tr>
-<th>Principe</th>
-<th>Question à se poser</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><strong>Cohésion</strong></td>
-<td>Cette classe/module a-t-elle une responsabilité claire et unique ?</td>
-</tr>
-<tr>
-<td><strong>Couplage</strong></td>
-<td>Si je modifie ce module, combien d'autres sont impactés ?</td>
-</tr>
-<tr>
-<td><strong>Dépendances</strong></td>
-<td>Mon code métier dépend-il directement de la technique ?</td>
-</tr>
-<tr>
-<td><strong>Responsabilités</strong></td>
-<td>Combien de raisons cette classe a-t-elle de changer ?</td>
-</tr>
-<tr>
-<td><strong>Inversion</strong></td>
-<td>Qui définit les interfaces : le métier ou la technique ?</td>
-</tr>
-</tbody>
-</table>
-<p><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> <strong>Ces principes guident TOUTES les décisions architecturales.</strong></p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%9B%A1%EF%B8%8F-4-architecture-hexagonale-ports--adapters"><img class="emoji" draggable="false" alt="🛡️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f6e1.svg" data-marp-twemoji=""/> 4. Architecture hexagonale (Ports &amp; Adapters)</h2>
+<h3 id="41-le-probl%C3%A8me-%C3%A0-r%C3%A9soudre">4.1 Le problème à résoudre</h3>
+<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Code &quot;framework-first&quot; typique</strong> :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-meta">@app.post(<span class="hljs-params"><span class="hljs-string">&quot;/tickets&quot;</span></span>)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">create_ticket</span>(<span class="hljs-params">request: Request, db: Session = Depends(<span class="hljs-params">get_db</span>)</span>):
+    data = request.json()
+    
+    <span class="hljs-comment"># Validation métier dans le controller <img class="emoji" draggable="false" alt="😬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f62c.svg" data-marp-twemoji=""/></span>
+    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data[<span class="hljs-string">&quot;title&quot;</span>]) &lt; <span class="hljs-number">3</span>:
+        <span class="hljs-keyword">raise</span> HTTPException(<span class="hljs-number">400</span>, <span class="hljs-string">&quot;Titre trop court&quot;</span>)
+    
+    <span class="hljs-comment"># Accès direct à la DB <img class="emoji" draggable="false" alt="😬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f62c.svg" data-marp-twemoji=""/></span>
+    ticket = TicketModel(title=data[<span class="hljs-string">&quot;title&quot;</span>], status=<span class="hljs-string">&quot;open&quot;</span>)
+    db.add(ticket)
+    db.commit()
+    
+    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;id&quot;</span>: ticket.<span class="hljs-built_in">id</span>}
+</code></pre>
+<p><strong>Problèmes :</strong></p>
+<ul>
+<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> Impossible de tester la règle métier sans lancer FastAPI + DB<br />
+<em>&quot;Pour tester 3 lignes, tu installes MySQL, tu lances un serveur web, tu fais un café...&quot;</em> <img class="emoji" draggable="false" alt="☕" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2615.svg" data-marp-twemoji=""/></li>
+<li><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f504.svg" data-marp-twemoji=""/> Changer de framework = tout réécrire</li>
+<li><img class="emoji" draggable="false" alt="🐛" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f41b.svg" data-marp-twemoji=""/> Logique métier éparpillée partout</li>
+</ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="25" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1535,32 +1533,31 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%9B%A1%EF%B8%8F-4-architecture-hexagonale-ports--adapters"><img class="emoji" draggable="false" alt="🛡️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f6e1.svg" data-marp-twemoji=""/> 4. Architecture hexagonale (Ports &amp; Adapters)</h2>
-<h3 id="41-le-probl%C3%A8me-%C3%A0-r%C3%A9soudre">4.1 Le problème à résoudre</h3>
-<p><img class="emoji" draggable="false" alt="❌" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/274c.svg" data-marp-twemoji=""/> <strong>Code &quot;framework-first&quot; typique</strong> :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-meta">@app.post(<span class="hljs-params"><span class="hljs-string">&quot;/tickets&quot;</span></span>)</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">create_ticket</span>(<span class="hljs-params">request: Request, db: Session = Depends(<span class="hljs-params">get_db</span>)</span>):
-    data = request.json()
-    
-    <span class="hljs-comment"># Validation métier dans le controller <img class="emoji" draggable="false" alt="😬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f62c.svg" data-marp-twemoji=""/></span>
-    <span class="hljs-keyword">if</span> <span class="hljs-built_in">len</span>(data[<span class="hljs-string">&quot;title&quot;</span>]) &lt; <span class="hljs-number">3</span>:
-        <span class="hljs-keyword">raise</span> HTTPException(<span class="hljs-number">400</span>, <span class="hljs-string">&quot;Titre trop court&quot;</span>)
-    
-    <span class="hljs-comment"># Accès direct à la DB <img class="emoji" draggable="false" alt="😬" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f62c.svg" data-marp-twemoji=""/></span>
-    ticket = TicketModel(title=data[<span class="hljs-string">&quot;title&quot;</span>], status=<span class="hljs-string">&quot;open&quot;</span>)
-    db.add(ticket)
-    db.commit()
-    
-    <span class="hljs-keyword">return</span> {<span class="hljs-string">&quot;id&quot;</span>: ticket.<span class="hljs-built_in">id</span>}
+;" data-marpit-pagination-total="40">
+<h3 id="42-la-solution--s%C3%A9parer-le-m%C3%A9tier-de-la-technique">4.2 La solution : séparer le métier de la technique</h3>
+<p><strong>Principe central de l'hexagonale :</strong></p>
+<blockquote>
+<p><strong>Le domaine métier au centre, indépendant de toute technique.</strong><br />
+La technique s'adapte au métier, pas l'inverse.</p>
+</blockquote>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">+----------------------------------------------------------+
+|                      ADAPTERS                            |
+|  (FastAPI, SQLite, SMTP, APIs externes...)               |
+|                                                          |
+|  +----------------------------------------------------+  |
+|  |              APPLICATION LAYER                     |  |
+|  |   (Use Cases : orchestration métier + ports)       |  |
+|  |                                                    |  |
+|  |  +-------------------------------------------+     |  |
+|  |  |          DOMAIN LAYER                     |     |  |
+|  |  |  (Entités, Règles métier, Value Objects)  |     |  |
+|  |  |  ZÉRO import technique                    |     |  |
+|  |  +-------------------------------------------+     |  |
+|  +----------------------------------------------------+  |
++----------------------------------------------------------+
+
+        Dependencies flow INWARD -&gt;
 </code></pre>
-<p><strong>Problèmes :</strong></p>
-<ul>
-<li><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> Impossible de tester la règle métier sans lancer FastAPI + DB<br />
-<em>&quot;Pour tester 3 lignes, tu installes MySQL, tu lances un serveur web, tu fais un café...&quot;</em> <img class="emoji" draggable="false" alt="☕" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2615.svg" data-marp-twemoji=""/></li>
-<li><img class="emoji" draggable="false" alt="🔄" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f504.svg" data-marp-twemoji=""/> Changer de framework = tout réécrire</li>
-<li><img class="emoji" draggable="false" alt="🐛" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f41b.svg" data-marp-twemoji=""/> Logique métier éparpillée partout</li>
-</ul>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="26" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1606,31 +1603,19 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="42-la-solution--s%C3%A9parer-le-m%C3%A9tier-de-la-technique">4.2 La solution : séparer le métier de la technique</h3>
-<p><strong>Principe central de l'hexagonale :</strong></p>
+;" data-marpit-pagination-total="40">
+<h3 id="43-les-3-couches-13">4.3 Les 3 couches (1/3)</h3>
+<h4 id="%F0%9F%9F%A2-domain-le-c%C5%93ur"><img class="emoji" draggable="false" alt="🟢" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg" data-marp-twemoji=""/> DOMAIN (le cœur)</h4>
+<p><strong>Contenu :</strong></p>
+<ul>
+<li>Entités (<code>Ticket</code>, <code>User</code>)</li>
+<li>Règles métier (<code>ticket.assign_to()</code>, <code>ticket.close()</code>)</li>
+<li>Value Objects (<code>TicketStatus</code>, <code>Email</code>)</li>
+</ul>
+<p><strong>Règle d'or :</strong></p>
 <blockquote>
-<p><strong>Le domaine métier au centre, indépendant de toute technique.</strong><br />
-La technique s'adapte au métier, pas l'inverse.</p>
+<p>Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)</p>
 </blockquote>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-text">+----------------------------------------------------------+
-|                      ADAPTERS                            |
-|  (FastAPI, SQLAlchemy, SMTP, APIs externes...)           |
-|                                                          |
-|  +----------------------------------------------------+  |
-|  |              APPLICATION LAYER                     |  |
-|  |   (Use Cases : orchestration métier + ports)       |  |
-|  |                                                    |  |
-|  |  +-------------------------------------------+     |  |
-|  |  |          DOMAIN LAYER                     |     |  |
-|  |  |  (Entités, Règles métier, Value Objects)  |     |  |
-|  |  |  ZÉRO import technique                    |     |  |
-|  |  +-------------------------------------------+     |  |
-|  +----------------------------------------------------+  |
-+----------------------------------------------------------+
-
-        Dependencies flow INWARD -&gt;
-</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="27" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1676,19 +1661,32 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="43-les-3-couches-13">4.3 Les 3 couches (1/3)</h3>
-<h4 id="%F0%9F%9F%A2-domain-le-c%C5%93ur"><img class="emoji" draggable="false" alt="🟢" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg" data-marp-twemoji=""/> DOMAIN (le cœur)</h4>
-<p><strong>Contenu :</strong></p>
-<ul>
-<li>Entités (<code>Ticket</code>, <code>User</code>)</li>
-<li>Règles métier (<code>ticket.assign_to()</code>, <code>ticket.close()</code>)</li>
-<li>Value Objects (<code>TicketStatus</code>, <code>Email</code>)</li>
-</ul>
-<p><strong>Règle d'or :</strong></p>
-<blockquote>
-<p>Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)</p>
-</blockquote>
+;" data-marpit-pagination-total="40">
+<h3 id="43-les-3-couches--exemple-domain-23">4.3 Les 3 couches — exemple DOMAIN (2/3)</h3>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># domain/ticket.py</span>
+<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass
+<span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Status</span>(<span class="hljs-title class_ inherited__">Enum</span>):
+    OPEN = <span class="hljs-string">&quot;open&quot;</span>
+    IN_PROGRESS = <span class="hljs-string">&quot;in_progress&quot;</span>
+    RESOLVED = <span class="hljs-string">&quot;resolved&quot;</span>
+    CLOSED = <span class="hljs-string">&quot;closed&quot;</span>
+
+<span class="hljs-meta">@dataclass</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">Ticket</span>:
+    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">int</span>
+    title: <span class="hljs-built_in">str</span>
+    status: Status
+    assignee_id: <span class="hljs-built_in">int</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>
+    
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">assign</span>(<span class="hljs-params">self, user_id: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:
+        <span class="hljs-string">&quot;&quot;&quot;Règle métier : on ne peut assigner qu&#x27;un ticket ouvert.&quot;&quot;&quot;</span>
+        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.status != Status.OPEN:
+            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Impossible d&#x27;assigner un ticket non ouvert&quot;</span>)
+        <span class="hljs-variable language_">self</span>.assignee_id = user_id
+        <span class="hljs-variable language_">self</span>.status = Status.IN_PROGRESS
+</code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1734,32 +1732,24 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="43-les-3-couches--exemple-domain-23">4.3 Les 3 couches — exemple DOMAIN (2/3)</h3>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># domain/ticket.py</span>
-<span class="hljs-keyword">from</span> dataclasses <span class="hljs-keyword">import</span> dataclass
-<span class="hljs-keyword">from</span> enum <span class="hljs-keyword">import</span> Enum
+;" data-marpit-pagination-total="40">
+<h3 id="43-les-3-couches--ports-34">4.3 Les 3 couches — PORTS (3/4)</h3>
+<h4 id="%F0%9F%94%B5-ports-interfaces"><img class="emoji" draggable="false" alt="🔵" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f535.svg" data-marp-twemoji=""/> PORTS (interfaces)</h4>
+<p>Des <strong>contrats</strong> (interfaces) définis par le métier :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># ports/ticket_repository.py</span>
+<span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod
 
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Status</span>(<span class="hljs-title class_ inherited__">Enum</span>):
-    OPEN = <span class="hljs-string">&quot;open&quot;</span>
-    IN_PROGRESS = <span class="hljs-string">&quot;in_progress&quot;</span>
-    RESOLVED = <span class="hljs-string">&quot;resolved&quot;</span>
-    CLOSED = <span class="hljs-string">&quot;closed&quot;</span>
-
-<span class="hljs-meta">@dataclass</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">Ticket</span>:
-    <span class="hljs-built_in">id</span>: <span class="hljs-built_in">int</span>
-    title: <span class="hljs-built_in">str</span>
-    status: Status
-    assignee_id: <span class="hljs-built_in">int</span> | <span class="hljs-literal">None</span> = <span class="hljs-literal">None</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">TicketRepository</span>(<span class="hljs-title class_ inherited__">ABC</span>):
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self, ticket: Ticket</span>) -&gt; <span class="hljs-literal">None</span>: <span class="hljs-keyword">pass</span>
     
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">assign</span>(<span class="hljs-params">self, user_id: <span class="hljs-built_in">int</span></span>) -&gt; <span class="hljs-literal">None</span>:
-        <span class="hljs-string">&quot;&quot;&quot;Règle métier : on ne peut assigner qu&#x27;un ticket ouvert.&quot;&quot;&quot;</span>
-        <span class="hljs-keyword">if</span> <span class="hljs-variable language_">self</span>.status != Status.OPEN:
-            <span class="hljs-keyword">raise</span> ValueError(<span class="hljs-string">&quot;Impossible d&#x27;assigner un ticket non ouvert&quot;</span>)
-        <span class="hljs-variable language_">self</span>.assignee_id = user_id
-        <span class="hljs-variable language_">self</span>.status = Status.IN_PROGRESS
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">self, ticket_id: <span class="hljs-built_in">int</span></span>) -&gt; Ticket | <span class="hljs-literal">None</span>: <span class="hljs-keyword">pass</span>
+    
+<span class="hljs-meta">    @abstractmethod</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">list_all</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>[Ticket]: <span class="hljs-keyword">pass</span>
 </code></pre>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> Le métier <strong>définit</strong> ce dont il a besoin, sans savoir <strong>comment</strong> c'est implémenté.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="29" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1805,24 +1795,20 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="43-les-3-couches--ports-34">4.3 Les 3 couches — PORTS (3/4)</h3>
-<h4 id="%F0%9F%94%B5-ports-interfaces"><img class="emoji" draggable="false" alt="🔵" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f535.svg" data-marp-twemoji=""/> PORTS (interfaces)</h4>
-<p>Des <strong>contrats</strong> (interfaces) définis par le métier :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># ports/ticket_repository.py</span>
-<span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod
-
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">TicketRepository</span>(<span class="hljs-title class_ inherited__">ABC</span>):
-<span class="hljs-meta">    @abstractmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self, ticket: Ticket</span>) -&gt; <span class="hljs-literal">None</span>: <span class="hljs-keyword">pass</span>
+;" data-marpit-pagination-total="40">
+<h3 id="43-les-3-couches--application-45">4.3 Les 3 couches — APPLICATION (4/5)</h3>
+<h4 id="%F0%9F%9F%A1-application-orchestration"><img class="emoji" draggable="false" alt="🟡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e1.svg" data-marp-twemoji=""/> APPLICATION (orchestration)</h4>
+<p><strong>Use cases</strong> qui coordonnent le métier et les ports :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># application/usecases/create_ticket.py</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">CreateTicket</span>:
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, ticket_repository: TicketRepository</span>):
+        <span class="hljs-variable language_">self</span>.repository = ticket_repository
     
-<span class="hljs-meta">    @abstractmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">get</span>(<span class="hljs-params">self, ticket_id: <span class="hljs-built_in">int</span></span>) -&gt; Ticket | <span class="hljs-literal">None</span>: <span class="hljs-keyword">pass</span>
-    
-<span class="hljs-meta">    @abstractmethod</span>
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">list_all</span>(<span class="hljs-params">self</span>) -&gt; <span class="hljs-built_in">list</span>[Ticket]: <span class="hljs-keyword">pass</span>
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">execute</span>(<span class="hljs-params">self, title: <span class="hljs-built_in">str</span></span>) -&gt; Ticket:
+        ticket = Ticket(<span class="hljs-built_in">id</span>=<span class="hljs-literal">None</span>, title=title, status=Status.OPEN)
+        <span class="hljs-variable language_">self</span>.repository.save(ticket)
+        <span class="hljs-keyword">return</span> ticket
 </code></pre>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> Le métier <strong>définit</strong> ce dont il a besoin, sans savoir <strong>comment</strong> c'est implémenté.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="30" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1868,19 +1854,20 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="43-les-3-couches--application-45">4.3 Les 3 couches — APPLICATION (4/5)</h3>
-<h4 id="%F0%9F%9F%A1-application-orchestration"><img class="emoji" draggable="false" alt="🟡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e1.svg" data-marp-twemoji=""/> APPLICATION (orchestration)</h4>
-<p><strong>Use cases</strong> qui coordonnent le métier et les ports :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># application/usecases/create_ticket.py</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">CreateTicket</span>:
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, ticket_repository: TicketRepository</span>):
-        <span class="hljs-variable language_">self</span>.repository = ticket_repository
+;" data-marpit-pagination-total="40">
+<h3 id="43-les-3-couches--adapters-55">4.3 Les 3 couches — ADAPTERS (5/5)</h3>
+<p><strong>Implémentations concrètes</strong> des ports :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># adapters/db/ticket_repository_inmemory.py</span>
+<span class="hljs-keyword">class</span> <span class="hljs-title class_">InMemoryTicketRepository</span>(<span class="hljs-title class_ inherited__">TicketRepository</span>):
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
+        <span class="hljs-variable language_">self</span>.tickets: <span class="hljs-built_in">dict</span>[<span class="hljs-built_in">int</span>, Ticket] = {}
+        <span class="hljs-variable language_">self</span>.next_id = <span class="hljs-number">1</span>
     
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">execute</span>(<span class="hljs-params">self, title: <span class="hljs-built_in">str</span></span>) -&gt; Ticket:
-        ticket = Ticket(<span class="hljs-built_in">id</span>=<span class="hljs-literal">None</span>, title=title, status=Status.OPEN)
-        <span class="hljs-variable language_">self</span>.repository.save(ticket)
-        <span class="hljs-keyword">return</span> ticket
+    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self, ticket: Ticket</span>) -&gt; <span class="hljs-literal">None</span>:
+        <span class="hljs-keyword">if</span> ticket.<span class="hljs-built_in">id</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
+            ticket.<span class="hljs-built_in">id</span> = <span class="hljs-variable language_">self</span>.next_id
+            <span class="hljs-variable language_">self</span>.next_id += <span class="hljs-number">1</span>
+        <span class="hljs-variable language_">self</span>.tickets[ticket.<span class="hljs-built_in">id</span>] = ticket
 </code></pre>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="31" data-paginate="true" data-theme="default" data-style="section {
@@ -1927,21 +1914,24 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="43-les-3-couches--adapters-55">4.3 Les 3 couches — ADAPTERS (5/5)</h3>
-<p><strong>Implémentations concrètes</strong> des ports :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># adapters/db/ticket_repository_inmemory.py</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">InMemoryTicketRepository</span>(<span class="hljs-title class_ inherited__">TicketRepository</span>):
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
-        <span class="hljs-variable language_">self</span>.tickets: <span class="hljs-built_in">dict</span>[<span class="hljs-built_in">int</span>, Ticket] = {}
-        <span class="hljs-variable language_">self</span>.next_id = <span class="hljs-number">1</span>
-    
-    <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self, ticket: Ticket</span>) -&gt; <span class="hljs-literal">None</span>:
-        <span class="hljs-keyword">if</span> ticket.<span class="hljs-built_in">id</span> <span class="hljs-keyword">is</span> <span class="hljs-literal">None</span>:
-            ticket.<span class="hljs-built_in">id</span> = <span class="hljs-variable language_">self</span>.next_id
-            <span class="hljs-variable language_">self</span>.next_id += <span class="hljs-number">1</span>
-        <span class="hljs-variable language_">self</span>.tickets[ticket.<span class="hljs-built_in">id</span>] = ticket
+;" data-marpit-pagination-total="40">
+<h3 id="44-pourquoi-cest-puissant">4.4 Pourquoi c'est puissant ?</h3>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Testabilité</strong> :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># Test du domaine (ZÉRO dépendance)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_cannot_assign_closed_ticket</span>():
+    ticket = Ticket(<span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>, title=<span class="hljs-string">&quot;Bug&quot;</span>, status=Status.CLOSED)
+    <span class="hljs-keyword">with</span> pytest.raises(ValueError):
+        ticket.assign(user_id=<span class="hljs-number">42</span>)
+
+<span class="hljs-comment"># Test du use case (InMemory fake)</span>
+<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_create_ticket</span>():
+    repo = InMemoryTicketRepository()
+    use_case = CreateTicket(repo)
+    ticket = use_case.execute(<span class="hljs-string">&quot;Bug critique&quot;</span>)
+    <span class="hljs-keyword">assert</span> ticket.status == Status.OPEN
 </code></pre>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Évolutivité</strong> : Passer de InMemory → SQLite → PostgreSQL sans toucher au métier</p>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Clarté</strong> : Chaque couche a un rôle précis</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -1987,24 +1977,26 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="44-pourquoi-cest-puissant">4.4 Pourquoi c'est puissant ?</h3>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Testabilité</strong> :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># Test du domaine (ZÉRO dépendance)</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_cannot_assign_closed_ticket</span>():
-    ticket = Ticket(<span class="hljs-built_in">id</span>=<span class="hljs-number">1</span>, title=<span class="hljs-string">&quot;Bug&quot;</span>, status=Status.CLOSED)
-    <span class="hljs-keyword">with</span> pytest.raises(ValueError):
-        ticket.assign(user_id=<span class="hljs-number">42</span>)
-
-<span class="hljs-comment"># Test du use case (InMemory fake)</span>
-<span class="hljs-keyword">def</span> <span class="hljs-title function_">test_create_ticket</span>():
-    repo = InMemoryTicketRepository()
-    use_case = CreateTicket(repo)
-    ticket = use_case.execute(<span class="hljs-string">&quot;Bug critique&quot;</span>)
-    <span class="hljs-keyword">assert</span> ticket.status == Status.OPEN
-</code></pre>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Évolutivité</strong> : Passer de InMemory → SQLite → PostgreSQL sans toucher au métier</p>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> <strong>Clarté</strong> : Chaque couche a un rôle précis</p>
+;" data-marpit-pagination-total="40">
+<h3 id="46-justification-p%C3%A9dagogique-12">4.6 Justification pédagogique (1/2)</h3>
+<p><strong>Question légitime :</strong> <em>Pourquoi l'hexagonale et pas une autre architecture ?</em></p>
+<p><strong>Réponses :</strong></p>
+<ol>
+<li>
+<p><img class="emoji" draggable="false" alt="📚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4da.svg" data-marp-twemoji=""/> <strong>Impose structurellement les bons principes</strong></p>
+<ul>
+<li>Séparation domaine/infrastructure visible immédiatement</li>
+<li>Impossible de contourner l'inversion de dépendances</li>
+</ul>
+</li>
+<li>
+<p><img class="emoji" draggable="false" alt="⏱️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/23f1.svg" data-marp-twemoji=""/> <strong>Adaptée au format 20h TD</strong></p>
+<ul>
+<li>Ni trop simple (layered classique), ni trop complexe (microservices)</li>
+<li>Juste assez de contraintes pour apprendre les fondamentaux</li>
+</ul>
+</li>
+</ol>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="33" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -2050,26 +2042,28 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="46-justification-p%C3%A9dagogique-12">4.6 Justification pédagogique (1/2)</h3>
-<p><strong>Question légitime :</strong> <em>Pourquoi l'hexagonale et pas une autre architecture ?</em></p>
-<p><strong>Réponses :</strong></p>
-<ol>
+;" data-marpit-pagination-total="40">
+<h3 id="46-justification-p%C3%A9dagogique-22">4.6 Justification pédagogique (2/2)</h3>
+<ol start="3">
 <li>
-<p><img class="emoji" draggable="false" alt="📚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4da.svg" data-marp-twemoji=""/> <strong>Impose structurellement les bons principes</strong></p>
+<p><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> <strong>Naturellement testable</strong> : Tests par couche sans dépendances</p>
 <ul>
-<li>Séparation domaine/infrastructure visible immédiatement</li>
-<li>Impossible de contourner l'inversion de dépendances</li>
+<li>Domain : pur (0 mock)</li>
+<li>Use cases : fake repository (pas de vraie DB)</li>
+<li>E2E : API complète</li>
 </ul>
 </li>
 <li>
-<p><img class="emoji" draggable="false" alt="⏱️" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/23f1.svg" data-marp-twemoji=""/> <strong>Adaptée au format 20h TD</strong></p>
+<p><img class="emoji" draggable="false" alt="🌍" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f30d.svg" data-marp-twemoji=""/> <strong>Transférable</strong> : Fondation pour comprendre toutes les archi modernes</p>
 <ul>
-<li>Ni trop simple (layered classique), ni trop complexe (microservices)</li>
-<li>Juste assez de contraintes pour apprendre les fondamentaux</li>
+<li>Clean Architecture, Onion, DDD → mêmes concepts</li>
+<li>Compatible TDD, microservices, event-driven</li>
 </ul>
 </li>
 </ol>
+<blockquote>
+<p><strong><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> Pour aller plus loin :</strong> Voir les annexes pour comparaisons détaillées des architectures et discussion monolithe vs microservices</p>
+</blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="34" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
@@ -2115,27 +2109,16 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h3 id="46-justification-p%C3%A9dagogique-22">4.6 Justification pédagogique (2/2)</h3>
-<ol start="3">
-<li>
-<p><img class="emoji" draggable="false" alt="🧪" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f9ea.svg" data-marp-twemoji=""/> <strong>Naturellement testable</strong> : Tests par couche sans dépendances</p>
+;" data-marpit-pagination-total="40">
+<h2 id="%E2%9D%93-questions-ou-clarifications"><img class="emoji" draggable="false" alt="❓" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2753.svg" data-marp-twemoji=""/> Questions ou clarifications ?</h2>
+<p><strong>Avant de passer au projet concret :</strong></p>
 <ul>
-<li>Domain : pur (0 mock)</li>
-<li>Use cases : fake repository (pas de vraie DB)</li>
-<li>E2E : API complète</li>
+<li>Architecture hexagonale claire ?</li>
+<li>Différence Domain / Ports / Application / Adapters ?</li>
+<li>Inversion de dépendances compréhensible ?</li>
 </ul>
-</li>
-<li>
-<p><img class="emoji" draggable="false" alt="🌍" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f30d.svg" data-marp-twemoji=""/> <strong>Transférable</strong> : Fondation pour comprendre toutes les archi modernes</p>
-<ul>
-<li>Clean Architecture, Onion, DDD → mêmes concepts</li>
-<li>Compatible TDD, microservices, event-driven</li>
-</ul>
-</li>
-</ol>
 <blockquote>
-<p><strong><img class="emoji" draggable="false" alt="💡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4a1.svg" data-marp-twemoji=""/> Pour aller plus loin :</strong> Voir les annexes pour comparaisons détaillées des architectures et discussion monolithe vs microservices</p>
+<p><em>Prochain sujet : votre projet fil rouge (système de tickets)</em></p>
 </blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="35" data-paginate="true" data-theme="default" data-style="section {
@@ -2182,7 +2165,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h2 id="%F0%9F%8E%AF-5-le-projet--ticketing-system"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> 5. Le projet : Ticketing System</h2>
 <h3 id="51-vue-densemble-12">5.1 Vue d'ensemble (1/2)</h3>
 <p>Vous allez implémenter un <strong>système de tickets</strong> (simplifié) en architecture hexagonale.</p>
@@ -2237,7 +2220,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h3 id="51-vue-densemble-22">5.1 Vue d'ensemble (2/2)</h3>
 <p><strong>Use cases :</strong></p>
 <ul>
@@ -2296,7 +2279,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h3 id="52-progression-des-tds">5.2 Progression des TDs</h3>
 <table>
 <thead>
@@ -2324,7 +2307,7 @@ table {
 </tr>
 <tr>
 <td><strong>TD3</strong></td>
-<td>Implémenter le repository SQL</td>
+<td>Implémenter le repository SQLite</td>
 <td>Adapters (DB)</td>
 </tr>
 <tr>
@@ -2379,7 +2362,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h3 id="53-%C3%A9valuation">5.3 Évaluation</h3>
 <p><img class="emoji" draggable="false" alt="📊" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4ca.svg" data-marp-twemoji=""/> <strong>Répartition</strong> :</p>
 <ul>
@@ -2439,7 +2422,7 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
+;" data-marpit-pagination-total="40">
 <h3 id="54-ressources">5.4 Ressources</h3>
 <p><img class="emoji" draggable="false" alt="📦" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4e6.svg" data-marp-twemoji=""/> <strong>Template de code</strong> :<br />
 <a href="https://github.com/Marcennaji/ticketing_starter">https://github.com/Marcennaji/ticketing_starter</a></p>
@@ -2449,7 +2432,7 @@ table {
 <ul>
 <li>Python 3.11+</li>
 <li>FastAPI (web framework)</li>
-<li>SQLAlchemy (ORM)</li>
+<li>SQLite (base de données, module <code>sqlite3</code> intégré)</li>
 <li>pytest (tests)</li>
 </ul>
 <p><img class="emoji" draggable="false" alt="🚀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f680.svg" data-marp-twemoji=""/> <strong>Prérequis</strong> : Guide de démarrage à suivre <strong>AVANT le TD0</strong></p>
@@ -2498,181 +2481,21 @@ pre code {
 table {
   font-size: 0.9em;
 }
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-r%C3%A9capitulatif-12"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Récapitulatif (1/2)</h2>
-<p>Vous avez maintenant :</p>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Compris <strong>pourquoi</strong> l'architecture est essentielle (encore plus avec l'IA)</p>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Découvert les <strong>principes fondamentaux</strong> :</p>
+;" data-marpit-pagination-total="40">
+<h2 id="%F0%9F%8E%AF-r%C3%A9capitulatif--prochaines-%C3%A9tapes"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Récapitulatif &amp; prochaines étapes</h2>
+<p><strong>Vous avez maintenant :</strong></p>
+<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Compris <strong>pourquoi</strong> l'architecture est essentielle (encore plus avec l'IA)<br />
+<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Découvert les <strong>5 principes fondamentaux</strong><br />
+<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Découvert l'<strong>architecture hexagonale</strong> (Domain, Ports, Application, Adapters)<br />
+<img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Une vision du <strong>projet ticketing</strong></p>
+<p><strong><img class="emoji" draggable="false" alt="🚀" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f680.svg" data-marp-twemoji=""/> Prochaine étape :</strong> TD0 (prise en main environnement + workflow)</p>
+<p><strong><img class="emoji" draggable="false" alt="📚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4da.svg" data-marp-twemoji=""/> Ressources complémentaires :</strong></p>
 <ul>
-<li>Cohésion, couplage, dépendances</li>
-<li>Séparation des responsabilités</li>
-<li>Inversion de dépendances</li>
+<li>Annexes (PDF) : <a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf">Comparaison architectures</a>, <a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf">TDD</a>, <a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf">Monolithe vs Microservices</a></li>
+<li>Articles : <a href="https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation">Architecture Hexagonale (OCTO)</a>, <a href="https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier">Hexagonale expliquée (Les Dieux du Code)</a></li>
+<li>Toutes les ressources : <a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources">https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources</a></li>
 </ul>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="41" data-paginate="true" data-theme="default" data-style="section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-" lang="en-US" data-marpit-pagination="41" style="--paginate:true;--theme:default;--style:section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%8E%AF-r%C3%A9capitulatif-22"><img class="emoji" draggable="false" alt="🎯" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3af.svg" data-marp-twemoji=""/> Récapitulatif (2/2)</h2>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Découvert l'<strong>architecture hexagonale</strong> :</p>
-<ul>
-<li>Domain (métier pur)</li>
-<li>Ports (interfaces)</li>
-<li>Application (use cases)</li>
-<li>Adapters (implémentations)</li>
-</ul>
-<p><img class="emoji" draggable="false" alt="✅" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2705.svg" data-marp-twemoji=""/> Une vision du <strong>projet ticketing</strong></p>
-<p><img class="emoji" draggable="false" alt="➡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/27a1.svg" data-marp-twemoji=""/> <strong>Prochaine étape</strong> : TD0 (prise en main environnement + workflow)</p>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="42" data-paginate="true" data-theme="default" data-style="section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-" lang="en-US" data-marpit-pagination="42" style="--paginate:true;--theme:default;--style:section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-;" data-marpit-pagination-total="43">
-<h2 id="%F0%9F%93%9A-pour-aller-plus-loin"><img class="emoji" draggable="false" alt="📚" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4da.svg" data-marp-twemoji=""/> Pour aller plus loin</h2>
-<p><strong>Annexes du cours (PDF) :</strong></p>
-<ul>
-<li><a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf">Comparaison des architectures</a> — Layered, MVC, MVVM, Microservices, Hexagonale</li>
-<li><a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_architecture_vs_design.pdf">Architecture vs Design</a> — Clarification conceptuelle</li>
-<li><a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf">TDD et architecture</a> — Les tests comme détecteur de qualité</li>
-<li><a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf">Monolithe vs Microservices</a> — Démystifier le monolithe</li>
-</ul>
-<p><strong>Articles de référence (français) :</strong></p>
-<ul>
-<li><a href="https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation">Architecture Hexagonale : trois principes et un exemple</a> (OCTO Technology)</li>
-<li><a href="https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier">Hexagonal Architecture expliquée simplement</a> (Les Dieux du Code)</li>
-</ul>
-</section>
-</foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="43" data-paginate="true" data-theme="default" data-style="section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-" lang="en-US" data-marpit-pagination="43" style="--paginate:true;--theme:default;--style:section {
-  font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;
-  color: #1f1f1f;
-}
-h1, h2, h3 {
-  color: #004f9f;
-}
-h1 {
-  border-bottom: 2px solid #d0d7de;
-  padding-bottom: 0.3em;
-}
-code {
-  background: #f6f8fa;
-  padding: 0.1em 0.3em;
-  border-radius: 3px;
-}
-pre code {
-  font-size: 0.75em;
-}
-table {
-  font-size: 0.9em;
-}
-;" data-marpit-pagination-total="43">
-<h1 id="%F0%9F%8F%81-fin-du-cours"><img class="emoji" draggable="false" alt="🏁" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f3c1.svg" data-marp-twemoji=""/> Fin du cours</h1>
-<p><img class="emoji" draggable="false" alt="📂" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f4c2.svg" data-marp-twemoji=""/> <strong>Toutes les ressources sont sur GitHub :</strong><br />
-<a href="https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources">https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources</a></p>
-<p><img class="emoji" draggable="false" alt="❓" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2753.svg" data-marp-twemoji=""/> <strong>Questions ?</strong></p>
+<p><strong><img class="emoji" draggable="false" alt="❓" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/2753.svg" data-marp-twemoji=""/> Questions ?</strong></p>
 </section>
 <script>!function(){"use strict";const t={h1:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"1"},style:"display: block; font-size: 2em; margin-block-start: 0.67em; margin-block-end: 0.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h2:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"2"},style:"display: block; font-size: 1.5em; margin-block-start: 0.83em; margin-block-end: 0.83em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h3:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"3"},style:"display: block; font-size: 1.17em; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h4:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"4"},style:"display: block; margin-block-start: 1.33em; margin-block-end: 1.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h5:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"5"},style:"display: block; font-size: 0.83em; margin-block-start: 1.67em; margin-block-end: 1.67em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},h6:{proto:()=>HTMLHeadingElement,attrs:{role:"heading","aria-level":"6"},style:"display: block; font-size: 0.67em; margin-block-start: 2.33em; margin-block-end: 2.33em; margin-inline-start: 0px; margin-inline-end: 0px; font-weight: bold;"},span:{proto:()=>HTMLSpanElement},pre:{proto:()=>HTMLElement,style:"display: block; font-family: monospace; white-space: pre; margin: 1em 0; --marp-auto-scaling-white-space: pre;"}},e="data-marp-auto-scaling-wrapper",i="data-marp-auto-scaling-svg",n="data-marp-auto-scaling-container";class s extends HTMLElement{container;containerSize;containerObserver;svg;svgComputedStyle;svgPreserveAspectRatio="xMinYMid meet";wrapper;wrapperSize;wrapperObserver;constructor(){super();const t=t=>([e])=>{const{width:i,height:n}=e.contentRect;this[t]={width:i,height:n},this.updateSVGRect()};this.attachShadow({mode:"open"}),this.containerObserver=new ResizeObserver(t("containerSize")),this.wrapperObserver=new ResizeObserver((...e)=>{t("wrapperSize")(...e),this.flushSvgDisplay()})}static get observedAttributes(){return["data-downscale-only"]}connectedCallback(){this.shadowRoot.innerHTML=`\n<style>\n  svg[${i}] { display: block; width: 100%; height: auto; vertical-align: top; }\n  span[${n}] { display: table; white-space: var(--marp-auto-scaling-white-space, nowrap); width: max-content; }\n</style>\n<div ${e}>\n  <svg part="svg" ${i}>\n    <foreignObject><span ${n}><slot></slot></span></foreignObject>\n  </svg>\n</div>\n    `.split(/\n\s*/).join(""),this.wrapper=this.shadowRoot.querySelector(`div[${e}]`)??void 0;const t=this.svg;this.svg=this.wrapper?.querySelector(`svg[${i}]`)??void 0,this.svg!==t&&(this.svgComputedStyle=this.svg?window.getComputedStyle(this.svg):void 0),this.container=this.svg?.querySelector(`span[${n}]`)??void 0,this.observe()}disconnectedCallback(){this.svg=void 0,this.svgComputedStyle=void 0,this.wrapper=void 0,this.container=void 0,this.observe()}attributeChangedCallback(){this.observe()}flushSvgDisplay(){const{svg:t}=this;t&&(t.style.display="inline",requestAnimationFrame(()=>{t.style.display=""}))}observe(){this.containerObserver.disconnect(),this.wrapperObserver.disconnect(),this.wrapper&&this.wrapperObserver.observe(this.wrapper),this.container&&this.containerObserver.observe(this.container),this.svgComputedStyle&&this.observeSVGStyle(this.svgComputedStyle)}observeSVGStyle(t){const e=()=>{const i=(()=>{const e=t.getPropertyValue("--preserve-aspect-ratio");if(e)return e.trim();return`x${(({textAlign:t,direction:e})=>{if(t.endsWith("left"))return"Min";if(t.endsWith("right"))return"Max";if("start"===t||"end"===t){let i="rtl"===e;return"end"===t&&(i=!i),i?"Max":"Min"}return"Mid"})(t)}YMid meet`})();i!==this.svgPreserveAspectRatio&&(this.svgPreserveAspectRatio=i,this.updateSVGRect()),t===this.svgComputedStyle&&requestAnimationFrame(e)};e()}updateSVGRect(){let t=Math.ceil(this.containerSize?.width??0);const e=Math.ceil(this.containerSize?.height??0);void 0!==this.dataset.downscaleOnly&&(t=Math.max(t,this.wrapperSize?.width??0));const i=this.svg?.querySelector(":scope > foreignObject");if(i?.setAttribute("width",`${t}`),i?.setAttribute("height",`${e}`),this.svg&&(this.svg.setAttribute("viewBox",`0 0 ${t} ${e}`),this.svg.setAttribute("preserveAspectRatio",this.svgPreserveAspectRatio),this.svg.style.height=t<=0||e<=0?"0":""),this.container){const t=this.svgPreserveAspectRatio.toLowerCase();this.container.style.marginLeft=t.startsWith("xmid")||t.startsWith("xmax")?"auto":"0",this.container.style.marginRight=t.startsWith("xmi")?"auto":"0"}}}const r=(t,{attrs:e={},style:i})=>class extends t{constructor(...t){super(...t);for(const[t,i]of Object.entries(e))this.hasAttribute(t)||this.setAttribute(t,i);this._shadow()}static get observedAttributes(){return["data-auto-scaling"]}connectedCallback(){this._update()}attributeChangedCallback(){this._update()}_shadow(){if(!this.shadowRoot)try{this.attachShadow({mode:"open"})}catch(t){if(!(t instanceof Error&&"NotSupportedError"===t.name))throw t}return this.shadowRoot}_update(){const t=this._shadow();if(t){const e=i?`<style>:host { ${i} }</style>`:"";let n="<slot></slot>";const{autoScaling:s}=this.dataset;if(void 0!==s){n=`<marp-auto-scaling exportparts="svg:auto-scaling" ${"downscale-only"===s?"data-downscale-only":""}>${n}</marp-auto-scaling>`}t.innerHTML=e+n}}};let o;const a=Symbol(),l=()=>o??(o=!!document.createElement("div",{is:"marp-auto-scaling"}).outerHTML.startsWith("<div is"),o);let c;const d="marpitSVGPolyfill:setZoomFactor,",h=Symbol(),g=Symbol();const p=()=>{const t="Apple Computer, Inc."===navigator.vendor,e=t?[v]:[],i={then:e=>(t?(async()=>{if(void 0===c){const t=document.createElement("canvas");t.width=10,t.height=10;const e=t.getContext("2d"),i=new Image(10,10),n=new Promise(t=>{i.addEventListener("load",()=>t())});i.crossOrigin="anonymous",i.src="data:image/svg+xml;charset=utf8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2210%22%20height%3D%2210%22%20viewBox%3D%220%200%201%201%22%3E%3CforeignObject%20width%3D%221%22%20height%3D%221%22%20requiredExtensions%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%3E%3Cdiv%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxhtml%22%20style%3D%22width%3A%201px%3B%20height%3A%201px%3B%20background%3A%20red%3B%20position%3A%20relative%22%3E%3C%2Fdiv%3E%3C%2FforeignObject%3E%3C%2Fsvg%3E",await n,e.drawImage(i,0,0),c=e.getImageData(5,5,1,1).data[3]<128}return c})().then(t=>{null==e||e(t?[v]:[])}):null==e||e([]),i)};return Object.assign(e,i)};let m,u;function v(t){const e="object"==typeof t&&t.target||document,i="object"==typeof t?t.zoom:t;window[g]||(Object.defineProperty(window,g,{configurable:!0,value:!0}),document.body.style.zoom=1.0001,document.body.offsetHeight,document.body.style.zoom=1,window.addEventListener("message",({data:t,origin:e})=>{if(e===window.origin)try{if(t&&"string"==typeof t&&t.startsWith(d)){const[,e]=t.split(","),i=Number.parseFloat(e);Number.isNaN(i)||(u=i)}}catch(t){console.error(t)}}));let n=!1;Array.from(e.querySelectorAll("svg[data-marpit-svg]"),t=>{var e,s,r,o;t.style.transform||(t.style.transform="translateZ(0)");const a=i||u||t.currentScale||1;m!==a&&(m=a,n=a);const l=t.getBoundingClientRect(),{length:c}=t.children;for(let i=0;i<c;i+=1){const n=t.children[i];if(n.getScreenCTM){const t=n.getScreenCTM();if(t){const i=null!==(s=null===(e=n.x)||void 0===e?void 0:e.baseVal.value)&&void 0!==s?s:0,c=null!==(o=null===(r=n.y)||void 0===r?void 0:r.baseVal.value)&&void 0!==o?o:0,d=n.children.length;for(let e=0;e<d;e+=1){const s=n.children[e];if("SECTION"===s.tagName){const{style:e}=s;e.transformOrigin||(e.transformOrigin=`${-i}px ${-c}px`),e.transform=`scale(${a}) matrix(${t.a}, ${t.b}, ${t.c}, ${t.d}, ${t.e-l.left}, ${t.f-l.top}) translateZ(0.0001px)`;break}}}}}}),!1!==n&&Array.from(e.querySelectorAll("iframe"),({contentWindow:t})=>{null==t||t.postMessage(`${d}${n}`,"null"===window.origin?"*":window.origin)})}function w({once:t=!1,target:e=document}={}){const i=function(t=document){if(t[h])return t[h];let e=!0;const i=()=>{e=!1,delete t[h]};Object.defineProperty(t,h,{configurable:!0,value:i});let n=[],s=!1;(async()=>{try{n=await p()}finally{s=!0}})();const r=()=>{for(const e of n)e({target:t});s&&0===n.length||e&&window.requestAnimationFrame(r)};return r(),i}(e);return t?(i(),()=>{}):i}m=1,u=void 0;const b=Symbol(),y=(e=document)=>{if("undefined"==typeof window)throw new Error("Marp Core's browser script is valid only in browser context.");if(((e=document)=>{const i=window[a];i||customElements.define("marp-auto-scaling",s);for(const n of Object.keys(t)){const s=`marp-${n}`,o=t[n].proto();l()&&o!==HTMLElement?i||customElements.define(s,r(o,{style:t[n].style}),{extends:n}):(i||customElements.define(s,r(HTMLElement,t[n])),e.querySelectorAll(`${n}[is="${s}"]`).forEach(t=>{t.outerHTML=t.outerHTML.replace(new RegExp(`^<${n}`,"i"),`<${s}`).replace(new RegExp(`</${n}>$`,"i"),`</${s}>`)}))}window[a]=!0})(e),e[b])return e[b];const i=w({target:e}),n=()=>{i(),delete e[b]},o=Object.assign(n,{cleanup:n,update:()=>y(e)});return Object.defineProperty(e,b,{configurable:!0,value:o}),o},f=document.currentScript;y(f?f.getRootNode():document)}();
 </script></foreignObject></svg></div><script>/*!! License: https://unpkg.com/@marp-team/marp-cli@4.2.3/lib/bespoke.js.LICENSE.txt */
