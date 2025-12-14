@@ -91,8 +91,9 @@ Une fois la PR **validée** par l'enseignant (commentaire "✅ Validé, vous pou
 
 1. **Vous mergez la PR** sur GitHub (bouton "Merge pull request")
 2. Confirmez le merge (bouton "Confirm merge")
-3. Supprimez la branche de travail (bouton "Delete branch")
-4. **Créez un tag** pour marquer la version finale :
+3. **Vérifiez que le merge a réussi** : vous devez voir un message "Pull request successfully merged and closed" avec une coche violette ✅
+4. Seulement après cette confirmation, supprimez la branche distante (bouton "Delete branch")
+5. **Créez un tag** pour marquer la version finale :
 
 ```bash
 git checkout main
@@ -102,6 +103,8 @@ git push origin TD1
 ```
 
 > ⚠️ **Important** : Ne mergez pas avant la validation explicite de l'enseignant !
+
+> 💡 **Sécurité** : La suppression de branche sur GitHub ne supprime que la branche **distante**. Votre branche locale reste intacte. Si vous avez un doute, vérifiez d'abord que le merge apparaît bien dans l'historique de `main` avant de supprimer quoi que ce soit.
 
 > 💡 **Bon à savoir** : Tous les commentaires de review restent accessibles après le merge dans l'historique de la PR (onglet "Pull requests" → filtre "Closed").
 
@@ -169,6 +172,30 @@ git add .
 git commit --amend -m "nouveau message"
 git push origin td1 --force
 ```
+
+### J'ai supprimé ma branche par erreur avant de merger !
+
+**Pas de panique** : votre branche locale existe toujours sur votre machine.
+
+```bash
+# Vérifier que la branche existe localement
+git branch
+
+# Si elle existe, la repousser sur GitHub
+git push origin td1
+```
+
+Si vous avez supprimé aussi la branche locale, vous pouvez la recréer depuis votre dernier commit (tant que vous n'avez pas fait `git gc`) :
+
+```bash
+# Voir l'historique de vos actions Git
+git reflog
+
+# Recréer la branche depuis un commit spécifique
+git checkout -b td1 <hash-du-commit>
+```
+
+**En cas de doute**, contactez l'enseignant AVANT de faire des manipulations hasardeuses.
 
 ### Comment voir les commentaires de review ?
 
