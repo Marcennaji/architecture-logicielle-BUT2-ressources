@@ -47,7 +47,7 @@ GitHub n'accepte plus les mots de passe pour Git. Vous devez créer un **token**
 3. Configurez :
    - **Owner** : votre compte GitHub personnel
    - **Repository name** : `ticketing`
-   - **Visibilité** : **Private** ⚠️ (obligatoire)
+   - **Visibility** : **Private** ⚠️ (obligatoire)
 4. Cliquez sur **"Create repository"**
 
 ### 4. Ajouter l'enseignant comme collaborateur
@@ -95,12 +95,20 @@ Si vous avez des erreurs, consultez la section "Problèmes fréquents" ci-dessou
 
 ### PC fixes, ou PC portables attribués personnellement (compte personnel)
 
-Le dossier persiste entre les séances. A chaque début de TD, faire :
+Le dossier persiste entre les séances. A chaque début de TD :
 
 ```bash
 cd ticketing
+git pull origin main          # ⚠️ IMPORTANT : récupérer vos dernières modifications
 source scripts/init.sh
 ```
+
+> ⚠️ **CRITIQUE si vous travaillez sur plusieurs machines** : Si vous alternez entre votre PC personnel et un PC de l'IUT (ou entre deux machines différentes), vous DEVEZ faire `git pull` avant de travailler, sinon vous risquez des conflits de code source et la perte de travail.
+
+**Workflow multi-machines** :
+1. **Début de séance** : `git pull origin main` (récupérer le travail fait ailleurs)
+2. **Travail** : coder, tester, committer régulièrement
+3. **Fin de séance** : `git push origin main` (sauvegarder sur GitHub)
 
 ### PC portables qui restent à l'IUT (compte partagé avec d'autres étudiants)
 
@@ -119,18 +127,21 @@ source scripts/init.sh
 Sur les **PC portables restant à l'IUT**, supprimez votre dossier en fin de séance :
 
 ```bash
+# 1. Vérifier que tout est bien sauvegardé sur GitHub
+git push origin main
+
+# 2. Si vous avez terminé un TD, créer et pousser le tag
+git tag TD1              # ou TD2, TD3, TD4 selon le TD
+git push origin TD1
+
+# 3. Supprimer le dossier local
 cd ~
 rm -rf ticketing
 ```
 
+> 💡 Pour le tagging et la soumission des TDs, consultez le [Workflow de développement](workflow_de_developpement.md).
+
 > ⚠️ Le compte de ces PC portables est partagé entre tous les étudiants. Ne laissez pas vos credentials ni votre code sur la machine !
-
----
-
-## 📖 Documentation
-
-- [Workflow de développement](workflow_de_developpement.md) - Comment soumettre votre travail
-- [Stratégie de tests](comment_tester.md) - Guide des tests par couche
 
 ---
 
