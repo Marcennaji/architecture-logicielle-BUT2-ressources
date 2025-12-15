@@ -75,9 +75,9 @@ git tag TD1  # ou TD2, TD3, TD4
 git push origin TD1
 ```
 
-> ⚠️ **Attention** : Le nom du tag doit être **exactement** `TD1`, `TD2`, `TD3` ou `TD4` (en majuscules). C'est ce nom que le système d'évaluation recherchera.
+> ⚠️ **Attention** : Le nom du tag doit être **exactement** `TD1`, `TD2`, `TD3` ou `TD4` (en majuscules).
 
-> 📊 **Évaluation** : L'enseignant évaluera automatiquement votre travail à partir du tag. L'historique complet des commits entre les tags sera également analysé pour vérifier la régularité de votre travail.
+> 📊 **Évaluation** : Votre travail sera évalué à partir du tag. L'historique complet des commits entre les tags sera également pris en compte.
 
 ## Résumé des commandes
 
