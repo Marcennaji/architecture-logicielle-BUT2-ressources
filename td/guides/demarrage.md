@@ -61,7 +61,8 @@ GitHub n'accepte plus les mots de passe pour Git. Vous devez créer un **token**
 
 > ⚠️ **Obligatoire** : Sans cela, votre travail ne pourra pas être évalué !
 
-### 5. Cloner et initialiser
+### 5. Cloner et initialiser sur votre machine de travail
+Allez dans le répertoire où vous voulez cloner votre projet, puis:
 
 ```bash
 git clone https://github.com/VOTRE-USERNAME/ticketing.git
