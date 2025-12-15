@@ -59,7 +59,7 @@ GitHub n'accepte plus les mots de passe pour Git. Vous devez créer un **token**
 5. Sélectionnez le rôle **Read** (accès en lecture)
 6. Cliquez sur **Add Marcennaji to this repository**
 
-> ⚠️ **Obligatoire** : Sans cela, l'enseignant ne pourra pas accéder à votre code pour vous aider en cas de difficulté !
+> ⚠️ **Obligatoire** : Sans cela, votre travail ne pourra pas être évalué !
 
 ### 5. Cloner et initialiser
 
@@ -123,7 +123,7 @@ cd ~
 rm -rf ticketing
 ```
 
-> ⚠️ Le compte est partagé entre tous les étudiants. Ne laissez pas vos credentials ni votre code sur la machine !
+> ⚠️ Le compte de ces PC portables est partagé entre tous les étudiants. Ne laissez pas vos credentials ni votre code sur la machine !
 
 ---
 

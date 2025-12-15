@@ -22,18 +22,3 @@ Ces guides sont à consulter tout au long du module :
 
 > 💡 **Volume total** : 20h de TD en présentiel + ~10h de travail à la maison.  
 > Les TDs sont publiés progressivement au fur et à mesure de l'avancement du module.
-
-## 🎯 Template de code
-
-Le code à compléter se trouve dans le repository :  
-https://github.com/Marcennaji/ticketing_starter
-
----
-
-## 📝 Pour l'enseignant
-
-Les TDs non encore publiés sont dans `.gitignore`. Pour publier un TD :
-
-1. Éditez `td/.gitignore` et commentez la ligne correspondante
-2. Mettez à jour le tableau ci-dessus (statut ✅ + lien)
-3. Commitez et poussez

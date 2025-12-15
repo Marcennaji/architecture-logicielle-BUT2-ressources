@@ -1,13 +1,13 @@
 # Guide des tests
 
-## ��� Objectif
+## Objectif
 
 Dans ce module, les tests servent à **valider que votre architecture fonctionne** :
 - Les tests garantissent que votre code fait ce qu'il doit faire
 - Ils permettent de refactorer sans casser
 - Ils documentent l'usage de votre code
 
-## ��� Les 3 niveaux de tests (architecture hexagonale)
+## Les 3 niveaux de tests 
 
 L'architecture hexagonale se reflète dans **3 niveaux de tests** correspondant aux 3 couches du projet.
 
@@ -95,7 +95,7 @@ def test_create_ticket_via_api(client):
 
 ---
 
-## ��� Workflow recommandé
+## Workflow recommandé
 
 Pour chaque TD, suivez cette approche simple :
 
@@ -105,7 +105,7 @@ Pour chaque TD, suivez cette approche simple :
 4. **Refactorez** si nécessaire (les tests vous protègent)
 5. **Commitez** code + tests ensemble
 
-> ��� **Important** : L'essentiel n'est pas **quand** vous écrivez les tests (avant ou après le code), mais **que vous les écriviez** systématiquement.
+> **Important** : L'essentiel n'est pas **quand** vous écrivez les tests (avant ou après le code), mais **que vous les écriviez** systématiquement.
 
 ---
 
@@ -138,7 +138,7 @@ def test_assign_ticket():
 
 ---
 
-## ��� Commandes pytest utiles
+## Commandes pytest utiles
 
 ```bash
 # Lancer tous les tests
@@ -153,41 +153,24 @@ pytest tests/e2e/               # Tests API uniquement
 pytest -v                       # Mode verbose (détails de chaque test)
 pytest -k "test_create"         # Tests contenant "create" dans le nom
 pytest tests/domain/test_ticket.py  # Un fichier spécifique
-pytest --maxfail=1              # Arrêter à la première erreur
 
-# Couverture de code (avancé)
-pytest --cov=src --cov-report=html
 ```
 
 ---
 
-## ��� Pourquoi 3 niveaux ?
+## Pourquoi 3 niveaux ?
 
 L'architecture hexagonale **facilite** les tests en séparant les responsabilités :
 
 | Niveau | Ce qu'on teste | Rapidité | Complexité |
 |--------|----------------|----------|------------|
-| **Domain** | Règles métier pures | ⚡⚡⚡ Très rapide | ��� Simple |
-| **Application** | Orchestration use cases | ⚡⚡ Rapide | ��� Moyenne |
-| **E2E** | Système complet | ⚡ Plus lent | ��� Complexe |
-
-**Pyramide des tests** :
-```
-     /\
-    /e2\     ← Peu de tests e2e (lents, fragiles)
-   /____\
-  /      \
- /  app   \  ← Tests use cases (orchestration)
-/__________\
-/          \
-/  domain   \ ← Beaucoup de tests domain (rapides, fiables)
-/____________\
-```
+| **Domain** | Règles métier pures | ⚡⚡⚡ Très rapide | Simple |
+| **Application** | Orchestration use cases | ⚡⚡ Rapide | Moyenne |
+| **E2E** | Système complet | ⚡ Plus lent | Complexe |
 
 ---
 
-## ��� Ressources
+## Ressources
 
 - [Documentation pytest](https://docs.pytest.org/)
 - Tests fournis dans le projet comme exemples
-- [Test-Driven Development by Example](https://www.oreilly.com/library/view/test-driven-development/0321146530/) (pour aller plus loin)

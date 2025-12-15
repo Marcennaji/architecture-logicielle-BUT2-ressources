@@ -81,7 +81,7 @@ git push origin main           # Push vers GitHub
 **🖥️ Ligne de commande**
 ```bash
 git tag TD1                    # Créer le tag
-git push origin TD1            # Pousser le tag
+git push origin TD1            # Pousser le tag sur votre repo github
 ```
 
 **🎨 VS Code**
@@ -153,11 +153,9 @@ git tag TD1
 git push origin TD1
 ```
 
-⚠️ **Ne faites cela que si la deadline n'est pas passée !**
-
 ---
 
-## 🔄 Mettre à jour depuis GitHub
+## 🔄 Mettre à jour depuis GitHub (utile si vous n'avez pas la dernière version de votre travail, sur votre PC)
 
 ### Récupérer les dernières modifications
 
@@ -218,7 +216,7 @@ git commit -m "TD1: ajout méthode Ticket.assign()"
 # 3. Pousser régulièrement (au moins en fin de séance)
 git push origin main
 
-# 4. Quand le TD est terminé, créer le tag
+# 4. Quand le TD est terminé, créer le tag. Exemple pour le TD 1 :
 git tag TD1
 git push origin TD1
 ```

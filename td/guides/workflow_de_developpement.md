@@ -141,60 +141,7 @@ tests/
 
 ❌ **Interdit** : Renommer, déplacer ou supprimer ces dossiers principaux
 
-> **Pourquoi ?** Le système d'évaluation automatique s'attend à trouver vos fichiers dans cette structure précise.
-
 ## FAQ
-
-### J'ai oublié de créer le tag, comment faire ?
-
-Pas de problème ! Créez-le maintenant et poussez-le :
-
-```bash
-git tag TD1
-git push origin TD1
-```
-
-### Je veux modifier mon tag (j'ai tagué trop tôt)
-
-```bash
-# Supprimer le tag localement
-git tag -d TD1
-
-# Supprimer le tag sur GitHub
-git push origin :refs/tags/TD1
-
-# Faire vos corrections
-git add .
-git commit -m "fix: corrections finales"
-git push origin main
-
-# Recréer le tag
-git tag TD1
-git push origin TD1
-```
-
-> ⚠️ **Attention** : Ne faites cela que si le délai de soumission n'est pas encore passé !
-
-### J'ai fait une erreur dans mon dernier commit, comment corriger ?
-
-```bash
-# Modifier le dernier commit
-git add .
-git commit --amend -m "nouveau message"
-git push origin main --force
-```
-
-> ⚠️ N'utilisez `--force` que si vous êtes sûr de ce que vous faites !
-
-### Comment voir mes tags existants ?
-
-```bash
-# Lister tous les tags locaux
-git tag
-
-# Voir les tags sur GitHub
-git ls-remote --tags origin
-```
 
 ### J'ai des difficultés sur un TD, que faire ?
 
