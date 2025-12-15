@@ -590,7 +590,7 @@ Red → Green → Refactor → Red → Green → Refactor ...
 |-------|---------|
 | "TDD ralentit le développement" | TDD accélère sur le moyen terme (moins de bugs, moins de refonte) |
 | "TDD = 100% de couverture" | TDD vise le comportement, pas la métrique |
-| "TDD remplace l'architecture" | TDD **révèle** les problèmes, pas les résout automatiquement |
+| "TDD remplace l'architecture" | TDD **révèle** les problèmes, ne les résout pas automatiquement |
 | "TDD impose le design" | TDD **guide** vers un bon design, ne l'impose pas |
 | "TDD = écrire tous les tests avant" | TDD = cycle court (1 test → 1 impl → refactor) |
 

@@ -24,7 +24,7 @@ main
 - `TD3` (repository SQLite)
 - `TD4` (API REST)
 
-> 💡 **Pourquoi cette approche ?** Elle simplifie le workflow tout en gardant un historique complet de votre progression via les commits. Les tags permettent à l'enseignant d'évaluer automatiquement votre travail à des étapes précises.
+> 💡 **Pourquoi cette approche ?** Elle simplifie le workflow tout en gardant un historique complet de votre progression via les commits. Les tags permettent à l'enseignant d'évaluer votre travail à des étapes précises.
 
 > ⚠️ **Support disponible** : Si vous rencontrez des difficultés sur un TD, **contactez l'enseignant** pendant les séances ou par email. Ne restez pas bloqué !
 
