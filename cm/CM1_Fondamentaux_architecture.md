@@ -69,7 +69,7 @@ Vous allez appliquer ces principes sur un **projet fil rouge** :
 
 Sans vraie architecture, on obtient vite :
 
-- Du **code spaghetti** 🍝 *(attention aux indigestions)*
+- Du **code spaghetti** 🍝
 - Une application **difficile à comprendre**
 - Des bugs qui reviennent en boucle
 - Une application **impossible à tester**

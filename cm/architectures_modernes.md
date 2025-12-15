@@ -29,7 +29,7 @@ style: |
 # 🧱 CM1 : Panorama des architectures logicielles modernes
 
 🎓 BUT Informatique — Ressource R4.01 « Architecture logicielle »  
-👨‍🏫 Enseignant·e : _à compléter_  
+👨‍🏫 Enseignant : Marc Ennaji
 
 🛠 Objectif du cours :  
 Comprendre **pourquoi** on parle d’architecture logicielle et découvrir les **principales architectures** rencontrées dans le monde professionnel.
