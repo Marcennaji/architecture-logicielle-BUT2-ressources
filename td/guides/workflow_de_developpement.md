@@ -1,125 +1,94 @@
 # Workflow de développement et rendu
 
-Ce document explique comment organiser votre travail et soumettre vos TDs pour correction.
+Ce document explique comment organiser votre travail et soumettre vos TDs pour évaluation.
 
-## Principe : Une branche par TD
+## Principe : Commits réguliers sur `main` + tags
 
-Chaque TD doit être développé sur une **branche dédiée**, puis soumis via une **Pull Request** (PR). Ce workflow est utilisé en entreprise pour la revue de code.
+Chaque TD est développé directement sur la branche `main` avec des **commits réguliers**, puis marqué avec un **tag standardisé** quand vous êtes prêt à soumettre.
 
 ```
-main (stable)
+main
   │
-  ├── td1 → PR → auto-validation → merge → tag TD1
+  ├─ commits TD1 ─→ tag TD1
   │
-  ├── td2 → PR → auto-validation → merge → tag TD2
+  ├─ commits TD2 ─→ tag TD2
   │
-  ├── td3 → PR → auto-validation → merge → tag TD3
+  ├─ commits TD3 ─→ tag TD3
   │
-  └── td4 → PR → auto-validation → merge → tag TD4
+  └─ commits TD4 ─→ tag TD4
 ```
 
-> 💡 **Note** : Les TD ne sont pas corrigés individuellement. Vous vous auto-validez via les checklists des PR. L'enseignant évaluera le **projet final complet** (tag TD4) pour l'appréciation globale.
+**Tags obligatoires** :
+- `TD1` (domain modeling)
+- `TD2` (use cases + ports)
+- `TD3` (repository SQLite)
+- `TD4` (API REST)
+
+> 💡 **Pourquoi cette approche ?** Elle simplifie le workflow tout en gardant un historique complet de votre progression via les commits. Les tags permettent à l'enseignant d'évaluer automatiquement votre travail à des étapes précises.
 
 > ⚠️ **Support disponible** : Si vous rencontrez des difficultés sur un TD, **contactez l'enseignant** pendant les séances ou par email. Ne restez pas bloqué !
 
+> ⚠️ **Arborescence obligatoire** : Ne modifiez **JAMAIS** la structure des dossiers principaux (`src/domain/`, `src/application/`, `src/ports/`, `src/adapters/`, `tests/`). Vous pouvez créer des sous-dossiers à l'intérieur, mais l'arborescence de base doit rester identique pour tous.
+
 ## Étape par étape
 
-### 1. Créer une branche pour le TD
+### 1. Développer le TD
 
-```bash
-# S'assurer d'être sur main à jour
-git checkout main
-git pull origin main
-
-# Créer et basculer sur la branche du TD (ici, cette branche s'appelle 'td1')
-git checkout -b td1
-```
-
-### 2. Développer le TD
-
-Travaillez normalement sur votre code. Faites des commits réguliers :
+Travaillez sur votre code directement sur `main`. Faites des **commits réguliers** :
 
 ```bash
 git add .
-git commit -m "feat: implémentation du use case CreateTicket"
+git commit -m "feat: ajout entité Ticket avec validation statut"
 ```
 
-> 💡 **Conseil** : Faites plusieurs petits commits plutôt qu'un seul gros commit. Cela montre votre progression et facilite la revue.
+> 💡 **Important** : Faites **plusieurs petits commits** au fur et à mesure de votre progression (idéalement 10-15 commits par TD). Cela démontre un travail itératif et facilite le debugging.
 
-### 3. Pousser la branche nommée 'td1'
-
+**Exemples de bonne granularité** :
 ```bash
-git push origin td1
+git commit -m "feat: création classe Ticket"
+git commit -m "feat: ajout validation du titre"
+git commit -m "test: ajout tests unitaires Ticket"
+git commit -m "feat: ajout méthode assign()"
+git commit -m "test: tests pour assign()"
 ```
 
-### 4. Créer une Pull Request
-
-1. Allez sur votre repo GitHub
-2. Vous verrez un bandeau proposant de créer une PR pour `td1`
-3. Cliquez sur **Compare & pull request**
-4. Remplissez le template de PR qui s'affiche automatiquement :
-   - **Titre** : `TD1 - [Votre description]`
-   - **Description** : Le template contient des checklists à cocher (architecture, tests, qualité)
-   - **Checklist spécifique au TD** : Ajoutez les points demandés dans l'énoncé du TD
-   - **Questions/remarques** : Notez vos difficultés ou interrogations (optionnel)
-5. Cliquez sur **Create pull request**
-
-> 💡 **Conseil** : Prenez le temps de cocher les checklists **avant** de créer la PR. Cela vous permet de vérifier que vous n'avez rien oublié !
-
-> ℹ️ **Tous les TD** : Vous pouvez merger vous-même après auto-validation via les checklists.
-
-### 5. Auto-validation
-
-1. Relisez votre code et vérifiez les checklists de la PR
-2. Assurez-vous que tous les tests passent (`pytest`)
-3. Si tout est OK, passez à l'étape 7 (merger)
-
-> 💡 Les checklists du template de PR sont votre guide d'auto-évaluation.
-
-> 📊 **Évaluation finale** : L'enseignant évaluera votre **projet complet** (tag TD4) en fin de module pour donner une appréciation globale sur l'architecture, les fonctionnalités, les tests et la qualité du code.
-
-### 6. Corriger si nécessaire
-
-Si vous détectez des problèmes lors de l'auto-validation, corrigez-les avant de merger :
+### 2. Pousser régulièrement sur GitHub
 
 ```bash
-# Vous êtes toujours sur la branche (td1, td2, td3 ou td4)
-git add .
-git commit -m "fix: correction après relecture"
-git push origin td1  # ou td2, td3, td4
+git push origin main
 ```
 
-La PR se met à jour automatiquement avec vos nouveaux commits.
+> 💡 **Conseil** : Poussez vos commits sur GitHub au moins à la fin de chaque séance TD. Cela sauvegarde votre travail et permet à l'enseignant de voir votre progression si vous demandez de l'aide.
 
-### 7. Merger et créer un tag
+### 3. Soumettre le TD avec un tag
 
-Une fois les checklists vérifiées et les tests OK :
-
-1. **Vous mergez la PR** sur GitHub (bouton "Merge pull request")
-2. Confirmez le merge (bouton "Confirm merge")
-3. **Vérifiez que le merge a réussi** : message "Pull request successfully merged and closed" ✅
-4. Supprimez la branche distante (bouton "Delete branch")
-5. **Créez un tag** pour marquer la version finale :
+Quand vous avez terminé le TD et que tous les tests passent :
 
 ```bash
-git checkout main
-git pull origin main
+# Vérifier que tous les tests passent
+pytest
+
+# Créer le tag (nom EXACT requis)
 git tag TD1  # ou TD2, TD3, TD4
+
+# Pousser le tag sur GitHub
 git push origin TD1
 ```
 
-> 💡 **Sécurité** : La suppression de branche sur GitHub ne supprime que la branche **distante**. Votre branche locale reste intacte. Si vous avez un doute, vérifiez d'abord que le merge apparaît bien dans l'historique de `main` avant de supprimer quoi que ce soit.
+> ⚠️ **Attention** : Le nom du tag doit être **exactement** `TD1`, `TD2`, `TD3` ou `TD4` (en majuscules). C'est ce nom que le système d'évaluation recherchera.
+
+> 📊 **Évaluation** : L'enseignant évaluera automatiquement votre travail à partir du tag. L'historique complet des commits entre les tags sera également analysé pour vérifier la régularité de votre travail.
 
 ## Résumé des commandes
 
 | Action | Commande |
 |--------|----------|
-| Nouvelle branche | `git checkout -b td2` |
+| Ajouter fichiers | `git add .` |
 | Commit | `git commit -m "message"` |
-| Push branche | `git push origin td2` |
-| Retour sur main | `git checkout main` |
-| Mise à jour main | `git pull origin main` |
-| Créer un tag | `git tag TD2 && git push origin TD2` |
+| Push vers GitHub | `git push origin main` |
+| Vérifier tests | `pytest` |
+| Créer un tag | `git tag TD1` (ou TD2, TD3, TD4) |
+| Pousser le tag | `git push origin TD1` |
 
 ## Bonnes pratiques
 
@@ -146,65 +115,93 @@ refactor: extraction de la logique métier dans le domain
 - Commitez **souvent** (plusieurs fois par heure de travail)
 - Un commit = une unité logique de travail
 - Évitez les commits géants avec 10 fichiers modifiés
+- **Objectif** : 10-15 commits minimum par TD
 
-### Description de PR
+### Structure des dossiers
 
-Une bonne description de PR contient :
-- Ce que vous avez implémenté
-- Les choix techniques que vous avez faits
-- Les difficultés rencontrées (optionnel)
-- Les questions que vous avez (optionnel)
+⚠️ **IMPORTANT** : L'arborescence de base du projet est **obligatoire et identique pour tous** :
+
+```
+src/
+├── domain/          # ✅ Ne pas renommer/supprimer
+├── application/     # ✅ Ne pas renommer/supprimer
+├── ports/           # ✅ Ne pas renommer/supprimer
+├── adapters/        # ✅ Ne pas renommer/supprimer
+│   ├── api/         # ✅ Ne pas renommer/supprimer
+│   └── db/          # ✅ Ne pas renommer/supprimer
+└── config/          # ✅ Ne pas renommer/supprimer
+
+tests/
+├── domain/          # ✅ Ne pas renommer/supprimer
+├── application/     # ✅ Ne pas renommer/supprimer
+└── e2e/             # ✅ Ne pas renommer/supprimer
+```
+
+✅ **Autorisé** : Créer des sous-dossiers à l'intérieur (ex: `src/domain/entities/`, `src/domain/value_objects/`)
+
+❌ **Interdit** : Renommer, déplacer ou supprimer ces dossiers principaux
+
+> **Pourquoi ?** Le système d'évaluation automatique s'attend à trouver vos fichiers dans cette structure précise.
 
 ## FAQ
 
-### Puis-je continuer à travailler sur le TD suivant avant de merger le TD actuel ?
+### J'ai oublié de créer le tag, comment faire ?
 
-Oui ! Créez une nouvelle branche pour le TD suivant :
+Pas de problème ! Créez-le maintenant et poussez-le :
 
 ```bash
-git checkout main
-git checkout -b td2
+git tag TD1
+git push origin TD1
 ```
 
-### J'ai fait une erreur sur ma branche, comment corriger ?
+### Je veux modifier mon tag (j'ai tagué trop tôt)
+
+```bash
+# Supprimer le tag localement
+git tag -d TD1
+
+# Supprimer le tag sur GitHub
+git push origin :refs/tags/TD1
+
+# Faire vos corrections
+git add .
+git commit -m "fix: corrections finales"
+git push origin main
+
+# Recréer le tag
+git tag TD1
+git push origin TD1
+```
+
+> ⚠️ **Attention** : Ne faites cela que si le délai de soumission n'est pas encore passé !
+
+### J'ai fait une erreur dans mon dernier commit, comment corriger ?
 
 ```bash
 # Modifier le dernier commit
 git add .
 git commit --amend -m "nouveau message"
-git push origin td1 --force
+git push origin main --force
 ```
 
-### J'ai supprimé ma branche par erreur avant de merger !
+> ⚠️ N'utilisez `--force` que si vous êtes sûr de ce que vous faites !
 
-**Pas de panique** : votre branche locale existe toujours sur votre machine.
+### Comment voir mes tags existants ?
 
 ```bash
-# Vérifier que la branche existe localement
-git branch
+# Lister tous les tags locaux
+git tag
 
-# Si elle existe, la repousser sur GitHub
-git push origin td1
+# Voir les tags sur GitHub
+git ls-remote --tags origin
 ```
-
-Si vous avez supprimé aussi la branche locale, vous pouvez la recréer depuis votre dernier commit (tant que vous n'avez pas fait `git gc`) :
-
-```bash
-# Voir l'historique de vos actions Git
-git reflog
-
-# Recréer la branche depuis un commit spécifique
-git checkout -b td1 <hash-du-commit>
-```
-
-**En cas de doute**, contactez l'enseignant AVANT de faire des manipulations hasardeuses.
 
 ### J'ai des difficultés sur un TD, que faire ?
 
 **Ne restez pas bloqué !** Contactez l'enseignant :
 - Pendant les séances TD (levez la main)
 - Par email avec une description claire du problème
-- En incluant le lien vers votre PR si pertinent
+- En incluant le lien vers votre repository GitHub
 
 L'enseignant est là pour vous aider à progresser tout au long du module.
 

@@ -668,17 +668,19 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 
 ### 5.3 Évaluation
 
-📊 **Répartition** :
-- 30% : Projet final (GitHub, code fonctionnel)
-- 40% : Exercices de TD (livrables intermédiaires)
-- 30% : Contrôle final (analyse de code architectural)
+📊 **Composantes** :
+- Travail en TD (TD1-TD4) - Soumission via GitHub + auto-validation
+- QCM final - 30-45 mn en dernière séance
+- Bonus présentiel - Travail soumis pendant séances TD valorisé
 
 ⚠️ **Important** :
-- 70% de la note **sans IA** (TD présentiel + Contrôle)
-- L'IA est **autorisée** pour le projet à la maison
-- Mais **comprendre** l'architecture reste indispensable
+- L'IA est **autorisée** pour le projet
+- Mais **comprendre** l'architecture reste indispensable pour le QCM
+- Le travail effectué en présentiel (sans IA intensive) est valorisé
 
-📖 Grille détaillée : `td/evaluation.md`
+📖 Détails complets : `td/evaluation.md`
+
+**Barèmes détaillés communiqués en début de module.**
 
 ---
 

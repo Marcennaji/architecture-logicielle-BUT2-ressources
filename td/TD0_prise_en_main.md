@@ -11,11 +11,11 @@
 
 À la fin de ce TD, vous saurez :
 
-1. ✅ Créer une branche dédiée pour un TD
+1. ✅ Travailler directement sur la branche `main`
 2. ✅ Implémenter une fonction utilitaire simple avec ses tests
 3. ✅ Utiliser pytest pour valider votre code
-4. ✅ Commiter et pousser votre travail sur GitHub
-5. ✅ Créer une Pull Request pour soumission et review
+4. ✅ Faire des commits réguliers et les pousser sur GitHub
+5. ✅ Créer un tag pour marquer votre soumission
 6. ✅ Comprendre le cycle complet de développement du module
 
 ---
@@ -42,7 +42,7 @@ pytest
 
 **Checklist** :
 - [ ] Mon repository `ticketing` existe sur mon compte GitHub
-- [ ] J'ai ajouté `Marcennaji` comme collaborateur (rôle **Triage**)
+- [ ] J'ai ajouté `Marcennaji` comme collaborateur
 - [ ] Le projet est cloné sur ma machine
 - [ ] La commande `pytest` fonctionne et tous les tests passent
 - [ ] Je vois `(.venv)` au début de ma ligne de commande
@@ -64,41 +64,11 @@ Dans le futur système de tickets, on voudra savoir combien de temps un ticket e
 **Ce que vous allez apprendre** :
 - Créer des modules dans la couche `domain/` (logique métier)
 - Écrire des tests unitaires avec pytest
-- Utiliser le workflow Git/GitHub (branche → commit → push → PR)
+- Utiliser le workflow Git/GitHub (commits réguliers → push → tag)
 
 ---
 
-## 📁 Partie 1 : Création de la branche de travail (5 min)
-
-### Pourquoi une branche par TD ?
-
-En entreprise comme dans ce module, on ne travaille **jamais directement sur `main`**. On crée une branche pour chaque fonctionnalité ou TD, puis on soumet notre travail via une **Pull Request**.
-
-**Avantages** :
-- 🔒 La branche `main` reste stable
-- 👀 Le code peut être reviewé avant d'être intégré
-- 🔄 On peut travailler sur plusieurs TDs en parallèle
-
-### Créer votre branche
-
-```bash
-# Vérifier qu'on est sur main
-git branch
-# L'étoile * devrait être sur main
-
-# Créer et basculer sur la nouvelle branche
-git checkout -b td0-utils-duration
-
-# Vérifier qu'on est bien sur la nouvelle branche
-git branch
-# L'étoile * devrait maintenant être sur td0-utils-duration
-```
-
-> 💡 **Convention de nommage** : `td0-utils-duration` = TD0 + description courte de ce qu'on fait
-
----
-
-## 💻 Partie 2 : Implémentation de la fonction (35 min)
+## 💻 Partie 1 : Implémentation de la fonction (35 min)
 
 ### 2.1 Créer le fichier de la fonction
 
@@ -229,7 +199,7 @@ tests/domain/test_utils.py::test_calculate_duration_invalid_order PASSED
 
 ---
 
-## 🔄 Partie 3 : Workflow Git (20 min)
+## 🔄 Partie 2 : Workflow Git (20 min)
 
 ### 3.1 Vérifier les modifications
 
@@ -240,7 +210,6 @@ git status
 
 Vous devriez voir :
 ```
-On branch td0-utils-duration
 Untracked files:
   src/domain/utils.py
   tests/domain/test_utils.py
@@ -268,89 +237,54 @@ git commit -m "TD0: Ajout fonction calculate_duration_hours et ses tests"
 - ✅ Description claire de ce qui a été fait
 - ✅ Court (< 72 caractères si possible)
 
-### 3.4 Pousser la branche sur GitHub
+> 💡 **Bonne pratique** : Faites plusieurs petits commits au fur et à mesure de votre progression, plutôt qu'un seul gros commit à la fin.
+
+### 3.4 Pousser sur GitHub
 
 ```bash
-# Pousser la branche sur votre repository GitHub
-git push origin td0-utils-duration
+# Pousser sur la branche main
+git push origin main
 ```
 
-Vous devriez voir un message de confirmation indiquant que la branche a été poussée.
+Vous devriez voir un message de confirmation indiquant que les commits ont été poussés.
 
 ---
 
-## 📬 Partie 4 : Création de la Pull Request (20 min)
+## 🏷️ Partie 3 : Créer un tag pour soumettre (5 min)
 
-### 4.1 Qu'est-ce qu'une Pull Request ?
+### 4.1 Vérifier que tout est OK
 
-Une **Pull Request** (PR) est une demande pour intégrer votre code dans la branche `main`. Elle permet :
-- 👀 La **revue de code** par l'enseignant
-- 💬 Des **commentaires** ligne par ligne
-- ✅ La **validation** avant l'intégration
+Avant de créer le tag, vérifiez une dernière fois :
 
-### 4.2 Créer la PR sur GitHub
+```bash
+# Tous les tests passent ?
+pytest
 
-1. Allez sur votre repository GitHub : `https://github.com/VOTRE-USERNAME/ticketing`
+# Tous les fichiers sont committés ?
+git status
+# Devrait afficher "nothing to commit, working tree clean"
+```
 
-2. Vous devriez voir un bandeau jaune proposant de créer une PR pour votre branche :
-   ```
-   td0-utils-duration had recent pushes
-   [Compare & pull request]
-   ```
-   Cliquez sur **Compare & pull request**
+### 4.2 Créer le tag
 
-3. **Si le bandeau n'apparaît pas** :
-   - Cliquez sur l'onglet **Pull requests**
-   - Cliquez sur **New pull request**
-   - Sélectionnez votre branche `td0-utils-duration` dans le menu déroulant
+```bash
+# Créer le tag TD0
+git tag TD0
 
-4. Remplissez le formulaire de la PR :
-   - **Titre** : `TD0 - Fonction calculate_duration_hours`
-   - **Description** : 
-     ```markdown
-     ## Résumé
-     Implémentation de la fonction `calculate_duration_hours` qui calcule 
-     la durée en heures entre deux dates.
-     
-     ## Fichiers ajoutés
-     - `src/domain/utils.py` : fonction utilitaire
-     - `tests/domain/test_utils.py` : 4 tests (cas nominaux + erreur)
-     
-     ## Tests
-     - ✅ Tous les tests passent (4/4)
-     ```
+# Pousser le tag sur GitHub
+git push origin TD0
+```
 
-5. **⚠️ NE MERGEZ PAS** la PR vous-même ! Cliquez sur **Create pull request**
+> ⚠️ **Important** : Le nom du tag doit être **exactement** `TD0` (en majuscules). C'est ce nom que le système d'évaluation recherchera pour les TDs suivants (`TD1`, `TD2`, `TD3`, `TD4`).
 
-### 4.3 Attendre la review et merger
+### 4.3 Vérifier sur GitHub
 
-Votre enseignant va :
-- 📖 Lire votre code
-- 💬 Ajouter des commentaires ligne par ligne si nécessaire
-- ✅ Approuver la PR quand tout est bon (bouton "Approve")
+1. Allez sur votre repository GitHub
+2. Cliquez sur le menu déroulant des branches (où il est écrit "main")
+3. Cliquez sur l'onglet **Tags**
+4. Vous devriez voir `TD0` dans la liste
 
-Vous recevrez une **notification GitHub** pour chaque action.
-
-**Quand vous recevez des commentaires** :
-1. Lisez attentivement chaque commentaire
-2. Apportez les corrections demandées dans votre code local
-3. Commitez et poussez les modifications sur la même branche :
-   ```bash
-   git add .
-   git commit -m "TD0: Corrections suite à review"
-   git push origin td0-utils-duration
-   ```
-4. La PR se mettra à jour automatiquement avec vos nouveaux commits
-
-**Quand la PR est approuvée** (✅ "Approved") :
-1. Vérifiez que tous les commentaires sont résolus
-2. **Vous mergez la PR vous-même** (bouton "Merge pull request")
-3. Confirmez le merge (bouton "Confirm merge")
-4. Vous pouvez ensuite supprimer la branche (bouton "Delete branch")
-
-> ⚠️ **Important** : Ne mergez PAS avant l'approbation de l'enseignant !
-
-> 💡 **Bon à savoir** : Même après le merge, tous les commentaires de la PR restent accessibles dans l'historique GitHub.
+✅ **Félicitations !** Vous avez soumis votre premier TD !
 
 ---
 
@@ -360,8 +294,8 @@ Ce TD **n'est pas noté** mais il est **obligatoire**.
 
 Si vous n'avez pas terminé pendant les 2h de TD :
 1. ✅ Terminez le travail en autonomie (en dehors des heures de TD)
-2. ✅ Soumettez votre Pull Request **avant le prochain TD**
-3. ⚠️ Au début du TD1, je vérifierai que chacun a soumis sa PR
+2. ✅ Créez le tag `TD0` **avant le prochain TD**
+3. ⚠️ Au début du TD1, je vérifierai que chacun a bien le tag TD0
 
 **Aide** : Si vous bloquez, consultez :
 - Le [Guide de workflow](guides/workflow_de_developpement.md)
@@ -374,18 +308,16 @@ Si vous n'avez pas terminé pendant les 2h de TD :
 
 | Étape | Commande / Action |
 |-------|-------------------|
-| **1. Créer branche** | `git checkout -b td0-utils-duration` |
-| **2. Coder** | Créer `src/domain/utils.py` et implémenter |
-| **3. Tester** | Créer `tests/domain/test_utils.py` et vérifier avec `pytest` |
-| **4. Staging** | `git add src/domain/utils.py tests/domain/test_utils.py` |
-| **5. Commit** | `git commit -m "TD0: Ajout fonction calculate_duration_hours et ses tests"` |
-| **6. Push** | `git push origin td0-utils-duration` |
-| **7. Pull Request** | Sur GitHub : Create pull request |
-| **8. Review** | Attendre la review et l'approbation de l'enseignant |
-| **9. Corrections** | Si demandées : corriger, commiter, pusher |
-| **10. Merge** | **Après approbation** : vous mergez vous-même la PR |
+| **1. Coder** | Créer `src/domain/utils.py` et implémenter |
+| **2. Tester** | Créer `tests/domain/test_utils.py` et vérifier avec `pytest` |
+| **3. Staging** | `git add src/domain/utils.py tests/domain/test_utils.py` |
+| **4. Commit** | `git commit -m "TD0: Ajout fonction calculate_duration_hours et ses tests"` |
+| **5. Push** | `git push origin main` |
+| **6. Vérification** | `pytest` (tous les tests doivent passer) |
+| **7. Tag** | `git tag TD0` |
+| **8. Push tag** | `git push origin TD0` |
 
-**Ce workflow sera utilisé pour TOUS les TDs du module.**
+**Ce workflow sera utilisé pour TOUS les TDs du module** (TD1, TD2, TD3, TD4).
 
 ---
 
@@ -395,10 +327,10 @@ Si vous n'avez pas terminé pendant les 2h de TD :
 
 | Concept | Description |
 |---------|-------------|
-| **Branching Git** | Isoler son travail sur une branche dédiée |
+| **Commits Git** | Sauvegarder progressivement son travail |
 | **Tests unitaires** | Valider qu'une fonction fait ce qu'on attend |
 | **pytest.raises** | Tester qu'une exception est bien levée |
-| **Pull Request** | Soumettre du code pour review |
+| **Tags Git** | Marquer une version spécifique pour soumission |
 | **Type hints** | Annoter les types en Python (`-> float`) |
 
 ### Ressources
@@ -406,7 +338,6 @@ Si vous n'avez pas terminé pendant les 2h de TD :
 - [Documentation datetime](https://docs.python.org/3/library/datetime.html)
 - [Documentation pytest](https://docs.pytest.org/)
 - [Guide Git](https://git-scm.com/book/fr/v2)
-- [Guide Pull Request](https://docs.github.com/en/pull-requests)
 
 ---
 
@@ -424,23 +355,30 @@ Vous créerez les entités métier (`Ticket`, `User`, `Status`) avec leurs règl
 
 ## ❓ FAQ
 
-### Puis-je modifier ma PR après l'avoir créée ?
+### J'ai oublié de pousser mes commits, comment faire ?
 
-Oui ! Faites simplement de nouveaux commits sur la même branche et poussez-les :
 ```bash
-git add .
-git commit -m "TD0: Correction suite à remarque"
-git push origin td0-utils-duration
+git push origin main
 ```
-La PR se mettra à jour automatiquement.
 
-### Qui merge la Pull Request ?
+### Je veux corriger quelque chose après avoir créé le tag
 
-**Vous** ! Après que l'enseignant ait approuvé votre PR, c'est à vous de cliquer sur le bouton "Merge pull request" sur GitHub. Ne mergez pas avant l'approbation.
+```bash
+# Supprimer le tag localement et sur GitHub
+git tag -d TD0
+git push origin :refs/tags/TD0
 
-### Les commentaires de la PR disparaissent après le merge ?
+# Faire vos corrections
+git add .
+git commit -m "TD0: corrections finales"
+git push origin main
 
-Non ! Tous les commentaires restent accessibles dans l'historique de la PR même après le merge. Vous pouvez les consulter à tout moment dans l'onglet "Pull requests" (filtre "Closed").
+# Recréer le tag
+git tag TD0
+git push origin TD0
+```
+
+> ⚠️ Ne faites cela que si le délai n'est pas encore passé !
 
 ### J'ai une erreur "fatal: not a git repository"
 
@@ -461,3 +399,4 @@ Corrigez votre fonction et relancez `pytest`.
 ### Quel est le mot de passe Git quand je push ?
 
 Ce n'est **pas** votre mot de passe GitHub, c'est votre **Personal Access Token** créé dans le guide de démarrage. Si vous l'avez perdu, recréez-en un : https://github.com/settings/tokens
+

@@ -50,17 +50,17 @@
 | 31/03/2026 | 2D I | Mar | 15:45-17:45 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 68h |
 | 01/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 70h |
 | 08/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 72h |
-| 15/04/2026 | 2A I | Mar | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 74h |
-| 15/04/2026 | 2B I | Mar | 10:30-12:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 76h |
-| 15/04/2026 | 2C I | Mar | 13:30-15:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 78h |
-| 22/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 80h |
+| 15/04/2026 | 2A I | Mar | 08:15-10:15 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 74h |
+| 15/04/2026 | 2B I | Mar | 10:30-12:30 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 76h |
+| 15/04/2026 | 2C I | Mar | 13:30-15:30 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 78h |
+| 22/04/2026 | 2D I | Mer | 08:15-10:15 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 80h |
 
 ---
 
 ## 📊 Statistiques
 
-- **Total séances** : 41 (1 CM + 36 séances TD + 4 contrôles finaux)
-- **Groupe 2A I** : 20h (18h TD + 2h contrôle)
-- **Groupe 2B I** : 20h (18h TD + 2h contrôle)
-- **Groupe 2C I** : 20h (18h TD + 2h contrôle)
-- **Groupe 2D I** : 20h (18h TD + 2h contrôle)
+- **Total séances** : 41 (1 CM + 36 séances TD + 4 séances finales QCM)
+- **Groupe 2A I** : 20h (18h TD + 2h QCM + finalisation)
+- **Groupe 2B I** : 20h (18h TD + 2h QCM + finalisation)
+- **Groupe 2C I** : 20h (18h TD + 2h QCM + finalisation)
+- **Groupe 2D I** : 20h (18h TD + 2h QCM + finalisation)

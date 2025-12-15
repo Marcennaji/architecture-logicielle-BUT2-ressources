@@ -1,6 +1,6 @@
 # Git - Aide-mémoire
 
-> **Référence rapide** des commandes Git essentielles pour le projet R4.01.
+> **Référence rapide** des commandes Git essentielles pour le module R4.01.
 > 
 > Pour chaque opération, vous trouverez :
 > - 🖥️ La commande en ligne de commande
@@ -8,7 +8,7 @@
 
 ---
 
-## 📋 Consulter l'état du dépôt
+## 📋 Consulter l'état du projet
 
 ### Voir les fichiers modifiés
 
@@ -26,77 +26,22 @@ git status
 **🖥️ Ligne de commande**
 ```bash
 git log --oneline              # Format compact
-git log --oneline --graph      # Avec visualisation des branches
-git log -n 5                   # 5 derniers commits
+git log --oneline -10          # 10 derniers commits
 ```
 
 **🎨 VS Code**
-- Extension **Git Graph** (installée par défaut) : Cliquez sur l'icône "Git Graph" dans la barre latérale
-- Ou palette de commandes (Ctrl+Shift+P) → "Git Graph: View Git Graph"
+- Extension **Git Graph** : Cliquez sur l'icône dans la barre latérale
 - Pour l'historique d'un fichier : Clic droit sur le fichier → "Git: View File History"
 
 ---
 
-## 🌿 Gérer les branches
+## 💾 Workflow quotidien (ce que vous ferez tout le temps)
 
-### Créer une nouvelle branche
-
-**🖥️ Ligne de commande**
-```bash
-git checkout -b td1-domain     # Crée et bascule sur la nouvelle branche
-```
-
-**🎨 VS Code**
-- Cliquez sur le nom de la branche actuelle (en bas à gauche)
-- Sélectionnez "+ Create new branch..."
-- Donnez un nom (ex: `td1-domain`)
-
-### Changer de branche
-
-**🖥️ Ligne de commande**
-```bash
-git checkout main              # Bascule sur main
-git checkout td1-domain        # Bascule sur td1-domain
-```
-
-**🎨 VS Code**
-- Cliquez sur le nom de la branche actuelle (en bas à gauche)
-- Sélectionnez la branche cible dans la liste
-
-### Lister les branches
-
-**🖥️ Ligne de commande**
-```bash
-git branch                     # Branches locales
-git branch -a                  # Toutes les branches (locales + distantes)
-```
-
-**🎨 VS Code**
-- Cliquez sur le nom de la branche actuelle (en bas à gauche)
-- La liste complète s'affiche
-
-### Supprimer une branche
-
-**🖥️ Ligne de commande**
-```bash
-git branch -d td1-domain       # Supprime localement (seulement si mergée)
-git branch -D td1-domain       # Force la suppression
-```
-
-**🎨 VS Code**
-- Palette de commandes (Ctrl+Shift+P) → "Git: Delete Branch..."
-- Sélectionnez la branche à supprimer
-
----
-
-## 💾 Sauvegarder ses modifications
-
-### Ajouter des fichiers à l'index (staging)
+### 1. Ajouter des fichiers à l'index (staging)
 
 **🖥️ Ligne de commande**
 ```bash
 git add src/domain/ticket.py          # Ajoute un fichier spécifique
-git add src/domain/                   # Ajoute tout un dossier
 git add .                             # Ajoute tous les fichiers modifiés
 ```
 
@@ -104,61 +49,85 @@ git add .                             # Ajoute tous les fichiers modifiés
 - Dans "Source Control", cliquez sur le **+** à côté du fichier
 - Ou cliquez sur **+** dans "Changes" pour tout ajouter
 
-### Valider les modifications (commit)
+### 2. Créer un commit
 
 **🖥️ Ligne de commande**
 ```bash
-git commit -m "feat(domain): ajout de la méthode reopen()"
+git commit -m "TD1: ajout entité Ticket avec validation"
 ```
 
 **🎨 VS Code**
 - Dans "Source Control", écrivez le message dans la zone de texte en haut
 - Cliquez sur le bouton **✓ Commit** (ou Ctrl+Enter)
 
-### Envoyer les commits sur GitHub (push)
+**💡 Bonnes pratiques pour les messages** :
+- Commencez par le numéro du TD : `TD1:`, `TD2:`, etc.
+- Soyez descriptif : `TD1: ajout méthode assign()` au lieu de `fix`
+- Faites des commits réguliers (10-15 par TD)
+
+### 3. Pousser vers GitHub
 
 **🖥️ Ligne de commande**
 ```bash
-git push origin td1-domain     # Push de la branche td1-domain
-git push                       # Push de la branche actuelle
+git push origin main           # Push vers GitHub
 ```
 
 **🎨 VS Code**
-- Dans "Source Control", cliquez sur **⋯** (menu) → "Push"
+- Cliquez sur **⋯** (menu) → "Push"
 - Ou cliquez sur l'icône **↑** dans la barre d'état (en bas)
 
-### Récupérer les dernières modifications (pull)
+### 4. Créer un tag pour soumettre un TD
 
 **🖥️ Ligne de commande**
 ```bash
-git pull origin main           # Récupère les changements de main
-git pull                       # Pull de la branche actuelle
+git tag TD1                    # Créer le tag
+git push origin TD1            # Pousser le tag
 ```
 
 **🎨 VS Code**
-- Dans "Source Control", cliquez sur **⋯** (menu) → "Pull"
-- Ou cliquez sur l'icône **↓** dans la barre d'état (en bas)
+- Palette de commandes (Ctrl+Shift+P) → "Git: Create Tag..."
+- Nommez le tag exactement `TD1`, `TD2`, `TD3` ou `TD4`
+- Puis : **⋯** → "Push" → Cochez "Include Tags"
+
+**⚠️ Important** : Le nom du tag doit être EXACT (`TD1` en majuscules, pas `td1`)
 
 ---
 
-## 🔧 Dépannage courant
+## 🔍 Voir les différences
 
-### Annuler le dernier commit (garder les modifications)
+### Comparer un fichier avec la dernière version
 
 **🖥️ Ligne de commande**
 ```bash
-git reset --soft HEAD~1        # Le commit est annulé, les fichiers restent "staged"
+git diff src/domain/ticket.py          # Différences non commitées
 ```
 
 **🎨 VS Code**
-- Palette de commandes → "Git: Undo Last Commit"
-- Les modifications restent dans "Staged Changes"
+- Dans "Source Control", cliquez sur le fichier modifié
+- Une vue "diff" s'ouvre (rouge = supprimé, vert = ajouté)
+
+---
+
+## 🔧 Corriger des erreurs courantes
+
+### Modifier le dernier commit (avant push)
+
+**🖥️ Ligne de commande**
+```bash
+# Vous avez oublié un fichier ou fait une faute dans le message
+git add fichier_oublie.py
+git commit --amend -m "TD1: nouveau message corrigé"
+```
+
+**🎨 VS Code**
+- Ajoutez les fichiers oubliés au staging (bouton **+**)
+- Palette de commandes → "Git: Commit Staged (Amend)"
 
 ### Annuler les modifications d'un fichier non commité
 
 **🖥️ Ligne de commande**
 ```bash
-git checkout -- src/domain/ticket.py    # Restaure le fichier à l'état du dernier commit
+git checkout -- src/domain/ticket.py    # Restaure le fichier
 ```
 
 **🎨 VS Code**
@@ -166,141 +135,42 @@ git checkout -- src/domain/ticket.py    # Restaure le fichier à l'état du dern
 
 ⚠️ **ATTENTION** : Les modifications sont perdues définitivement !
 
-### Mettre de côté des modifications temporairement (stash)
+### Supprimer/recréer un tag
 
 **🖥️ Ligne de commande**
 ```bash
-git stash                      # Sauvegarde les modifications
-git stash pop                  # Restaure les modifications sauvegardées
-git stash list                 # Liste les stashes
+# Vous avez tagué trop tôt et voulez corriger
+git tag -d TD1                          # Supprime localement
+git push origin :refs/tags/TD1          # Supprime sur GitHub
+
+# Faites vos corrections...
+git add .
+git commit -m "TD1: corrections finales"
+git push origin main
+
+# Recréez le tag
+git tag TD1
+git push origin TD1
 ```
 
-**🎨 VS Code**
-- Dans "Source Control", cliquez sur **⋯** (menu) → "Stash" → "Stash"
-- Pour restaurer : **⋯** → "Stash" → "Pop Latest Stash"
-
-**Cas d'usage** : Vous êtes sur la mauvaise branche, vous avez déjà codé → stash, checkout branche correcte, stash pop.
-
-### Voir les différences d'un fichier
-
-**🖥️ Ligne de commande**
-```bash
-git diff src/domain/ticket.py          # Différences non stagées
-git diff --staged src/domain/ticket.py # Différences stagées
-```
-
-**🎨 VS Code**
-- Dans "Source Control", cliquez sur le fichier modifié
-- Une vue "diff" s'ouvre automatiquement (rouge = supprimé, vert = ajouté)
+⚠️ **Ne faites cela que si la deadline n'est pas passée !**
 
 ---
 
-## 🚨 Commandes dangereuses (à utiliser avec précaution)
+## 🔄 Mettre à jour depuis GitHub
 
-### Écraser l'historique distant (force push)
-
-**🖥️ Ligne de commande**
-```bash
-git push --force origin td1-domain
-```
-
-**🎨 VS Code**
-- Palette de commandes → "Git: Push (Force)"
-
-⚠️ **NE JAMAIS FAIRE** sur `main` ou une branche partagée !  
-✅ OK sur votre branche personnelle si vous avez fait un `git commit --amend` ou un `git rebase`.
-
-### Réinitialiser complètement une branche
+### Récupérer les dernières modifications
 
 **🖥️ Ligne de commande**
 ```bash
-git reset --hard origin/main   # Remet la branche exactement comme origin/main
+git pull origin main           # Récupère les changements
 ```
 
 **🎨 VS Code**
-- Palette de commandes → "Git: Reset" → Sélectionnez "Hard"
+- Cliquez sur **⋯** → "Pull"
+- Ou cliquez sur l'icône **↓** dans la barre d'état
 
-⚠️ **TOUTES les modifications locales non commitées sont PERDUES** !
-
-### Modifier le dernier commit
-
-**🖥️ Ligne de commande**
-```bash
-# Vous avez oublié un fichier ou fait une faute de frappe dans le message
-git add fichier_oublie.py
-git commit --amend              # Ouvre l'éditeur pour modifier le message
-git commit --amend --no-edit    # Garde le même message
-```
-
-**🎨 VS Code**
-- Ajoutez les fichiers oubliés au staging (bouton **+**)
-- Palette de commandes → "Git: Commit Staged (Amend)"
-
-⚠️ Si vous avez déjà pushé le commit, vous devrez faire un `git push --force` (évitez sur des branches partagées).
-
----
-
-## 💡 Astuces pour le projet
-
-### Workflow complet pour un exercice de TD
-
-```bash
-# 1. Créer la branche d'exercice
-git checkout -b td3-exercice
-
-# 2. Coder, tester...
-
-# 3. Vérifier ce qui a changé
-git status
-git diff
-
-# 4. Ajouter et commiter
-git add .
-git commit -m "feat(td3): ajout CommentRepository SQLite"
-
-# 5. Pousser AVANT la deadline
-git push origin td3-exercice
-
-# ⏰ Vérifier l'heure du commit
-git log -1 --format="%ai"    # Affiche la date/heure du dernier commit
-```
-
-### Éviter les commits "tout vrac"
-
-❌ **Mauvais**
-```bash
-git add .
-git commit -m "changements"
-```
-
-✅ **Bon**
-```bash
-# Commiter par unité logique
-git add src/domain/ticket.py tests/domain/test_ticket.py
-git commit -m "feat(domain): ajout méthode Ticket.reopen()"
-
-git add src/application/usecases/reopen_ticket.py
-git commit -m "feat(application): use case ReopenTicket"
-```
-
-**🎨 Dans VS Code** : Utilisez le staging sélectif (cliquez **+** fichier par fichier).
-
-### Rattraper une branche en retard sur main
-
-```bash
-# Vous êtes sur td2-usecases, mais main a avancé
-git checkout main
-git pull origin main
-
-git checkout td2-usecases
-git merge main               # Intègre les nouveautés de main dans td2-usecases
-# Ou: git rebase main        # Alternative plus "propre" mais plus complexe
-```
-
-**🎨 VS Code**
-- Basculez sur `main`, faites un pull
-- Revenez sur `td2-usecases`
-- Palette de commandes → "Git: Merge Branch..." → Sélectionnez `main`
+**Cas d'usage** : Vous travaillez sur plusieurs machines (IUT + maison)
 
 ---
 
@@ -308,33 +178,12 @@ git merge main               # Intègre les nouveautés de main dans td2-usecase
 
 ### "Your branch is behind 'origin/main'"
 
-**Cause** : Quelqu'un (ou vous depuis une autre machine) a pushé sur `main`.
+**Cause** : Vous avez travaillé sur une autre machine et poussé des commits.
 
 **Solution**
 ```bash
 git pull origin main
 ```
-
-**🎨 VS Code** : Cliquez sur **↓** dans la barre d'état.
-
-### "Merge conflict"
-
-**Cause** : Git ne peut pas fusionner automatiquement car vous et quelqu'un d'autre avez modifié les mêmes lignes.
-
-**Solution**
-1. **🖥️ Ligne de commande**
-   ```bash
-   # Ouvrez le fichier en conflit (marqueurs <<<<<<, ======, >>>>>>)
-   # Éditez manuellement pour garder la bonne version
-   git add fichier_resolu.py
-   git commit -m "fix: résolution conflit merge"
-   ```
-
-2. **🎨 VS Code**
-   - Les conflits sont marqués visuellement dans l'éditeur
-   - Cliquez sur "Accept Current Change", "Accept Incoming Change", ou "Accept Both"
-   - Une fois résolu, cliquez sur **+** pour stager le fichier
-   - Commitez
 
 ### "fatal: not a git repository"
 
@@ -342,37 +191,59 @@ git pull origin main
 
 **Solution**
 ```bash
-cd ~/mon-projet-ticketing    # Naviguez vers le dossier du projet
+cd ~/ticketing    # Naviguez vers le dossier du projet
 ```
 
-**🎨 VS Code** : Ouvrez le bon dossier (Fichier → Ouvrir le dossier...).
+### Message d'erreur lors du push (authentication failed)
 
-### Commit poussé par erreur sur la mauvaise branche
-
-**Exemple** : Vous avez commité sur `main` au lieu de `td1-domain`.
+**Cause** : Votre Personal Access Token est expiré ou incorrect.
 
 **Solution**
+- Créez un nouveau token : https://github.com/settings/tokens
+- Utilisez ce token comme mot de passe lors du push
+
+---
+
+## 💡 Astuces pour le projet
+
+### Workflow complet pour un TD
+
 ```bash
-# Sur main (où est le commit à déplacer)
-git log --oneline -3         # Notez l'ID du commit (ex: a1b2c3d)
+# 1. Coder et tester régulièrement
 
-# Créez la bonne branche depuis ce commit
-git checkout -b td1-domain
+# 2. Commiter souvent (petits commits)
+git add src/domain/ticket.py tests/domain/test_ticket.py
+git commit -m "TD1: ajout méthode Ticket.assign()"
 
-# Revenez sur main et annulez le commit
-git checkout main
-git reset --hard HEAD~1      # Supprime le dernier commit de main
+# 3. Pousser régulièrement (au moins en fin de séance)
+git push origin main
 
-# Pushez la correction
-git push origin td1-domain
-git push --force origin main # ⚠️ Seulement si vous êtes seul sur main
+# 4. Quand le TD est terminé, créer le tag
+git tag TD1
+git push origin TD1
+```
+
+### Vérifier l'heure de votre dernier commit
+
+**🖥️ Ligne de commande**
+```bash
+git log -1 --format="%ai"    # Affiche date/heure du dernier commit
+```
+
+**Utile pour** : Vérifier que vous avez bien commité pendant la séance TD (bonus présentiel)
+
+### Lister vos tags existants
+
+**🖥️ Ligne de commande**
+```bash
+git tag                      # Liste locale
+git ls-remote --tags origin  # Liste sur GitHub
 ```
 
 ---
 
 ## 📚 Ressources complémentaires
 
-- [Documentation officielle Git](https://git-scm.com/doc)
-- [Visualisation interactive Git](https://learngitbranching.js.org/) (excellent pour comprendre les branches)
-- [Git Cheat Sheet (PDF)](https://education.github.com/git-cheat-sheet-education.pdf)
-- Extension VS Code installée : **Git Graph** (`mhutchie.git-graph`) pour visualiser l'historique graphique
+- [Documentation officielle Git (FR)](https://git-scm.com/book/fr/v2)
+- [Visualisation interactive Git](https://learngitbranching.js.org/) (pour comprendre les concepts)
+- Extension VS Code recommandée : **Git Graph** (visualisation graphique de l'historique)

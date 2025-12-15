@@ -23,9 +23,9 @@
 | 27/01/2026 | Mar | 08:15-10:15 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
 | 31/03/2026 | Mar | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
-| 15/04/2026 | Mar | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
+| 15/04/2026 | Mar | 08:15-10:15 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 20h |
 
-**Total présentiel : 20h** (9 séances TD + 1 contrôle)
+**Total présentiel : 20h** (9 séances TD + 1 séance QCM + finalisation)
 
 ---
 
@@ -42,9 +42,9 @@
 | 27/01/2026 | Mar | 10:30-12:30 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
 | 31/03/2026 | Mar | 10:30-12:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
-| 15/04/2026 | Mar | 10:30-12:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
+| 15/04/2026 | Mar | 10:30-12:30 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 20h |
 
-**Total présentiel : 20h** (9 séances TD + 1 contrôle)
+**Total présentiel : 20h** (9 séances TD + 1 séance QCM + finalisation)
 
 ---
 
@@ -61,9 +61,9 @@
 | 27/01/2026 | Mar | 13:30-15:30 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 03/02/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
 | 31/03/2026 | Mar | 13:30-15:30 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
-| 15/04/2026 | Mar | 13:30-15:30 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
+| 15/04/2026 | Mar | 13:30-15:30 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 20h |
 
-**Total présentiel : 20h** (9 séances TD + 1 contrôle)
+**Total présentiel : 20h** (9 séances TD + 1 séance QCM + finalisation)
 
 ---
 
@@ -80,9 +80,9 @@
 | 31/03/2026 | Mar | 15:45-17:45 | 2h | **TD3** | Repository SQLite (fin) - Tests intégration | 14h |
 | 01/04/2026 | Mer | 08:15-10:15 | 2h | **TD4** | API REST (début) - Routes FastAPI | 16h |
 | 08/04/2026 | Mer | 08:15-10:15 | 2h | **TD4** | API REST (fin) - 5 endpoints + tests e2e | 18h |
-| 22/04/2026 | Mer | 08:15-10:15 | 2h | **Contrôle** | Contrôle final sur machine IUT (sans IA) | 20h |
+| 22/04/2026 | Mer | 08:15-10:15 | 2h | **QCM + TD4** | QCM (30-45 mn) + Finalisation TD4 en présentiel | 20h |
 
-**Total présentiel : 20h** (9 séances TD + 1 contrôle)
+**Total présentiel : 20h** (9 séances TD + 1 séance QCM + finalisation)
 
 ---
 
