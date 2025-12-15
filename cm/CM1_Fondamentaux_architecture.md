@@ -715,7 +715,9 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
 **📚 Ressources complémentaires :**
 - Annexes (PDF) : [Comparaison architectures](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf), [TDD](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf), [Monolithe vs Microservices](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf)
-- Articles : [Architecture Hexagonale (OCTO)](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation), [Hexagonale expliquée (Les Dieux du Code)](https://lesdieuxducode.com/blog/2020/11/architecture-hexagonale--la-structure-ideale-pour-vos-applications-metier)
+- Articles : [Architecture Hexagonale (OCTO)](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation)
 - Toutes les ressources : https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
+
+---
 
 **❓ Questions ?**
