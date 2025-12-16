@@ -714,7 +714,7 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 **🚀 Prochaine étape :** TD0 (prise en main environnement + workflow)
 
 **📚 Ressources complémentaires :**
-- Annexes (PDF) : [Comparaison architectures](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_comparaison_architectures.pdf), [TDD](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf), [Monolithe vs Microservices](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_monolithe_microservices.pdf)
+- Annexes (PDF) : [Pourquoi l'hexagonale ?](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_pourquoi_hexagonale.pdf), [TDD](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/CM1_annexe_TDD.pdf)
 - Articles : [Architecture Hexagonale (OCTO)](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation)
 - Toutes les ressources : https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
