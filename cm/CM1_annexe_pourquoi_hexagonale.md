@@ -1,30 +1,15 @@
 ---
 marp: true
-theme: default
-paginate: true
-title: Annexe CM1 — Comparaison des architectures
+size: 16:9
 style: |
   section {
-    font-family: "Liberation Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-    color: #1f1f1f;
-  }
-  h1, h2, h3 {
-    color: #004f9f;
-  }
-  h1 {
-    border-bottom: 2px solid #d0d7de;
-    padding-bottom: 0.3em;
-  }
-  code {
-    background: #f6f8fa;
-    padding: 0.1em 0.3em;
-    border-radius: 3px;
-  }
-  pre code {
-    font-size: 0.75em;
+    font-size: 22px;
   }
   table {
-    font-size: 0.9em;
+    font-size: 18px;
+  }
+  pre {
+    font-size: 16px;
   }
 ---
 
