@@ -36,6 +36,10 @@ C'est **tout ce dont ton code a besoin pour fonctionner** :
 - une implémentation concrète
 - une décision technique
 
+---
+
+### Dépendance ≠ import (suite)
+
 👉 Ce qui compte, ce n'est pas leur existence,  
 c'est **l'impact de leur changement**.
 
@@ -59,6 +63,10 @@ Plus un code dépend fortement de :
 - choix techniques
 - services externes
 
+---
+
+### Dépendances et inertie du code (suite)
+
 Plus il devient :
 - difficile à faire évoluer
 - coûteux à tester
@@ -79,6 +87,10 @@ Si pour tester cette règle tu dois :
 - démarrer une API
 - configurer un framework
 
+---
+
+### Exemple conceptuel (suite)
+
 ➡️ La règle dépend trop de la technique.
 
 La règle n'a pas besoin de ces éléments pour exister,  
@@ -94,6 +106,10 @@ elle devrait donc en être **indépendante**.
 - configuration claire
 
 ➡️ Elles sont contrôlables et testables.
+
+---
+
+### Dépendances visibles vs dépendances cachées (suite)
 
 #### Dépendances cachées
 - singletons globaux
@@ -173,6 +189,10 @@ Sans inversion de dépendances :
 - les choix techniques deviennent structurants
 - changer d'outil revient à réécrire le métier
 
+---
+
+### Le vrai problème à résoudre (suite)
+
 👉 Le cœur du système devient **prisonnier de ses dépendances**.
 
 ---
@@ -215,6 +235,10 @@ Cas classique :
 Si la base change :
 ➡️ le métier change
 
+---
+
+### Exemple conceptuel (suite)
+
 Avec inversion :
 - le métier définit ce dont il a besoin
 - la technique fournit une implémentation
@@ -232,6 +256,10 @@ Sans inversion :
 - la technique impose ses contraintes
 - le métier s'adapte
 
+---
+
+### Inversion de dépendances et pouvoir de décision (suite)
+
 Avec inversion :
 - le métier impose ses besoins
 - la technique s'adapte
@@ -245,6 +273,10 @@ Avec inversion :
 Les **interfaces** utilisées dans l'inversion de dépendances :
 - ne sont pas des abstractions "pour faire joli"
 - représentent des **besoins métiers**
+
+---
+
+### Lien avec les ports et interfaces (suite)
 
 On ne crée pas une interface parce que :
 > « C'est plus propre »
@@ -260,6 +292,10 @@ Grâce à l'inversion :
 - le métier peut être testé sans infrastructure
 - les tests deviennent rapides et ciblés
 - les règles métier sont isolées
+
+---
+
+### Inversion de dépendances et testabilité (suite)
 
 Si tester une règle métier nécessite :
 - une base de données
@@ -302,6 +338,10 @@ Pour chaque dépendance importante, demande-toi :
 Une bonne architecture :
 - accepte les dépendances
 - mais refuse d'en être prisonnière
+
+---
+
+## Synthèse (suite)
 
 ### L'inversion (Partie 2)
 > **L'inversion de dépendances n'est pas un détail technique,  

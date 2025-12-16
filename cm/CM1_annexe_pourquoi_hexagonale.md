@@ -63,6 +63,13 @@ style: |
 |---------|---------|-----|------|---------------|----------------|
 | **Changement infra** | ❌ Impact métier | ❌ Réécriture | ⚠️ Adapter VM | ✅ Par design | ✅ 1 adapter |
 | **Production** | ✅ Legacy | ✅ Web standard | ✅ Frontend | ✅ Netflix | ✅ Modernisation |
+
+---
+
+## 📋 Tableau comparatif (3/3)
+
+| Critère | Layered | MVC | MVVM | Microservices | **Hexagonale** |
+|---------|---------|-----|------|---------------|----------------|
 | **Autres patterns** | ⚠️ Limitée | ⚠️ Limitée | ⚠️ Limitée | ✅ Oui | ✅ DDD, CQRS |
 
 ---
@@ -83,12 +90,13 @@ style: |
 ┌─────────────────────┐
 │   Data Access       │  (DAO, Repositories)
 └──────────┬──────────┘
-           │ accède
            ▼
-┌─────────────────────┐
-│   Database          │
-└─────────────────────┘
+      [Database]
 ```
+
+---
+
+## 🔍 Architecture Layered (suite)
 
 **✅ Avantages :**
 - Simple à comprendre
@@ -113,7 +121,6 @@ style: |
                   ┌──────────┐
                   │  Model   │
                   └────┬─────┘
-                       │
                        ▼
                   [Database]
 ```
@@ -122,6 +129,10 @@ style: |
 - Séparation UI/logique
 - Pattern bien connu
 - Frameworks matures (Django, Rails)
+
+---
+
+## 🎨 Architecture MVC (suite)
 
 **❌ Problèmes :**
 - Scope = organisation UI
@@ -161,6 +172,10 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
 | **Flux données** | Unidirectionnel | Bidirectionnel (binding) |
 | **Tests UI** | Difficile | ViewModel testable |
 
+---
+
+## 🖼️ Architecture MVVM (suite)
+
 **✅ Avantages :** Data binding auto, ViewModel testable  
 **❌ Limites :** Scope UI, Model couplé infra, pas d'inversion métier  
 **🎯 Usage :** Angular, React, Vue.js, WPF
@@ -184,6 +199,10 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
 - Technologies hétérogènes
 - Équipes autonomes
 - Déploiement indépendant
+
+---
+
+## ☁️ Architecture Microservices (suite)
 
 **❌ Problèmes pour ce module :**
 - Complexité infrastructure (orchestration, découverte services)
@@ -213,6 +232,10 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
     Dépendances inversées vers le centre
 ```
 
+---
+
+## 🛡️ Architecture Hexagonale (suite)
+
 **✅ Avantages :**
 - Métier totalement indépendant
 - Testabilité maximale
@@ -236,6 +259,10 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
 - ✅ Testabilité (forcée par l'architecture)
 - ✅ Évolutivité (changement d'adapter sans toucher au métier)
 
+---
+
+## 🎓 Pourquoi l'hexagonale ? (suite)
+
 **Avec Layered/MVC :** On PEUT mal faire sans que ça bloque  
 **Avec Hexagonale :** Impossible de progresser sans respecter les principes
 
@@ -249,6 +276,10 @@ class TicketModel(db.Model):  # ❌ Héritage de l'ORM
 | **MVC** | Trop simple | ❌ Focus UI, pas architecture métier |
 | **Microservices** | Trop complexe | ❌ Infrastructure > architecture |
 | **Hexagonale** | Juste ce qu'il faut | ✅ Challenge sans être inaccessible |
+
+---
+
+### 2. **Format : 20h** (suite)
 
 **Progression réaliste :**
 - TD1 : Domain (2h) → faisable
@@ -269,6 +300,10 @@ def test_create_ticket():
     assert response.status_code == 200
 ```
 → Toute l'infra pour tester 3 lignes de métier 🤯
+
+---
+
+## 🎯 Testabilité (suite)
 
 **Bonne pratique (Hexagonale) :**
 ```python
@@ -307,6 +342,10 @@ def test_create_ticket():
 - Sites web traditionnels (Django, Rails)
 - CMS (WordPress, Drupal)
 - Admin panels
+
+---
+
+## 💼 Exemples concrets (suite)
 
 ### **Cas d'usage Microservices**
 - Netflix (800+ services)
@@ -364,6 +403,10 @@ R : Oui, pour un script de 100 lignes. Non pour une application évolutive. Seui
 
 **Q : Microservices, c'est l'avenir, pourquoi pas les apprendre ?**  
 R : Oui, APRÈS avoir maîtrisé le monolithe. Microservices = multiplier les problèmes par N.
+
+---
+
+## ❓ Questions fréquentes (suite)
 
 **Q : MVC suffit pour le web, non ?**  
 R : MVC organise l'UI. Il faut une architecture métier EN PLUS (hexagonale marche bien avec MVC).

@@ -24,6 +24,10 @@ Si c'est votre première lecture, suivez cet ordre :
 2. **`annexe_02_decoupage_et_responsabilites.md`**  
    → Maîtriser couplage, cohésion et SRP
 
+---
+
+## 🎯 Comment les utiliser (suite)
+
 3. **`annexe_03_tests_revelateur_architectural.md`**  
    → Comprendre ce que les tests révèlent de votre architecture
 
@@ -32,6 +36,11 @@ Si c'est votre première lecture, suivez cet ordre :
 Les concepts s'appuient les uns sur les autres :
 - Les **dépendances** → doivent être **inversées** pour protéger le métier
 - Le **découpage** (couplage/cohésion/SRP) → structure le code correctement
+
+---
+
+## 🎯 Comment les utiliser (suite 2)
+
 - Les **tests** → révèlent la qualité du découpage et des dépendances
 
 ---
@@ -45,6 +54,13 @@ Vous rencontrez un problème spécifique ? Consultez directement :
 | "Mon test est difficile à écrire" | **Annexe 3** (Tests) puis **Annexe 1** (Dépendances) |
 | "Une classe fait trop de choses" | **Annexe 2** (Découpage - partie SRP) |
 | "Mon code métier dépend de la BDD" | **Annexe 1** (Inversion) |
+
+---
+
+### Option 2 : Lecture par besoin (suite)
+
+| Problème rencontré | Annexe à consulter |
+|-------------------|-------------------|
 | "Un changement casse plein de trucs" | **Annexe 2** (Découpage - partie Couplage) |
 | "Je ne sais pas où mettre ce code" | **Annexe 2** (Découpage - partie SRP et Cohésion) |
 | "Mes tests sont lents" | **Annexe 3** (Tests) puis **Annexe 1** (Inversion) |
@@ -63,6 +79,10 @@ Ces concepts ne sont pas isolés, ils forment un **système cohérent** :
      Annexe 3 : Tests (révèlent tout)
 ```
 
+---
+
+## 🔄 Interconnexions entre les annexes (suite)
+
 **Message clé :**  
 Chaque principe renforce les autres.  
 Une bonne maîtrise vient de leur **compréhension globale**.
@@ -75,6 +95,10 @@ Une bonne maîtrise vient de leur **compréhension globale**.
 - ❌ Des règles rigides à appliquer mécaniquement
 - ❌ Des recettes toutes faites
 - ❌ Une liste de bonnes pratiques à mémoriser
+
+---
+
+## 💡 Comment lire ces annexes (suite)
 
 ### Ce qu'elles sont
 - ✅ Des **questions à se poser** pendant la conception
@@ -89,11 +113,19 @@ Une bonne maîtrise vient de leur **compréhension globale**.
 Ces concepts demandent de la réflexion.  
 Mieux vaut lire **une annexe lentement** que tout survoler rapidement.
 
+---
+
+## 🎓 Conseils de lecture (suite)
+
 ### 2. Reliez à votre code
 Après chaque annexe, regardez votre projet `ticketing` :
 - Identifiez des exemples concrets
 - Repérez les points d'amélioration
 - Testez les "exercices mentaux" sur votre code
+
+---
+
+## 🎓 Conseils de lecture (suite 2)
 
 ### 3. Revenez-y plus tard
 Ces annexes prennent du sens **avec l'expérience**.  
@@ -116,6 +148,10 @@ Ces principes sont des **guides**, pas des lois absolues.
 Il peut y avoir des exceptions,  
 mais elles doivent être **justifiées et conscientes**.
 
+---
+
+## 🚨 Pièges à éviter (suite)
+
 ### Ne pas chercher la perfection immédiate
 Une bonne architecture se construit **progressivement**.
 
@@ -137,6 +173,10 @@ Concentrez-vous sur :
 Ajoutez :
 - **Annexe 1 (Dépendances)** : Le domaine ne dépend de rien
 - **Annexe 1 (Inversion)** : Les ports définissent les besoins
+
+---
+
+## 📊 Utilisation pendant les TD (suite)
 
 ### Pendant TD3 (SQLite)
 Approfondissez :
@@ -182,6 +222,10 @@ elles ne le remplacent pas.
 
 **Temps estimé :**  
 30-40 minutes par annexe (lecture attentive)
+
+---
+
+## 📝 En résumé (suite)
 
 **Meilleur moment :**  
 - Après le CM1 (vue d'ensemble)

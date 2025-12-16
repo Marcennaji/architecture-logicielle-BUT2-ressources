@@ -44,6 +44,10 @@ Erreur fréquente :
 - moins d'abstraction
 - code plus rapide à écrire
 
+---
+
+### Couplage fort : illusion de simplicité (suite)
+
 À moyen terme :
 - tests difficiles à écrire
 - dépendances en cascade
@@ -63,6 +67,10 @@ objetA.getObjetB()
       .getObjetC()
       .faireQuelqueChose();
 ```
+
+---
+
+### Symptôme courant : le "train wreck" (suite)
 
 #### Pourquoi c'est un problème
 
@@ -118,6 +126,10 @@ Dans une chaîne d'héritage longue :
 - Il faut comprendre toute la hiérarchie pour raisonner correctement
 - Les impacts d'un changement deviennent difficiles à prédire
 
+---
+
+#### Pourquoi c'est dangereux (suite)
+
 Cela crée :
 - de l'incertitude
 - de la peur de refactorer
@@ -133,6 +145,10 @@ Il ne s'agit pas de dire :
 Mais de comprendre que :
 > **Un héritage profond augmente fortement le couplage.**
 
+---
+
+#### Message clé (suite)
+
 C'est pour cette raison que, dans beaucoup de cas :
 - on préfère des objets qui **collaborent** (composition)
 - plutôt que des objets qui **héritent** d'un comportement complexe
@@ -145,6 +161,10 @@ Un test difficile à écrire révèle souvent :
 - trop de dépendances
 - des dépendances trop concrètes
 - une connaissance excessive de l'environnement
+
+---
+
+### Couplage et testabilité (suite)
 
 Si pour tester une règle simple tu dois :
 - instancier beaucoup d'objets
@@ -207,6 +227,10 @@ Le SRP dit :
 
 C'est une **règle** que l'on applique consciemment lors de la conception.
 
+---
+
+### Relation forte entre cohésion et SRP (suite)
+
 #### Cohésion : un indicateur de qualité
 La cohésion est :
 - une **mesure**
@@ -215,10 +239,6 @@ La cohésion est :
 
 👉 **Un module qui respecte le SRP est fortement cohésif.**  
 👉 **Un module qui viole le SRP a forcément une faible cohésion.**
-
-On peut donc dire que :
-- **SRP est la cause**
-- **la cohésion est la conséquence**
 
 ---
 
@@ -234,9 +254,17 @@ Il est modifié :
 3. Quand la politique de mot de passe change
 4. Quand le stockage en base évolue
 
+---
+
+### Exemple conceptuel (suite)
+
 ➡️ 4 raisons différentes de changer  
 ➡️ Violation du SRP  
 ➡️ Cohésion faible
+
+---
+
+### Exemple conceptuel (suite 2)
 
 Même si le code est :
 - propre
@@ -251,6 +279,10 @@ Erreur fréquente :
 > « Si je découpe tout en petites classes, j'aurai une bonne cohésion »
 
 ❌ Faux.
+
+---
+
+### Bonne cohésion ≠ découpage excessif (suite)
 
 Un découpage excessif peut :
 - augmenter la complexité
@@ -320,8 +352,16 @@ Une classe `OrderService` qui :
 - écrit des logs
 - appelle une API externe
 
+---
+
+### Exemple conceptuel (suite)
+
 Fonctionnellement :
 > « Elle gère les commandes »
+
+---
+
+### Exemple conceptuel (suite 2)
 
 Architecturalement :
 - règles métier
@@ -342,6 +382,10 @@ Dans une architecture en couches ou hexagonale :
 - le **domaine** porte les règles métier
 - l'**application** orchestre les cas d'usage
 - les **adapters** gèrent la technique
+
+---
+
+### SRP et couches architecturales (suite)
 
 👉 Mélanger ces rôles dans un même module viole le SRP,  
 même si le thème métier est unique.
@@ -370,6 +414,10 @@ Ce choix :
 - accélère aujourd'hui
 - ralentit tout le projet demain
 
+---
+
+### Erreur classique : "c'est plus pratique ici" (suite)
+
 Le SRP est un principe de **protection contre l'accumulation de décisions**  
 dans un même endroit.
 
@@ -381,6 +429,10 @@ Un module qui respecte le SRP :
 - est plus simple à lire
 - a un comportement prévisible
 - peut être modifié sans crainte excessive
+
+---
+
+### SRP et lisibilité du code (suite)
 
 Un module qui viole le SRP :
 - devient un point central du projet
@@ -408,12 +460,20 @@ Pour chaque classe importante, demande-toi :
 Moins un module connaît de détails sur les autres,  
 plus le système est **robuste, testable et évolutif**.
 
+---
+
+## Synthèse (suite 1)
+
 ### Cohésion (Partie 2)
 > **Le SRP est une règle à appliquer,  
 > la cohésion est un signal à observer.**
 
 Les deux parlent de la même chose,  
 mais sous des angles différents et complémentaires.
+
+---
+
+## Synthèse (suite 2)
 
 ### SRP (Partie 3)
 > **Le SRP ne dit pas "fais une seule chose",  
@@ -434,6 +494,10 @@ mais l'un des plus puissants pour garder un code maîtrisable.
           ↘   ↙
       Code maintenable
 ```
+
+---
+
+## Lien entre les trois concepts (suite)
 
 - **Appliquer le SRP** → augmente la cohésion, réduit le couplage
 - **Cohésion forte** → limite le couplage (modules bien délimités)
