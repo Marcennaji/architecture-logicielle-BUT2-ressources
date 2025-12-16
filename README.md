@@ -6,7 +6,6 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 - Comprendre **pourquoi** l'architecture logicielle est essentielle
 - Maîtriser les **principes fondamentaux** d'une bonne architecture : cohésion, couplage, dépendances, inversion de dépendances.
-- Connaître les principales **familles d'architectures** (monolithe, N-tiers, MVC, microservices, event-driven, hexagonale…).
 - Savoir **structurer une application** selon l'architecture hexagonale (Ports & Adapters).
 - Mettre en œuvre une architecture hexagonale sur un **projet fil rouge**.
 - Travailler avec des **briques logicielles existantes** (framework web, ORM, services web, etc.).
