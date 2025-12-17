@@ -15,7 +15,7 @@ Ces guides sont à consulter tout au long du module :
 | TD | Titre | Durée | Statut | Lien |
 |----|-------|-------|--------|------|
 | TD0 | Prise en main | 2h | ✅ Disponible | [TD0_prise_en_main.md](TD0_prise_en_main.md) |
-| TD1 | Modélisation du domaine | 3h | 🔒 Bientôt | - |
+| TD1 | Modélisation du domaine | 3h | ✅ Disponible | [TD01_domain_modeling.md](TD01_domain_modeling.md) |
 | TD2 | Use cases et ports | 3h | 🔒 Bientôt | - |
 | TD3 | Repository SQLite | 5h | 🔒 Bientôt | - |
 | TD4 | API REST avec FastAPI | 5h | 🔒 Bientôt | - |
