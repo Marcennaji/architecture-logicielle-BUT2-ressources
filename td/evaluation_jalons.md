@@ -58,26 +58,6 @@ Chaque jalon reçoit un **coefficient de bonus** selon les commits :
 
 ---
 
-## 🔍 Détection automatique
-
-Un script analysera pour chaque tag :
-
-```python
-# Analyse du dépôt Git pour chaque jalon
-- Nombre de commits entre début et fin de séance
-- Timestamps des commits (répartition temporelle)
-- Heure de push du tag
-- Taille des diff (détection de gros commits suspects)
-```
-
-**Indicateurs suspects** :
-- ❌ 1 seul gros commit juste avant la fin
-- ❌ Tag poussé 1-2 jours après la séance
-- ❌ Changements massifs incompatibles avec 2h de travail
-- ❌ Code trop "parfait" sans itérations visibles
-
----
-
 ## 💡 Conseils aux étudiants
 
 ### Pour maximiser votre note :
@@ -107,13 +87,6 @@ Un script analysera pour chaque tag :
    - Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent **améliorer votre note**
    - Exemples : tests avancés, validation supplémentaire, documentation enrichie
    - Les bonus comptent comme un critère de qualité dans l'évaluation du jalon
-
-### ⚠️ À éviter :
-
-- ❌ Tout faire chez soi puis copier en fin de séance
-- ❌ Attendre 1h45 pour faire le premier commit
-- ❌ Générer tout le code avec IA puis le copier d'un coup
-- ❌ Pousser le tag plusieurs jours après la séance
 
 ---
 
