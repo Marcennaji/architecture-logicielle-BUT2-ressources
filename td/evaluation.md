@@ -45,21 +45,12 @@
 
 ## 🎯 Travail en TD
 
-**18h TD** : 10 séances de 2h, chacune constituant un jalon évaluable indépendant
+**20h TD** : 10 séances de 2h, chacune constituant un jalon évaluable indépendant
 
 **Système de jalons** : Chaque séance de 2h = 1 livrable avec son propre tag Git
-- TD0 → Tag `TD0`
-- TD1a → Tag `TD1-domain` (entités domaine)
-- TD1b → Tag `TD1-tests` (tests unitaires)
-- TD2a → Tag `TD2-ports` (ports + 1er use case)
-- TD2b → Tag `TD2-usecases` (use cases complets)
-- TD3a → Tag `TD3-repository` (repository in-memory)
-- TD3b → Tag `TD3-sqlite-1` (SQLite connexion/tables)
-- TD3c → Tag `TD3-sqlite-2` (SQLite CRUD complet)
-- TD4a → Tag `TD4-api` (API REST endpoints)
-- TD4b → Tag `TD4-complete` (tests E2E + finalisation)
 
-**📋 Détails complets** : Voir [evaluation_jalons.md](evaluation_jalons.md)
+> 📋 **Liste des jalons** : Voir [README.md](README.md#-liste-des-tds)  
+> **Système d'évaluation** : Voir [evaluation_jalons.md](evaluation_jalons.md)
 
 **Workflow** : 
 1. Commitez régulièrement pendant la séance (≥ 3 commits répartis)
