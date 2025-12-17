@@ -12,14 +12,9 @@ Le setup sera fait ensemble pendant la première séance. Mais si vous avez le t
 
 **Temps estimé** : 20-30 minutes
 
-**Vérification de réussite** : Au début du TD0, vous devez être capable de :
-- ✅ Lancer la commande `pytest` dans votre projet et voir tous les tests passer
-- ✅ Voir votre repository `ticketing` sur votre compte GitHub
-- ✅ Voir "Marcennaji" dans la liste de vos collaborateurs GitHub
-
 ---
 
-## 🚀 Premier TD
+## 🚀 Etapes à suivre
 
 ### 1. Créer votre compte GitHub
 
