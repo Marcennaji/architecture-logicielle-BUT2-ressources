@@ -54,6 +54,7 @@ Chaque jalon est évalué selon des critères objectifs répartis en 4 catégori
 - ✅ Messages de commits clairs et descriptifs
 
 **4. Fonctionnalités spécifiques au TD**
+
 Les fonctionnalités à implémenter obligatoirement sont variables, selon le jalon (entités, use cases, adapters, API, etc.)
 Elles seront détaillées dans chaque énoncé de TD
 
