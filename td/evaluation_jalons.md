@@ -107,10 +107,9 @@ Chaque jalon reçoit un **coefficient de bonus** selon les commits :
 **Résultat** : 4 commits répartis + tag à l'heure → **Coefficient 1.0** ✅
 
 ---
-absolument. Vous aurez un coefficient réduit (0.6-0.8 selon le délai), mais votre travail sera évalué. Un excellent code fait chez vous vaut mieux qu'un code incomplet rendu en séance.
 
 **Q : Puis-je utiliser l'IA pour m'aider ?**
-R : Oui, l'IA est un outil d'apprentissage légitime. En présentiel, elle peut vous débloquer. À la maison, elle peut vous aider à comprendre et compléter. Le coefficient réduit compense simplement l'avantage du temps illimité et de l'assistance IA complète.
+R : Oui, l'IA est un outil d'apprentissage légitime. En présentiel, elle est interdite. À la maison, elle peut vous aider à comprendre et compléter. Le coefficient réduit compense simplement l'avantage du temps illimité et de l'assistance IA complète.
 
 **Q : Est-ce injuste pour ceux qui travaillent en présentiel ?**
 R : Non. Avec le même code de qualité, un étudiant présentiel aura toujours 20-40% de points en plus. Exemple : code noté 16/20 → présentiel = 16, maison = 11-13. L'avantage est significatif.
