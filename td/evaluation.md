@@ -45,17 +45,32 @@
 
 ## 🎯 Travail en TD
 
-**18h TD** : TD0 (2h) + TD1 (4h) + TD2 (4h) + TD3 (4h) + TD4 (4h)
+**18h TD** : 10 séances de 2h, chacune constituant un jalon évaluable indépendant
 
-**Workflow** : Commits réguliers sur `main` → Tag standardisé pour soumettre (TD1, TD2, TD3, TD4)
+**Système de jalons** : Chaque séance de 2h = 1 livrable avec son propre tag Git
+- TD0 → Tag `TD0`
+- TD1a → Tag `TD1-domain` (entités domaine)
+- TD1b → Tag `TD1-tests` (tests unitaires)
+- TD2a → Tag `TD2-ports` (ports + 1er use case)
+- TD2b → Tag `TD2-usecases` (use cases complets)
+- TD3a → Tag `TD3-repository` (repository in-memory)
+- TD3b → Tag `TD3-sqlite-1` (SQLite connexion/tables)
+- TD3c → Tag `TD3-sqlite-2` (SQLite CRUD complet)
+- TD4a → Tag `TD4-api` (API REST endpoints)
+- TD4b → Tag `TD4-complete` (tests E2E + finalisation)
 
-**Soumission** : Quand vous avez terminé un TD, créez un tag Git avec le nom exact (`TD1`, `TD2`, etc.) et poussez-le sur GitHub.
+**📋 Détails complets** : Voir [evaluation_jalons.md](evaluation_jalons.md)
 
-**Évaluation** : Chaque TD est évalué. L'enseignant reste disponible si vous rencontrez des difficultés pendant les séances.
+**Workflow** : 
+1. Commitez régulièrement pendant la séance (≥ 3 commits répartis)
+2. Poussez le tag avant la fin de la séance
+3. Tests passants obligatoires
 
-**Bonus présentiel** : Le travail effectué et soumis pendant les séances TD est valorisé.
-
-**Commits réguliers encouragés** : Faites plusieurs petits commits pour chaque TD, au fur et à mesure de votre progression. Assurez vous que vos tests passent en local, avant de committer.
+**Bonus présentiel** : Coefficient de 0.5 à 1.0 selon les commits pendant la séance
+- **1.0** : ≥ 3 commits répartis + tag poussé pendant la séance
+- **0.9** : Tag poussé dans les 10mn après la séance
+- **0.7** : Tag poussé tardivement ou peu de commits
+- **0.5** : Tag très tardif ou travail manifestement fait à la maison
 
 ---
 
@@ -87,8 +102,8 @@
 
 **IA intensive sans maîtrise ?** Projet peut-être OK, mais échec au QCM → module non validé.
 
-**Comment sont évalués les TDs ?** Chaque TD est noté. Les modalités précises sont communiquées en début de module.
+**Comment sont évalués les TDs ?** Chaque jalon de 2h est évalué avec un coefficient de bonus selon les commits pendant la séance. Voir [evaluation_jalons.md](evaluation_jalons.md) pour les détails.
 
 **QCM difficile ?** Non si vous avez compris l'architecture et suivi les TD.
 
-**Bonus présentiel ?** Oui, le travail effectué pendant les séances TD est valorisé dans la note finale.
+**Bonus présentiel ?** Oui, chaque jalon reçoit un coefficient de 0.5 à 1.0 selon le nombre et la répartition des commits pendant la séance. Les étudiants qui travaillent régulièrement sur site obtiennent coefficient 1.0.

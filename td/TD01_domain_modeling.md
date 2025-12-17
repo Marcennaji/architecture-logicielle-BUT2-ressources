@@ -1,14 +1,29 @@
-# TD01 — Modélisation du domaine (Ticketing)
+# TD1 — Modélisation du domaine (Ticketing)
 
-🎯 **Objectifs**
+## 🎯 Vue d'ensemble
 
-- Identifier les entités principales du domaine métier.
-- Lister les règles métier (invariants) de base.
-- Implémenter les classes du domaine en Python.
+Ce TD couvre la modélisation du domaine métier du système de ticketing. Il est divisé en **2 jalons de 2h** :
+- **TD1a** : Création des entités et règles métier de base
+- **TD1b** : Écriture des tests unitaires complets
+
+**Objectifs globaux** :
+- Identifier les entités principales du domaine métier
+- Lister et implémenter les règles métier (invariants)
+- Tester le domaine de manière exhaustive
+- Garantir l'indépendance du domaine (pas de dépendances externes)
 
 ---
 
-## 1. Compréhension du domaine
+## 📦 Jalon TD1a (2h) → Tag `TD1-domain`
+
+**⏰ Durée : 1 séance de 2h**
+
+> **Note** : Pour la plupart des groupes, c'est la séance 2. Un groupe particulier fait cette séance juste après TD0 le même jour.
+
+### Objectif du jalon
+Créer les entités du domaine (Status, User, Ticket) avec les règles métier de base.
+
+### 1. Compréhension du domaine (15 min)
 
 En petits groupes, répondez aux questions suivantes :
 
@@ -19,9 +34,7 @@ En petits groupes, répondez aux questions suivantes :
 
 📝 **Livrable** : Notez vos réponses dans un fichier `docs/domain-notes.md` de votre dépôt.
 
----
-
-## 2. Structure des fichiers du domaine
+### 2. Structure des fichiers du domaine
 
 Le domaine est organisé en fichiers séparés (une entité par fichier) :
 
@@ -34,9 +47,7 @@ src/domain/
 └── exceptions.py    # Erreurs métier (fourni)
 ```
 
----
-
-## 3. Implémenter l'énumération Status
+### 3. Implémenter l'énumération Status (20 min)
 
 Ouvrez `src/domain/status.py` et complétez l'énumération `Status`.
 
@@ -46,9 +57,14 @@ Ouvrez `src/domain/status.py` et complétez l'énumération `Status`.
 - `RESOLVED` → résolu, en attente de validation
 - `CLOSED` → fermé définitivement
 
----
+💡 **Commit** : Une fois terminé, commitez vos changements :
+```bash
+git add src/domain/status.py
+git commit -m "Add Status enum with lifecycle values"
+git push
+```
 
-## 4. Implémenter la classe User
+### 4. Implémenter la classe User (25 min)
 
 Ouvrez `src/domain/user.py` et complétez la classe `User`.
 
@@ -58,9 +74,14 @@ Ouvrez `src/domain/user.py` et complétez la classe `User`.
 - `is_agent` : peut traiter des tickets ?
 - `is_admin` : droits administrateur ?
 
----
+💡 **Commit** : Commitez régulièrement :
+```bash
+git add src/domain/user.py
+git commit -m "Add User class with attributes"
+git push
+```
 
-## 5. Implémenter la classe Ticket
+### 5. Implémenter la classe Ticket (30 min)
 
 Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 
@@ -68,49 +89,359 @@ Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 - `id`, `title`, `description`
 - `status` (avec valeur par défaut `Status.OPEN`)
 - `creator_id`
-
-**Attributs optionnels** :
 - `assignee_id` (agent assigné, peut être `None`)
-- `created_at`, `updated_at` (dates)
 
-**Méthodes métier à implémenter** :
+**Méthode métier à implémenter** :
 - `assign(user_id)` : assigne le ticket à un agent
-- `close()` : ferme le ticket
 
----
+💡 **Note** : La méthode `close()` sera implémentée dans TD1b (avec ses tests).
 
-## 6. Règles métier (invariants)
+### 6. Règles métier (invariants) (15 min)
 
-Implémentez au moins **3 règles métier** dans vos classes :
+Implémentez au moins **2 règles métier** dans vos classes :
 
 | Règle | Où l'implémenter |
 |-------|------------------|
 | Un ticket doit avoir un titre non vide | `__post_init__` de Ticket |
-| Un ticket fermé ne peut plus être assigné | Méthode `assign()` |
-| Un ticket déjà fermé ne peut pas être re-fermé | Méthode `close()` |
+| Un utilisateur doit avoir un username non vide | `__post_init__` de User |
 
 💡 **Conseil** : Utilisez `raise ValueError("message")` pour signaler les violations.
 
----
+💡 **Note** : D'autres règles seront ajoutées dans TD1b (ex: ticket fermé non modifiable).
 
-## 7. Activer les tests
-
-Une fois vos classes implémentées :
-
-1. Ouvrez `tests/domain/test_ticket.py`
-2. Supprimez la ligne `pytest.skip(...)` au début
-3. Décommentez les imports
-4. Lancez les tests : `pytest tests/domain/`
+💡 **Commit final** :
+```bash
+git add src/domain/
+git commit -m "Add business rules to Ticket class"
+git push
+```
 
 ---
 
-## 8. Critères de validation
+## 🎁 Bonus (facultatif)
 
+**Si vous avez terminé en avance**, enrichissez votre modèle de domaine.
+
+💡 **Note** : Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent améliorer votre note.
+
+### Option 1 : Ajouter les timestamps
+
+Ajoutez `created_at` et `updated_at` à la classe `Ticket` :
+```python
+from datetime import datetime
+from dataclasses import field
+
+@dataclass
+class Ticket:
+    # ... attributs existants ...
+    created_at: datetime = field(default_factory=datetime.now)
+    updated_at: datetime = field(default_factory=datetime.now)
+```
+
+### Option 2 : Méthodes utilitaires
+
+Ajoutez des méthodes pratiques :
+```python
+def __str__(self) -> str:
+    """Affichage lisible du ticket."""
+    return f"Ticket #{self.id}: {self.title} ({self.status.value})"
+
+def is_assigned(self) -> bool:
+    """Vérifie si le ticket est assigné."""
+    return self.assignee_id is not None
+
+def is_open(self) -> bool:
+    """Vérifie si le ticket est ouvert."""
+    return self.status == Status.OPEN
+```
+
+### Option 3 : Validation avancée
+
+Ajoutez des règles métier supplémentaires :
+- La description doit avoir au moins 10 caractères
+- Le username doit être alphanumérique
+- Seul un admin peut créer un ticket avec statut différent de OPEN
+
+### Option 4 : Enrichir la documentation
+
+Complétez `docs/domain-notes.md` avec :
+- Diagramme UML des classes (textuel ou draw.io)
+- Exemples d'utilisation réels
+- Justification de vos choix de design
+- Questions/réflexions sur l'architecture
+
+---
+
+### ✅ Critères de soumission TD1a
+
+Avant la fin de la séance :
+
+**Code** :
 - [ ] `Status` contient au moins 4 valeurs (OPEN, IN_PROGRESS, RESOLVED, CLOSED)
 - [ ] `User` a les attributs `id`, `username`, `is_agent`, `is_admin`
-- [ ] `Ticket` a tous les attributs obligatoires
-- [ ] Les méthodes `assign()` et `close()` sont implémentées
-- [ ] Au moins 3 règles métier sont codées
-- [ ] Les tests du domaine passent (`pytest tests/domain/`)
+- [ ] `Ticket` a tous les attributs obligatoires (id, title, description, status, creator_id, assignee_id)
+- [ ] La méthode `assign()` est implémentée
+- [ ] Au moins 2 règles métier sont codées (titre non vide + username non vide)
 - [ ] Le fichier `docs/domain-notes.md` existe avec vos réflexions
-- [ ] **Aucune dépendance externe** dans le dossier `domain/` (pas de FastAPI, SQLAlchemy, etc.)
+- [ ] **Aucune dépendance externe** dans le dossier `domain/`
+
+**Git** :
+- [ ] ≥ 3 commits répartis pendant la séance (pas tout à la fin)
+- [ ] Tag `TD1-domain` créé et poussé :
+  ```bash
+  git tag TD1-domain
+  git push origin TD1-domain
+  ```
+
+---
+
+## 📦 Jalon TD1b (2h) → Tag `TD1-tests`
+
+**⏰ Durée : 1 séance de 2h** (séance suivant TD1a)
+
+### Objectif du jalon
+Écrire des tests unitaires complets pour valider le comportement du domaine.
+
+### 1. Compléter la classe Ticket (10 min)
+
+Avant d'écrire les tests, ajoutons la méthode `close()` qui manque :
+
+**Dans `src/domain/ticket.py`**, ajoutez :
+```python
+def close(self):
+    """Ferme le ticket."""
+    if self.status == Status.CLOSED:
+        raise ValueError("Cannot close an already closed ticket")
+    self.status = Status.CLOSED
+```
+
+💡 **Commit** :
+```bash
+git add src/domain/ticket.py
+git commit -m "Add close() method to Ticket"
+git push
+```
+
+### 2. Comprendre la structure des tests (10 min)
+
+Explorez le fichier `tests/domain/test_ticket.py` :
+- Exemples de tests commentés
+- Organisation par fonctionnalité
+- Utilisation de pytest
+
+### 3. Activer les tests (5 min)
+
+Dans `tests/domain/test_ticket.py` :
+1. Supprimez la ligne `pytest.skip(...)` au début
+2. Décommentez les imports
+3. Lancez les tests : `pytest tests/domain/`
+
+Les tests vont probablement échouer au début, c'est normal !
+
+### 4. Écrire les tests de base (25 min)
+
+Décommentez et complétez les tests fournis :
+
+**Tests de création** :
+```python
+def test_status_values_exist():
+    """Vérifie que les 4 statuts existent."""
+    
+def test_user_creation():
+    """Vérifie la création d'un utilisateur."""
+    
+def test_ticket_creation():
+    """Vérifie la création d'un ticket avec valeurs par défaut."""
+```
+
+💡 **Commit** :
+```bash
+git add tests/domain/test_ticket.py
+git commit -m "Add basic domain tests"
+git push
+```
+
+### 5. Écrire les tests des règles métier (35 min)
+
+Implémentez les tests pour **chaque règle métier** :
+
+```python
+def test_ticket_title_cannot_be_empty():
+    """Règle : Un ticket doit avoir un titre non vide."""
+    with pytest.raises(ValueError):
+        Ticket(id="t1", title="", description="desc", creator_id="u1")
+
+def test_user_username_cannot_be_empty():
+    """Règle : Un utilisateur doit avoir un username non vide."""
+    with pytest.raises(ValueError):
+        User(id="u1", username="", is_agent=False, is_admin=False)
+
+def test_cannot_assign_closed_ticket():
+    """Règle : Un ticket fermé ne peut plus être assigné."""
+    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket.close()
+    with pytest.raises(ValueError):
+        ticket.assign("agent1")
+
+def test_cannot_close_already_closed_ticket():
+    """Règle : Un ticket déjà fermé ne peut pas être re-fermé."""
+    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket.close()
+    with pytest.raises(ValueError):
+        ticket.close()
+```
+
+💡 **Note** : Vous devrez aussi implémenter la règle "ticket fermé non assignable" dans la méthode `assign()` pour que le test passe.
+
+### 6. Tests des méthodes métier (25 min)
+
+Testez le comportement normal des méthodes :
+
+```python
+def test_ticket_assign():
+    """Vérifie l'assignation d'un ticket."""
+    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket.assign("agent1")
+    assert ticket.assignee_id == "agent1"
+
+def test_ticket_close():
+    """Vérifie la fermeture d'un ticket."""
+    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket.close()
+    assert ticket.status == Status.CLOSED
+```
+
+### 7. Vérifier la couverture (5 min)
+
+Lancez les tests avec couverture :
+```bash
+pytest tests/domain/ --cov=src/domain --cov-report=term-missing
+```
+
+Objectif : **≥ 80% de couverture** sur le domaine.
+
+💡 **Commit final** :
+```bash
+git add tests/domain/
+git commit -m "Complete domain tests with business rules"
+git push
+```
+
+---
+
+## 🎁 Bonus (facultatif)
+
+**Si vous avez terminé en avance**, perfectionnez vos tests.
+
+💡 **Note** : Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent améliorer votre note.
+
+### Option 1 : Tests paramétriques
+
+Utilisez `@pytest.mark.parametrize` pour tester plusieurs cas :
+```python
+@pytest.mark.parametrize("title,should_raise", [
+    ("", True),           # Titre vide
+    ("   ", True),        # Seulement espaces
+    ("OK", False),        # Titre valide court
+    ("A" * 200, False),   # Titre très long
+])
+def test_ticket_title_validation(title, should_raise):
+    if should_raise:
+        with pytest.raises(ValueError):
+            Ticket(id="t1", title=title, description="desc", creator_id="u1")
+    else:
+        ticket = Ticket(id="t1", title=title, description="desc", creator_id="u1")
+        assert ticket.title == title
+```
+
+### Option 2 : Fixtures complexes
+
+Créez des fixtures réutilisables dans `conftest.py` :
+```python
+@pytest.fixture
+def sample_user():
+    return User(id="u1", username="john", is_agent=False, is_admin=False)
+
+@pytest.fixture
+def sample_agent():
+    return User(id="a1", username="agent_smith", is_agent=True, is_admin=False)
+
+@pytest.fixture
+def open_ticket(sample_user):
+    return Ticket(
+        id="t1",
+        title="Bug report",
+        description="Something is broken",
+        creator_id=sample_user.id
+    )
+```
+
+### Option 3 : Tester les messages d'erreur
+
+Vérifiez les messages exacts :
+```python
+def test_empty_title_error_message():
+    with pytest.raises(ValueError, match="Ticket title cannot be empty"):
+        Ticket(id="t1", title="", description="desc", creator_id="u1")
+```
+
+### Option 4 : Viser 100% de couverture
+
+Ajoutez des tests pour :
+- Tous les edge cases (None, valeurs extrêmes)
+- Toutes les branches conditionnelles
+- Les méthodes `__str__()`, `__repr__()` si implémentées
+- Les propriétés calculées
+
+### Option 5 : Tests de documentation
+
+Ajoutez des doctests dans vos classes :
+```python
+class Ticket:
+    """Représente un ticket du système.
+    
+    Examples:
+        >>> ticket = Ticket(id="t1", title="Bug", description="Broken", creator_id="u1")
+        >>> ticket.status
+        <Status.OPEN: 'open'>
+        >>> ticket.assign("agent1")
+        >>> ticket.assignee_id
+        'agent1'
+    """
+```
+
+---
+
+### ✅ Critères de soumission TD1b
+
+Avant la fin de la séance :
+
+**Tests** :
+- [ ] Méthode `close()` implémentée dans Ticket
+- [ ] Règle "ticket fermé non assignable" implémentée dans `assign()`
+- [ ] Tous les tests de base passent (Status, User, Ticket)
+- [ ] Chaque règle métier a son test (4 règles au total)
+- [ ] Tests des méthodes `assign()` et `close()`
+- [ ] `pytest tests/domain/` passe entièrement (vert)
+- [ ] Couverture ≥ 80% sur `src/domain/`
+
+**Git** :
+- [ ] ≥ 3 commits répartis pendant la séance
+- [ ] Tag `TD1-tests` créé et poussé :
+  ```bash
+  git tag TD1-tests
+  git push origin TD1-tests
+  ```
+
+---
+
+## 🎯 Validation globale TD1
+
+Une fois les 2 jalons terminés, vous devez avoir :
+- ✅ Entités du domaine complètes et testées
+- ✅ Règles métier implémentées et validées
+- ✅ Aucune dépendance externe dans `domain/`
+- ✅ 2 tags poussés : `TD1-domain` et `TD1-tests`
+- ✅ ≥ 6 commits au total (≥ 3 par jalon)
+
+**Conseil** : Si vous n'avez pas fini un jalon pendant la séance, vous pouvez le terminer chez vous, mais votre coefficient de bonus sera réduit. Voir [evaluation_jalons.md](evaluation_jalons.md) pour les détails.

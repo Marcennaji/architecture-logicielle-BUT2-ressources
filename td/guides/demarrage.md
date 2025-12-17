@@ -1,12 +1,16 @@
 # Guide de démarrage
 
-## ⚠️ PRÉREQUIS OBLIGATOIRE AVANT LE TD0
+## ⚠️ PRÉREQUIS CRITIQUE AVANT LE TD0
 
 **Cette procédure DOIT être suivie AVANT d'arriver au TD0.**
 
-En suivant cette procédure maintenant, vous gagnerez du temps lors du TD0 et pourrez vous concentrer directement sur le code et le workflow Git/GitHub.
+**📅 Groupes 2A, 2B, 2C (TD le 6 janvier)** :  
+Setup **OBLIGATOIRE** avant la première séance. Sans cela, vous ne pourrez pas suivre le TD efficacement.
 
-**Temps estimé** : 15-20 minutes
+**📅 Groupe 2D (TD le 19 décembre)** :  
+Le setup sera fait ensemble pendant la première séance. Mais si vous avez le temps de le faire avant, c'est **fortement recommandé** pour gagner du temps et pouvoir terminer TD0 + TD1a dans les 4h.
+
+**Temps estimé** : 20-30 minutes
 
 **Vérification de réussite** : Au début du TD0, vous devez être capable de :
 - ✅ Lancer la commande `pytest` dans votre projet et voir tous les tests passer

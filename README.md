@@ -13,9 +13,10 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 ## 📌 Projet fil rouge
 
 - Sujet : **Gestionnaire de tickets / workflow** (type Trello / Jira minimal).
-- Réalisé au fil des TD (TD0-TD4, 20h présentiel + travail maison).
+- Réalisé au fil des TD : **10 jalons de 2h** évalués indépendamment.
 - Dépôt propre à chaque étudiant, créé à partir d'un **bootstrap** commun.
-- Les TD servent de **guides de progression**.
+- Chaque jalon = 1 tag Git à pousser pendant la séance.
+- **Bonus présentiel** : Commits réguliers pendant les séances valorisés.
 
 ## 📚 Ressources du cours
 
@@ -29,7 +30,8 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 **Guides généraux** :
 - [📖 Guide de démarrage](td/guides/demarrage.md) ⚠️ **À suivre AVANT le TD0**
-- [🔄 Workflow de développement](td/guides/workflow_de_developpement.md)
+- [🔄 Workflow de développement](td/guides/workflow
+- [📊 Système d'évaluation par jalons](td/evaluation_jalons.md) 🎯 **Important !**
 - [🧪 Guide des tests](td/guides/comment_tester.md)
 
 **TDs** (publiés progressivement) :
@@ -56,17 +58,22 @@ Le template de démarrage (code à compléter) est dans un repository séparé :
 | **CM** | Fondamentaux et architecture hexagonale | Pourquoi l'architecture ? • Architecture à l'ère de l'IA • Principes (cohésion, couplage, dépendances) • Architecture hexagonale (Ports & Adapters) • Présentation du projet |
 
 **Volume total du module** : 2h CM + 20h TD = **22h** (sur calendrier)
+10 jalons de 2h)
 
-### Travaux dirigés (TD0-TD4)
+| Jalon | Titre | Tag | Contenu |
+|-------|-------|-----|---------|
+| **TD0** | Prise en main | `TD0` | Workflow Git/GitHub, pytest |
+| **TD1a** | Modélisation domaine | `TD1-domain` | Entités (Ticket, User, Status), règles métier |
+| **TD1b** | Tests domaine | `TD1-tests` | Tests unitaires du domaine |
+| **TD2a** | Ports & use case | `TD2-ports` | Ports + use case création ticket |
+| **TD2b** | Use cases complets | `TD2-usecases` | Assign, close, list tickets |
+| **TD3a** | Repository pattern | `TD3-repository` | Repository abstrait + in-memory |
+| **TD3b** | SQLite adapter | `TD3-sqlite-1` | Connexion SQLite + tables |
+| **TD3c** | SQLite CRUD | `TD3-sqlite-2` | CRUD complet + tests intégration |
+| **TD4a** | API REST | `TD4-api` | Endpoints FastAPI CRUD |
+| **TD4b** | Tests E2E | `TD4-complete` | Tests E2E + finalisation (après QCM) |
 
-| TD | Titre | Contenu |
-|----|-------|---------|
-| **TD0** | Prise en main | Environnement Python, FastAPI, pytest |
-| **TD1** | Modélisation du domaine | Entités (Ticket, User), Value Objects, règles métier |
-| **TD2** | Use cases et ports | Cas d'usage, ports entrants et sortants |
-| **TD3** | Adapters persistance | Repository abstrait + implémentation SQLite |
-| **TD4** | API REST | Adapter FastAPI, tests d'intégration |
-
+**Système d'évaluation** : Chaque jalon = 1 livrable évalué avec bonus présentiel (commits réguliers pendant la séance). Voir [evaluation_jalons.md](td/evaluation_jalons.md)
 Ce planning couvre le socle minimal de l'architecture hexagonale. Les fonctionnalités avancées (authentification, notifications, etc.) peuvent être ajoutées en bonus.
 
 ## 📖 Références

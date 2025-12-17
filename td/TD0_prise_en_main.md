@@ -1,13 +1,18 @@
 # TD0 — Prise en main du workflow Git/GitHub
 
-> **Durée estimée** : 2h (extensible en autonomie)  
+## 📦 Jalon TD0 (2h) → Tag `TD0`
+
+**⏰ Durée : 1 séance de 2h** (première séance du module)
+
 > **Prérequis** : [Guide de démarrage](guides/demarrage.md) suivi (repository cloné, `scripts/init.sh` exécuté)  
 > **Objectif** : Maîtriser le workflow de développement Git/GitHub utilisé pour tous les TDs  
-> **⚠️ Non noté** : Ce TD sert à valider le workflow, mais il est **obligatoire**
+> **⚠️ Obligatoire mais non noté** : Ce TD valide votre setup et votre compréhension du workflow
+
+> **🚨 Important pour le groupe qui a TD1a juste après** : Vous devez impérativement terminer ce TD0 pendant cette séance de 2h car vous enchaînez directement sur TD1a. Travaillez efficacement !
 
 ---
 
-## 🎯 Objectifs de ce TD
+## 🎯 Objectifs de ce jalon
 
 À la fin de ce TD, vous saurez :
 
@@ -18,11 +23,21 @@
 5. ✅ Créer un tag pour marquer votre soumission
 6. ✅ Comprendre le cycle complet de développement du module
 
+**Important** : Ce workflow (commits réguliers + tag) sera utilisé pour **tous les jalons** du module.
+
+---
+
+## 🚨 Si vous n'avez PAS suivi le guide de démarrage
+
+**Vous DEVEZ le faire MAINTENANT** : [Guide de démarrage](guides/demarrage.md)
+
+**Temps nécessaire** : 15-20 minutes
+
+⚠️ **Pour le groupe qui enchaîne TD0+TD1a** : Si vous n'avez pas fait le guide avant d'arriver, **prévenez l'enseignant immédiatement** en début de séance. Une organisation spéciale sera mise en place pour vous permettre de finir TD1a à la maison sans pénalité.
+
 ---
 
 ## ✋ Vérification des prérequis (5 min)
-
-**Avant de commencer, vérifiez que vous avez bien suivi le [Guide de démarrage](guides/demarrage.md).**
 
 Exécutez ces commandes dans un terminal :
 
@@ -68,7 +83,7 @@ Dans le futur système de tickets, on voudra savoir combien de temps un ticket e
 
 ---
 
-## 💻 Partie 1 : Implémentation de la fonction (35 min)
+## 💻 Partie 1 : Implémentation de la fonction (30 min)
 
 ### 2.1 Créer le fichier de la fonction
 
@@ -126,12 +141,12 @@ delta = end - start  # Retourne un objet timedelta
 heures = delta.total_seconds() / 3600
 ```
 
-### 2.3 Créer les tests
+### 2.3 Créer les tests (version simplifiée)
 
-Créez le fichier `tests/domain/test_utils.py` avec le contenu suivant :
+Créez le fichier `tests/domain/test_utils.py` avec **au minimum ces 3 tests** :
 
 ```python
-from datetime import datetime, timedelta
+from datetime import datetime
 import pytest
 from src.domain.utils import calculate_duration_hours
 
@@ -144,16 +159,6 @@ def test_calculate_duration_same_day():
     result = calculate_duration_hours(start, end)
     
     assert result == 8.0  # 8 heures de différence
-
-
-def test_calculate_duration_multiple_days():
-    """Test avec plusieurs jours de différence."""
-    start = datetime(2025, 1, 1, 9, 0)   # 1er janvier à 9h
-    end = datetime(2025, 1, 2, 9, 0)     # 2 janvier à 9h
-    
-    result = calculate_duration_hours(start, end)
-    
-    assert result == 24.0  # 24 heures = 1 jour
 
 
 def test_calculate_duration_with_minutes():
@@ -176,6 +181,8 @@ def test_calculate_duration_invalid_order():
         calculate_duration_hours(start, end)
 ```
 
+💡 **Gain de temps** : 3 tests suffisent pour TD0. Vous pourrez en ajouter d'autres plus tard si vous voulez.
+
 ### 2.4 Lancer les tests
 
 ```bash
@@ -188,18 +195,17 @@ pytest tests/domain/test_utils.py -v
 **Résultat attendu** :
 ```
 tests/domain/test_utils.py::test_calculate_duration_same_day PASSED
-tests/domain/test_utils.py::test_calculate_duration_multiple_days PASSED
 tests/domain/test_utils.py::test_calculate_duration_with_minutes PASSED
 tests/domain/test_utils.py::test_calculate_duration_invalid_order PASSED
 
-======================== 4 passed in 0.05s ========================
+======================== 3 passed in 0.05s ========================
 ```
 
 > 💡 **Si des tests échouent**, lisez attentivement le message d'erreur et corrigez votre fonction.
 
 ---
 
-## 🔄 Partie 2 : Workflow Git (20 min)
+## 🔄 Partie 2 : Workflow Git (15 min)
 
 ### 3.1 Vérifier les modifications
 
@@ -239,6 +245,12 @@ git commit -m "TD0: Ajout fonction calculate_duration_hours et ses tests"
 
 > 💡 **Bonne pratique** : Faites plusieurs petits commits au fur et à mesure de votre progression, plutôt qu'un seul gros commit à la fin.
 
+> ⚠️ **Note sur le formatage automatique** : À chaque commit, un hook pre-commit vérifie et formate automatiquement votre code avec Ruff. Si vous voyez des fichiers modifiés après votre commit, c'est normal ! Le code a été reformaté. Il suffit de refaire :
+> ```bash
+> git add .
+> git commit -m "votre message"
+> ```
+
 ### 3.4 Pousser sur GitHub
 
 ```bash
@@ -265,7 +277,7 @@ git status
 # Devrait afficher "nothing to commit, working tree clean"
 ```
 
-### 4.2 Créer le tag
+### 4.2 Créer le tag correspondant au TD 0
 
 ```bash
 # Créer le tag TD0
@@ -274,8 +286,6 @@ git tag TD0
 # Pousser le tag sur GitHub
 git push origin TD0
 ```
-
-> ⚠️ **Important** : Le nom du tag doit être **exactement** `TD0` (en majuscules). C'est ce nom que le système d'évaluation recherchera pour les TDs suivants (`TD1`, `TD2`, `TD3`, `TD4`).
 
 ### 4.3 Vérifier sur GitHub
 
@@ -292,10 +302,9 @@ git push origin TD0
 
 Ce TD **n'est pas noté** mais il est **obligatoire**.
 
-Si vous n'avez pas terminé pendant les 2h de TD :
-1. ✅ Terminez le travail en autonomie (en dehors des heures de TD)
-2. ✅ Créez le tag `TD0` **avant le prochain TD**
-3. ⚠️ Au début du TD1, je vérifierai que chacun a bien le tag TD0
+**Pour la plupart des groupes** : Si vous n'avez pas terminé pendant la séance de 2h, terminez-le en autonomie avant la prochaine séance (TD1a).
+
+**⚠️ Pour le groupe qui enchaîne TD0 et TD1a le même jour** : Vous DEVEZ finir TD0 dans les 2h pour pouvoir faire TD1a juste après. Concentrez-vous et demandez de l'aide si vous bloquez !
 
 **Aide** : Si vous bloquez, consultez :
 - Le [Guide de workflow](guides/workflow_de_developpement.md)
@@ -317,7 +326,37 @@ Si vous n'avez pas terminé pendant les 2h de TD :
 | **7. Tag** | `git tag TD0` |
 | **8. Push tag** | `git push origin TD0` |
 
-**Ce workflow sera utilisé pour TOUS les TDs du module** (TD1, TD2, TD3, TD4).
+**Ce workflow sera utilisé pour TOUS les jalons du module** (TD1a, TD1b, TD2a, TD2b, etc.).
+
+---
+
+## 🎁 Bonus (facultatif)
+
+**Si vous avez terminé en avance**
+
+- Ajoutez des tests pour les cas limites ou des arguments invalides
+- revérifiez bien votre code et refactorisez si nécessaire
+
+## ✅ Critères de soumission TD0
+
+Avant la fin de la séance (ou avant le TD1 si non terminé) :
+
+**Code** :
+- [ ] Fichier `src/domain/utils.py` créé avec la fonction `calculate_duration_hours`
+- [ ] Fichier `tests/domain/test_utils.py` créé avec exactement 3 tests (suffisant pour TD0)
+- [ ] Tous les tests passent (`pytest` en vert)
+- [ ] La fonction gère le cas où `end < start` (lève ValueError)
+
+**Git** :
+- [ ] ≥ 3 commits répartis (pas tout à la fin)
+  - Exemple : 1) Fonction de base, 2) Tests, 3) Gestion des erreurs
+- [ ] Tag `TD0` créé et poussé :
+  ```bash
+  git tag TD0
+  git push origin TD0
+  ```
+
+**Bonus** : Si vous finalisez pendant la séance avec commits réguliers, vous validez le bon workflow pour les prochains jalons !
 
 ---
 

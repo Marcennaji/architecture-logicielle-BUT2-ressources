@@ -12,13 +12,19 @@ Ces guides sont à consulter tout au long du module :
 
 ## 📋 Liste des TDs
 
-| TD | Titre | Durée | Statut | Lien |
-|----|-------|-------|--------|------|
-| TD0 | Prise en main | 2h | ✅ Disponible | [TD0_prise_en_main.md](TD0_prise_en_main.md) |
-| TD1 | Modélisation du domaine | 3h | ✅ Disponible | [TD01_domain_modeling.md](TD01_domain_modeling.md) |
-| TD2 | Use cases et ports | 3h | 🔒 Bientôt | - |
-| TD3 | Repository SQLite | 5h | 🔒 Bientôt | - |
-| TD4 | API REST avec FastAPI | 5h | 🔒 Bientôt | - |
+| Séance | Jalon | Tag | Fichier | Statut |
+|--------|-------|-----|---------|--------|
+| 1 | TD0 | `TD0` | [TD0_prise_en_main.md](TD0_prise_en_main.md) | ✅ Disponible |
+| 2 | TD1a : Entités domaine | `TD1-domain` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1a-2h--tag-td1-domain) | ✅ Disponible |
+| 3 | TD1b : Tests domaine | `TD1-tests` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1b-2h--tag-td1-tests) | ✅ Disponible |
+| 4 | TD2a : Ports + use case | `TD2-ports` | 🔒 Bientôt | 🔒 Bientôt |
+| 5 | TD2b : Use cases complets | `TD2-usecases` | 🔒 Bientôt | 🔒 Bientôt |
+| 6 | TD3a : Repository pattern | `TD3-repository` | 🔒 Bientôt | 🔒 Bientôt |
+| 7 | TD3b : SQLite adapter | `TD3-sqlite-1` | 🔒 Bientôt | 🔒 Bientôt |
+| 8 | TD3c : SQLite CRUD | `TD3-sqlite-2` | 🔒 Bientôt | 🔒 Bientôt |
+| 9 | TD4a : API REST | `TD4-api` | 🔒 Bientôt | 🔒 Bientôt |
+| 10 | TD4b : Tests E2E | `TD4-complete` | 🔒 Bientôt | 🔒 Bientôt |
 
-> 💡 **Volume total** : 20h de TD en présentiel + ~10h de travail à la maison.  
-> Les TDs sont publiés progressivement au fur et à mesure de l'avancement du module.
+> 💡 **Volume total** : 10 jalons de 2h = 20h de TD en présentiel.  
+> Chaque jalon est évalué indépendamment avec son propre tag Git.  
+> **Système d'évaluation** : Voir [evaluation_jalons.md](evaluation_jalons.md)
