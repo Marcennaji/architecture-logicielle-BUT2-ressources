@@ -143,54 +143,10 @@ git push
 ## 🎁 Bonus (facultatif)
 
 **Si vous avez terminé en avance**, enrichissez votre modèle de domaine.
-
-💡 **Note** : Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent améliorer votre note.
-
-### Option 1 : Ajouter les timestamps
-
-Ajoutez `created_at` et `updated_at` à la classe `Ticket` :
-```python
-from datetime import datetime
-from dataclasses import field
-
-@dataclass
-class Ticket:
-    # ... attributs existants ...
-    created_at: datetime = field(default_factory=datetime.now)
-    updated_at: datetime = field(default_factory=datetime.now)
-```
-
-### Option 2 : Méthodes utilitaires
-
-Ajoutez des méthodes pratiques :
-```python
-def __str__(self) -> str:
-    """Affichage lisible du ticket."""
-    return f"Ticket #{self.id}: {self.title} ({self.status.value})"
-
-def is_assigned(self) -> bool:
-    """Vérifie si le ticket est assigné."""
-    return self.assignee_id is not None
-
-def is_open(self) -> bool:
-    """Vérifie si le ticket est ouvert."""
-    return self.status == Status.OPEN
-```
-
-### Option 3 : Validation avancée
-
-Ajoutez des règles métier supplémentaires :
-- La description doit avoir au moins 10 caractères
+Par exemple, ajoutez des règles métier supplémentaires :
 - Le username doit être alphanumérique
 - Seul un admin peut créer un ticket avec statut différent de OPEN
-
-### Option 4 : Enrichir la documentation
-
-Complétez `docs/domain-notes.md` avec :
-- Diagramme UML des classes (textuel ou draw.io)
-- Exemples d'utilisation réels
-- Justification de vos choix de design
-- Questions/réflexions sur l'architecture
+- etc...
 
 ---
 

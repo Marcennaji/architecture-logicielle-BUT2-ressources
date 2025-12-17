@@ -330,13 +330,6 @@ Ce TD **n'est pas noté** mais il est **obligatoire**.
 
 ---
 
-## 🎁 Bonus (facultatif)
-
-**Si vous avez terminé en avance**
-
-- Ajoutez des tests pour les cas limites ou des arguments invalides
-- revérifiez bien votre code et refactorisez si nécessaire
-
 ## ✅ Critères de soumission TD0
 
 Avant la fin de la séance (ou avant le TD1 si non terminé) :
