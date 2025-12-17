@@ -42,15 +42,19 @@ Pour qu'un jalon soit considéré comme **validé en présentiel**, il doit :
 
 Chaque jalon reçoit un **coefficient de bonus** selon les commits :
 
-| Critère | Coefficient |
-|---------|-------------|
-| ≥ 3 commits répartis pendant la séance | **1.0** (100%) |
-| Tag poussé dans les 10mn après la fin | **0.9** (90%) |
-| Tag poussé > 10mn après la séance | **0.7** (70%) |
-| 1-2 commits seulement ou concentrés en fin | **0.7** (70%) |
-| Tag absent ou très tardif | **0.5** (50%) |
+| Critère | Coefficient | Exemple (code noté 16/20) |
+|---------|-------------|---------------------------|
+| ≥ 3 commits répartis pendant la séance | **1.0** (100%) | 16 × 1.0 = **16/20** |
+| Tag poussé dans les 10mn après la fin | **0.9** (90%) | 16 × 0.9 = **14.4/20** |
+| Tag poussé < 24h après (ex: le soir) | **0.8** (80%) | 16 × 0.8 = **12.8/20** |
+| Tag poussé 1-3 jours après | **0.7** (70%) | 16 × 0.7 = **11.2/20** |
+| 1-2 commits ou concentrés en fin | **0.7** (70%) | 16 × 0.7 = **11.2/20** |
+| Tag poussé > 3 jours après | **0.6** (60%) | 16 × 0.6 = **9.6/20** |
+| Tag absent après relance | **0** (non rendu) | Non évalué |
 
 **Note finale du jalon = Note du code × Coefficient de bonus**
+
+> 💡 **Philosophie** : L'IA est un outil d'apprentissage légitime. Ce système valorise le travail en présentiel sans pénaliser excessivement ceux qui terminent chez eux. Même avec un coefficient réduit, un excellent travail reste reconnu.
 
 ---
 
@@ -130,32 +134,40 @@ Un script analysera pour chaque tag :
 **Résultat** : 4 commits répartis + tag à l'heure → **Coefficient 1.0** ✅
 
 ---
+absolument. Vous aurez un coefficient réduit (0.6-0.8 selon le délai), mais votre travail sera évalué. Un excellent code fait chez vous vaut mieux qu'un code incomplet rendu en séance.
 
-## ❓ FAQ
+**Q : Puis-je utiliser l'IA pour m'aider ?**
+R : Oui, l'IA est un outil d'apprentissage légitime. En présentiel, elle peut vous débloquer. À la maison, elle peut vous aider à comprendre et compléter. Le coefficient réduit compense simplement l'avantage du temps illimité et de l'assistance IA complète.
 
-**Q : Je n'ai pas fini le jalon pendant la séance, puis-je le terminer chez moi ?**
-R : Oui, mais vous aurez un coefficient réduit (0.7-0.5). Mieux vaut avoir un code simple mais poussé pendant la séance.
+**Q : Est-ce injuste pour ceux qui travaillent en présentiel ?**
+R : Non. Avec le même code de qualité, un étudiant présentiel aura toujours 20-40% de points en plus. Exemple : code noté 16/20 → présentiel = 16, maison = 11-13. L'avantage est significatif.
 
 **Q : Exception pour le groupe qui a TD0+TD1a le même jour ?**
 R : Oui. Si vous n'aviez pas fait le guide de démarrage avant d'arriver et que vous manquez de temps, vous pourrez **exceptionnellement** terminer TD1a à la maison **sans pénalité de coefficient**. Prévenez l'enseignant en début de séance si c'est votre cas.
 
 **Q : Combien de commits minimum ?**
-R : 3 commits répartis dans le temps. Idéalement 4-5.
-
-**Q : Puis-je utiliser l'IA chez moi pour terminer ?**
-R : Techniquement oui, mais vous serez pénalisé par le coefficient. L'objectif est de travailler en présentiel.
+R : 3 commits répartis dans le temps pour coefficient 1.0. Idéalement 4-5.
 
 **Q : Comment savoir si mon coefficient sera bon ?**
-R : Si vous commitez régulièrement et poussez votre tag avant la fin, vous aurez 1.0.
+R : Si vous commitez régulièrement (toutes les 20-30min) et poussez votre tag avant la fin de séance, vous aurez 1.0.
 
 **Q : Les commits doivent être parfaits ?**
 R : Non ! Des commits de travail en cours sont normaux et valorisés. Ça montre une vraie progression.
 
----
+**Q : Si je travaille en présentiel mais que mon code n'est pas parfait ?**
+R : C'est valorisé ! Un code simple avec coefficient 1.0 peut avoir une meilleure note qu'un code parfait avec coefficient 0.7. Exemple : 13×1.0 = 13 vs 16×0.7 = 11.2
+R : Si vous commitez régulièrement et poussez votre tag avant la fin, vous aurez 1.0.
 
-## 🔐 Intégrité académique
+**Q : Les commits doivent être parfaits ?**
+R : Non ! Des commits de travail en cours sont normaux et valorisés. Ça montre une vraie progression.
+(coefficient maximum)
+- ✅ **Permettre** l'utilisation de l'IA comme outil d'apprentissage
+- ✅ **Équilibrer** : présentiel avantagé mais maison pas éliminatoire
+- ✅ **Détecter** les abus flagrants (gros commit unique, code copié-collé)
+- ✅ **Encourager** une pratique professionnelle (commits réguliers)
+- ✅ **Évaluer** votre compréhension réelle (QCM sans IA)
 
-Ce système permet de :
+**Rappel** : Le QCM final (sans IA, sans internet) compte significativement dans la note. Si vous utilisez massivement l'IA sans comprendre, le QCM le révélera. Utilisez l'IA pour **apprendre**, pas pour **contourner**
 - ✅ **Valoriser** le travail en présentiel sans IA
 - ✅ **Détecter** facilement le code généré par IA et copié
 - ✅ **Encourager** une pratique professionnelle (commits réguliers)

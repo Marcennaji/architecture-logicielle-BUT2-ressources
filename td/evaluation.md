@@ -66,11 +66,9 @@
 2. Poussez le tag avant la fin de la séance
 3. Tests passants obligatoires
 
-**Bonus présentiel** : Coefficient de 0.5 à 1.0 selon les commits pendant la séance
-- **1.0** : ≥ 3 commits répartis + tag poussé pendant la séance
-- **0.9** : Tag poussé dans les 10mn après la séance
-- **0.7** : Tag poussé tardivement ou peu de commits
-- **0.5** : Tag très tardif ou travail manifestement fait à la maison
+**Bonus présentiel** : Coefficient de 0.6 à 1.0 selon les commits et le délai de push
+
+Voir le tableau complet des coefficients dans [evaluation_jalons.md](evaluation_jalons.md).
 
 ---
 
@@ -106,4 +104,4 @@
 
 **QCM difficile ?** Non si vous avez compris l'architecture et suivi les TD.
 
-**Bonus présentiel ?** Oui, chaque jalon reçoit un coefficient de 0.5 à 1.0 selon le nombre et la répartition des commits pendant la séance. Les étudiants qui travaillent régulièrement sur site obtiennent coefficient 1.0.
+**Bonus présentiel ?** Oui, chaque jalon reçoit un coefficient de 0.6 à 1.0 selon le nombre et la répartition des commits pendant la séance, ainsi que le délai de push du tag. Les étudiants qui travaillent régulièrement sur site et poussent leur tag à temps obtiennent coefficient 1.0. Voir [evaluation_jalons.md](evaluation_jalons.md) pour le barème complet.
