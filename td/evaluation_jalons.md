@@ -65,7 +65,10 @@ Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point po
 *Cas 1 - Tag pendant séance avec bonus :*
 - Note de base : 15/20
 - 2 bonus réalisés : +1 point
-- Tag pendantle lendemain (bonus ignorés) :*
+- Tag pendant la séance : coefficient 1.0
+- **Note finale** : (15 + 1) × 1.0 = **16/20** ✅
+
+*Cas 2 - Tag le lendemain (bonus ignorés) :*
 - Note de base : 15/20
 - 2 bonus réalisés mais tag le lendemain : +0 point (bonus non comptés)
 - Tag dans les 7 jours : coefficient 0.7
@@ -74,10 +77,7 @@ Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point po
 *Cas 3 - Tag après relance (9 jours après la séance) :*
 - Note de base : 15/20
 - Tag après relance : coefficient 0.5
-- **Note finale** : 15 × 0.5 = **7
-- 2 bonus réalisés mais tag le lendemain : +0 point (bonus non comptés)
-- Tag hors séance : coefficient 0.7
-- **Note finale** : 15 × 0.7 = **10.5/20** ❌
+- **Note finale** : 15 × 0.5 = **7.5/20** ❌
 
 > 💡 **Philosophie** : L'IA est un outil d'apprentissage légitime. Ce système valorise le travail en présentiel sans pénaliser excessivement ceux qui terminent chez eux. Même avec un coefficient réduit, un excellent travail reste reconnu.
 
