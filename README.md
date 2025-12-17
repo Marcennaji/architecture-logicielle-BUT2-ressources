@@ -30,7 +30,7 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 
 **Guides généraux** :
 - [📖 Guide de démarrage](td/guides/demarrage.md) ⚠️ **À suivre AVANT le TD0**
-- [🔄 Workflow de développement](td/guides/workflow
+- [🔄 Workflow de développement](td/guides/workflow_de_developpement.md)
 - [📊 Système d'évaluation par jalons](td/evaluation_jalons.md) 🎯 **Important !**
 - [🧪 Guide des tests](td/guides/comment_tester.md)
 
