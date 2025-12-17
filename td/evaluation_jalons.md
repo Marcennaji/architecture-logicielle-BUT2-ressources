@@ -44,8 +44,11 @@ Pour qu'un jalon soit considéré comme **validé en présentiel avec coefficien
 | Critère | Coefficient |
 |---------|-------------|
 | Tag poussé pendant la séance + ≥ 3 commits en séance | **1.0** |
-| Tag poussé en dehors de la séance OU moins de 3 commits en séance | **0.7** |
-| Tag absent après relance | **0** |
+| Tag poussé dans les 7 jours après la séance | **0.7** |
+| Tag poussé après relance (> 7 jours) | **0.5** |
+| Pas de tag 3 jours après relance | **0** |
+
+> 💡 **Relance automatique** : Un rappel est envoyé 7 jours après chaque séance pour les jalons non rendus. Délai supplémentaire : 3 jours (coefficient 0.5).
 
 ### 2. Bonus
 
@@ -62,11 +65,16 @@ Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point po
 *Cas 1 - Tag pendant séance avec bonus :*
 - Note de base : 15/20
 - 2 bonus réalisés : +1 point
-- Tag pendant séance + 4 commits : coefficient 1.0
-- **Note finale** : (15 + 1) × 1.0 = **16/20** ✅
-
-*Cas 2 - Tag hors séance (bonus ignorés) :*
+- Tag pendantle lendemain (bonus ignorés) :*
 - Note de base : 15/20
+- 2 bonus réalisés mais tag le lendemain : +0 point (bonus non comptés)
+- Tag dans les 7 jours : coefficient 0.7
+- **Note finale** : 15 × 0.7 = **10.5/20** ⚠️
+
+*Cas 3 - Tag après relance (9 jours après la séance) :*
+- Note de base : 15/20
+- Tag après relance : coefficient 0.5
+- **Note finale** : 15 × 0.5 = **7
 - 2 bonus réalisés mais tag le lendemain : +0 point (bonus non comptés)
 - Tag hors séance : coefficient 0.7
 - **Note finale** : 15 × 0.7 = **10.5/20** ❌

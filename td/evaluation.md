@@ -7,7 +7,7 @@
 1. **Travail en TD (80%)** - 10 jalons de 2h évalués via tags Git sur GitHub
 2. **QCM final (20%)** - 30-45 mn en dernière séance (correction automatique)
 
-**Bonus présentiel** : Coefficient de 0.7 à 1.0 appliqué sur chaque jalon selon le travail en présentiel
+**Bonus présentiel** : Coefficient de 0.5 à 1.0 appliqué sur chaque jalon selon le travail en présentiel et le délai de rendu
 
 ---
 
@@ -20,7 +20,7 @@
 ### 🚫 Interdite pendant les séances de TD
 - L'IA n'est **pas autorisée en présentiel** (salles de TD)
 - Le travail avec IA se fait donc **en dehors des séances**
-- ⚠️ **Conséquence** : coefficient réduit (0.7 vs 1.0 en présentiel)
+- ⚠️ **Conséquence** : coefficient réduit (0.7 maximum vs 1.0 en présentiel, voire 0.5 après relance)
 - 📊 Voir le [tableau des coefficients](evaluation_jalons.md#1-coefficient-présentiel)
 
 ### 🚫 Bloquée pendant le QCM
@@ -112,4 +112,4 @@ Voir le tableau complet des coefficients dans [evaluation_jalons.md](evaluation_
 
 **QCM difficile ?** Non si vous avez compris l'architecture et suivi les TD.
 
-**Bonus présentiel ?** Oui, chaque jalon reçoit un coefficient de 0.7 ou 1.0. Le coefficient 1.0 est obtenu en travaillant en présentiel avec au moins 3 commits et le tag poussé pendant la séance. Voir [evaluation_jalons.md](evaluation_jalons.md) pour le barème complet.
+**Bonus présentiel ?** Oui, chaque jalon reçoit un coefficient selon le moment du rendu : 1.0 (tag pendant la séance + ≥ 3 commits), 0.7 (tag dans les 7 jours), 0.5 (tag après relance), ou 0 (pas de tag 3 jours après relance). Voir [evaluation_jalons.md](evaluation_jalons.md) pour le barème complet.
