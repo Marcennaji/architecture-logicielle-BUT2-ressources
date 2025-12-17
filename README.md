@@ -18,8 +18,6 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 - Dépôt Git individuel créé depuis un template commun
 - Évaluation par jalons avec bonus présentiel
 
-👉 [Template de code](https://github.com/Marcennaji/ticketing_starter) • [Détails des jalons](td/README.md)
-
 ## 📚 Ressources du cours
 
 ### Cours magistraux (CM)

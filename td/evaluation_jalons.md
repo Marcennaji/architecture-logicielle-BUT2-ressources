@@ -4,7 +4,7 @@
 
 Chaque séance de TD de 2h constitue un **jalon évaluable indépendant** avec son propre tag Git à pousser.
 
-**Objectif** : Valoriser le travail effectué en présentiel et détecter le travail fait à la maison avec IA.
+**Objectif** : Valoriser le travail effectué en présentiel.
 
 ---
 
@@ -29,30 +29,47 @@ Chaque séance de TD de 2h constitue un **jalon évaluable indépendant** avec s
 
 ## ✅ Critères de validation d'un jalon
 
-Pour qu'un jalon soit considéré comme **validé en présentiel**, il doit :
+Pour qu'un jalon soit considéré comme **validé en présentiel avec coefficient maximum (1.0)**, il doit remplir toutes ces conditions:
 
 1. **Au moins 3 commits** pendant la séance de 2h
-2. **Commits répartis** dans le temps (pas tout dans les 10 dernières minutes)
-3. **Tag poussé** avant la fin de la séance ou dans les 10 minutes suivantes
-4. **Tests passants** sur le tag
+2. **Tag poussé** avant la fin de la séance
+3. **Tests passants avec succès** sur le tag
 
 ---
 
-## 📊 Calcul du bonus présentiel
+## 📊 Calcul de la note
 
-Chaque jalon reçoit un **coefficient de bonus** selon les commits :
+### 1. Coefficient présentiel
 
-| Critère | Coefficient | Exemple (code noté 16/20) |
-|---------|-------------|---------------------------|
-| ≥ 3 commits répartis pendant la séance | **1.0** (100%) | 16 × 1.0 = **16/20** |
-| Tag poussé dans les 10mn après la fin | **0.9** (90%) | 16 × 0.9 = **14.4/20** |
-| Tag poussé < 24h après (ex: le soir) | **0.8** (80%) | 16 × 0.8 = **12.8/20** |
-| Tag poussé 1-3 jours après | **0.7** (70%) | 16 × 0.7 = **11.2/20** |
-| 1-2 commits ou concentrés en fin | **0.7** (70%) | 16 × 0.7 = **11.2/20** |
-| Tag poussé > 3 jours après | **0.6** (60%) | 16 × 0.6 = **9.6/20** |
-| Tag absent après relance | **0** (non rendu) | Non évalué |
+| Critère | Coefficient |
+|---------|-------------|
+| Tag poussé pendant la séance + ≥ 3 commits en séance | **1.0** |
+| Tag poussé en dehors de la séance OU moins de 3 commits en séance | **0.7** |
+| Tag absent après relance | **0** |
 
-**Note finale du jalon = Note du code × Coefficient de bonus**
+### 2. Bonus
+
+**⚠️ Les bonus ne sont comptabilisés QUE si le tag est poussé pendant la séance** (avec un coefficient 1.0).
+
+Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point pour 2 bonus).
+
+### 3. Calcul final
+
+**Note finale = (Note de base + Points bonus) × Coefficient**
+
+**Exemples** : 
+
+*Cas 1 - Tag pendant séance avec bonus :*
+- Note de base : 15/20
+- 2 bonus réalisés : +1 point
+- Tag pendant séance + 4 commits : coefficient 1.0
+- **Note finale** : (15 + 1) × 1.0 = **16/20** ✅
+
+*Cas 2 - Tag hors séance (bonus ignorés) :*
+- Note de base : 15/20
+- 2 bonus réalisés mais tag le lendemain : +0 point (bonus non comptés)
+- Tag hors séance : coefficient 0.7
+- **Note finale** : 15 × 0.7 = **10.5/20** ❌
 
 > 💡 **Philosophie** : L'IA est un outil d'apprentissage légitime. Ce système valorise le travail en présentiel sans pénaliser excessivement ceux qui terminent chez eux. Même avec un coefficient réduit, un excellent travail reste reconnu.
 
@@ -69,7 +86,7 @@ Chaque jalon reçoit un **coefficient de bonus** selon les commits :
    git push
    ```
 
-2. **N'attendez pas la dernière minute** pour pousser le tag
+2. **Poussez le tag avant la fin de la séance**
    ```bash
    git tag TD1-domain
    git push origin TD1-domain
@@ -83,10 +100,10 @@ Chaque jalon reçoit un **coefficient de bonus** selon les commits :
 
 4. **Testez régulièrement** : `pytest` avant chaque commit
 
-5. **Si vous finissez en avance** : Explorez les **bonus facultatifs** à la fin de chaque TD
-   - Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent **améliorer votre note**
-   - Exemples : tests avancés, validation supplémentaire, documentation enrichie
-   - Les bonus comptent comme un critère de qualité dans l'évaluation du jalon
+5. **Si vous finissez en avance** : Réalisez les **bonus facultatifs** à la fin de chaque TD
+   - Chaque bonus = **+0.5 point** sur la note finale (max +1 point)
+   - ⚠️ **Bonus comptés uniquement si tag poussé pendant la séance**
+   - Exemples : tests avancés (parametrize, fixtures), attributs supplémentaires, fichiers de configuration
 
 ---
 
@@ -104,7 +121,7 @@ Chaque jalon reçoit un **coefficient de bonus** selon les commits :
 10:15 - Fin de séance
 ```
 
-**Résultat** : 4 commits répartis + tag à l'heure → **Coefficient 1.0** ✅
+**Résultat** : 4 commits + tag poussé pendant la séance → **Coefficient 1.0** ✅
 
 ---
 
