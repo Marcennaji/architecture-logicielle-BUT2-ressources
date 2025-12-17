@@ -60,8 +60,9 @@ GitHub n'accepte plus les mots de passe pour Git. Vous devez créer un **token**
 
 > ⚠️ **Obligatoire** : Sans cela, votre travail ne pourra pas être évalué !
 
-### 5. Cloner et initialiser sur votre machine de travail
-Allez dans le répertoire où vous voulez cloner votre projet, puis:
+### 5. Cloner le repository sur votre machine
+
+Ouvrez un terminal et allez dans le répertoire où vous voulez cloner votre projet :
 
 ```bash
 git clone https://github.com/VOTRE-USERNAME/ticketing.git
@@ -73,13 +74,45 @@ Git vous demandera vos identifiants :
 
 > 💡 Le token ne s'affiche pas quand vous le collez, c'est normal. Faites Ctrl+Shift+V puis Entrée.
 
-Puis initialisez :
+### 6. Identifier votre repository
+
+**⚠️ Si votre nom d'utilisateur GitHub ne correspond pas à votre nom réel** (ex: `dark_coder_666`), l'enseignant ne pourra pas savoir à qui appartient le repository.
+
+**Solution** : Ajoutez vos nom et prénom en haut du fichier `README.md` :
+
 ```bash
 cd ticketing
+# Éditez README.md avec VS Code, nano, ou votre éditeur préféré
+```
+
+Ajoutez en haut du fichier :
+```markdown
+# Projet Ticketing - Architecture Logicielle
+
+**Étudiant** : Prénom NOM
+
+---
+
+[reste du README...]
+```
+
+Puis commitez et poussez :
+```bash
+git add README.md
+git commit -m "Ajout identification étudiant"
+git push origin main
+```
+
+### 7. Initialiser l'environnement
+
+> 💡 **Environnement de travail** : Ces TDs sont conçus pour Linux (machines de l'IUT). 
+
+```bash
+cd ticketing  # si pas déjà dans le dossier
 source scripts/init.sh
 ```
 
-Le script configure tout automatiquement.
+Le script configure automatiquement l'environnement Python et installe les dépendances.
 
 **Vérification finale** : Si vous voyez ce message à la fin, c'est bon ✅ :
 ```
