@@ -25,12 +25,12 @@ Créer les entités du domaine (Status, User, Ticket) avec les règles métier d
 
 ### 1. Compréhension du domaine (15 min)
 
-En petits groupes, répondez aux questions suivantes :
+Individuellement ou en binôme, répondez aux questions suivantes :
 
 - Qu'est-ce qu'un **ticket** dans un système de support ?
 - Quelles informations minimales doit-il contenir ?
 - Quels **statuts** peut-il prendre au cours de sa vie ?
-- Quels rôles d'utilisateur existe-t-il (simple user, support, admin…) ?
+- Quels rôles un utilisateur peut-il prendre ?
 
 📝 **Livrable** : Notez vos réponses dans un fichier `docs/domain-notes.md` de votre dépôt.
 
@@ -45,6 +45,28 @@ src/domain/
 ├── user.py          # Classe User (TODO)  
 ├── ticket.py        # Classe Ticket (TODO)
 └── exceptions.py    # Erreurs métier (fourni)
+```
+
+💡 **Note sur les dataclasses** : 
+Les classes du domaine utilisent `@dataclass`, une fonctionnalité Python qui simplifie la création de classes. Au lieu d'écrire un `__init__` avec tous les paramètres, vous déclarez simplement les attributs avec leur type :
+
+```python
+from dataclasses import dataclass
+
+@dataclass
+class User:
+    id: str
+    username: str
+    is_agent: bool = False  # Valeur par défaut
+```
+
+Pour valider les attributs après création, utilisez la méthode spéciale `__post_init__` :
+
+```python
+def __post_init__(self):
+    """S'exécute automatiquement après la création."""
+    if not self.username:
+        raise ValueError("Username cannot be empty")
 ```
 
 ### 3. Implémenter l'énumération Status (20 min)
