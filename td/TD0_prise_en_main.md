@@ -250,6 +250,8 @@ git commit -m "TD0: Ajout fonction calculate_duration_hours et ses tests"
 > git add .
 > git commit -m "votre message"
 > ```
+>
+> 💡 **Conseil pratique** : Pour éviter toute surprise, prenez l'habitude de toujours faire `git add .` (ajouter tous les fichiers modifiés) avant de committer, plutôt que d'ajouter fichier par fichier.
 
 ### 3.4 Pousser sur GitHub
 
