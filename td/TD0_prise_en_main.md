@@ -6,7 +6,7 @@
 
 > **Prérequis** : [Guide de démarrage](guides/demarrage.md) suivi (repository cloné, `scripts/init.sh` exécuté)  
 > **Objectif** : Maîtriser le workflow de développement Git/GitHub utilisé pour tous les TDs  
-> **⚠️ Obligatoire mais non noté** : Ce TD valide votre setup et votre compréhension du workflow
+> **⚠️ Obligatoire mais NON NOTÉ** : Ce TD sert uniquement à valider votre setup et votre compréhension du workflow. Il n'entre pas dans le calcul de la note finale du module. Les jalons notés commencent à partir de TD1.
 
 > **🚨 Important pour le groupe qui a TD1a juste après** : Vous devez impérativement terminer ce TD0 pendant cette séance de 2h car vous enchaînez directement sur TD1a. Travaillez efficacement !
 
