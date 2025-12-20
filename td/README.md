@@ -15,15 +15,15 @@ Ces guides sont à consulter tout au long du module :
 | Séance | Jalon | Tag | Fichier | Statut |
 |--------|-------|-----|---------|--------|
 | 1 | TD0 | `TD0` | [TD0_prise_en_main.md](TD0_prise_en_main.md) | ✅ Disponible |
-| 2 | TD1a : Entités domaine | `TD1-domain` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1a-2h--tag-td1-domain) | ✅ Disponible |
-| 3 | TD1b : Tests domaine | `TD1-tests` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1b-2h--tag-td1-tests) | ✅ Disponible |
-| 4 | TD2a : Ports + use case | `TD2-ports` | 🔒 Bientôt | 🔒 Bientôt |
-| 5 | TD2b : Use cases complets | `TD2-usecases` | 🔒 Bientôt | 🔒 Bientôt |
-| 6 | TD3a : Repository pattern | `TD3-repository` | 🔒 Bientôt | 🔒 Bientôt |
-| 7 | TD3b : SQLite adapter | `TD3-sqlite-1` | 🔒 Bientôt | 🔒 Bientôt |
-| 8 | TD3c : SQLite CRUD | `TD3-sqlite-2` | 🔒 Bientôt | 🔒 Bientôt |
-| 9 | TD4a : API REST | `TD4-api` | 🔒 Bientôt | 🔒 Bientôt |
-| 10 | TD4b : Tests E2E | `TD4-complete` | 🔒 Bientôt | 🔒 Bientôt |
+| 2 | TD1a : Entités domaine | `TD1a` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1a-2h--tag-td1a) | ✅ Disponible |
+| 3 | TD1b : Tests domaine | `TD1b` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1b-2h--tag-td1b) | ✅ Disponible |
+| 4 | TD2a : Ports + use case | `TD2a` | 🔒 Bientôt | 🔒 Bientôt |
+| 5 | TD2b : Use cases complets | `TD2b` | 🔒 Bientôt | 🔒 Bientôt |
+| 6 | TD3a : Repository pattern | `TD3a` | 🔒 Bientôt | 🔒 Bientôt |
+| 7 | TD3b : SQLite adapter | `TD3b` | 🔒 Bientôt | 🔒 Bientôt |
+| 8 | TD3c : SQLite CRUD | `TD3c` | 🔒 Bientôt | 🔒 Bientôt |
+| 9 | TD4a : API REST | `TD4a` | 🔒 Bientôt | 🔒 Bientôt |
+| 10 | TD4b : Tests E2E | `TD4b` | 🔒 Bientôt | 🔒 Bientôt |
 
 > 💡 **Volume total** : 10 jalons de 2h = 20h de TD en présentiel.  
 > Chaque jalon est évalué indépendamment avec son propre tag Git.  

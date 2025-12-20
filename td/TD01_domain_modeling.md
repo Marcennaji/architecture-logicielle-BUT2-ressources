@@ -14,7 +14,7 @@ Ce TD couvre la modélisation du domaine métier du système de ticketing. Il es
 
 ---
 
-## 📦 Jalon TD1a (2h) → Tag `TD1-domain`
+## 📦 Jalon TD1a (2h) → Tag `TD1a`
 
 **⏰ Durée : 1 séance de 2h**
 
@@ -165,15 +165,15 @@ Avant la fin de la séance :
 
 **Git** :
 - [ ] ≥ 3 commits répartis pendant la séance (pas tout à la fin)
-- [ ] Tag `TD1-domain` créé et poussé :
+- [ ] Tag `TD1a` créé et poussé :
   ```bash
-  git tag TD1-domain
-  git push origin TD1-domain
+  git tag TD1a
+  git push origin TD1a
   ```
 
 ---
 
-## 📦 Jalon TD1b (2h) → Tag `TD1-tests`
+## 📦 Jalon TD1b (2h) → Tag `TD1b`
 
 **⏰ Durée : 1 séance de 2h** (séance suivant TD1a)
 
@@ -405,10 +405,10 @@ Avant la fin de la séance :
 
 **Git** :
 - [ ] ≥ 3 commits répartis pendant la séance
-- [ ] Tag `TD1-tests` créé et poussé :
+- [ ] Tag `TD1b` créé et poussé :
   ```bash
-  git tag TD1-tests
-  git push origin TD1-tests
+  git tag TD1b
+  git push origin TD1b
   ```
 
 ---
@@ -419,7 +419,7 @@ Une fois les 2 jalons terminés, vous devez avoir :
 - ✅ Entités du domaine complètes et testées
 - ✅ Règles métier implémentées et validées
 - ✅ Aucune dépendance externe dans `domain/`
-- ✅ 2 tags poussés : `TD1-domain` et `TD1-tests`
+- ✅ 2 tags poussés : `TD1a` et `TD1b`
 - ✅ ≥ 6 commits au total (≥ 3 par jalon)
 
 **Conseil** : Si vous n'avez pas fini un jalon pendant la séance, vous pouvez le terminer chez vous, mais votre coefficient de bonus sera réduit. Voir [evaluation_jalons.md](evaluation_jalons.md) pour les détails.

@@ -13,15 +13,15 @@ Chaque séance de TD de 2h constitue un **jalon évaluable indépendant** avec s
 | Séance | Jalon | Tag Git | Contenu |
 |--------|-------|---------|---------|
 | 1 | TD0 | `TD0` | Prise en main workflow Git/GitHub |
-| 2 | TD1a | `TD1-domain` | Entités domaine (Ticket, User, Status) + règles métier de base |
-| 3 | TD1b | `TD1-tests` | Tests unitaires du domaine complets |
-| 4 | TD2a | `TD2-ports` | Définition des ports + use case création ticket |
-| 5 | TD2b | `TD2-usecases` | Use cases complets (assign, close, list) |
-| 6 | TD3a | `TD3-repository` | Repository pattern + implémentation in-memory |
-| 7 | TD3b | `TD3-sqlite-1` | SQLite adapter (connexion + création tables) |
-| 8 | TD3c | `TD3-sqlite-2` | SQLite CRUD complet + tests d'intégration |
-| 9 | TD4a | `TD4-api` | API REST FastAPI (endpoints CRUD de base) |
-| 10 | TD4b | `TD4-complete` | Tests E2E + finalisation (après QCM 45mn) |
+| 2 | TD1a | `TD1a` | Entités domaine (Ticket, User, Status) + règles métier de base |
+| 3 | TD1b | `TD1b` | Tests unitaires du domaine complets |
+| 4 | TD2a | `TD2a` | Définition des ports + use case création ticket |
+| 5 | TD2b | `TD2b` | Use cases complets (assign, close, list) |
+| 6 | TD3a | `TD3a` | Repository pattern + implémentation in-memory |
+| 7 | TD3b | `TD3b` | SQLite adapter (connexion + création tables) |
+| 8 | TD3c | `TD3c` | SQLite CRUD complet + tests d'intégration |
+| 9 | TD4a | `TD4a` | API REST FastAPI (endpoints CRUD de base) |
+| 10 | TD4b | `TD4b` | Tests E2E + finalisation (après QCM 45mn) |
 
 **Total : 10 jalons évalués**
 
@@ -96,8 +96,8 @@ Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point po
 
 2. **Poussez le tag avant la fin de la séance**
    ```bash
-   git tag TD1-domain
-   git push origin TD1-domain
+   git tag TD1a
+   git push origin TD1a
    ```
 
 3. **Travaillez en itérations** :
@@ -125,7 +125,7 @@ Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point po
 09:15 - Commit 2 : "Add User class with basic attributes"
 09:45 - Commit 3 : "Add Ticket class with id, title, description"
 10:00 - Commit 4 : "Add business rule: title cannot be empty"
-10:10 - Tag + push : git tag TD1-domain && git push origin TD1-domain
+10:10 - Tag + push : git tag TD1a && git push origin TD1a
 10:15 - Fin de séance
 ```
 
