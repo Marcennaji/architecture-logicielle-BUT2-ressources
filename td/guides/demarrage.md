@@ -107,6 +107,28 @@ git push origin main
 
 > 💡 **Environnement de travail** : Ces TDs sont conçus pour Linux (machines de l'IUT). 
 
+**Sur les machines IUT (Ubuntu)**, installez d'abord le package python3-venv :
+
+```bash
+sudo apt update
+sudo apt install -y python3-venv
+```
+
+> 💡 Cette installation est nécessaire une seule fois par machine. Si la commande échoue (ex: pas de droits sudo), demandez de l'aide.
+
+**⚠️ Si l'installation échoue (erreur de droits d'écriture)** :
+
+1. **Option 1** : Demandez à l'enseignant ou au responsable de salle d'installer le package
+2. **Option 2** : Changez de machine (le package est peut-être déjà installé sur d'autres postes)
+3. **Option 3** : Vérifiez d'abord si c'est nécessaire en testant directement :
+   ```bash
+   cd ticketing
+   python3 -m venv .venv
+   ls .venv/bin/activate   # Si ce fichier existe, python3-venv est déjà installé
+   ```
+
+Puis initialisez l'environnement du projet :
+
 ```bash
 cd ticketing  # si pas déjà dans le dossier
 source scripts/init.sh
