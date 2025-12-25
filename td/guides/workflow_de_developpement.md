@@ -175,6 +175,27 @@ L'enseignant est là pour vous aider à progresser tout au long du module.
 
 ---
 
+## 🎨 Vérifier la qualité du code (optionnel)
+
+Pour détecter automatiquement les violations de conventions Python (PEP 8) avant de committer :
+
+```bash
+# Installation (une seule fois)
+pip install ruff
+
+# Vérifier le code
+ruff check src/domain/
+
+# Corriger automatiquement ce qui peut l'être
+ruff check --fix src/
+```
+
+**Pourquoi ?** Les conventions Python (noms de classes, variables, etc.) sont signalées dans le rapport d'évaluation mais ne pénalisent pas la note. Néanmoins, respecter ces conventions rend le code plus lisible et professionnel.
+
+💡 **Note** : Si vous avez cloné le template récemment, la vérification automatique est déjà configurée dans les pre-commit hooks.
+
+---
+
 ## Ressources complémentaires
 
 - [Git - Aide-mémoire](git_aide_memoire.md) : Commandes Git essentielles (ligne de commande + VS Code)
