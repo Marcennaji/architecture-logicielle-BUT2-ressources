@@ -23,6 +23,28 @@ Ce TD couvre la modélisation du domaine métier du système de ticketing. Il es
 ### Objectif du jalon
 Créer les entités du domaine (Status, User, Ticket) avec les règles métier de base.
 
+### 📊 Barème de notation (sur 20)
+
+**Critères obligatoires (15 pts)** :
+- **Fichiers présents** (8 pts) : `status.py`, `user.py`, `ticket.py`
+- **Classes de base** (5 pts) : Status, User, Ticket, DomainError
+- **Indépendance technique** (2 pts) : Aucun import externe (fastapi, sqlite3, requests...)
+
+**Bonus domaine riche** (max +5 pts) :
+- Entités supplémentaires : +1 pt par classe (Comment, Priority, Project...)
+- Exceptions métier : +0.5 pt par classe (*Error, *Exception)
+- Maximum cumulé : 5 pts bonus
+
+**Coefficient présentiel** :
+- Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le détail des coefficients
+- En résumé : ×1.0 si tag pendant séance, sinon réduit selon le délai
+
+**Conseils qualité** (0 pt, feedback uniquement) :
+- Qualité du code : TODO/FIXME, code commenté, conventions Python
+- Ces aspects sont signalés dans le rapport mais ne pénalisent pas la note
+
+💡 **Exemple de calcul** : 15/15 (base) + 3/5 (bonus) = 18/20 brut × 1.0 (présentiel) = **18/20 final**
+
 ### 1. Compréhension du domaine (15 min)
 
 Individuellement ou en binôme, répondez aux questions suivantes :
@@ -48,7 +70,7 @@ src/domain/
 ```
 
 💡 **Note sur les dataclasses** : 
-Les classes du domaine utilisent `@dataclass`, une fonctionnalité Python qui simplifie la création de classes. Au lieu d'écrire un `__init__` avec tous les paramètres, vous déclarez simplement les attributs avec leur type :
+Les classes du domaine utilisent `@dataclass`, une fonctionnalité Python qui simplifie la création de classes :
 
 ```python
 from dataclasses import dataclass
@@ -58,15 +80,11 @@ class User:
     id: str
     username: str
     is_agent: bool = False  # Valeur par défaut
-```
 
-Pour valider les attributs après création, utilisez la méthode spéciale `__post_init__` :
-
-```python
-def __post_init__(self):
-    """S'exécute automatiquement après la création."""
-    if not self.username:
-        raise ValueError("Username cannot be empty")
+    def __post_init__(self):
+        """Validation après création."""
+        if not self.username:
+            raise ValueError("Username cannot be empty")
 ```
 
 ### 3. Implémenter l'énumération Status (20 min)
@@ -150,22 +168,18 @@ Par exemple, ajoutez des règles métier supplémentaires :
 
 ---
 
-### ✅ Critères de soumission TD1a
-
-Avant la fin de la séance :
+### ✅ Checklist avant de soumettre
 
 **Code** :
-- [ ] `Status` contient au moins 4 valeurs (OPEN, IN_PROGRESS, RESOLVED, CLOSED)
-- [ ] `User` a les attributs `id`, `username`, `is_agent`, `is_admin`
-- [ ] `Ticket` a tous les attributs obligatoires (id, title, description, status, creator_id, assignee_id)
-- [ ] La méthode `assign()` est implémentée
-- [ ] Au moins 2 règles métier sont codées (titre non vide + username non vide)
-- [ ] Le fichier `docs/domain-notes.md` existe avec vos réflexions
-- [ ] **Aucune dépendance externe** dans le dossier `domain/`
+- [ ] Fichiers : `status.py`, `user.py`, `ticket.py` créés
+- [ ] Classes : Status (enum), User, Ticket implémentées
+- [ ] Méthode `assign()` dans Ticket
+- [ ] Règles métier : titre non vide, username non vide
+- [ ] **Aucun import externe** (fastapi, sqlite3, requests)
 
 **Git** :
-- [ ] ≥ 3 commits répartis pendant la séance (pas tout à la fin)
-- [ ] Tag `TD1a` créé et poussé :
+- [ ] ≥ 3 commits pendant la séance
+- [ ] Tag `TD1a` poussé :
   ```bash
   git tag TD1a
   git push origin TD1a
@@ -179,6 +193,25 @@ Avant la fin de la séance :
 
 ### Objectif du jalon
 Écrire des tests unitaires complets pour valider le comportement du domaine.
+
+### 📊 Barème de notation (sur 20)
+
+**Critères obligatoires (15 pts)** :
+- **Tests passent** (8 pts) : `pytest tests/domain/` vert
+- **Couverture** (5 pts) : ≥ 80% sur `src/domain/`
+- **Tests des règles métier** (2 pts) : Chaque règle a son test
+
+**Bonus tests avancés** (max +5 pts) :
+- Tests paramétriques : +1 pt
+- Fixtures complexes : +1 pt
+- Messages d'erreur testés : +1 pt
+- Couverture 100% : +2 pts
+
+**Coefficient présentiel** :
+- Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le détail
+- En résumé : ×1.0 si tag pendant séance, sinon réduit selon le délai
+
+💡 **Exemple** : 15/15 + 2/5 (bonus) = 17/20 × 1.0 = **17/20 final**
 
 ### 1. Compléter la classe Ticket (10 min)
 
@@ -390,22 +423,18 @@ class Ticket:
 
 ---
 
-### ✅ Critères de soumission TD1b
-
-Avant la fin de la séance :
+### ✅ Checklist avant de soumettre
 
 **Tests** :
-- [ ] Méthode `close()` implémentée dans Ticket
-- [ ] Règle "ticket fermé non assignable" implémentée dans `assign()`
-- [ ] Tous les tests de base passent (Status, User, Ticket)
-- [ ] Chaque règle métier a son test (4 règles au total)
-- [ ] Tests des méthodes `assign()` et `close()`
-- [ ] `pytest tests/domain/` passe entièrement (vert)
-- [ ] Couverture ≥ 80% sur `src/domain/`
+- [ ] Méthode `close()` implémentée
+- [ ] Règle "ticket fermé non assignable" dans `assign()`
+- [ ] `pytest tests/domain/` vert (tous les tests passent)
+- [ ] Couverture ≥ 80% : `pytest --cov=src/domain`
+- [ ] Chaque règle métier a son test (4 minimum)
 
 **Git** :
-- [ ] ≥ 3 commits répartis pendant la séance
-- [ ] Tag `TD1b` créé et poussé :
+- [ ] ≥ 3 commits pendant la séance
+- [ ] Tag `TD1b` poussé :
   ```bash
   git tag TD1b
   git push origin TD1b
@@ -415,11 +444,11 @@ Avant la fin de la séance :
 
 ## 🎯 Validation globale TD1
 
-Une fois les 2 jalons terminés, vous devez avoir :
-- ✅ Entités du domaine complètes et testées
-- ✅ Règles métier implémentées et validées
-- ✅ Aucune dépendance externe dans `domain/`
-- ✅ 2 tags poussés : `TD1a` et `TD1b`
-- ✅ ≥ 6 commits au total (≥ 3 par jalon)
+À la fin des 2 jalons :
+- ✅ Domaine complet : Status, User, Ticket + règles métier
+- ✅ Tests passent : `pytest tests/domain/` vert
+- ✅ Couverture ≥ 80%
+- ✅ Indépendance : aucun import externe
+- ✅ Tags poussés : `TD1a` et `TD1b`
 
-**Conseil** : Si vous n'avez pas fini un jalon pendant la séance, vous pouvez le terminer chez vous, mais votre coefficient de bonus sera réduit. Voir [evaluation_jalons.md](evaluation_jalons.md) pour les détails.
+💡 **Coefficient présentiel** : Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le barème complet
