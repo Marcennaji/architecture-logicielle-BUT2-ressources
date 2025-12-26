@@ -54,7 +54,50 @@ Pour qu'un jalon soit considéré comme **validé en présentiel avec coefficien
 
 **⚠️ Les bonus ne sont comptabilisés QUE si le tag est poussé pendant la séance** (avec un coefficient 1.0).
 
-Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +1 point pour 2 bonus).
+Chaque bonus réalisé ajoute **+0.5 point** à la note de base (max +5 points).
+
+#### Calcul des bonus - Classes Exception du domaine
+
+Une classe Exception donne droit à un bonus de **+0.5 point** uniquement si :
+
+1. ✅ Elle hérite (directement ou indirectement) de `Exception`
+2. ✅ Elle est **effectivement levée** (`raise` en Python) dans le code métier du domaine
+
+**⚠️ Pénalité** : Une exception définie mais **jamais levée** = **-0.5 point**
+
+**Exemples :**
+
+❌ **Exception fantôme (pénalité -0.5 pt)** :
+```python
+# exceptions.py - Exception définie
+class TicketNotFoundError(DomainError):
+    pass
+
+# Aucun fichier ne fait: raise TicketNotFoundError(...)
+```
+→ Exception créée "au cas où" = **-0.5 point**
+
+✅ **Exception utilisée (bonus +0.5 pt)** :
+```python
+# exceptions.py
+class InvalidStatusTransitionError(DomainError):
+    pass
+
+# ticket.py - Exception levée dans une règle métier
+def close(self):
+    if self.status == Status.CLOSED:
+        raise InvalidStatusTransitionError("Already closed")
+    self.status = Status.CLOSED
+```
+→ Exception utilisée dans le domaine = **+0.5 point**
+
+**Principe** : Une exception existe parce qu'elle est levée dans une règle métier, pas "au cas où un futur Use Case en aurait besoin". En architecture hexagonale, les Use Cases *consomment* les exceptions, ils ne les anticipent pas.
+
+#### Autres bonus
+
+- Entités métier supplémentaires : **+1.0 pt/classe** (Comment, Priority, Project, etc.)
+- Tests avancés (parametrize, fixtures) : **+0.5 pt**
+- Configuration externe (YAML, ENV) : **+0.5 pt**
 
 ### 3. Calcul final
 
