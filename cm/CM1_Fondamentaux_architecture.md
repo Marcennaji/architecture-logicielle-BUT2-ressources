@@ -715,6 +715,7 @@ https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
 **📚 Ressources complémentaires :**
 - Annexes : [Guide de lecture + 3 annexes thématiques](https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources/blob/main/export/annexe_00_guide_lecture.pdf)
+- Bibliographie : [Just Enough Software Architecture](https://www.georgefairbanks.com/book/), [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/)
 - Articles : [Architecture Hexagonale (OCTO)](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation)
 - Toutes les ressources : https://github.com/Marcennaji/architecture-logicielle-BUT2-ressources
 
