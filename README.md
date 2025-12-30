@@ -48,8 +48,9 @@ Guides de démarrage, workflow Git, liste des 10 jalons, et système d'évaluati
 - [Architecture hexagonale : 3 principes et un exemple — OCTO](https://blog.octo.com/architecture-hexagonale-trois-principes-et-un-exemple-dimplementation/) *(FR)*
 
 ### Outils utilisés
-- [Documentation FastAPI](https://fastapi.tiangolo.com/)
+- [Documentation FastAPI (API REST python)](https://fastapi.tiangolo.com/)
 - [Documentation pytest](https://docs.pytest.org/)
 
-### Pour aller plus loin
-- 📘 **Modern Software Engineering** — David Farley *(EN)* : vision pragmatique de l'ingénierie logicielle moderne
+### Bibliographie
+- 📘 [Just Enough Software Architecture](https://www.georgefairbanks.com/book/) : l'essentiel à connaître, ouvrage pragmatique et clair. Si vous n'en lisez qu'un, c'est celui-là !
+- 📘 [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/) : pour une vision plus large, ouvrage excellent, mais plus dense
