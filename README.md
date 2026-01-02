@@ -52,5 +52,15 @@ Guides de démarrage, workflow Git, liste des 10 jalons, et système d'évaluati
 - [Documentation pytest](https://docs.pytest.org/)
 
 ### Bibliographie
-- 📘 [Just Enough Software Architecture](https://www.georgefairbanks.com/book/) : l'essentiel à connaître, ouvrage pragmatique et clair. Si vous n'en lisez qu'un, c'est celui-là !
-- 📘 [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/) : pour une vision plus large, ouvrage excellent, mais plus dense
+
+- 📘 [Head First - Software Architecture](https://www.oreilly.com/library/view/head-first-software/9781098134341/) 
+   --> Le livre pour comprendre l’architecture logicielle facilement, avec des exemples concrets et sans jargon inutile.
+
+- 📘 [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/) 
+   --> Ce livre vous donne le vocabulaire et les bases pour comprendre l’architecture logicielle.
+
+- 📘 [Just Enough Software Architecture](https://www.georgefairbanks.com/book/)
+   --> Ce livre explique comment prendre de bonnes décisions d’architecture en projet réel.
+
+Lisez-les dans l'ordre que vous voulez (ou piochez dedans selon vos besoins), mais assurez-vous qu'à un moment donné, vous aurez lu et compris "Fundamentals".
+
