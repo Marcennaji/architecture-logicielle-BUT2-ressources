@@ -25,11 +25,11 @@ Créer les entités du domaine (Status, User, Ticket) avec les règles métier d
 
 **Critères obligatoires (15 pts)** :
 - **Fichiers présents** (8 pts) : `status.py`, `user.py`, `ticket.py`
-- **Classes de base** (5 pts) : Status, User, Ticket, DomainError
+- **Classes de base (minimum requis à ce stade)** (5 pts) : Status, User, Ticket, DomainError
 - **Indépendance technique** (2 pts) : Aucun import externe (fastapi, sqlite3, requests...)
 
 **Bonus domaine riche** (max +5 pts) :
-- Entités supplémentaires : +1 pt par classe (Comment, Priority, Project...)
+- Entités supplémentaires : +1 pt par classe 
 - Exceptions métier : +0.5 pt par classe (*Error, *Exception)
 - Maximum cumulé : 5 pts bonus
 
@@ -51,6 +51,7 @@ Individuellement ou en binôme, répondez aux questions suivantes :
 - Quelles informations minimales doit-il contenir ?
 - Quels **statuts** peut-il prendre au cours de sa vie ?
 - Quels rôles un utilisateur peut-il prendre ?
+- Quelles autres entités métier seront certainement nécessaires, pour notre système de traçage des bugs ?
 
 📝 **Livrable** : Notez vos réponses dans un fichier `docs/domain-notes.md` de votre dépôt.
 
@@ -85,7 +86,7 @@ class User:
             raise ValueError("Username cannot be empty")
 ```
 
-### 3. Implémenter l'énumération Status (20 min)
+### 3. Implémenter l'énumération Status 
 
 Ouvrez `src/domain/status.py` et complétez l'énumération `Status`.
 
@@ -102,7 +103,7 @@ git commit -m "Add Status enum with lifecycle values"
 git push
 ```
 
-### 4. Implémenter la classe User (25 min)
+### 4. Implémenter la classe User
 
 Ouvrez `src/domain/user.py` et complétez la classe `User`.
 
@@ -119,7 +120,7 @@ git commit -m "Add User class with attributes"
 git push
 ```
 
-### 5. Implémenter la classe Ticket (30 min)
+### 5. Implémenter la classe Ticket
 
 Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 
@@ -134,7 +135,7 @@ Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 
 💡 **Note** : La méthode `close()` sera implémentée dans TD1b (avec ses tests).
 
-### 6. Règles métier (invariants) (15 min)
+### 6. Règles métier (invariants) 
 
 Implémentez au moins **2 règles métier** dans vos classes :
 
@@ -163,17 +164,17 @@ Par exemple, ajoutez des règles métier supplémentaires :
 - Le username doit être alphanumérique
 - Seul un admin peut créer un ticket avec statut différent de OPEN
 - etc...
+Vous pouvez également ajouter des entités métiers, autres que le groupe minimal (Status, User, Ticket, DomainError) qui a été donné.
 
 ---
 
 ### ✅ Checklist avant de soumettre
 
 **Code** :
-- [ ] Fichiers : `status.py`, `user.py`, `ticket.py` créés
+- [ ] Fichiers : au minimum, `status.py`, `user.py`, `ticket.py` créés
 - [ ] Classes : Status (enum), User, Ticket implémentées
 - [ ] Méthode `assign()` dans Ticket
 - [ ] Règles métier : titre non vide, username non vide
-- [ ] **Aucun import externe** (fastapi, sqlite3, requests)
 
 **Git** :
 - [ ] ≥ 3 commits pendant la séance
