@@ -11,26 +11,13 @@ main
   │
   ├─ commits séance 1 ─→ tag TD0
   │
-  ├─ commits séance 2 ─→ tag TD1-domain
+  ├─ commits séance 2 ─→ tag TD1a
   │
-  ├─ commits séance 3 ─→ tag TD1-tests
+  ├─ commits séance 3 ─→ tag TD1b
   │
-  ├─ commits séance 4 ─→ tag TD2-ports
   │
   └─ ... (10 jalons au total)
 ```
-
-**Tags obligatoires** (10 jalons) :
-- `TD0` - Prise en main Git/GitHub
-- `TD1-domain` - Entités du domaine
-- `TD1-tests` - Tests unitaires domaine
-- `TD2-ports` - Ports + use case création
-- `TD2-usecases` - Use cases complets
-- `TD3-repository` - Repository pattern
-- `TD3-sqlite-1` - SQLite adapter de base
-- `TD3-sqlite-2` - SQLite CRUD complet
-- `TD4-api` - API REST
-- `TD4-complete` - Tests E2E + finalisation
 
 > 💡 **Pourquoi cette approche ?** Chaque séance de 2h est évaluable immédiatement. Cela valorise le travail en présentiel et évite l'accumulation de retard.
 
@@ -78,13 +65,13 @@ git push origin main
 pytest
 
 # Créer le tag du jalon (nom EXACT requis)
-git tag TD1-domain  # Exemple pour le jalon TD1a
+git tag TD1a  # Exemple pour le jalon TD1a
 
 # Pousser le tag sur GitHub
-git push origin TD1-domain
+git push origin TD1a
 ```
 
-> ⚠️ **Attention** : Le nom du tag doit être **exactement** celui indiqué dans le TD (`TD0`, `TD1-domain`, `TD1-tests`, etc.).
+> ⚠️ **Attention** : Le nom du tag doit être **exactement** celui indiqué dans le TD (`TD0`, `TD1a`, `TD1b`, etc.).
 
 > 📊 **Évaluation** : Votre coefficient de bonus dépend du moment où vous poussez le tag et de la répartition de vos commits. Voir [evaluation_jalons.md](../evaluation_jalons.md) pour les détails.
 
@@ -96,8 +83,8 @@ git push origin TD1-domain
 | Commit | `git commit -m "message"` |
 | Push vers GitHub | `git push origin main` |
 | Vérifier tests | `pytest` |
-| Créer un tag | `git tag TD1-domain` (voir nom exact dans le TD) |
-| Pousser le tag | `git push origin TD1-domain` |
+| Créer un tag | `git tag TD1a` (voir nom exact dans le TD) |
+| Pousser le tag | `git push origin TD1a` |
 
 ## Bonnes pratiques
 
