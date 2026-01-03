@@ -21,29 +21,7 @@ Ce TD couvre la modélisation du domaine métier du système de ticketing. Il es
 ### Objectif du jalon
 Créer les entités du domaine (Status, User, Ticket) avec les règles métier de base.
 
-### 📊 Barème de notation (sur 20)
-
-**Critères obligatoires (15 pts)** :
-- **Fichiers présents** (8 pts) : `status.py`, `user.py`, `ticket.py`
-- **Classes de base (minimum requis à ce stade)** (5 pts) : Status, User, Ticket, DomainError
-- **Indépendance technique** (2 pts) : Aucun import externe (fastapi, sqlite3, requests...)
-
-**Bonus domaine riche** (max +5 pts) :
-- Entités supplémentaires : +1 pt par classe 
-- Exceptions métier : +0.5 pt par classe (*Error, *Exception)
-- Maximum cumulé : 5 pts bonus
-
-**Coefficient présentiel** :
-- Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le détail des coefficients
-- En résumé : ×1.0 si tag pendant séance, sinon réduit selon le délai
-
-**Conseils qualité** (0 pt, feedback uniquement) :
-- Qualité du code : TODO/FIXME, code commenté, conventions Python
-- Ces aspects sont signalés dans le rapport mais ne pénalisent pas la note
-
-💡 **Exemple de calcul** : 15/15 (base) + 3/5 (bonus) = 18/20 brut × 1.0 (présentiel) = **18/20 final**
-
-### 1. Compréhension du domaine (15 min)
+### 1. Compréhension du domaine 
 
 Individuellement ou en binôme, répondez aux questions suivantes :
 
@@ -99,7 +77,7 @@ Ouvrez `src/domain/status.py` et complétez l'énumération `Status`.
 💡 **Commit** : Une fois terminé, commitez vos changements :
 ```bash
 git add src/domain/status.py
-git commit -m "Add Status enum with lifecycle values"
+git commit -m "Ajout de l'enum Status, servant a gerer le cycle de vie d'un ticket"
 git push
 ```
 
@@ -133,8 +111,6 @@ Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 **Méthode métier à implémenter** :
 - `assign(user_id)` : assigne le ticket à un agent
 
-💡 **Note** : La méthode `close()` sera implémentée dans TD1b (avec ses tests).
-
 ### 6. Règles métier (invariants) 
 
 Implémentez au moins **2 règles métier** dans vos classes :
@@ -151,7 +127,7 @@ Implémentez au moins **2 règles métier** dans vos classes :
 💡 **Commit final** :
 ```bash
 git add src/domain/
-git commit -m "Add business rules to Ticket class"
+git commit -m "Ajout de regles metier a la classe Ticket "
 git push
 ```
 
@@ -164,11 +140,12 @@ Par exemple, ajoutez des règles métier supplémentaires :
 - Le username doit être alphanumérique
 - Seul un admin peut créer un ticket avec statut différent de OPEN
 - etc...
+
 Vous pouvez également ajouter des entités métiers, autres que le groupe minimal (Status, User, Ticket, DomainError) qui a été donné.
 
 ---
 
-### ✅ Checklist avant de soumettre
+### ✅ Checklist minimale avant de soumettre votre tag
 
 **Code** :
 - [ ] Fichiers : au minimum, `status.py`, `user.py`, `ticket.py` créés
