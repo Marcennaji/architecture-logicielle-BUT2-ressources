@@ -4,7 +4,7 @@
 
 ---
 
-## 🚀 Etapes à suivre
+## 🚀 Etapes à suivre (à faire chez vous, avant le tout premier TD)
 
 ### 1. Créer votre compte GitHub
 
