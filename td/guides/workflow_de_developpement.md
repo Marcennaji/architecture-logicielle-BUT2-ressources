@@ -19,7 +19,7 @@ main
   └─ ... (10 jalons au total)
 ```
 
-> 💡 **Pourquoi cette approche ?** Chaque séance de 2h est évaluable immédiatement. Cela valorise le travail en présentiel et évite l'accumulation de retard.
+> 💡 **Pourquoi cette approche ?** Chaque séance de 2h (i.e, "jalon") est évaluable immédiatement. Cela valorise le travail en présentiel et évite l'accumulation de retard.
 
 > ⚠️ **Support disponible** : Si vous rencontrez des difficultés, **contactez l'enseignant** pendant les séances ou par email. Ne restez pas bloqué !
 
