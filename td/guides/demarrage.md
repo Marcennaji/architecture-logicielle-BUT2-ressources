@@ -136,7 +136,7 @@ Si vous avez des erreurs, consultez la section "Problèmes fréquents" ci-dessou
 
 ---
 
-## 🔄 TD suivants
+## 🔄 Procédure à suivre au début des TD suivants
 
 ### PC fixes, ou PC portables attribués personnellement (compte personnel)
 
@@ -179,7 +179,7 @@ git push origin main
 git tag TD1              # ou TD2, TD3, TD4 selon le TD
 git push origin TD1
 
-# 3. Supprimer le dossier local
+# 3. Après vous être assurés que tout est sauvegardé correctement sur Github : supprimez le dossier local
 cd ~
 rm -rf ticketing
 ```
