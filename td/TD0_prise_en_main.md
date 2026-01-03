@@ -2,14 +2,10 @@
 
 ## 📦 Jalon TD0 (2h) → Tag `TD0`
 
-**⏰ Durée : 1 séance de 2h** (première séance du module)
+**⏰ Durée : 1 séance de 2h** 
 
 > **Prérequis** : [Guide de démarrage](guides/demarrage.md) suivi (repository cloné, `scripts/init.sh` exécuté)  
 > **Objectif** : Maîtriser le workflow de développement Git/GitHub utilisé pour tous les TDs  
-> **⚠️ Obligatoire mais NON NOTÉ** : Ce TD sert uniquement à valider votre setup et votre compréhension du workflow. Il n'entre pas dans le calcul de la note finale du module. Les jalons notés commencent à partir de TD1.
-
-> **🚨 Important pour le groupe qui a TD1a juste après** : Vous devez impérativement terminer ce TD0 pendant cette séance de 2h car vous enchaînez directement sur TD1a. Travaillez efficacement !
-
 ---
 
 ## 🎯 Objectifs de ce jalon
@@ -20,7 +16,7 @@
 2. ✅ Implémenter une fonction utilitaire simple avec ses tests
 3. ✅ Utiliser pytest pour valider votre code
 4. ✅ Faire des commits réguliers et les pousser sur GitHub
-5. ✅ Créer un tag pour marquer votre soumission
+5. ✅ Créer un tag pour indiquer que votre travail est prêt à être évalué par l'enseignant
 6. ✅ Comprendre le cycle complet de développement du module
 
 **Important** : Ce workflow (commits réguliers + tag) sera utilisé pour **tous les jalons** du module.
@@ -31,9 +27,7 @@
 
 **Vous DEVEZ le faire MAINTENANT** : [Guide de démarrage](guides/demarrage.md)
 
-**Temps nécessaire** : 15-20 minutes
-
-⚠️ **Pour le groupe qui enchaîne TD0+TD1a** : Si vous n'avez pas fait le guide avant d'arriver, **prévenez l'enseignant immédiatement** en début de séance. Une organisation spéciale sera mise en place pour vous permettre de finir TD1a à la maison sans pénalité.
+**Temps nécessaire** : environ 20 minutes
 
 ---
 
@@ -338,7 +332,7 @@ Avant la fin de la séance (ou avant le TD1 si non terminé) :
 
 **Code** :
 - [ ] Fichier `src/domain/utils.py` créé avec la fonction `calculate_duration_hours`
-- [ ] Fichier `tests/domain/test_utils.py` créé avec exactement 3 tests (suffisant pour TD0)
+- [ ] Fichier `tests/domain/test_utils.py` créé avec 3 tests (suffisant pour TD0)
 - [ ] Tous les tests passent (`pytest` en vert)
 - [ ] La fonction gère le cas où `end < start` (lève ValueError)
 
