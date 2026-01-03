@@ -15,8 +15,8 @@ Ces guides sont à consulter tout au long du module :
 | Séance | Jalon | Tag | Fichier | Statut |
 |--------|-------|-----|---------|--------|
 | 1 | TD0 | `TD0` | [TD0_prise_en_main.md](TD0_prise_en_main.md) | ✅ Disponible |
-| 2 | TD1a : Entités domaine | `TD1a` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1a-2h--tag-td1a) | ✅ Disponible |
-| 3 | TD1b : Tests domaine | `TD1b` | [TD01_domain_modeling.md](TD01_domain_modeling.md#-jalon-td1b-2h--tag-td1b) | ✅ Disponible |
+| 2 | TD1a : Entités domaine | `TD1a` | [TD1a_domain_modeling.md](TD1a_domain_modeling.md) | ✅ Disponible |
+| 3 | TD1b : Tests domaine | `TD1b` | 🔒 Bientôt | 🔒 Bientôt |
 | 4 | TD2a : Ports + use case | `TD2a` | 🔒 Bientôt | 🔒 Bientôt |
 | 5 | TD2b : Use cases complets | `TD2b` | 🔒 Bientôt | 🔒 Bientôt |
 | 6 | TD3a : Repository pattern | `TD3a` | 🔒 Bientôt | 🔒 Bientôt |
