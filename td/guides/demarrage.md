@@ -1,15 +1,5 @@
 # Guide de démarrage
 
-## ⚠️ PRÉREQUIS CRITIQUE AVANT LE TD0
-
-**Cette procédure DOIT être suivie AVANT d'arriver au TD0.**
-
-**📅 Groupes 2A, 2B, 2C (TD le 6 janvier)** :  
-Setup **OBLIGATOIRE** avant la première séance. Sans cela, vous ne pourrez pas suivre le TD efficacement.
-
-**📅 Groupe 2D (TD le 19 décembre)** :  
-Le setup sera fait ensemble pendant la première séance. Mais si vous avez le temps de le faire avant, c'est **fortement recommandé** pour gagner du temps et pouvoir terminer TD0 + TD1a dans les 4h.
-
 **Temps estimé** : 20-30 minutes
 
 ---
