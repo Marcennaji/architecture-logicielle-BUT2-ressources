@@ -452,7 +452,7 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 
 ---
 
-### 4.3 Les 3 couches (1/3)
+### 4.3 Les 5 composants de l'architecture (1/5)
 
 #### 🟢 DOMAIN (le cœur)
 
@@ -466,37 +466,7 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 
 ---
 
-### 4.3 Les 3 couches — exemple DOMAIN (2/3)
-
-```python
-# domain/ticket.py
-from dataclasses import dataclass
-from enum import Enum
-
-class Status(Enum):
-    OPEN = "open"
-    IN_PROGRESS = "in_progress"
-    RESOLVED = "resolved"
-    CLOSED = "closed"
-
-@dataclass
-class Ticket:
-    id: int
-    title: str
-    status: Status
-    assignee_id: int | None = None
-    
-    def assign(self, user_id: int) -> None:
-        """Règle métier : on ne peut assigner qu'un ticket ouvert."""
-        if self.status != Status.OPEN:
-            raise ValueError("Impossible d'assigner un ticket non ouvert")
-        self.assignee_id = user_id
-        self.status = Status.IN_PROGRESS
-```
-
----
-
-### 4.3 Les 3 couches — PORTS (3/4)
+### 4.3 Les 5 composants — PORTS (2/5)
 
 #### 🔵 PORTS (interfaces)
 
@@ -521,7 +491,7 @@ class TicketRepository(ABC):
 
 ---
 
-### 4.3 Les 3 couches — APPLICATION (4/5)
+### 4.3 Les 5 composants — APPLICATION (3/5)
 
 #### 🟡 APPLICATION (orchestration)
 
@@ -541,7 +511,7 @@ class CreateTicket:
 
 ---
 
-### 4.3 Les 3 couches — ADAPTERS (5/5)
+### 4.3 Les 5 composants — ADAPTERS (4/5)
 
 **Implémentations concrètes** des ports :
 
@@ -558,6 +528,28 @@ class InMemoryTicketRepository(TicketRepository):
             self.next_id += 1
         self.tickets[ticket.id] = ticket
 ```
+
+---
+
+### 4.3 Les 5 composants — COMPOSITION ROOT (5/5)
+
+#### 🟣 MAIN.PY (assemblage)
+
+**Rôle :** Point d'entrée qui **instancie** les adapters et les **injecte** dans les use cases.
+
+```python
+# main.py
+from adapters.db.ticket_repository_inmemory import InMemoryTicketRepository
+from application.usecases.create_ticket import CreateTicket
+
+# Instanciation des dépendances concrètes
+ticket_repo = InMemoryTicketRepository()
+
+# Injection dans les use cases
+create_ticket_usecase = CreateTicket(ticket_repository=ticket_repo)
+```
+
+👉 **C'est le seul endroit** où les dépendances concrètes sont instanciées.
 
 ---
 
