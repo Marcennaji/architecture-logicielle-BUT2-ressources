@@ -62,7 +62,7 @@ Guides de démarrage, workflow Git, liste des 10 jalons, et système d'évaluati
    --> Un ouvrage de référence, qui vous donne des bases larges et solides pour comprendre l’architecture logicielle.
 
 - 📘 [Just Enough Software Architecture](https://www.georgefairbanks.com/book/)
-   --> Ce livre explique comment prendre de bonnes décisions d’architecture en projet réel, compte-tenu des conditions environnantes et des risques spédcifiques liés au projet : ni trop d'architecture, ni pas assez (d'où le titre).
+   --> Ce livre explique comment prendre de bonnes décisions d’architecture en projet réel, compte-tenu des conditions environnantes et des risques spécifiques liés au projet : ne faire ni trop d'architecture, ni pas assez (d'où le titre).
 
 
 
