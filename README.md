@@ -54,13 +54,13 @@ Guides de démarrage, workflow Git, liste des 10 jalons, et système d'évaluati
 ### Bibliographie
 
 - 📘 [Head First - Software Architecture](https://www.oreilly.com/library/view/head-first-software/9781098134341/) 
-   --> Le livre pour comprendre l’architecture logicielle facilement, avec des exemples concrets et sans jargon inutile.
+   --> Le livre pour comprendre l’architecture logicielle facilement, avec des exemples concrets et sans jargon inutile. La série "Head First" se veut accessible, pragmatique et plaisante à lire. Ecrit par les auteurs de "Fundamentals of Software Architecture" (cf. ci-dessous).
 
 - 📘 [Fundamentals of Software Architecture](https://www.oreilly.com/library/view/fundamentals-of-software/9781492043447/) 
-   --> Ce livre vous donne le vocabulaire et les bases pour comprendre l’architecture logicielle.
+   --> Un ouvrage de référence, qui vous donne des bases larges et solides pour comprendre l’architecture logicielle.
 
 - 📘 [Just Enough Software Architecture](https://www.georgefairbanks.com/book/)
-   --> Ce livre explique comment prendre de bonnes décisions d’architecture en projet réel.
+   --> Ce livre explique comment prendre de bonnes décisions d’architecture en projet réel, compte-tenu des conditions environnantes et des risques spédcifiques liés au projet : ni trop d'architecture, ni pas assez (d'où le titre).
 
-Lisez-les dans l'ordre que vous voulez (ou piochez dedans selon vos besoins), mais assurez-vous qu'à un moment donné, vous aurez lu et compris "Fundamentals".
+
 
