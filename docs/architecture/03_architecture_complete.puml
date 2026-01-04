@@ -1,0 +1,190 @@
+@startuml
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+title Architecture Complète - Implémentation Hexagonale
+
+' Style
+skinparam package {
+  BackgroundColor<<Domain>> #E3F2FD
+  BackgroundColor<<Application>> #E8F5E9
+  BackgroundColor<<Ports>> #FFF9C4
+  BackgroundColor<<Adapters>> #FFEBEE
+  BackgroundColor<<Main>> #F3E5F5
+  BorderColor #424242
+  FontStyle bold
+}
+
+package "src/" {
+  
+  package "domain/" <<Domain>> {
+    class Ticket {
+      +id, title, description
+      +status, creator_id, assignee_id
+      --
+      +assign()
+      +close()
+    }
+    
+    class User {
+      +id, username
+      +is_agent, is_admin
+    }
+    
+    enum Status {
+      OPEN
+      IN_PROGRESS
+      RESOLVED
+      CLOSED
+    }
+    
+    class DomainError {
+    }
+  }
+  
+  package "ports/" <<Ports>> {
+    interface TicketRepository {
+      +{abstract} save(ticket: Ticket)
+      +{abstract} get(id: str): Ticket
+      +{abstract} list(): List[Ticket]
+      +{abstract} delete(id: str)
+    }
+    
+    interface UserRepository {
+      +{abstract} save(user: User)
+      +{abstract} get(id: str): User
+      +{abstract} list(): List[User]
+    }
+    
+    note right of TicketRepository
+      **Port = Interface (ABC)**
+      Contrat abstrait que les
+      adapters doivent respecter
+    end note
+  }
+  
+  package "application/usecases/" <<Application>> {
+    class CreateTicket {
+      -repository: TicketRepository
+      -user_repo: UserRepository
+      --
+      +__init__(repo, user_repo)
+      +execute(data: dict): Ticket
+    }
+    
+    class ListTickets {
+      -repository: TicketRepository
+      --
+      +__init__(repository)
+      +execute(): List[Ticket]
+    }
+    
+    class AssignTicket {
+      -repository: TicketRepository
+      -user_repo: UserRepository
+      --
+      +__init__(repo, user_repo)
+      +execute(ticket_id, user_id)
+    }
+    
+    note right of CreateTicket
+      **Use Case = Orchestration**
+      • Reçoit les ports via DI
+      • Utilise les entités domaine
+      • Coordonne les opérations
+    end note
+  }
+  
+  package "adapters/" <<Adapters>> {
+    package "db/" {
+      class InMemoryTicketRepository {
+        -tickets: Dict
+        --
+        +save()
+        +get()
+        +list()
+      }
+      
+      class SQLiteTicketRepository {
+        -connection: Connection
+        --
+        +save()
+        +get()
+        +list()
+      }
+    }
+    
+    package "api/" {
+      class TicketRouter {
+        -create_ticket_uc: CreateTicket
+        -list_tickets_uc: ListTickets
+        --
+        +post_ticket()
+        +get_tickets()
+      }
+      
+      note right of TicketRouter
+        **Adapter API (FastAPI)**
+        • Reçoit requêtes HTTP
+        • Appelle les use cases
+        • Retourne JSON
+      end note
+    }
+  }
+  
+  package "main.py" <<Main>> {
+    class CompositionRoot {
+      --
+      **Responsabilités :**
+      1. Instancier adapters
+      2. Instancier use cases
+      3. Injecter dépendances
+      4. Configurer FastAPI
+    }
+    
+    note right of CompositionRoot
+      **C'est ICI qu'on décide :**
+      • InMemory ou SQLite ?
+      • Quelle config ?
+      • Quel port FastAPI ?
+      
+      **Principe : Wire everything**
+    end note
+  }
+}
+
+' Relations de dépendance
+CreateTicket ..> TicketRepository : dépend de
+CreateTicket ..> UserRepository : dépend de
+CreateTicket --> Ticket : utilise
+CreateTicket --> User : utilise
+
+ListTickets ..> TicketRepository : dépend de
+AssignTicket ..> TicketRepository : dépend de
+
+InMemoryTicketRepository ..|> TicketRepository : implémente
+SQLiteTicketRepository ..|> TicketRepository : implémente
+
+TicketRouter --> CreateTicket : appelle
+TicketRouter --> ListTickets : appelle
+
+CompositionRoot --> InMemoryTicketRepository : instancie
+CompositionRoot --> SQLiteTicketRepository : instancie
+CompositionRoot --> CreateTicket : injecte\ndépendances
+CompositionRoot --> TicketRouter : configure
+
+' Note sur l'inversion de dépendance
+note bottom
+  **Inversion de Dépendance (Dependency Inversion Principle)**
+  
+  Les use cases dépendent de **TicketRepository** (interface abstraite)
+  Les adapters **implémentent** TicketRepository
+  
+  ➜ Le flux de contrôle va de l'API vers le domaine
+  ➜ Mais les dépendances vont du domaine vers... rien !
+  
+  **C'est ça, l'architecture hexagonale.**
+end note
+
+@enduml

@@ -18,6 +18,22 @@ Année 2025/2026 - Enseignant : Marc Ennaji (marc.ennaji@univ-rennes.fr)
 - Dépôt Git individuel créé depuis un template commun
 - Évaluation par jalons avec bonus présentiel
 
+### 🏗️ Architecture du projet
+
+Ce projet suit l'**architecture hexagonale** (aussi appelée "Ports & Adapters").
+
+![Architecture conceptuelle](docs/architecture/01_vue_conceptuelle.png)
+
+**Principe clé** : Le domaine métier (centre) ne dépend de **RIEN**. Tout le reste dépend de lui.
+
+**Progression des TD** :
+- **TD1** : Construire le domaine (centre) → entités métier pures
+- **TD2** : Ajouter les ports (interfaces) → contrats abstraits
+- **TD3** : Implémenter les adapters (API, DB) → détails techniques
+- **TD4+** : Assembler et enrichir l'application
+
+💡 Ne vous inquiétez pas si vous ne comprenez pas tout maintenant. Chaque TD vous fera progresser vers cette architecture complète.
+
 ## 📚 Ressources du cours
 
 ### Cours magistraux (CM)

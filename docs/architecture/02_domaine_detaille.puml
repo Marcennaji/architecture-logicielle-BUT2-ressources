@@ -1,0 +1,92 @@
+@startuml
+!theme plain
+skinparam backgroundColor white
+skinparam defaultFontName Arial
+
+title Exemple de modèle du Domaine - Système de Ticketing
+
+' Style
+skinparam class {
+  BackgroundColor<<enumeration>> #FFF9C4
+  BackgroundColor #E3F2FD
+  BorderColor #1976D2
+  ArrowColor #1976D2
+}
+
+enum Status <<enumeration>> {
+  OPEN
+  IN_PROGRESS
+  RESOLVED
+  CLOSED
+  --
+  Cycle de vie d'un ticket
+}
+
+class User {
+  +id: str
+  +username: str
+  +is_agent: bool = False
+  +is_admin: bool = False
+  --
+  +__post_init__()
+  --
+  **Règles métier :**
+  • Username non vide
+  • Username alphanumérique
+}
+
+class Ticket {
+  +id: str
+  +title: str
+  +description: str
+  +status: Status
+  +creator_id: str
+  +assignee_id: str | None
+  +created_at: datetime
+  +updated_at: datetime
+  --
+  +assign(user_id: str) -> None
+  +close() -> None
+  +reopen() -> None
+  +resolve() -> None
+  +is_open() -> bool
+  +is_closed() -> bool
+  --
+  **Règles métier :**
+  • Titre non vide (1-200 car.)
+  • Description optionnelle
+  • Statut par défaut = OPEN
+  • Créateur obligatoire
+  • Assigné = optionnel (agent)
+  • Ticket fermé → non modifiable
+}
+
+' Relations
+Ticket --> Status : a un >
+Ticket --> User : créé par >
+Ticket --> User : assigné à >
+
+note right of Ticket
+  **Principe clé :**
+  Chaque entité du domaine
+  contient sa propre logique métier.
+  
+  Pas de logique métier dans les
+  adapters ou l'application !
+end note
+
+note bottom of Status
+  **Transitions possibles :**
+  OPEN → IN_PROGRESS → RESOLVED → CLOSED
+  RESOLVED → OPEN (réouverture)
+end note
+
+note left of User
+  **Rôles :**
+  • Utilisateur standard
+    (crée des tickets)
+  • Agent (traite tickets)
+  • Admin (gestion)
+end note
+
+@enduml

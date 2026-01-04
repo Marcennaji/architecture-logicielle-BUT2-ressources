@@ -21,6 +21,29 @@ Ce TD couvre la modélisation du domaine métier du système de ticketing. Il es
 ### Objectif du jalon
 Créer les entités du domaine (Status, User, Ticket) avec les règles métier de base.
 
+### 🗺️ Vue du domaine que vous allez créer
+
+Voici un **exemple de modèle de domaine** pour ce TD :
+
+![Modèle du domaine](../docs/architecture/02_domaine_detaille.png)
+
+Ce schéma montre un **socle minimal** :
+- Les **3 classes principales** : `Status`, `User`, `Ticket`
+- Quelques **attributs et méthodes** de base
+- Les **relations** essentielles (un Ticket a un Status, est créé par un User, etc.)
+- Quelques **règles métier** à implémenter
+
+💡 **Important** : Ce schéma n'est **pas à copier à la lettre** ! C'est une base de départ.  
+Vous êtes libres (et encouragés) de :
+- Ajouter d'autres attributs ou méthodes selon vos besoins
+- Enrichir les règles métier
+- Ajouter d'autres entités si pertinent
+- Adapter la structure à votre compréhension du domaine
+
+🎯 **Votre mission** : implémenter au minimum ces 3 classes avec leurs règles métier de base dans `src/domain/`.
+
+---
+
 ### 1. Compréhension du domaine 
 
 Individuellement ou en binôme, répondez aux questions suivantes :
@@ -46,9 +69,22 @@ src/domain/
 └── exceptions.py    # Erreurs métier (fourni)
 ```
 
-💡 **Note sur les dataclasses** : 
-Les classes du domaine utilisent `@dataclass`, une fonctionnalité Python qui simplifie la création de classes :
+💡 **Note sur l'implémentation des classes** : 
 
+Vous avez **deux approches possibles** pour implémenter vos classes du domaine :
+
+**Option 1 - Classe classique avec `__init__`** :
+```python
+class User:
+    def __init__(self, id: str, username: str, is_agent: bool = False):
+        if not username:
+            raise ValueError("Username cannot be empty")
+        self.id = id
+        self.username = username
+        self.is_agent = is_agent
+```
+
+**Option 2 - Avec `@dataclass` (plus concis)** :
 ```python
 from dataclasses import dataclass
 
@@ -56,13 +92,15 @@ from dataclasses import dataclass
 class User:
     id: str
     username: str
-    is_agent: bool = False  # Valeur par défaut
+    is_agent: bool = False
 
     def __post_init__(self):
         """Validation après création."""
         if not self.username:
             raise ValueError("Username cannot be empty")
 ```
+
+Les deux sont valides ! Choisissez celle avec laquelle vous êtes le plus à l'aise.
 
 ### 3. Implémenter l'énumération Status 
 
