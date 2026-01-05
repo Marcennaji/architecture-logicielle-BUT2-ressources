@@ -7,9 +7,8 @@ title Architecture Complète - Implémentation Hexagonale
 
 ' Style
 skinparam package {
-  BackgroundColor<<Domain>> #E3F2FD
+  BackgroundColor<<Coeur>> #E3F2FD
   BackgroundColor<<Application>> #E8F5E9
-  BackgroundColor<<Ports>> #FFF9C4
   BackgroundColor<<Adapters>> #FFEBEE
   BackgroundColor<<Main>> #F3E5F5
   BorderColor #424242
@@ -18,51 +17,59 @@ skinparam package {
 
 package "src/" {
   
-  package "domain/" <<Domain>> {
-    class Ticket {
-      +id, title, description
-      +status, creator_id, assignee_id
-      --
-      +assign()
-      +close()
+  package "CŒUR MÉTIER" <<Coeur>> {
+    package "domain/" {
+      class Ticket {
+        +id, title, description
+        +status, creator_id, assignee_id
+        --
+        +assign()
+        +close()
+      }
+      
+      class User {
+        +id, username
+        +is_agent, is_admin
+      }
+      
+      enum Status {
+        OPEN
+        IN_PROGRESS
+        RESOLVED
+        CLOSED
+      }
+      
+      class DomainError {
+      }
     }
     
-    class User {
-      +id, username
-      +is_agent, is_admin
-    }
-    
-    enum Status {
-      OPEN
-      IN_PROGRESS
-      RESOLVED
-      CLOSED
-    }
-    
-    class DomainError {
+    package "ports/" {
+      interface TicketRepository {
+        +{abstract} save(ticket: Ticket)
+        +{abstract} get(id: str): Ticket
+        +{abstract} list(): List[Ticket]
+        +{abstract} delete(id: str)
+      }
+      
+      interface UserRepository {
+        +{abstract} save(user: User)
+        +{abstract} get(id: str): User
+        +{abstract} list(): List[User]
+      }
+      
+      note right of TicketRepository
+        **Port = Besoin du métier**
+        Interface abstraite définie
+        par le domaine pour exprimer
+        "ce dont j'ai besoin"
+      end note
     }
   }
   
-  package "ports/" <<Ports>> {
-    interface TicketRepository {
-      +{abstract} save(ticket: Ticket)
-      +{abstract} get(id: str): Ticket
-      +{abstract} list(): List[Ticket]
-      +{abstract} delete(id: str)
-    }
-    
-    interface UserRepository {
-      +{abstract} save(user: User)
-      +{abstract} get(id: str): User
-      +{abstract} list(): List[User]
-    }
-    
-    note right of TicketRepository
-      **Port = Interface (ABC)**
-      Contrat abstrait que les
-      adapters doivent respecter
-    end note
-  }
+  note top of "CŒUR MÉTIER"
+    Domain + Ports = Un seul bloc conceptuel
+    Les Ports expriment les besoins du Domaine
+  end note
   
   package "application/usecases/" <<Application>> {
     class CreateTicket {

@@ -1663,17 +1663,24 @@ table {
   font-size: 0.9em;
 }
 ;" data-marpit-pagination-total="42">
-<h3 id="43-les-5-composants-de-larchitecture-15">4.3 Les 5 composants de l'architecture (1/5)</h3>
-<h4 id="%F0%9F%9F%A2-domain-le-c%C5%93ur"><img class="emoji" draggable="false" alt="🟢" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg" data-marp-twemoji=""/> DOMAIN (le cœur)</h4>
-<p><strong>Contenu :</strong></p>
+<h3 id="43-les-composants-de-larchitecture-14">4.3 Les composants de l'architecture (1/4)</h3>
+<h4 id="%F0%9F%9F%A2-c%C5%93ur-m%C3%A9tier-domain--ports"><img class="emoji" draggable="false" alt="🟢" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e2.svg" data-marp-twemoji=""/> CŒUR MÉTIER (Domain + Ports)</h4>
+<p><strong>Deux facettes d'un même bloc :</strong></p>
+<p><strong>Domain</strong> — La logique métier :</p>
 <ul>
 <li>Entités (<code>Ticket</code>, <code>User</code>)</li>
 <li>Règles métier (<code>ticket.assign_to()</code>, <code>ticket.close()</code>)</li>
 <li>Value Objects (<code>TicketStatus</code>, <code>Email</code>)</li>
 </ul>
+<p><strong>Ports</strong> — Les besoins exprimés par le métier :</p>
+<ul>
+<li>Interfaces abstraites (<code>TicketRepository</code>)</li>
+<li>Contrats que le domaine définit</li>
+<li>&quot;Voici ce dont j'ai besoin pour fonctionner&quot;</li>
+</ul>
 <p><strong>Règle d'or :</strong></p>
 <blockquote>
-<p>Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)</p>
+<p>Le cœur métier ne dépend de RIEN (ni framework, ni lib technique)</p>
 </blockquote>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="28" data-paginate="true" data-theme="default" data-style="section {
@@ -1721,13 +1728,13 @@ table {
   font-size: 0.9em;
 }
 ;" data-marpit-pagination-total="42">
-<h3 id="43-les-5-composants--ports-25">4.3 Les 5 composants — PORTS (2/5)</h3>
-<h4 id="%F0%9F%94%B5-ports-interfaces"><img class="emoji" draggable="false" alt="🔵" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f535.svg" data-marp-twemoji=""/> PORTS (interfaces)</h4>
-<p>Des <strong>contrats</strong> (interfaces) définis par le métier :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># ports/ticket_repository.py</span>
-<span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod
+<h3 id="43-les-composants--exemple-de-port-14-suite">4.3 Les composants — Exemple de Port (1/4 suite)</h3>
+<p><strong>Interface abstraite définie par le métier :</strong></p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">from</span> abc <span class="hljs-keyword">import</span> ABC, abstractmethod
 
 <span class="hljs-keyword">class</span> <span class="hljs-title class_">TicketRepository</span>(<span class="hljs-title class_ inherited__">ABC</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Port : le domaine exprime son besoin de persistance.&quot;&quot;&quot;</span>
+    
 <span class="hljs-meta">    @abstractmethod</span>
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">save</span>(<span class="hljs-params">self, ticket: Ticket</span>) -&gt; <span class="hljs-literal">None</span>: <span class="hljs-keyword">pass</span>
     
@@ -1784,11 +1791,12 @@ table {
   font-size: 0.9em;
 }
 ;" data-marpit-pagination-total="42">
-<h3 id="43-les-5-composants--application-35">4.3 Les 5 composants — APPLICATION (3/5)</h3>
+<h3 id="43-les-composants--application-24">4.3 Les composants — APPLICATION (2/4)</h3>
 <h4 id="%F0%9F%9F%A1-application-orchestration"><img class="emoji" draggable="false" alt="🟡" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e1.svg" data-marp-twemoji=""/> APPLICATION (orchestration)</h4>
-<p><strong>Use cases</strong> qui coordonnent le métier et les ports :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># application/usecases/create_ticket.py</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">CreateTicket</span>:
+<p><strong>Use cases</strong> qui coordonnent le domaine et les ports :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">CreateTicket</span>:
+    <span class="hljs-string">&quot;&quot;&quot;Use case : créer un nouveau ticket.&quot;&quot;&quot;</span>
+    
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self, ticket_repository: TicketRepository</span>):
         <span class="hljs-variable language_">self</span>.repository = ticket_repository
     
@@ -1843,10 +1851,12 @@ table {
   font-size: 0.9em;
 }
 ;" data-marpit-pagination-total="42">
-<h3 id="43-les-5-composants--adapters-45">4.3 Les 5 composants — ADAPTERS (4/5)</h3>
-<p><strong>Implémentations concrètes</strong> des ports :</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># adapters/db/ticket_repository_inmemory.py</span>
-<span class="hljs-keyword">class</span> <span class="hljs-title class_">InMemoryTicketRepository</span>(<span class="hljs-title class_ inherited__">TicketRepository</span>):
+<h3 id="43-les-composants--adapters-34">4.3 Les composants — ADAPTERS (3/4)</h3>
+<h4 id="%F0%9F%94%B4-adapters-impl%C3%A9mentations"><img class="emoji" draggable="false" alt="🔴" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f534.svg" data-marp-twemoji=""/> ADAPTERS (implémentations)</h4>
+<p><strong>Implémentations concrètes</strong> qui répondent aux besoins (Ports) du cœur :</p>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-keyword">class</span> <span class="hljs-title class_">InMemoryTicketRepository</span>(<span class="hljs-title class_ inherited__">TicketRepository</span>):
+    <span class="hljs-string">&quot;&quot;&quot;Adapter : implémente la persistance en mémoire.&quot;&quot;&quot;</span>
+    
     <span class="hljs-keyword">def</span> <span class="hljs-title function_">__init__</span>(<span class="hljs-params">self</span>):
         <span class="hljs-variable language_">self</span>.tickets: <span class="hljs-built_in">dict</span>[<span class="hljs-built_in">int</span>, Ticket] = {}
         <span class="hljs-variable language_">self</span>.next_id = <span class="hljs-number">1</span>
@@ -1903,20 +1913,19 @@ table {
   font-size: 0.9em;
 }
 ;" data-marpit-pagination-total="42">
-<h3 id="43-les-5-composants--composition-root-55">4.3 Les 5 composants — COMPOSITION ROOT (5/5)</h3>
-<h4 id="%F0%9F%9F%A3-mainpy-assemblage"><img class="emoji" draggable="false" alt="🟣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e3.svg" data-marp-twemoji=""/> MAIN.PY (assemblage)</h4>
+<h3 id="43-les-composants--composition-root-44">4.3 Les composants — COMPOSITION ROOT (4/4)</h3>
+<h4 id="%F0%9F%9F%A3-composition-root-assemblage"><img class="emoji" draggable="false" alt="🟣" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f7e3.svg" data-marp-twemoji=""/> COMPOSITION ROOT (assemblage)</h4>
 <p><strong>Rôle :</strong> Point d'entrée qui <strong>instancie</strong> les adapters et les <strong>injecte</strong> dans les use cases.</p>
-<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># main.py</span>
-<span class="hljs-keyword">from</span> adapters.db.ticket_repository_inmemory <span class="hljs-keyword">import</span> InMemoryTicketRepository
-<span class="hljs-keyword">from</span> application.usecases.create_ticket <span class="hljs-keyword">import</span> CreateTicket
-
-<span class="hljs-comment"># Instanciation des dépendances concrètes</span>
+<pre is="marp-pre" data-auto-scaling="downscale-only"><code class="language-python"><span class="hljs-comment"># Instanciation des dépendances concrètes</span>
 ticket_repo = InMemoryTicketRepository()
 
 <span class="hljs-comment"># Injection dans les use cases</span>
 create_ticket_usecase = CreateTicket(ticket_repository=ticket_repo)
+
+<span class="hljs-comment"># Configuration de l&#x27;API</span>
+app = configure_api(create_ticket_usecase)
 </code></pre>
-<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>C'est le seul endroit</strong> où les dépendances concrètes sont instanciées.</p>
+<p><img class="emoji" draggable="false" alt="👉" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@16.0.1/assets/svg/1f449.svg" data-marp-twemoji=""/> <strong>C'est le seul endroit</strong> où l'on connaît les implémentations concrètes.</p>
 </section>
 </foreignObject></svg><svg data-marpit-svg="" viewBox="0 0 1280 720"><foreignObject width="1280" height="720"><section id="32" data-paginate="true" data-theme="default" data-style="section {
   font-family: &quot;Liberation Sans&quot;, -apple-system, BlinkMacSystemFont, &quot;Segoe UI&quot;, sans-serif;

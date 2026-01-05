@@ -7,84 +7,84 @@ title Architecture Hexagonale - Vue Conceptuelle
 
 ' Style
 skinparam package {
-  BackgroundColor<<Domain>> #E3F2FD
+  BackgroundColor<<Coeur>> #E3F2FD
   BackgroundColor<<Application>> #E8F5E9
-  BackgroundColor<<Ports>> #FFF9C4
   BackgroundColor<<Adapters>> #FFEBEE
   BackgroundColor<<Main>> #F3E5F5
   BorderColor #424242
   FontStyle bold
 }
 
-package "src/" {
-  
-  package "domain/" <<Domain>> {
-    [Entités métier]
-    note right
+package "CŒUR MÉTIER" <<Coeur>> {
+  package "Domaine" {
+    [Entités]
+    [Règles métier]
+    note right of [Entités]
       Ticket, User, Status
       Logique métier pure
       ZERO dépendance externe
     end note
   }
   
-  package "ports/" <<Ports>> {
-    interface "Repositories\n(ABC)" as repos
-    note right
-      Ports sortants (driven)
-      Interfaces abstraites
-      Ex: TicketRepository
-      Définit "quoi" sans "comment"
-    end note
-  }
-  
-  package "application/usecases/" <<Application>> {
-    [Use Cases]
-    note right
-      CreateTicket, ListTickets...
-      Orchestration
-      Dépend des ports (DI)
-    end note
-  }
-  
-  package "adapters/" <<Adapters>> {
-    package "api/" {
-      [FastAPI\nRouter]
-    }
-    
-    package "db/" {
-      [SQLite\nRepository]
-    }
-  }
-  
-  package "main.py" <<Main>> {
-    [Composition\nRoot]
-    note right
-      Instancie tout
-      Injecte les dépendances
+  package "Ports" {
+    interface "Interfaces\nabstraites" as ports
+    note right of ports
+      Contrats définis par le métier
+      Ex: TicketRepository (ABC)
+      Le métier dit "ce dont j'ai besoin"
     end note
   }
 }
 
+package "APPLICATION" <<Application>> {
+  [Use Cases]
+  note right of [Use Cases]
+    CreateTicket, ListTickets...
+    Orchestration métier
+    Coordonne Domaine + Ports
+  end note
+}
+
+package "ADAPTERS" <<Adapters>> {
+  [API Web]
+  [Persistance]
+  note bottom of [Persistance]
+    Implémentations concrètes
+    Répondent aux besoins (Ports)
+    du cœur métier
+  end note
+}
+
+package "COMPOSITION ROOT" <<Main>> {
+  [Câblage]
+  note right of [Câblage]
+    Instancie les adapters
+    Injecte dans les use cases
+  end note
+}
+
 ' Relations
-[Use Cases] --> [Entités métier] : utilise
-[Use Cases] --> repos : dépend de
+[Use Cases] --> [Entités] : orchestre
+[Use Cases] --> [Règles métier] : applique
+[Use Cases] --> ports : dépend de
 
-[SQLite\nRepository] ..|> repos : implémente
+[Persistance] ..|> ports : implémente
+[API Web] --> [Use Cases] : appelle
 
-[FastAPI\nRouter] --> [Use Cases] : appelle
-
-[Composition\nRoot] --> [FastAPI\nRouter] : configure
-[Composition\nRoot] --> [Use Cases] : crée
-[Composition\nRoot] --> [SQLite\nRepository] : instancie
+[Câblage] --> [API Web] : configure
+[Câblage] --> [Use Cases] : crée
+[Câblage] --> [Persistance] : instancie
 
 ' Note explicative
 note bottom
-  **Flux d'exécution** : API → Use Cases → Domaine
-  **Dépendances** : Adapters → Ports ← Application → Domaine
+  **Architecture concentrique** : tout dépend du cœur métier
   
-  Le domaine ne connaît rien du monde extérieur.
-  Les ports définissent les contrats que les adapters implémentent.
-  main.py est le seul endroit où on câble tout ensemble.
+  Le CŒUR (Domaine + Ports) ne dépend de rien.
+  Les Ports expriment les besoins du métier (interfaces).
+  Les Adapters répondent à ces besoins (implémentations).
+  
+  **Flux d'exécution** : API → Use Cases → Domaine
+  **Flux de dépendances** : Adapters → Application → CŒUR
 end note
 
 @enduml

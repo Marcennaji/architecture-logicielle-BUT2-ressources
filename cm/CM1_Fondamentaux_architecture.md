@@ -452,31 +452,37 @@ def create_ticket(request: Request, db: Session = Depends(get_db)):
 
 ---
 
-### 4.3 Les 5 composants de l'architecture (1/5)
+### 4.3 Les composants de l'architecture (1/4)
 
-#### 🟢 DOMAIN (le cœur)
+#### 🟢 CŒUR MÉTIER (Domain + Ports)
 
-**Contenu :**
+**Deux facettes d'un même bloc :**
+
+**Domain** — La logique métier :
 - Entités (`Ticket`, `User`)
 - Règles métier (`ticket.assign_to()`, `ticket.close()`)
 - Value Objects (`TicketStatus`, `Email`)
 
+**Ports** — Les besoins exprimés par le métier :
+- Interfaces abstraites (`TicketRepository`)
+- Contrats que le domaine définit
+- "Voici ce dont j'ai besoin pour fonctionner"
+
 **Règle d'or :**
-> Aucun import de framework ou lib technique (FastAPI, SQLAlchemy, etc.)
+> Le cœur métier ne dépend de RIEN (ni framework, ni lib technique)
 
 ---
 
-### 4.3 Les 5 composants — PORTS (2/5)
+### 4.3 Les composants — Exemple de Port (1/4 suite)
 
-#### 🔵 PORTS (interfaces)
-
-Des **contrats** (interfaces) définis par le métier :
+**Interface abstraite définie par le métier :**
 
 ```python
-# ports/ticket_repository.py
 from abc import ABC, abstractmethod
 
 class TicketRepository(ABC):
+    """Port : le domaine exprime son besoin de persistance."""
+    
     @abstractmethod
     def save(self, ticket: Ticket) -> None: pass
     
@@ -491,15 +497,16 @@ class TicketRepository(ABC):
 
 ---
 
-### 4.3 Les 5 composants — APPLICATION (3/5)
+### 4.3 Les composants — APPLICATION (2/4)
 
 #### 🟡 APPLICATION (orchestration)
 
-**Use cases** qui coordonnent le métier et les ports :
+**Use cases** qui coordonnent le domaine et les ports :
 
 ```python
-# application/usecases/create_ticket.py
 class CreateTicket:
+    """Use case : créer un nouveau ticket."""
+    
     def __init__(self, ticket_repository: TicketRepository):
         self.repository = ticket_repository
     
@@ -511,13 +518,16 @@ class CreateTicket:
 
 ---
 
-### 4.3 Les 5 composants — ADAPTERS (4/5)
+### 4.3 Les composants — ADAPTERS (3/4)
 
-**Implémentations concrètes** des ports :
+#### 🔴 ADAPTERS (implémentations)
+
+**Implémentations concrètes** qui répondent aux besoins (Ports) du cœur :
 
 ```python
-# adapters/db/ticket_repository_inmemory.py
 class InMemoryTicketRepository(TicketRepository):
+    """Adapter : implémente la persistance en mémoire."""
+    
     def __init__(self):
         self.tickets: dict[int, Ticket] = {}
         self.next_id = 1
@@ -531,25 +541,24 @@ class InMemoryTicketRepository(TicketRepository):
 
 ---
 
-### 4.3 Les 5 composants — COMPOSITION ROOT (5/5)
+### 4.3 Les composants — COMPOSITION ROOT (4/4)
 
-#### 🟣 MAIN.PY (assemblage)
+#### 🟣 COMPOSITION ROOT (assemblage)
 
 **Rôle :** Point d'entrée qui **instancie** les adapters et les **injecte** dans les use cases.
 
 ```python
-# main.py
-from adapters.db.ticket_repository_inmemory import InMemoryTicketRepository
-from application.usecases.create_ticket import CreateTicket
-
 # Instanciation des dépendances concrètes
 ticket_repo = InMemoryTicketRepository()
 
 # Injection dans les use cases
 create_ticket_usecase = CreateTicket(ticket_repository=ticket_repo)
+
+# Configuration de l'API
+app = configure_api(create_ticket_usecase)
 ```
 
-👉 **C'est le seul endroit** où les dépendances concrètes sont instanciées.
+👉 **C'est le seul endroit** où l'on connaît les implémentations concrètes.
 
 ---
 
