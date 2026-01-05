@@ -3,7 +3,7 @@
 skinparam backgroundColor white
 skinparam defaultFontName Arial
 
-title Architecture Hexagonale - Vue Conceptuelle
+title Architecture Hexagonale du projet Ticketing - Vue Conceptuelle
 
 ' Style
 skinparam package {
@@ -66,9 +66,10 @@ package "APPLICATION" <<Application>> {
 
 package "ADAPTERS" <<Adapters>> {
   package "Entrants (Driving)" {
-    [API Web]
-    note bottom of [API Web]
-      Reçoit requêtes externes
+    [FastAPI]
+    note bottom of [FastAPI]
+      API REST
+      Reçoit requêtes HTTP
       Appelle les use cases
       
       **Devrait implémenter**
@@ -77,10 +78,10 @@ package "ADAPTERS" <<Adapters>> {
   }
   
   package "Sortants (Driven)" {
-    [Persistance]
-    note bottom of [Persistance]
-      Implémente les ports sortants
-      Ex: SQLite, InMemory
+    [SQLite / InMemory]
+    note bottom of [SQLite / InMemory]
+      Implémente TicketRepository
+      InMemory → SQLite (progression TD)
     end note
   }
 }
@@ -99,13 +100,13 @@ package "COMPOSITION ROOT" <<Main>> {
 [Use Cases] ..|> ports_in : implémentent\n(implicite)
 [Use Cases] --> ports_out : dépend de
 
-[Persistance] ..|> ports_out : implémente
+[SQLite / InMemory] ..|> ports_out : implémente
 
-[API Web] ..> ports_in : devrait\nimplémenter
-[API Web] --> [Use Cases] : appelle\n(simplifié)
+[FastAPI] ..> ports_in : devrait\ndépendre de
+[FastAPI] --> [Use Cases] : appelle\n(simplifié)
 
-[Câblage] ..> [API Web]
-[Câblage] ..> [Persistance]
+[Câblage] ..> [FastAPI]
+[Câblage] ..> [SQLite / InMemory]
 [Câblage] ..> [Use Cases]
 
 ' Note explicative
@@ -113,13 +114,14 @@ note bottom
   **Architecture hexagonale complète**
   
   **Ports entrants** : interfaces exposées par l'application (use cases)
-  **Ports sortants** : interfaces requises par l'application (repositories)
+  **Ports sortants** : interfaces requises par l'application (repositories, etc)
   
   **Adapters entrants** : implémentent/appellent les ports entrants
   **Adapters sortants** : implémentent les ports sortants
   
   **Simplification pédagogique du projet** :
-  Les ports entrants sont omis → API appelle directement les use cases
+  Les ports entrants sont omis → l'API appelle directement les use cases, 
+  au lieu d'implémenter un port
   
   **Flux d'exécution** : API → Use Cases → Domaine
   **Flux de dépendances** : Tout pointe vers le CŒUR
