@@ -27,9 +27,25 @@ package "CŒUR MÉTIER" <<Coeur>> {
   }
   
   package "Ports" {
-    interface "Interfaces\nabstraites" as ports
-    note right of ports
-      Contrats définis par le métier
+    interface "Ports entrants\n(Primary)" as ports_in
+    interface "Ports sortants\n(Secondary)" as ports_out
+    
+    ports_in -[hidden]- ports_out
+    
+    note right of ports_in
+      Interfaces de use cases
+      Ex: CreateTicket (ABC)
+      
+      **Bénéfice :** changer d'adapter
+      entrant (FastAPI → Flask → CLI)
+      sans toucher aux use cases
+      
+      **Simplification projet : omis**
+      (couplage direct API → Use Cases)
+    end note
+    
+    note right of ports_out
+      Interfaces de persistance
       Ex: TicketRepository (ABC)
       Le métier dit "ce dont j'ai besoin"
     end note
@@ -42,17 +58,31 @@ package "APPLICATION" <<Application>> {
     CreateTicket, ListTickets...
     Orchestration métier
     Coordonne Domaine + Ports
+    
+    **Dans projet : implémentent**
+    **implicitement les ports entrants**
   end note
 }
 
 package "ADAPTERS" <<Adapters>> {
-  [API Web]
-  [Persistance]
-  note bottom of [Persistance]
-    Implémentations concrètes
-    Répondent aux besoins (Ports)
-    du cœur métier
-  end note
+  package "Entrants (Driving)" {
+    [API Web]
+    note bottom of [API Web]
+      Reçoit requêtes externes
+      Appelle les use cases
+      
+      **Devrait implémenter**
+      **ports entrants (simplifié)**
+    end note
+  }
+  
+  package "Sortants (Driven)" {
+    [Persistance]
+    note bottom of [Persistance]
+      Implémente les ports sortants
+      Ex: SQLite, InMemory
+    end note
+  }
 }
 
 package "COMPOSITION ROOT" <<Main>> {
@@ -66,25 +96,33 @@ package "COMPOSITION ROOT" <<Main>> {
 ' Relations
 [Use Cases] --> [Entités] : orchestre
 [Use Cases] --> [Règles métier] : applique
-[Use Cases] --> ports : dépend de
+[Use Cases] ..|> ports_in : implémentent\n(implicite)
+[Use Cases] --> ports_out : dépend de
 
-[Persistance] ..|> ports : implémente
-[API Web] --> [Use Cases] : appelle
+[Persistance] ..|> ports_out : implémente
 
-[Câblage] --> [API Web] : configure
-[Câblage] --> [Use Cases] : crée
-[Câblage] --> [Persistance] : instancie
+[API Web] ..> ports_in : devrait\nimplémenter
+[API Web] --> [Use Cases] : appelle\n(simplifié)
+
+[Câblage] ..> [API Web]
+[Câblage] ..> [Persistance]
+[Câblage] ..> [Use Cases]
 
 ' Note explicative
 note bottom
-  **Architecture concentrique** : tout dépend du cœur métier
+  **Architecture hexagonale complète**
   
-  Le CŒUR (Domaine + Ports) ne dépend de rien.
-  Les Ports expriment les besoins du métier (interfaces).
-  Les Adapters répondent à ces besoins (implémentations).
+  **Ports entrants** : interfaces exposées par l'application (use cases)
+  **Ports sortants** : interfaces requises par l'application (repositories)
+  
+  **Adapters entrants** : implémentent/appellent les ports entrants
+  **Adapters sortants** : implémentent les ports sortants
+  
+  **Simplification pédagogique du projet** :
+  Les ports entrants sont omis → API appelle directement les use cases
   
   **Flux d'exécution** : API → Use Cases → Domaine
-  **Flux de dépendances** : Adapters → Application → CŒUR
+  **Flux de dépendances** : Tout pointe vers le CŒUR
 end note
 
 @enduml
