@@ -9,7 +9,7 @@ Dans ce module, les tests servent à **valider que votre architecture fonctionne
 
 ## Les 3 niveaux de tests 
 
-L'architecture hexagonale se reflète dans **3 niveaux de tests** correspondant aux 3 couches du projet.
+L'architecture hexagonale se reflète dans **3 niveaux de tests** qui ciblent différents composants :
 
 ### 1. Tests domain (unitaires)
 
@@ -70,8 +70,8 @@ def test_create_ticket_use_case():
 ### 3. Tests e2e (API / intégration)
 
 **Où** : `tests/e2e/`  
-**Quoi** : Tester l'API complète (de la requête HTTP à la base de données)  
-**Comment** : TestClient FastAPI avec vraie base de données (ou in-memory)
+**Quoi** : Tester l'API complète (requête HTTP → routeur → use case → repository)  
+**Comment** : TestClient FastAPI qui fait des requêtes HTTP
 
 **Exemple** :
 ```python
@@ -89,9 +89,14 @@ def test_create_ticket_via_api(client):
 ```
 
 **Caractéristiques** :
-- ✅ Testent le système complet
-- ✅ Valident les contrats d'API (requête/réponse)
-- ✅ Plus lents mais plus réalistes
+- ✅ Testent **toute la stack** : API + use cases + domain
+- ✅ Valident le routeur FastAPI, validation Pydantic, sérialisation JSON
+- ✅ Valident les codes HTTP et contrats d'API
+- 💡 Peuvent toutefois utiliser une base in-memory (pour la rapidité)
+
+**Différence avec tests application** :
+- Tests application : appellent le use case **directement** (fonction Python)
+- Tests e2e : passent par une **requête HTTP** (testent l'adapter API en plus)
 
 ---
 
