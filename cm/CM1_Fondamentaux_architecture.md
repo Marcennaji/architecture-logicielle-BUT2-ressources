@@ -679,7 +679,7 @@ Vous allez implémenter un **système de tickets** (simplifié) en architecture 
 - Mais **comprendre** l'architecture reste indispensable pour le QCM
 - Le travail effectué en présentiel (sans IA intensive) est valorisé
 
-📖 Détails complets : [td/EVALUATION.md](../td/EVALUATION.md)
+📖 Détails complets : [td/evaluation.md](../td/evaluation.md)
 
 **Barèmes détaillés communiqués en début de module.**
 

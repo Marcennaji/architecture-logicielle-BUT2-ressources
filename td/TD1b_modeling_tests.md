@@ -15,7 +15,7 @@
 - ✅ Tous les tests passent : `pytest tests/domain/` vert
 - ✅ On ne peut pas contourner les règles métier
 
-Voir [EVALUATION.md](EVALUATION.md) pour le système de notation.
+Voir [evaluation.md](evaluation.md) pour le système de notation.
 
 ---
 

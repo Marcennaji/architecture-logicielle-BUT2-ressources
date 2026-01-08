@@ -73,7 +73,7 @@ git push origin TD1a
 
 > ⚠️ **Attention** : Le nom du tag doit être **exactement** celui indiqué dans le TD (`TD0`, `TD1a`, `TD1b`, etc.).
 
-> 📊 **Évaluation** : Votre engagement pendant les séances de TD est pris en compte dans l'évaluation. Voir [EVALUATION.md](../EVALUATION.md) pour les détails.
+> 📊 **Évaluation** : Votre engagement pendant les séances de TD est pris en compte dans l'évaluation. Voir [evaluation.md](../evaluation.md) pour les détails.
 
 ## Résumé des commandes
 
@@ -141,11 +141,11 @@ tests/
 
 ### Quand dois-je pousser le tag ?
 
-**Idéalement pendant ou juste après la séance** pour montrer votre avancement. Vous pouvez aussi le pousser plus tard si vous continuez à travailler chez vous. Voir [EVALUATION.md](../EVALUATION.md) pour plus de détails.
+**Idéalement pendant ou juste après la séance** pour montrer votre avancement. Vous pouvez aussi le pousser plus tard si vous continuez à travailler chez vous. Voir [evaluation.md](../evaluation.md) pour plus de détails.
 
 ### J'ai oublié de pousser le tag pendant la séance, que faire ?
 
-Vous pouvez le pousser plus tard. Le travail régulier en séance est valorisé, mais mieux vaut un tag tardif que pas de tag du tout. Voir [EVALUATION.md](../EVALUATION.md).
+Vous pouvez le pousser plus tard. Le travail régulier en séance est valorisé, mais mieux vaut un tag tardif que pas de tag du tout. Voir [evaluation.md](../evaluation.md).
 
 ### Puis-je terminer le jalon chez moi ?
 

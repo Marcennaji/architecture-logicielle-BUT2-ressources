@@ -8,7 +8,7 @@ Ces guides sont à consulter tout au long du module :
 - [Workflow de développement](guides/workflow_de_developpement.md)
 - [Git - Aide-mémoire](guides/git_aide_memoire.md) 🖥️ **Commandes Git essentielles**
 - [Guide des tests](guides/comment_tester.md)
-- [Critères d'évaluation](EVALUATION.md) 📊 **Comment vous serez évalués**
+- [Critères d'évaluation](evaluation.md) 📊 **Comment vous serez évalués**
 
 ## 📋 Liste des TDs
 
@@ -26,4 +26,4 @@ Ces guides sont à consulter tout au long du module :
 | 10 | TD4b : Tests E2E | `TD4b` | 🔒 Bientôt | 🔒 Bientôt |
 
 > 💡 **Volume total** : 10 jalons de 2h = 20h de TD en présentiel.  
-> **Système d'évaluation** : Voir [EVALUATION.md](EVALUATION.md)
+> **Système d'évaluation** : Voir [evaluation.md](evaluation.md)
