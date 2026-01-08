@@ -6,14 +6,14 @@
 
 ### Objectif
 
-Écrire des tests unitaires qui couvrent **toutes les règles métier** du domaine, y compris les cas d'erreur. L'objectif est de garantir qu'on ne peut pas contourner les règles métier.
+Écrire des tests unitaires qui couvrent **toutes les règles métier** du domaine, y compris les cas d'erreur. L'objectif est de garantir que les règles métier sont implémentées, et qu'on ne peut pas les contourner.
 
 ### Ce qui est attendu
 
 - ✅ Chaque règle métier a un test qui vérifie le cas nominal
-- ✅ Chaque règle métier a un test qui vérifie le cas d'erreur
+- ✅ Chaque règle métier a un test qui vérifie les cas d'erreurs (au moins les plus courants)
 - ✅ Tous les tests passent : `pytest tests/domain/` vert
-- ✅ On ne peut pas contourner les règles métier
+- ✅ Un code applicatif peut pas contourner par inadvertance les règles métier
 
 Voir [evaluation.md](evaluation.md) pour le système de notation.
 
@@ -52,7 +52,7 @@ Pour chaque règle métier, écrivez un test unitaire qui vérifie le **comporte
 
 Pour chaque règle métier, écrivez un test unitaire qui vérifie qu'on **ne peut pas violer la règle**, directement ou indirectement.
 
-**Exemples de tests à écrire** :
+**Exemples de tests à écrire (dépendent de vos règles métier)** :
 - Un ticket ne peut pas avoir un titre vide
 - Un ticket ne peut pas avoir un titre contenant uniquement des espaces
 - Un utilisateur ne peut pas avoir un username vide
@@ -75,13 +75,6 @@ Vérifiez que tous vos tests passent :
 ```bash
 pytest tests/domain/
 ```
-
-Si vous voulez vérifier la couverture (optionnel) :
-
-```bash
-pytest tests/domain/ --cov=src/domain
-```
-
 ---
 
 ## ✅ Checklist avant de soumettre
