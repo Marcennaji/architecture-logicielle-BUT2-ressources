@@ -13,7 +13,7 @@
 - ✅ Chaque règle métier a un test qui vérifie le cas nominal
 - ✅ Chaque règle métier a un test qui vérifie les cas d'erreurs (au moins les plus courants)
 - ✅ Tous les tests passent : `pytest tests/domain/` vert
-- ✅ Un code applicatif peut pas contourner par inadvertance les règles métier
+- ✅ Un code applicatif ne peut pas contourner par inadvertance les règles métier
 
 Voir [evaluation.md](evaluation.md) pour le système de notation.
 
