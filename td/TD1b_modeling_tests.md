@@ -23,7 +23,7 @@ Voir [evaluation.md](evaluation.md) pour le système de notation.
 
 ## Étape 1 : Lister les règles métier
 
-Avant de tester, listez, si vous ne l'avez pas déjà fait dans le fichier domain-notes.md, **toutes les règles métier** de votre domaine :
+Avant de tester, listez (si vous ne l'avez pas déjà fait) dans le fichier docs/domain-notes.md, **toutes les règles métier** de votre domaine :
 
 **Exemples de règles métier** :
 - Un ticket doit avoir un titre non vide
@@ -80,8 +80,8 @@ pytest tests/domain/
 ## ✅ Checklist avant de soumettre
 
 **Tests** :
-- [ ] Chaque règle métier a un test pour le cas nominal
-- [ ] Chaque règle métier a un test pour le cas d'erreur (y compris les tentatives de contournement)
+- [ ] Chaque règle métier a des test pour les cas d'utilisation normale
+- [ ] Chaque règle métier a des tests qui vérifient qu'une exception est lancée, si cette règle n'est pas respectée
 - [ ] `pytest tests/domain/` vert (tous les tests passent)
 
 **Git** :
