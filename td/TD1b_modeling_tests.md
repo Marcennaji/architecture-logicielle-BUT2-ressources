@@ -1,92 +1,69 @@
+# TD1b — Tests unitaires du domaine
 
 ## 📦 Jalon TD1b (2h) → Tag `TD1b`
 
 **⏰ Durée : 1 séance de 2h** (séance suivant TD1a)
 
-### Objectif du jalon
-Écrire des tests unitaires complets pour valider le comportement du domaine.
+### 🎯 Objectif
 
-### 📊 Barème de notation (sur 20)
+Écrire des tests unitaires qui couvrent **toutes les règles métier** du domaine, y compris les cas d'erreur. L'objectif est de garantir qu'on ne peut pas contourner les règles métier.
 
-**Critères obligatoires (15 pts)** :
-- **Tests passent** (8 pts) : `pytest tests/domain/` vert
-- **Couverture** (5 pts) : ≥ 80% sur `src/domain/`
-- **Tests des règles métier** (2 pts) : Chaque règle a son test
+### Ce qui est attendu
 
-**Bonus tests avancés** (max +5 pts) :
-- Tests paramétriques : +1 pt
-- Fixtures complexes : +1 pt
-- Messages d'erreur testés : +1 pt
-- Couverture 100% : +2 pts
+- ✅ Chaque règle métier a un test qui vérifie le cas nominal
+- ✅ Chaque règle métier a un test qui vérifie le cas d'erreur
+- ✅ Tous les tests passent : `pytest tests/domain/` vert
+- ✅ On ne peut pas contourner les règles métier
 
-**Coefficient présentiel** :
-- Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le détail
-- En résumé : ×1.0 si tag pendant séance, sinon réduit selon le délai
+Voir [EVALUATION.md](EVALUATION.md) pour le système de notation.
 
-💡 **Exemple** : 15/15 + 2/5 (bonus) = 17/20 × 1.0 = **17/20 final**
+---
 
-### 1. Compléter la classe Ticket (10 min)
+## Étape 1 : Lister les règles métier (10 min)
 
-Avant d'écrire les tests, ajoutons la méthode `close()` qui manque :
+Avant de tester, listez **toutes les règles métier** de votre domaine :
 
-**Dans `src/domain/ticket.py`**, ajoutez :
+**Exemples de règles métier** :
+- Un ticket doit avoir un titre non vide
+- Un utilisateur doit avoir un username non vide
+- Un ticket fermé ne peut plus être assigné
+- Un ticket déjà fermé ne peut pas être re-fermé
+
+📝 **Action** : Complétez cette liste avec vos propres règles.
+
+---
+
+## Étape 2 : Tester les cas nominaux (30 min)
+
+Pour chaque règle métier, écrivez un test qui vérifie le **comportement normal** :
+
 ```python
-def close(self):
-    """Ferme le ticket."""
-    if self.status == Status.CLOSED:
-        raise ValueError("Cannot close an already closed ticket")
-    self.status = Status.CLOSED
-```
-
-💡 **Commit** :
-```bash
-git add src/domain/ticket.py
-git commit -m "Add close() method to Ticket"
-git push
-```
-
-### 2. Comprendre la structure des tests (10 min)
-
-Explorez le fichier `tests/domain/test_ticket.py` :
-- Exemples de tests commentés
-- Organisation par fonctionnalité
-- Utilisation de pytest
-
-### 3. Activer les tests (5 min)
-
-Dans `tests/domain/test_ticket.py` :
-1. Supprimez la ligne `pytest.skip(...)` au début
-2. Décommentez les imports
-3. Lancez les tests : `pytest tests/domain/`
-
-Les tests vont probablement échouer au début, c'est normal !
-
-### 4. Écrire les tests de base (25 min)
-
-Décommentez et complétez les tests fournis :
-
-**Tests de création** :
-```python
-def test_status_values_exist():
-    """Vérifie que les 4 statuts existent."""
-    
-def test_user_creation():
-    """Vérifie la création d'un utilisateur."""
-    
 def test_ticket_creation():
-    """Vérifie la création d'un ticket avec valeurs par défaut."""
+    """Un ticket peut être créé avec des valeurs valides."""
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
+    assert ticket.id == "t1"
+    assert ticket.title == "Bug"
+    assert ticket.status == Status.OPEN
+
+def test_ticket_assign():
+    """Un ticket ouvert peut être assigné."""
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
+    ticket.assign("agent1")
+    assert ticket.assignee_id == "agent1"
+    assert ticket.status == Status.IN_PROGRESS
+
+def test_ticket_close():
+    """Un ticket peut être fermé."""
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
+    ticket.close()
+    assert ticket.status == Status.CLOSED
 ```
 
-💡 **Commit** :
-```bash
-git add tests/domain/test_ticket.py
-git commit -m "Add basic domain tests"
-git push
-```
+---
 
-### 5. Écrire les tests des règles métier (35 min)
+## Étape 3 : Tester les cas d'erreur (30 min)
 
-Implémentez les tests pour **chaque règle métier** :
+Pour chaque règle métier, écrivez un test qui vérifie qu'on **ne peut pas violer la règle** :
 
 ```python
 def test_ticket_title_cannot_be_empty():
@@ -101,151 +78,75 @@ def test_user_username_cannot_be_empty():
 
 def test_cannot_assign_closed_ticket():
     """Règle : Un ticket fermé ne peut plus être assigné."""
-    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
     ticket.close()
     with pytest.raises(ValueError):
         ticket.assign("agent1")
 
 def test_cannot_close_already_closed_ticket():
     """Règle : Un ticket déjà fermé ne peut pas être re-fermé."""
-    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
     ticket.close()
     with pytest.raises(ValueError):
         ticket.close()
 ```
 
-💡 **Note** : Vous devrez aussi implémenter la règle "ticket fermé non assignable" dans la méthode `assign()` pour que le test passe.
+---
 
-### 6. Tests des méthodes métier (25 min)
+## Étape 4 : Vérifier qu'on ne peut pas contourner (20 min)
 
-Testez le comportement normal des méthodes :
+Testez les tentatives de contournement :
 
 ```python
-def test_ticket_assign():
-    """Vérifie l'assignation d'un ticket."""
-    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
-    ticket.assign("agent1")
-    assert ticket.assignee_id == "agent1"
+def test_cannot_modify_closed_ticket_status_directly():
+    """On ne peut pas modifier le statut d'un ticket fermé en le réassignant."""
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
+    ticket.close()
+    
+    # Tentative de contournement
+    with pytest.raises(ValueError):
+        ticket.assign("agent1")  # Doit échouer même si assign() change le statut
 
-def test_ticket_close():
-    """Vérifie la fermeture d'un ticket."""
-    ticket = Ticket(id="t1", title="Test", description="desc", creator_id="u1")
+def test_status_transitions_are_validated():
+    """Les transitions de statut respectent les règles métier."""
+    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
+    
+    # Transition valide : OPEN → IN_PROGRESS
+    ticket.assign("agent1")
+    assert ticket.status == Status.IN_PROGRESS
+    
+    # Transition valide : IN_PROGRESS → CLOSED
     ticket.close()
     assert ticket.status == Status.CLOSED
 ```
 
-### 7. Vérifier la couverture (5 min)
+---
 
-Lancez les tests avec couverture :
+## Étape 5 : Valider (10 min)
+
+Vérifiez que tout fonctionne :
+
 ```bash
-pytest tests/domain/ --cov=src/domain --cov-report=term-missing
-```
+# Tous les tests passent
+pytest tests/domain/
 
-Objectif : **≥ 80% de couverture** sur le domaine.
-
-💡 **Commit final** :
-```bash
-git add tests/domain/
-git commit -m "Complete domain tests with business rules"
-git push
+# Vérifier la couverture (optionnel)
+pytest tests/domain/ --cov=src/domain
 ```
 
 ---
 
-## 🎁 Bonus (facultatif)
-
-**Si vous avez terminé en avance**, perfectionnez vos tests.
-
-💡 **Note** : Ces bonus réalisés **pendant la séance** (avec commits horodatés) peuvent améliorer votre note.
-
-### Option 1 : Tests paramétriques
-
-Utilisez `@pytest.mark.parametrize` pour tester plusieurs cas :
-```python
-@pytest.mark.parametrize("title,should_raise", [
-    ("", True),           # Titre vide
-    ("   ", True),        # Seulement espaces
-    ("OK", False),        # Titre valide court
-    ("A" * 200, False),   # Titre très long
-])
-def test_ticket_title_validation(title, should_raise):
-    if should_raise:
-        with pytest.raises(ValueError):
-            Ticket(id="t1", title=title, description="desc", creator_id="u1")
-    else:
-        ticket = Ticket(id="t1", title=title, description="desc", creator_id="u1")
-        assert ticket.title == title
-```
-
-### Option 2 : Fixtures complexes
-
-Créez des fixtures réutilisables dans `conftest.py` :
-```python
-@pytest.fixture
-def sample_user():
-    return User(id="u1", username="john", is_agent=False, is_admin=False)
-
-@pytest.fixture
-def sample_agent():
-    return User(id="a1", username="agent_smith", is_agent=True, is_admin=False)
-
-@pytest.fixture
-def open_ticket(sample_user):
-    return Ticket(
-        id="t1",
-        title="Bug report",
-        description="Something is broken",
-        creator_id=sample_user.id
-    )
-```
-
-### Option 3 : Tester les messages d'erreur
-
-Vérifiez les messages exacts :
-```python
-def test_empty_title_error_message():
-    with pytest.raises(ValueError, match="Ticket title cannot be empty"):
-        Ticket(id="t1", title="", description="desc", creator_id="u1")
-```
-
-### Option 4 : Viser 100% de couverture
-
-Ajoutez des tests pour :
-- Tous les edge cases (None, valeurs extrêmes)
-- Toutes les branches conditionnelles
-- Les méthodes `__str__()`, `__repr__()` si implémentées
-- Les propriétés calculées
-
-### Option 5 : Tests de documentation
-
-Ajoutez des doctests dans vos classes :
-```python
-class Ticket:
-    """Représente un ticket du système.
-    
-    Examples:
-        >>> ticket = Ticket(id="t1", title="Bug", description="Broken", creator_id="u1")
-        >>> ticket.status
-        <Status.OPEN: 'open'>
-        >>> ticket.assign("agent1")
-        >>> ticket.assignee_id
-        'agent1'
-    """
-```
-
----
-
-### ✅ Checklist avant de soumettre
+## ✅ Checklist avant de soumettre
 
 **Tests** :
-- [ ] Méthode `close()` implémentée
-- [ ] Règle "ticket fermé non assignable" dans `assign()`
+- [ ] Toutes les règles métier sont listées
+- [ ] Chaque règle a un test pour le cas nominal
+- [ ] Chaque règle a un test pour le cas d'erreur
+- [ ] Tests de non-contournement écrits
 - [ ] `pytest tests/domain/` vert (tous les tests passent)
-- [ ] Couverture ≥ 80% : `pytest --cov=src/domain`
-- [ ] Chaque règle métier a son test (4 minimum)
 
 **Git** :
-- [ ] ≥ 3 commits pendant la séance
+- [ ] Commits réguliers pendant la séance
 - [ ] Tag `TD1b` poussé :
   ```bash
   git tag TD1b
@@ -254,13 +155,4 @@ class Ticket:
 
 ---
 
-## 🎯 Validation globale TD1
-
-À la fin des 2 jalons :
-- ✅ Domaine complet : Status, User, Ticket + règles métier
-- ✅ Tests passent : `pytest tests/domain/` vert
-- ✅ Couverture ≥ 80%
-- ✅ Indépendance : aucun import externe
-- ✅ Tags poussés : `TD1a` et `TD1b`
-
-💡 **Coefficient présentiel** : Voir [evaluation_jalons.md](evaluation_jalons.md#1-coefficient-présentiel) pour le barème complet
+💡 **Rappel** : L'objectif n'est pas la quantité de tests, mais la **qualité** : couvrir toutes les règles métier et s'assurer qu'on ne peut pas les contourner.

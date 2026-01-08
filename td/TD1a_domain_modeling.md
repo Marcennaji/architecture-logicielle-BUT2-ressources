@@ -192,7 +192,7 @@ Vous pouvez également ajouter des entités métiers, autres que le groupe minim
 - [ ] Règles métier : titre non vide, username non vide
 
 **Git** :
-- [ ] ≥ 3 commits pendant la séance
+- [ ] Commits réguliers pendant la séance
 - [ ] Tag `TD1a` poussé :
   ```bash
   git tag TD1a

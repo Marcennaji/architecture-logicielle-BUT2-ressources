@@ -337,7 +337,7 @@ Avant la fin de la séance (ou avant le TD1 si non terminé) :
 - [ ] La fonction gère le cas où `end < start` (lève ValueError)
 
 **Git** :
-- [ ] ≥ 3 commits répartis (pas tout à la fin)
+- [ ] Commits réguliers répartis pendant la séance (pas tout à la fin)
   - Exemple : 1) Fonction de base, 2) Tests, 3) Gestion des erreurs
 - [ ] Tag `TD0` créé et poussé :
   ```bash

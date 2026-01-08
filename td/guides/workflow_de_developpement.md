@@ -37,7 +37,7 @@ git commit -m "Add Status enum with lifecycle values"
 git push
 ```
 
-> 💡 **Important** : Faites **au moins 3 commits** répartis pendant la séance de 2h. Cela prouve que vous avez travaillé en présentiel et améliore votre coefficient d'évaluation.
+> 💡 **Important** : Faites des commits réguliers pendant la séance de 2h. Cela témoigne de votre engagement et de votre progression pendant les séances de TD.
 
 **Exemples de bonne granularité pour un jalon** :
 ```bash
@@ -73,7 +73,7 @@ git push origin TD1a
 
 > ⚠️ **Attention** : Le nom du tag doit être **exactement** celui indiqué dans le TD (`TD0`, `TD1a`, `TD1b`, etc.).
 
-> 📊 **Évaluation** : Votre coefficient de bonus dépend du moment où vous poussez le tag et de la répartition de vos commits. Voir [evaluation_jalons.md](../evaluation_jalons.md) pour les détails.
+> 📊 **Évaluation** : Votre engagement pendant les séances de TD est pris en compte dans l'évaluation. Voir [EVALUATION.md](../EVALUATION.md) pour les détails.
 
 ## Résumé des commandes
 
@@ -141,15 +141,15 @@ tests/
 
 ### Quand dois-je pousser le tag ?
 
-**Avant la fin de la séance** ou dans les 10 minutes suivantes pour avoir le coefficient maximum (1.0). Plus vous attendez, plus le coefficient baisse. Voir [evaluation_jalons.md](../evaluation_jalons.md).
+**Idéalement pendant ou juste après la séance** pour montrer votre avancement. Vous pouvez aussi le pousser plus tard si vous continuez à travailler chez vous. Voir [EVALUATION.md](../EVALUATION.md) pour plus de détails.
 
 ### J'ai oublié de pousser le tag pendant la séance, que faire ?
 
-Vous pouvez le pousser plus tard, mais votre coefficient sera réduit (voir le tableau dans [evaluation_jalons.md](../evaluation_jalons.md)). Mieux vaut un tag tardif que pas de tag du tout.
+Vous pouvez le pousser plus tard. Le travail régulier en séance est valorisé, mais mieux vaut un tag tardif que pas de tag du tout. Voir [EVALUATION.md](../EVALUATION.md).
 
 ### Puis-je terminer le jalon chez moi ?
 
-Oui, mais votre coefficient sera réduit car les commits ne seront pas faits pendant la séance. L'objectif est de valoriser le travail en présentiel.
+Oui, mais cela n'aura pas le même impact sur votre évaluation. L'objectif est de valoriser le travail en présentiel et la progression pendant les séances.
 
 ### J'ai des difficultés sur un jalon, que faire ?
 
