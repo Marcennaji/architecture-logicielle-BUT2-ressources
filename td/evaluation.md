@@ -27,6 +27,8 @@ Chaque TD a **ses propres critères d'évaluation** en fonction des objectifs p�
 - ✅ Qualité du code et tests
 - ✅ **Engagement en TD** : Votre présence et participation aux séances sont valorisées
 
+> 💡 **Important** : Votre travail est évalué sur la base du **tag final** que vous poussez (peu importe quand). Des **points bonus ou malus** peuvent être ajoutés en fonction de votre engagement pendant les séances de TD (visible via vos commits en présentiel).
+
 ### Comment valider un TD
 
 1. **Travaillez progressivement** pendant les séances de 2h
