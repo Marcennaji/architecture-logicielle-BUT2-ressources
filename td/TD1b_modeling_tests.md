@@ -2,9 +2,9 @@
 
 ## 📦 Jalon TD1b (2h) → Tag `TD1b`
 
-**⏰ Durée : 1 séance de 2h** (séance suivant TD1a)
+**Durée : 1 séance de 2h** (séance suivant TD1a)
 
-### 🎯 Objectif
+### Objectif
 
 Écrire des tests unitaires qui couvrent **toutes les règles métier** du domaine, y compris les cas d'erreur. L'objectif est de garantir qu'on ne peut pas contourner les règles métier.
 
@@ -17,11 +17,13 @@
 
 Voir [evaluation.md](evaluation.md) pour le système de notation.
 
+> ⚠️ **Important** : Les exemples de règles métier donnés dans ce TD sont indicatifs. Vous devez les adapter en fonction des entités et des règles métier que **vous** avez réellement implémentées dans TD1a. Chaque étudiant peut avoir des règles légèrement différentes.
+
 ---
 
-## Étape 1 : Lister les règles métier (10 min)
+## Étape 1 : Lister les règles métier
 
-Avant de tester, listez **toutes les règles métier** de votre domaine :
+Avant de tester, listez, si vous ne l'avez pas déjà fait dans le fichier domain-notes.md, **toutes les règles métier** de votre domaine :
 
 **Exemples de règles métier** :
 - Un ticket doit avoir un titre non vide
@@ -29,108 +31,62 @@ Avant de tester, listez **toutes les règles métier** de votre domaine :
 - Un ticket fermé ne peut plus être assigné
 - Un ticket déjà fermé ne peut pas être re-fermé
 
-📝 **Action** : Complétez cette liste avec vos propres règles.
 
 ---
 
-## Étape 2 : Tester les cas nominaux (30 min)
+## Étape 2 : Tester les cas nominaux
 
-Pour chaque règle métier, écrivez un test qui vérifie le **comportement normal** :
+Pour chaque règle métier, écrivez un test unitaire qui vérifie le **comportement normal**.
 
-```python
-def test_ticket_creation():
-    """Un ticket peut être créé avec des valeurs valides."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    assert ticket.id == "t1"
-    assert ticket.title == "Bug"
-    assert ticket.status == Status.OPEN
-
-def test_ticket_assign():
-    """Un ticket ouvert peut être assigné."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    ticket.assign("agent1")
-    assert ticket.assignee_id == "agent1"
-    assert ticket.status == Status.IN_PROGRESS
-
-def test_ticket_close():
-    """Un ticket peut être fermé."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    ticket.close()
-    assert ticket.status == Status.CLOSED
-```
+**Exemples de cas nominaux à tester** :
+- Un ticket peut être créé avec des valeurs valides
+- Un ticket ouvert peut être assigné à un agent
+- Un ticket assigné peut être fermé
+- Un utilisateur peut être créé avec un username valide
+- Un ticket a le statut OPEN à sa création
+- L'assignation d'un ticket change son statut à IN_PROGRESS
 
 ---
 
-## Étape 3 : Tester les cas d'erreur (30 min)
+## Étape 3 : Tester les cas d'erreur
 
-Pour chaque règle métier, écrivez un test qui vérifie qu'on **ne peut pas violer la règle** :
+Pour chaque règle métier, écrivez un test unitaire qui vérifie qu'on **ne peut pas violer la règle**.
 
-```python
-def test_ticket_title_cannot_be_empty():
-    """Règle : Un ticket doit avoir un titre non vide."""
-    with pytest.raises(ValueError):
-        Ticket(id="t1", title="", description="desc", creator_id="u1")
-
-def test_user_username_cannot_be_empty():
-    """Règle : Un utilisateur doit avoir un username non vide."""
-    with pytest.raises(ValueError):
-        User(id="u1", username="", is_agent=False, is_admin=False)
-
-def test_cannot_assign_closed_ticket():
-    """Règle : Un ticket fermé ne peut plus être assigné."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    ticket.close()
-    with pytest.raises(ValueError):
-        ticket.assign("agent1")
-
-def test_cannot_close_already_closed_ticket():
-    """Règle : Un ticket déjà fermé ne peut pas être re-fermé."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    ticket.close()
-    with pytest.raises(ValueError):
-        ticket.close()
-```
+**Exemples de règles à tester (cas d'erreur)** :
+- Un ticket ne peut pas avoir un titre vide
+- Un ticket ne peut pas avoir un titre contenant uniquement des espaces
+- Un utilisateur ne peut pas avoir un username vide
+- Un ticket fermé ne peut plus être assigné
+- Un ticket fermé ne peut pas être re-fermé
+- Un ticket ne peut pas être assigné sans ID d'agent
+- Les valeurs du Status sont bien limitées aux 4 valeurs attendues (OPEN, IN_PROGRESS, CLOSED, RESOLVED)
 
 ---
 
-## Étape 4 : Vérifier qu'on ne peut pas contourner (20 min)
+## Étape 4 : Vérifier qu'on ne peut pas contourner
 
-Testez les tentatives de contournement :
+Testez les tentatives de contournement des règles métier.
 
-```python
-def test_cannot_modify_closed_ticket_status_directly():
-    """On ne peut pas modifier le statut d'un ticket fermé en le réassignant."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    ticket.close()
-    
-    # Tentative de contournement
-    with pytest.raises(ValueError):
-        ticket.assign("agent1")  # Doit échouer même si assign() change le statut
-
-def test_status_transitions_are_validated():
-    """Les transitions de statut respectent les règles métier."""
-    ticket = Ticket(id="t1", title="Bug", description="desc", creator_id="u1")
-    
-    # Transition valide : OPEN → IN_PROGRESS
-    ticket.assign("agent1")
-    assert ticket.status == Status.IN_PROGRESS
-    
-    # Transition valide : IN_PROGRESS → CLOSED
-    ticket.close()
-    assert ticket.status == Status.CLOSED
-```
+**Exemples de tests de non-contournement** :
+- On ne peut pas modifier le statut d'un ticket fermé en le réassignant
+- Les transitions de statut respectent un ordre logique (OPEN → IN_PROGRESS → CLOSED)
+- On ne peut pas passer directement de OPEN à CLOSED sans assignation (si c'est une règle métier)
+- On ne peut pas créer un ticket sans créateur
+- On ne peut pas modifier les attributs immuables après création (si applicable)
 
 ---
 
-## Étape 5 : Valider (10 min)
+## Étape 5 : Valider
 
-Vérifiez que tout fonctionne :
+Vérifiez que tous vos tests passent :
 
 ```bash
-# Tous les tests passent
 pytest tests/domain/
+```
 
-# Vérifier la couverture (optionnel)
+Si vous voulez vérifier la couverture (optionnel) :
+
+```bash
 pytest tests/domain/ --cov=src/domain
 ```
 
@@ -139,9 +95,8 @@ pytest tests/domain/ --cov=src/domain
 ## ✅ Checklist avant de soumettre
 
 **Tests** :
-- [ ] Toutes les règles métier sont listées
-- [ ] Chaque règle a un test pour le cas nominal
-- [ ] Chaque règle a un test pour le cas d'erreur
+- [ ] Chaque règle métier a un test pour le cas nominal
+- [ ] Chaque règle métier a un test pour les cas d'erreurs (au moins les plus courants)
 - [ ] Tests de non-contournement écrits
 - [ ] `pytest tests/domain/` vert (tous les tests passent)
 
