@@ -1,6 +1,6 @@
 # TD0 — Prise en main du workflow Git/GitHub
 
-## 📦 Jalon TD0 (2h) → Tag `TD0`
+## 📦 Séance TD0 (2h) → Tag `TD0`
 
 **⏰ Durée : 1 séance de 2h** 
 
@@ -8,7 +8,7 @@
 > **Objectif** : Maîtriser le workflow de développement Git/GitHub utilisé pour tous les TDs  
 ---
 
-## 🎯 Objectifs de ce jalon
+## 🎯 Objectifs de cette séance
 
 À la fin de ce TD, vous saurez :
 
@@ -19,7 +19,7 @@
 5. ✅ Créer un tag pour indiquer que votre travail est prêt à être évalué par l'enseignant
 6. ✅ Comprendre le cycle complet de développement du module
 
-**Important** : Ce workflow (commits réguliers + tag) sera utilisé pour **tous les jalons** du module.
+**Important** : Ce workflow (commits réguliers + tag) sera utilisé pour **toutes les séances** du module.
 
 ---
 
@@ -322,7 +322,7 @@ Ce TD **n'est pas noté** mais il est **obligatoire**.
 | **7. Tag** | `git tag TD0` |
 | **8. Push tag** | `git push origin TD0` |
 
-**Ce workflow sera utilisé pour TOUS les jalons du module** (TD1a, TD1b, TD2a, TD2b, etc.).
+**Ce workflow sera utilisé pour TOUTES les séances du module** (TD1a, TD1b, TD2a, TD2b, etc.).
 
 ---
 
@@ -345,7 +345,7 @@ Avant la fin de la séance (ou avant le TD1 si non terminé) :
   git push origin TD0
   ```
 
-**Bonus** : Si vous finalisez pendant la séance avec commits réguliers, vous validez le bon workflow pour les prochains jalons !
+**Bonus** : Si vous finalisez pendant la séance avec commits réguliers, vous validez le bon workflow pour les prochaines séances !
 
 ---
 

@@ -2,7 +2,7 @@
 
 ## 🎯 Vue d'ensemble
 
-Ce TD couvre la modélisation du domaine métier du système de ticketing. Il est divisé en **2 jalons de 2h** :
+Ce TD couvre la modélisation du domaine métier du système de ticketing. Il est divisé en **2 séances de 2h** :
 - **TD1a** : Création des entités et règles métier de base
 - **TD1b** : Écriture des tests unitaires complets
 
@@ -14,11 +14,11 @@ Ce TD couvre la modélisation du domaine métier du système de ticketing. Il es
 
 ---
 
-## 📦 Jalon TD1a (2h) → Tag `TD1a`
+## 📦 Séance TD1a (2h) → Tag `TD1a`
 
 **⏰ Durée : 1 séance de 2h**
 
-### Objectif du jalon
+### Objectif de la séance
 Créer les entités du domaine (Status, User, Ticket) avec les règles métier de base.
 
 ### 🗺️ Vue du domaine que vous allez créer

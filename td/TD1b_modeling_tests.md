@@ -1,6 +1,6 @@
 # TD1b — Tests unitaires du domaine
 
-## 📦 Jalon TD1b (2h) → Tag `TD1b`
+## 📦 Séance TD1b (2h) → Tag `TD1b`
 
 **Durée : 1 séance de 2h** (séance suivant TD1a)
 
