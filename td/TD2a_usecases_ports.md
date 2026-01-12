@@ -142,7 +142,7 @@ class TicketRepository(ABC):
         Returns:
             Le ticket sauvegardé (avec éventuellement un ID généré)
         """
-        pass
+        ...
 
     @abstractmethod
     def get_by_id(self, ticket_id: str) -> Optional[Ticket]:
@@ -155,7 +155,7 @@ class TicketRepository(ABC):
         Returns:
             Le ticket trouvé, ou None s'il n'existe pas
         """
-        pass
+        ...
 
     @abstractmethod
     def list_all(self) -> list[Ticket]:
@@ -165,12 +165,20 @@ class TicketRepository(ABC):
         Returns:
             Liste de tous les tickets (peut être vide)
         """
-        pass
+        ...
 ```
 
 **2.** Vérifiez que votre classe `Ticket` du TD1 est bien importable et complète.
 
-> 💡 **Note architecturale** : Les ports font partie du domaine ! Ils définissent ce dont le domaine a besoin (ses interfaces requises), sans imposer d'implémentation. C'est pourquoi on les place dans `src/ports/` qui est conceptuellement dans le domaine, mais séparé des entités pour plus de clarté.
+> 💡 **Note architecturale** : Les ports font **conceptuellement** partie du domaine ! Ils définissent ce dont le domaine a besoin (ses interfaces requises), sans imposer d'implémentation.
+> 
+> **Pourquoi `src/ports/` et pas `src/domain/ports/` ?**
+> - **Conceptuellement** : les ports appartiennent au domaine (ils expriment ses besoins)
+> - **Physiquement** : on les sépare dans `src/ports/` pour plus de clarté dans l'organisation du code
+> - Cela permet de distinguer visuellement :
+>   - `src/domain/` → entités et règles métier pures (Ticket, User, Status...)
+>   - `src/ports/` → contrats d'infrastructure (TicketRepository, NotificationService...)
+> - C'est une **convention courante** en architecture hexagonale (pas une obligation stricte)
 > 
 > **Séparation des responsabilités** :
 > - Les **entités** (`Ticket`, `User`, `Status`, `Project`...) sont des objets métier purs qui ne s'occupent pas de leur propre persistance
