@@ -68,7 +68,7 @@ Pour chaque règle métier, écrivez un test unitaire qui vérifie qu'on **ne pe
 - Un ticket fermé ne peut plus être assigné
 - Un ticket fermé ne peut pas être re-fermé
 - On ne peut pas modifier le statut d'un ticket fermé en le réassignant (contournement)
-- Les transitions de statut respectent un ordre logique (OPEN → IN_PROGRESS → CLOSED)
+- Les transitions de statut respectent l'ordre logique que vos règles métier ont définies
 - On ne peut pas passer directement de OPEN à CLOSED sans assignation (si c'est une règle métier)
 - Un ticket ne peut pas être assigné sans ID d'agent
 - On ne peut pas créer un ticket sans créateur
@@ -96,3 +96,6 @@ pytest tests/domain/
 ---
 
 💡 **Rappel** : L'objectif n'est pas la quantité de tests, mais la **qualité** : couvrir toutes les règles métier et s'assurer qu'on ne peut pas les contourner.
+
+## Si vous avez fini avant la fin de séance
+Enrichissez encore votre domaine métier (entités et/ou règles métier) et créez les tests unitaires associés.
