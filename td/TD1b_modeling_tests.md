@@ -86,20 +86,12 @@ pytest tests/domain/
 ```
 ---
 
-## ✅ Checklist avant de soumettre
+## ✅ Checklist avant de soumettre 
 
-**Tests** :
 - [ ] Chaque règle métier a des test pour les cas d'utilisation normale
 - [ ] Chaque règle métier a des tests qui vérifient qu'une exception est lancée, si cette règle n'est pas respectée
 - [ ] `pytest tests/domain/` vert (tous les tests passent)
 
-**Git** :
-- [ ] Commits réguliers pendant la séance
-- [ ] Tag `TD1b` poussé :
-  ```bash
-  git tag TD1b
-  git push origin TD1b
-  ```
 
 ---
 
