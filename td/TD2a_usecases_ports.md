@@ -3,6 +3,11 @@
 **⏰ Durée : 1 séance de 2h**  
 **🏷️ Tag Git optionnel : `TD2a` (pour feedback)**
 
+> ⏳ **Note importante** : Ce TD est dense et introduit de nombreux concepts architecturaux. Il est **normal de ne pas terminer en 2h**. Vous pouvez :
+> - Continuer le travail en **autonomie** chez vous
+> - Finir lors de la **séance TD2b** (temps prévu en début de séance)
+> - Créer le tag `TD2a` quand vous êtes prêts pour obtenir un feedback
+
 ---
 
 ## 🎯 Objectifs de la séance
