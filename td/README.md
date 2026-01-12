@@ -17,8 +17,8 @@ Ces guides sont à consulter tout au long du module :
 | 1 | TD0 | `TD0` | [TD0_prise_en_main.md](TD0_prise_en_main.md) | ✅ Disponible |
 | 2 | TD1a : Entités domaine | `TD1a` | [TD1a_domain_modeling.md](TD1a_domain_modeling.md) | ✅ Disponible |
 | 3 | TD1b : Tests domaine | `TD1b` | [TD1b_modeling_tests.md](TD1b_modeling_tests.md) | ✅ Disponible |
-| 4 | TD2a : Ports + use case | `TD2a` | 🔒 Bientôt | 🔒 Bientôt |
-| 5 | TD2b : Use cases complets | `TD2b` | 🔒 Bientôt | 🔒 Bientôt |
+| 4 | TD2a : Use cases & ports | `TD2a` | [TD2a_usecases_ports.md](TD2a_usecases_ports.md) | ✅ Disponible |
+| 5 | TD2b : Use cases avancés | `TD2b` | 🔒 Bientôt | 🔒 Bientôt |
 | 6 | TD3a : Repository pattern | `TD3a` | 🔒 Bientôt | 🔒 Bientôt |
 | 7 | TD3b : SQLite adapter | `TD3b` | 🔒 Bientôt | 🔒 Bientôt |
 | 8 | TD3c : SQLite CRUD | `TD3c` | 🔒 Bientôt | 🔒 Bientôt |
