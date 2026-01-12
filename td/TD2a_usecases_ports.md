@@ -1,7 +1,7 @@
 # TD2a — Cas d'usage & ports (architecture hexagonale)
 
 **⏰ Durée : 1 séance de 2h**  
-**🏷️ Tag Git à créer : `TD2a`**
+**🏷️ Tag Git optionnel : `TD2a` (pour feedback)**
 
 ---
 
