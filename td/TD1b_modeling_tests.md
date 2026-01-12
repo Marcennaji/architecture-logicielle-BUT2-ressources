@@ -1,8 +1,17 @@
 # TD1b — Tests unitaires du domaine
 
-## 📦 Séance TD1b (2h) → Tag `TD1b`
+## 📦 Séance TD1b (2h) → Tag `TD1b` (optionnel)
 
 **Durée : 1 séance de 2h** (séance suivant TD1a)
+
+> 📋 **Contexte du TD1** :
+> - **TD1a + TD1b** constituent ensemble le **TD1 complet** sur la modélisation du domaine métier
+> - Le tag `TD1b` est **optionnel** et permet d'obtenir un **feedback intermédiaire** si vous le souhaitez
+> - Le tag **`TD1` (obligatoire)** doit être créé quand vous avez terminé l'ensemble du domaine (TD1a + TD1b)
+> - **Deadline pour `TD1`** : avant la séance **TD2b** (vous avez donc encore ~1 semaine après TD1b pour finaliser)
+> - La **correction du TD1 sera déclenchée** uniquement lorsque vous pousserez le tag `TD1`
+> 
+> 💡 Il n'est pas obligatoire de pousser les tags en séance ! Prenez le temps nécessaire pour avoir un domaine métier solide.
 
 ### Objectif
 
