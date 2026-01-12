@@ -633,11 +633,11 @@ pytest tests/application/ -v
 
 ---
 
-## ✅ Critères de validation du TD2a
+## ✅ Points de vérification pour le tag `TD2a` (optionnel)
 
-Pour obtenir le tag `TD2a`, votre projet doit respecter :
+Le tag `TD2a` est **optionnel** et vous permet d'obtenir un **feedback** sur votre architecture. Si vous souhaitez créer ce tag pour marquer votre progression et recevoir des retours, voici les points à vérifier :
 
-### Fichiers obligatoires
+### Fichiers attendus
 
 - [ ] `docs/usecases.md` avec au moins 6-8 cas d'usage listés
 - [ ] `src/ports/ticket_repository.py` avec l'interface `TicketRepository`
@@ -647,24 +647,22 @@ Pour obtenir le tag `TD2a`, votre projet doit respecter :
 - [ ] `tests/application/test_create_ticket.py` avec au moins 3 tests
 - [ ] `tests/application/test_assign_ticket.py` avec au moins 3 tests
 
-### Architecture
+### Points architecturaux à vérifier
 
 - [ ] Le port est dans `src/ports/`, **pas dans `src/domain/`**
 - [ ] Les use cases reçoivent le repository par injection de dépendances
 - [ ] Les use cases utilisent l'interface `TicketRepository`, pas l'implémentation
-- [ ] Pas d'import de FastAPI / SQLite / librairies externes dans `domain/` et `application/`
+- [ ] Pas d'import de `InMemoryTicketRepository` dans `domain/` et `application/` (seulement dans les tests)
 
 ### Tests
 
 - [ ] Tous les tests passent : `pytest tests/application/`
-- [ ] Couverture des cas nominaux et d'erreur
 - [ ] Les tests utilisent l'adaptateur InMemory
 
 ### Git
 
 - [ ] Commits atomiques avec messages explicites
-- [ ] Tag `TD2a` créé sur le commit final
-- [ ] Historique Git propre
+- [ ] Tag `TD2a` créé sur un commit fonctionnel
 
 ---
 
@@ -680,7 +678,7 @@ Pour obtenir le tag `TD2a`, votre projet doit respecter :
 
 Si vous finissez en avance, vous pouvez :
 
-1. Ajouter un 3ème use case simple (ex: lister tous les tickets)
+1. Ajouter un 3ème use case simple (ex: lister tous les tickets, filtrer les tickets par statut...)
 2. Enrichir les tests avec plus de cas d'erreur
 3. Ajouter des docstrings complètes sur toutes les méthodes
 
