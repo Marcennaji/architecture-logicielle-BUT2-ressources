@@ -37,11 +37,11 @@ Dans l'architecture hexagonale, nous organisons le code en **composants** avec d
 │  (API, DB, CLI, etc.)   │    │  (Application)   │
 └───────────┬─────────────┘    └────────┬─────────┘
             │                           │
-            │ implémentent les ports    │ utilisent
+            │                           │ utilisent
             │                           │
             └──────────►┌───────────────▼────┐
-                        │    DOMAINE         │  ← Cœur (indépendant)
-                        │  • Entités         │
+  implémentent          │    DOMAINE         │  ← Cœur (indépendant)
+  les ports             │  • Entités         │
                         │  • Règles métier   │
                         │  • Ports           │  ← Interfaces (ports) ici !
                         └────────────────────┘
