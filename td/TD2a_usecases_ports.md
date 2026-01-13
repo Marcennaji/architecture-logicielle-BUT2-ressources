@@ -112,7 +112,7 @@ Un **port** est une **interface abstraite** qui définit les opérations nécess
 
 ### 📝 À faire
 
-**1.** Créez le fichier `src/ports/ticket_repository.py` :
+Créez le fichier `src/ports/ticket_repository.py` :
 
 ```python
 """
@@ -172,8 +172,6 @@ class TicketRepository(ABC):
         """
         ...
 ```
-
-**2.** Vérifiez que votre classe `Ticket` du TD1 est bien importable et complète.
 
 > 💡 **Note architecturale** : Les ports font **conceptuellement** partie du domaine ! Ils définissent ce dont le domaine a besoin (ses interfaces requises), sans imposer d'implémentation.
 > 
@@ -654,7 +652,6 @@ Le tag `TD2a` est **optionnel** et vous permet d'obtenir un **feedback** sur vot
 
 ### Points architecturaux à vérifier
 
-- [ ] Le port est dans `src/ports/`, **pas dans `src/domain/`**
 - [ ] Les use cases reçoivent le repository par injection de dépendances
 - [ ] Les use cases utilisent l'interface `TicketRepository`, pas l'implémentation
 - [ ] Pas d'import de `InMemoryTicketRepository` dans `domain/` et `application/` (seulement dans les tests)
@@ -666,8 +663,7 @@ Le tag `TD2a` est **optionnel** et vous permet d'obtenir un **feedback** sur vot
 
 ### Git
 
-- [ ] Commits atomiques avec messages explicites
-- [ ] Tag `TD2a` créé sur un commit fonctionnel
+- [ ] Commits réguliers et fréquents, avec messages explicites
 
 ---
 
@@ -683,7 +679,7 @@ Le tag `TD2a` est **optionnel** et vous permet d'obtenir un **feedback** sur vot
 
 Si vous finissez en avance, vous pouvez :
 
-1. Ajouter un 3ème use case simple (ex: lister tous les tickets, filtrer les tickets par statut...)
+1. Ajouter un 3ème use case simple (ex: lister tous les tickets, en filtrant éventuellement en fonction d'un statut passé en paramètre...)
 2. Enrichir les tests avec plus de cas d'erreur
 3. Ajouter des docstrings complètes sur toutes les méthodes
 
