@@ -55,7 +55,7 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 - ✅ Tests déterministes (même résultat à chaque exécution)
 
 <details>
-<summary>💡 Indices</summary>
+<summary>💡 Indices (à ne pas lire avant 15mn de réflexion)</summary>
 
 - Le temps = dépendance externe (comme la DB)
 - Même solution qu'au TD2a : interface + adapteurs
