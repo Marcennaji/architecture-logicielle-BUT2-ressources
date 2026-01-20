@@ -23,7 +23,6 @@ feedback_etudiants.md
 docs/architecture/README.md
 scripts/export_diagrams.sh
 
-td/TD3a_sqlite_ticket_repository.md
 td/TD3b_sqlite_user_repository.md
 td/TD3c_relations_multi_repositories.md
 td/bareme-td1.md
