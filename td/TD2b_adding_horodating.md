@@ -14,7 +14,7 @@
 
 ---
 
-## 📋 Partie 1 : Horodatage (40 min — AUTONOMIE)
+## 📋 Partie 1 : Horodatage (AUTONOMIE)
 
 ### 🎯 Besoin
 
@@ -22,7 +22,7 @@ Enregistrer la date/heure quand un ticket est démarré (`started_at`).
 
 **Cas d'usage** : statistiques, audit, métriques de performance.
 
-### 🤔 Questions (10 min de réflexion)
+### 🤔 Questions
 
 **Q1.** Comment obtenir la date/heure actuelle en Python ?
 
@@ -51,27 +51,24 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 ```
 
 **Contraintes** :
-- ❌ Pas de `datetime.now()` dans le domaine
-- ✅ Les use cases utilisent un port Clock pour obtenir le temps
-- ✅ Le domaine reçoit les timestamps en paramètre
 - ✅ Architecture hexagonale respectée
-- ✅ Tests déterministes
+- ✅ Tests déterministes (même résultat à chaque exécution)
 
 <details>
-<summary>💡 Indices (après 20 min)</summary>
+<summary>💡 Indices</summary>
 
 - Le temps = dépendance externe (comme la DB)
 - Même solution qu'au TD2a : interface + adapteurs
-- Nommage classique :
-  - Port : `Clock`, `TimeProvider`
-  - Adaptateur production : `SystemClock`, `RealClock`
-  - Adaptateur test : `FixedClock`, `FakeClock`
+- Nommage (classique) proposé:
+  - Port : `Clock`
+  - Adaptateur production : `SystemClock`
+  - Adaptateur test : `FixedClock`
 
 </details>
 
 ---
 
-## 📋 Partie 2 : Domaine (20 min)
+## 📋 Partie 2 : Domaine
 
 ### 🎯 Spécifications
 
@@ -93,7 +90,7 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 
 ---
 
-## 📋 Partie 3 : Use Case (35 min — AUTONOMIE)
+## 📋 Partie 3 : Use Case (AUTONOMIE)
 
 **Spécifications `StartTicketUseCase`** :
 
@@ -113,7 +110,7 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 
 ---
 
-## 📋 Partie 4 : Tests (20 min)
+## 📋 Partie 4 : Tests
 
 Créez `tests/application/test_start_ticket.py` avec :
 
