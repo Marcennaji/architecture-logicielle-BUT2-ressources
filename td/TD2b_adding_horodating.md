@@ -62,7 +62,10 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 
 - Le temps = dépendance externe (comme la DB)
 - Même solution qu'au TD2a : interface + adapteurs
-- Nommage classique : `Clock`, `TimeProvider`
+- Nommage classique :
+  - Port : `Clock`, `TimeProvider`
+  - Adaptateur production : `SystemClock`, `RealClock`
+  - Adaptateur test : `FixedClock`, `FakeClock`
 
 </details>
 
@@ -78,16 +81,15 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 - Enregistre `started_at`
 - Transition : `OPEN` → `IN_PROGRESS`
 
-**Validations** (i.e, vérifications à faire avant le démarrage du ticket) :
-1. Le ticket existe
-2. Le ticket est assigné
-3. L'agent qui démarre = agent assigné
-4. Le ticket est `OPEN`
+**Validations métier** (à implémenter dans `ticket.start()`) :
+1. Le ticket est assigné
+2. L'agent qui démarre = agent assigné
+3. Le ticket est `OPEN`
 
 **À faire** :
 1. Ajoutez le champ `started_at: Optional[datetime]` dans `Ticket`
-2. Créez la méthode `start(agent_id, started_at)` avec validations
-3. Créez les exceptions nécessaires
+2. Créez la méthode `start(agent_id, started_at)` avec les 3 validations métier
+3. Créez les exceptions nécessaires (`TicketNotAssignedError`, `WrongAgentError`, `InvalidTicketStateError`)
 
 ---
 
@@ -100,12 +102,12 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 - **Dépendances** : Repository + Horloge (créée en Partie 1)
 
 **Comportement** :
-1. Récupérer le ticket
-2. Vérifier existence
-3. Obtenir le timestamp
-4. Appeler `ticket.start()`
-5. Sauvegarder
-6. Retourner
+1. Récupérer le ticket depuis le repository
+2. Vérifier existence (lever `TicketNotFoundError` si None)
+3. Obtenir le timestamp depuis l'horloge
+4. Appeler `ticket.start(agent_id, timestamp)` (qui fait les validations métier)
+5. Sauvegarder le ticket
+6. Retourner le ticket modifié
 
 **À faire** : Créez `src/application/usecases/start_ticket.py`
 
@@ -116,8 +118,8 @@ datetime(2026, 1, 16, 14, 30, 0)  # Toujours pareil !
 Créez `tests/application/test_start_ticket.py` avec :
 
 1. `test_start_ticket_success` → Succès nominal
-2. `test_start_ticket_not_found` → TicketNotFoundError
-3. `test_start_ticket_already_started` → InvalidTicketStateError
+2. `test_start_ticket_not_found` → TicketNotFoundError (validation use case)
+3. `test_start_ticket_invalid_status` → InvalidTicketStateError (validation domaine)
 
 **Clé** : Vérifier `ticket.started_at == temps_fixe` (déterminisme)
 
@@ -136,13 +138,13 @@ Créez `tests/application/test_start_ticket.py` avec :
 
 **Domaine**
 - [ ] Champ `started_at`
-- [ ] Méthode `start()` + 4 validations
-- [ ] Transition d'état correcte
-- [ ] 4 exceptions créées (NotFound, NotAssigned, WrongAgent, AlreadyStarted)
+- [ ] Méthode `start()` + 3 validations métier (assigné, bon agent, statut OPEN)
+- [ ] Transition d'état correcte (OPEN → IN_PROGRESS)
+- [ ] 3 exceptions créées pour le domaine (`TicketNotAssignedError`, `WrongAgentError`, `InvalidTicketStateError`)
 
 **Use Case & Tests**
 - [ ] StartTicketUseCase fonctionnel
-- [ ] 3 tests minimum (success, not_found, already_started)
+- [ ] 3 tests minimum (success, not_found, invalid_status)
 - [ ] Tests déterministes
 - [ ] `pytest tests/` → 100% ✅
 
@@ -163,10 +165,20 @@ Si vous aviez déjà une fonction `_now_utc()` ou des appels à `datetime.now()`
 1. Supprimer la fonction `_now_utc()` du domaine
 2. Modifier les méthodes du domaine (`assign`, `transition_to`, `set_priority`) pour accepter un paramètre `updated_at: datetime`
 3. Rendre `created_at` et `updated_at` obligatoires dans le constructeur de `Ticket`
-4. Adapter tous les use cases (`CreateTicket`, `AssignTicket`) pour injecter `Clock` et passer les timestamps
+4. Adapter tous les use cases (`CreateTicket`, `AssignTicket`) pour injecter le port `Clock` et passer les timestamps au domaine
 5. Mettre à jour tous les tests pour passer explicitement les timestamps
 
 **Avantage** : Architecture hexagonale strictement respectée, domaine testable sans effets de bord.
+
+---
+
+## 📚 Pour aller plus loin
+
+**[Annexe : Cas d'usage concret du port Clock](TD2b_annexe_cas_usage_clock.md)**
+
+Un exemple métier réel qui illustre pourquoi le port Clock est indispensable : la réouverture de ticket limitée à 7 jours.
+
+Cette lecture approfondit votre compréhension du TD2b à travers un cas concret avec tests détaillés. À lire chez vous ou en fin de séance si vous avez terminé.
 
 ---
 
