@@ -460,7 +460,7 @@ def clear(self):
 **2. Tests de performance** : Comparer InMemory vs SQLite
 - Créer 1000 tickets
 - Mesurer temps d'exécution
-- Constater : InMemory = rapide, SQLite = persistent
+- Constater : InMemory = rapide, SQLite = persistent (et lent)
 
 **3. find_by_status()** : Filtrer par statut
 ```sql
