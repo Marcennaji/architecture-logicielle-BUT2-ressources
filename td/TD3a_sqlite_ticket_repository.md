@@ -281,13 +281,6 @@ tests/
 - b) Les tests du use case ?
 - c) Uniquement l'instanciation du repository ?
 
-**Q4.** Pourquoi les helpers `database.py` et `mappers.py` sont-ils dans `adapters/` et pas dans `domain/` ?
-
-**Q5.** Lisez le code de `database.py` : comment fonctionne `get_connection()` ?
-
-**Q6.** Lisez le code de `mappers.py` : comment `ticket_to_row()` convertit-il les `datetime` et les `Enum` ?
-
-**Q7.** Dans la fixture `sqlite_ticket_repo`, pourquoi utilise-t-on `tmp_path` ? Comment cela garantit l'isolation des tests ?
 
 ---
 
