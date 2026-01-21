@@ -194,9 +194,10 @@ def row_to_ticket(row: dict) -> Ticket:
     return ticket
 ```
 
-### **Fichier 4 : `tests/conftest.py`** (à compléter)
+### **Fichier 4 : `tests/conftest.py`**
 
-Ajoutez cette fixture à votre fichier `conftest.py` existant (ou créez-le) :
+**Si le fichier existe déjà** : Ajoutez cette fixture à la fin du fichier.  
+**Si le fichier n'existe pas** : Créez-le avec ce contenu.
 
 ```python
 import pytest
