@@ -20,10 +20,10 @@ Ces guides sont à consulter tout au long du module :
 | 4 | TD2a : Use cases & ports | `TD2a` | [TD2a_usecases_ports.md](TD2a_usecases_ports.md) | ✅ Disponible |
 | 5 | TD2b : Use cases & ports (2) | `TD2b` | [TD2b_adding_horodating.md](TD2b_adding_horodating.md) | ✅ Disponible |
 | 6 | TD3a : Ticket Repository | `TD3a` | [TD3a_sqlite_ticket_repository.md](TD3a_sqlite_ticket_repository.md) | ✅ Disponible |
-| 7 | TD3b : User Repository | `TD3b` | 🔒 Bientôt | 🔒 Bientôt |
+| 7 | TD3b : User Repository | `TD3b` | [TD3b_sqlite_user_repository.md](TD3b_sqlite_user_repository.md) | ✅ Disponible |
 | 8 | TD4a : API REST (1) | `TD4a` | 🔒 Bientôt | 🔒 Bientôt |
 | 9 | TD4b : API REST (2) + Révision | `TD4b` | 🔒 Bientôt | 🔒 Bientôt |
 | 10 | QCM (45mn) + Exercice pratique | 🔒 Bientôt | 🔒 Bientôt |
 
-> 💡 **Volume total** : 9 jalons de 2h + QCM = 20h de TD en présentiel.  
+> 💡 **Volume total** : 20h de TD en présentiel.  
 > **Système d'évaluation** : Voir [evaluation.md](evaluation.md)
