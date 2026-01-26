@@ -7,11 +7,10 @@
 > 📋 **Contexte du TD1** :
 > - **TD1a + TD1b** constituent ensemble le **TD1 complet** sur la modélisation du domaine métier
 > - Le tag `TD1b` est **optionnel** et permet d'obtenir un **feedback intermédiaire** si vous le souhaitez
-> - Le tag **`TD1` (obligatoire)** doit être créé quand vous avez terminé l'ensemble du domaine (TD1a + TD1b)
-> - **Deadline pour `TD1`** : avant la séance **TD2b** (vous avez donc encore ~1 semaine après TD1b pour finaliser)
-> - La **correction du TD1 sera déclenchée** uniquement lorsque vous pousserez le tag `TD1`
+> - **Correction finale de TD1** : déclenchée automatiquement **1 semaine après la séance TD1b**
+> - La correction évalue l'**état le plus récent du code sur la branche `main`** (pas de tag obligatoire)
 > 
-> 💡 Il n'est pas obligatoire de pousser les tags en séance ! Prenez le temps nécessaire pour avoir un domaine métier solide.
+> 💡 Prenez le temps nécessaire pour avoir un domaine métier solide avant la deadline de correction !
 
 ### Objectif
 
@@ -50,10 +49,9 @@ Pour chaque règle métier, écrivez un test unitaire qui vérifie le **comporte
 **Exemples de cas nominaux à tester** :
 - Un ticket peut être créé avec des valeurs valides
 - Un ticket ouvert peut être assigné à un agent
-- Un ticket assigné peut être fermé
+- Un ticket assigné peut être démarré (transition vers IN_PROGRESS)
 - Un utilisateur peut être créé avec un username valide
 - Un ticket a le statut OPEN à sa création
-- L'assignation d'un ticket change son statut à IN_PROGRESS
 
 ---
 
@@ -69,7 +67,7 @@ Pour chaque règle métier, écrivez un test unitaire qui vérifie qu'on **ne pe
 - Un ticket fermé ne peut pas être re-fermé
 - On ne peut pas modifier le statut d'un ticket fermé en le réassignant (contournement)
 - Les transitions de statut respectent l'ordre logique que vos règles métier ont définies
-- On ne peut pas passer directement de OPEN à CLOSED sans assignation (si c'est une règle métier)
+- On ne peut pas passer directement de OPEN à RESOLVED (il faut passer par IN_PROGRESS)
 - Un ticket ne peut pas être assigné sans ID d'agent
 - On ne peut pas créer un ticket sans créateur
 - On ne peut pas modifier les attributs immuables après création (si applicable)
