@@ -29,6 +29,76 @@ Voir [evaluation.md](evaluation.md) pour le système de notation.
 
 ---
 
+## Étape 0 : Vérifier la protection des transitions de statut (5-10 min)
+
+**Objectif** : S'assurer que les règles de transition de statut ne peuvent pas être contournées.
+
+### ✅ Checklist de vérification
+
+Vérifiez dans votre `src/domain/status.py` et `src/domain/ticket.py` :
+
+- [ ] **Status est un Enum** Python :
+  ```python
+  from enum import Enum
+  
+  class Status(Enum):
+      OPEN = "open"
+      IN_PROGRESS = "in_progress"
+      RESOLVED = "resolved"
+      CLOSED = "closed"
+  ```
+  💡 Si ce n'est pas le cas, corrigez maintenant avant de continuer.
+
+- [ ] Le statut du ticket est **privé** : `_status` (avec underscore) au lieu de `status`
+- [ ] Une **propriété lecture seule** permet d'accéder au statut :
+  ```python
+  @property
+  def status(self) -> Status:
+      return self._status
+  ```
+- [ ] Vos méthodes métier (`close()`, `resolve()`, `reopen()`, etc.) **valident les transitions** avant de modifier `_status`
+
+💡 **Si tout est bon** : Passez directement à l'Étape 1.
+
+### 📝 Alternative : méthode `transition_to()` centralisée (optionnel)
+
+Si vous préférez centraliser la logique de transition dans une seule méthode :
+
+**Fichier** : `src/domain/ticket.py`
+
+```python
+class Ticket:
+    # Transitions autorisées
+    ALLOWED_TRANSITIONS = {
+        Status.OPEN: [Status.IN_PROGRESS],
+        Status.IN_PROGRESS: [Status.RESOLVED],
+        Status.RESOLVED: [Status.CLOSED, Status.IN_PROGRESS],
+        Status.CLOSED: [Status.IN_PROGRESS],
+    }
+    
+    def transition_to(self, new_status: Status, updated_at: datetime) -> None:
+        """Fait transiter le ticket vers un nouveau statut."""
+        if new_status not in self.ALLOWED_TRANSITIONS.get(self._status, []):
+            raise InvalidStatusTransitionError(
+                f"Cannot transition from {self._status.value} to {new_status.value}"
+            )
+        self._status = new_status
+        self.updated_at = updated_at
+```
+
+Vos méthodes métier deviennent alors :
+```python
+def close(self, closed_at: datetime):
+    self.transition_to(Status.CLOSED, closed_at)  # Valide automatiquement la transition
+    self.closed_at = closed_at
+```
+
+💡 **Les deux approches sont valables** :
+- **Méthodes autonomes** : chaque méthode (`close()`, `resolve()`) fait sa propre validation
+- **Avec `transition_to()`** : délègue toute la validation des transitions à `transition_to()`
+
+---
+
 ## Étape 1 : Lister les règles métier
 
 Avant de tester, listez (si vous ne l'avez pas déjà fait) dans le fichier docs/domain-notes.md, **toutes les règles métier** de votre domaine :

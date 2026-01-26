@@ -112,6 +112,20 @@ Ouvrez `src/domain/status.py` et complétez l'énumération `Status`.
 - `RESOLVED` → résolu, en attente de validation
 - `CLOSED` → fermé définitivement
 
+**Exemple d'implémentation** :
+```python
+from enum import Enum
+
+class Status(Enum):
+    """États possibles d'un ticket."""
+    OPEN = "open"
+    IN_PROGRESS = "in_progress"
+    RESOLVED = "resolved"
+    CLOSED = "closed"
+```
+
+💡 **Pourquoi un Enum ?** Un enum garantit que seules ces 4 valeurs sont possibles. Impossible d'avoir un statut invalide comme `"PENDING"` ou `"DONE"`.
+
 💡 **Commit** : Une fois terminé, commitez vos changements :
 ```bash
 git add src/domain/status.py
@@ -148,6 +162,66 @@ Ouvrez `src/domain/ticket.py` et complétez la classe `Ticket`.
 
 **Méthode métier à implémenter** :
 - `assign(user_id)` : assigne le ticket à un agent
+
+### 5.1. Sécuriser les transitions de statut (optionnel mais recommandé)
+
+**Problème** : Si on laisse `status` modifiable directement, on peut contourner les règles métier :
+```python
+ticket.status = Status.CLOSED  # ❌ Contourne les règles métier !
+```
+
+**Solution** : Implémenter un mécanisme de transition sécurisé.
+
+**Étape 1** : Définir les transitions autorisées (en début de classe) :
+```python
+class Ticket:
+    # Transitions d'état autorisées
+    ALLOWED_TRANSITIONS = {
+        Status.OPEN: [Status.IN_PROGRESS],
+        Status.IN_PROGRESS: [Status.RESOLVED],
+        Status.RESOLVED: [Status.CLOSED, Status.IN_PROGRESS],
+        Status.CLOSED: [Status.IN_PROGRESS],  # Réouverture
+    }
+```
+
+**Étape 2** : Rendre `_status` privé (avec underscore) :
+```python
+    _status: Status = field(default=Status.OPEN, init=False, repr=False)
+```
+
+**Étape 3** : Ajouter une propriété lecture seule :
+```python
+    @property
+    def status(self) -> Status:
+        """Récupère le statut actuel du ticket (lecture seule)."""
+        return self._status
+```
+
+**Étape 4** : Implémenter `transition_to()` :
+```python
+    def transition_to(self, new_status: Status, updated_at: datetime) -> None:
+        """
+        Fait transiter le ticket vers un nouveau statut.
+
+        Raises:
+            InvalidStatusTransitionError: Si la transition n'est pas autorisée
+        """
+        if new_status not in self.ALLOWED_TRANSITIONS.get(self._status, []):
+            raise InvalidStatusTransitionError(
+                f"Cannot transition from {self._status.value} to {new_status.value}"
+            )
+        self._status = new_status
+        self.updated_at = updated_at
+```
+
+**Étape 5** : Ajouter l'exception dans `src/domain/exceptions.py` :
+```python
+class InvalidStatusTransitionError(DomainError):
+    """Levée lors d'une tentative de transition de statut invalide."""
+    ...
+```
+
+💡 **Bénéfice** : Impossible maintenant de contourner les règles de transition. Vous pourrez tester ça dans TD1b !
 
 ### 6. Règles métier (invariants) 
 
