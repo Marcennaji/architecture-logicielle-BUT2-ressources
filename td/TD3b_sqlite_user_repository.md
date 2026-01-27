@@ -440,7 +440,6 @@ class TestCreateUserUseCase:
 ### ✅ Constat
 
 - [ ] Use case `CreateUser` implémenté
-- [ ] Validat5on : username unique (via `find_by_username()`)
 - [ ] Génération d'ID avec `uuid.uuid4()`
 - [ ] Injection de dépendances : le use case ne dépend que du port
 
