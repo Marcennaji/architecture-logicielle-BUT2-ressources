@@ -1,4 +1,4 @@
-# TD04 — API REST avec FastAPI (tag: TD04)
+# TD4a — API REST avec FastAPI (tag: TD4a)
 
 **Objectif** : Créer une API REST pour exposer votre application ticketing et comprendre le rôle du *composition root*.
 

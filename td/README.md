@@ -21,7 +21,7 @@ Ces guides sont à consulter tout au long du module :
 | 5 | TD2b : Use cases & ports (2) | `TD2b` | [TD2b_adding_horodating.md](TD2b_adding_horodating.md) | ✅ Disponible |
 | 6 | TD3a : Ticket Repository | `TD3a` | [TD3a_sqlite_ticket_repository.md](TD3a_sqlite_ticket_repository.md) | ✅ Disponible |
 | 7 | TD3b : User Repository | `TD3b` | [TD3b_sqlite_user_repository.md](TD3b_sqlite_user_repository.md) | ✅ Disponible |
-| 8 | TD4a : API REST (1) | `TD4a` | 🔒 Bientôt | 🔒 Bientôt |
+| 8 | TD4a : API REST (1) | `TD4a` | [TD4a_api_rest.md](TD4a_api_rest.md) | ✅ Disponible |
 | 9 | TD4b : API REST (2) + Révision | `TD4b` | 🔒 Bientôt | 🔒 Bientôt |
 | 10 | QCM (45mn) + Exercice pratique | 🔒 Bientôt | 🔒 Bientôt |
 
