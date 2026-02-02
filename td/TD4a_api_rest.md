@@ -16,6 +16,30 @@
 
 ---
 
+## 🌐 Contexte : API REST et FastAPI
+
+### Qu'est-ce qu'une API REST ?
+
+Une **API REST** (Representational State Transfer) permet à des applications de communiquer via HTTP. Elle expose des **ressources** (tickets, utilisateurs...) accessibles par des **endpoints** (URLs) et manipulables avec des **verbes HTTP** :
+- **GET** : Lire des données (`GET /tickets` → liste des tickets)
+- **POST** : Créer une ressource (`POST /tickets` → créer un ticket)
+- **PUT/PATCH** : Modifier une ressource
+- **DELETE** : Supprimer une ressource
+
+**Exemple** : Une application web (frontend) peut consommer votre API pour afficher et gérer des tickets, sans connaître votre base de données ni votre logique métier.
+
+### Pourquoi FastAPI ?
+
+**FastAPI** est un framework Python moderne pour créer des APIs. Ses atouts :
+- ✅ **Validation automatique** : Pydantic vérifie les données entrantes/sortantes
+- ✅ **Documentation auto-générée** : Swagger UI (`/docs`) et ReDoc (`/redoc`)
+- ✅ **Performance** : Basé sur Starlette (async) et comparable à Node.js/Go
+- ✅ **Type hints natifs** : Exploitation maximale des annotations Python
+
+**Dans ce TD**, FastAPI sert d'**adaptateur d'entrée** : il reçoit les requêtes HTTP et appelle vos use cases (votre logique métier reste indépendante du framework).
+
+---
+
 ## 📚 Rappel : Architecture hexagonale complète
 
 Jusqu'à présent, vous avez construit :
@@ -35,7 +59,7 @@ Jusqu'à présent, vous avez construit :
 
 ---
 
-## 🧩 Partie 1 : Comprendre le composition root (15 min)
+## 🧩 Partie 1 : Comprendre le composition root 
 
 Le **composition root** (`src/main.py`) est le seul endroit qui :
 1. Connaît les implémentations concrètes (`SQLiteTicketRepository`, `InMemoryTicketRepository`...)
@@ -44,19 +68,19 @@ Le **composition root** (`src/main.py`) est le seul endroit qui :
 
 **Principe** :
 ```python
-# ✅ Use case = reçoit l'interface
+# ✅ Use case = reçoit les interfaces (ses dépendances)
 class CreateTicketUseCase:
-    def __init__(self, ticket_repository: TicketRepository):
+    def __init__(self, ticket_repository: TicketRepository, clock: Clock):
         self.repo = ticket_repository
+        self.clock = clock
 
-# ✅ Composition root = câble les implémentations
+# ✅ Composition root = câble les implémentations concrètes
 repo = SQLiteTicketRepository()
-usecase = CreateTicketUseCase(ticket_repository=repo)
+clock = SystemClock()
+usecase = CreateTicketUseCase(ticket_repository=repo, clock=clock)
 ```
 
-**👀 Regardez `src/main.py`** : repository instancié, clock instancié, factories pour les use cases (qui injectent repository + clock), routes incluses.
-
-💡 **Important** : `CreateTicketUseCase` nécessite 2 dépendances : `ticket_repository` et `clock`. La factory doit les injecter toutes les deux.
+**👀 Regardez `src/main.py`** : repository instancié, clock instancié, factories pour les use cases (qui injectent toutes les dépendances nécessaires), routes incluses.
 
 ---
 
@@ -71,7 +95,7 @@ Les use cases sont déjà l'interface publique de votre application. Pas besoin 
 
 ---
 
-## 🚀 Partie 2 : Lancer l'API et premier test (15 min)
+## 🚀 Partie 2 : Lancer l'API et premier test 
 
 ### Étape 1 : Lancer le serveur
 
@@ -103,6 +127,8 @@ Réponse : `{"status":"ok"}` ✅
 
 🌐 Ouvrez **http://127.0.0.1:8000/docs** (Swagger UI) → Documentation interactive avec `GET /`, `POST /tickets`, `GET /tickets`
 
+💡 **Quand est-elle générée ?** FastAPI crée automatiquement cette documentation **au démarrage du serveur**, en analysant vos routes, type hints et schémas Pydantic. Avec `--reload`, elle se met à jour à chaque modification du code. Aucun fichier à écrire manuellement !
+
 💡 **Lire Swagger correctement** : Dans la section "Responses", vous voyez TOUS les codes possibles (201, 422...). Quand vous testez une requête, seul le code correspondant à votre résultat est la vraie réponse. Les autres sont des exemples "si ça se passe mal".
 
 🔍 **Alternative** : **http://127.0.0.1:8000/redoc** (ReDoc) offre une présentation plus claire de la documentation.
@@ -111,19 +137,21 @@ Réponse : `{"status":"ok"}` ✅
 
 ---
 
-## 📝 Partie 3 : Schémas Pydantic (10 min)
+## 📝 Partie 3 : Schémas Pydantic 
 
 **Fichier** : `src/adapters/api/ticket_router.py` (lignes 16-40)
 
 Les schémas `TicketIn` et `TicketOut` sont déjà fournis. Ils définissent :
-- **Entrée** : `title` et `description` (ce que l'API reçoit)
+- **Entrée** : `title`, `description`, `creator_id` (ce que l'API reçoit)
 - **Sortie** : `id`, `title`, `description`, `status` (ce que l'API retourne)
 
 **💡 Point clé** : Schémas API ≠ entités domaine. La route convertit `Status.OPEN` (enum) → `"OPEN"` (string)
 
+**💡 Note** : En production, `creator_id` viendrait d'un système d'authentification (JWT, session...). Pour simplifier le TD, on le passe dans la requête.
+
 ---
 
-## 🔌 Partie 4 : Implémenter POST /tickets (30 min)
+## 🔌 Partie 4 : Implémenter POST /tickets 
 
 ### Étape 1 : Comprendre le squelette
 
@@ -149,7 +177,7 @@ usecase = get_create_ticket_usecase()
 ticket = usecase.execute(
     title=ticket_data.title,
     description=ticket_data.description,
-    creator_id="anonymous"
+    creator_id=ticket_data.creator_id
 )
 
 # 3. Convertir l'entité domaine en schéma API
@@ -165,7 +193,7 @@ return TicketOut(
 
 🌐 Ouvrez http://127.0.0.1:8000/docs et testez avec l'interface Swagger :
 1. Cliquez sur `POST /tickets` → "Try it out"
-2. Modifiez le JSON : `{"title": "Test", "description": "Ma description"}`
+2. Modifiez le JSON : `{"title": "Bug urgent", "description": "Le serveur ne répond plus", "creator_id": "user-123"}`
 3. Cliquez "Execute"
 4. Vérifiez la réponse HTTP 201 avec le ticket créé
 
@@ -173,7 +201,7 @@ return TicketOut(
 
 ---
 
-## 📋 Partie 5 : Implémenter GET /tickets (25 min)
+## 📋 Partie 5 : Implémenter GET /tickets 
 
 ### Étape 1 : Créer le use case ListTickets
 
@@ -243,7 +271,7 @@ async def list_tickets():
 
 ---
 
-## 🧪 Partie 6 : Tests E2E (15 min)
+## 🧪 Partie 6 : Tests E2E
 
 **Fichier** : `tests/e2e/test_api.py`
 
@@ -255,7 +283,7 @@ pytest tests/e2e/ -v
 
 ---
 
-## 🎓 Synthèse (5 min)
+## 🎓 Synthèse
 
 Vous avez complété l'architecture hexagonale :
 - **Composition root** (`main.py`) : Câble les dépendances
@@ -302,6 +330,6 @@ Vous avez créé le `UserRepository` au TD3b. Maintenant, créez l'API `/users` 
 ```bash
 git add .
 git commit -m "feat(api): Implement FastAPI routes and composition root"
-git tag -a TD04 -m "TD04: API REST avec FastAPI"
+git tag -a TD4a -m "TD4a: API REST avec FastAPI"
 git push origin main --tags
 ```
