@@ -25,7 +25,7 @@
 | Jalon | Contenu | Tag | Statut |
 |-------|---------|-----|--------|
 | **TD1** | Modélisation domaine (Ticket, User, Status) | `TD1` | ✅ |
-| **TD2** | Use cases + ports (CreateTicket, AssignTicket) | `TD2` | ✅ |
+| **TD2** | Use cases + ports (CreateTicket, StartTicket) | `TD2` | ✅ |
 | **TD3** | Repositories SQLite (persistence) | `TD3` | ✅ |
 | **TD4a** | API REST (POST/GET /tickets) | `TD4a` | ✅ |
 | **TD4b** | **API REST avancée (PATCH + erreurs)** | `TD4b` | ⏳ **Aujourd'hui** |
@@ -37,7 +37,7 @@ Vous avez construit une architecture hexagonale complète :
 ```
 src/
 ├── domain/           → Entités (Ticket, User, Status)
-├── application/      → Use cases (CreateTicket, AssignTicket, ListTickets)
+├── application/      → Use cases (CreateTicket, StartTicket, ListTickets)
 ├── ports/           → Interfaces (TicketRepository, UserRepository, Clock)
 └── adapters/
     ├── db/          → SQLiteTicketRepository, SQLiteUserRepository
@@ -182,85 +182,106 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
 
 ---
 
-## 🔌 Partie 3 : Implémenter PATCH /tickets/{id}/assign
+## 🔌 Partie 3 : Implémenter PATCH /tickets/{id}/start
 
-### Étape 1 : Rappel du use case AssignTicket
+### Étape 1 : Rappel du use case StartTicket
 
-Vous avez déjà implémenté ce use case au **TD2b** :
+**Fichier** : `src/application/usecases/start_ticket.py`
 
-**Fichier** : `src/application/usecases/assign_ticket.py`
+💡 **Note** : Ce use case a été obligatoirement implémenté au TD2b. Vous devriez déjà avoir ce code dans votre projet.
 
 ```python
-class AssignTicketUseCase:
-    def __init__(
-        self, 
-        ticket_repository: TicketRepository,
-        user_repository: UserRepository,
-        clock: Clock
-    ):
-        self.ticket_repository = ticket_repository
-        self.user_repository = user_repository
+from src.domain.exceptions import TicketNotFoundError
+from src.domain.ticket import Ticket
+from src.ports.clock import Clock
+from src.ports.ticket_repository import TicketRepository
+
+
+class StartTicketUseCase:
+    """Cas d'usage pour démarrer le traitement d'un ticket."""
+
+    def __init__(self, ticket_repo: TicketRepository, clock: Clock):
+        """
+        Initialise le use case.
+
+        Args:
+            ticket_repo: Le repository de tickets
+            clock: L'horloge pour obtenir le temps actuel
+        """
+        self.ticket_repo = ticket_repo
         self.clock = clock
-    
-    def execute(self, ticket_id: str, user_id: str) -> Ticket:
-        # 1. Récupérer le ticket
-        ticket = self.ticket_repository.get_by_id(ticket_id)
-        if not ticket:
-            raise KeyError(f"Ticket {ticket_id} not found")
+
+    def execute(self, ticket_id: str, agent_id: str) -> Ticket:
+        """
+        Démarre le traitement d'un ticket par un agent.
+
+        Args:
+            ticket_id: ID du ticket à démarrer
+            agent_id: ID de l'agent qui démarre le ticket
+
+        Returns:
+            Le ticket mis à jour
+
+        Raises:
+            TicketNotFoundError: Si le ticket n'existe pas
+        """
+        # 1. Récupérer le ticket depuis le repository
+        ticket = self.ticket_repo.get_by_id(ticket_id)
         
-        # 2. Récupérer l'utilisateur
-        user = self.user_repository.get_by_id(user_id)
-        if not user:
-            raise KeyError(f"User {user_id} not found")
+        # 2. Vérifier que le ticket existe
+        if ticket is None:
+            raise TicketNotFoundError(f"Ticket {ticket_id} not found")
         
-        # 3. Assigner (logique métier dans le domaine)
-        ticket.assign(user)
+        # 3. Obtenir le temps actuel
+        current_time = self.clock.now()
         
-        # 4. Horodater
-        ticket.assigned_at = self.clock.now()
+        # 4. Appeler la méthode métier du domaine
+        ticket.start(agent_id, current_time)
         
-        # 5. Persister
-        self.ticket_repository.update(ticket)
+        # 5. Sauvegarder le ticket modifié
+        updated_ticket = self.ticket_repo.save(ticket)
         
-        return ticket
+        # 6. Retourner le ticket mis à jour
+        return updated_ticket
 ```
 
-**💡 Point clé** : Le use case lève `KeyError` (ressource inexistante) et laisse remonter les `ValueError` du domaine (règles métier).
+**💡 Point clé** : Le use case lève `TicketNotFoundError` (exception de l'application) si le ticket n'existe pas, et laisse remonter les `ValueError` du domaine pour les règles métier (ex: ticket non assigné, mauvais agent, statut invalide).
 
-### Étape 2 : Ajouter la factory dans main.py
+### Étape 2 : Vérifier la factory dans main.py
 
 **Fichier** : `src/main.py`
 
-**Import** (en haut avec les autres imports) :
+💡 **Note** : Si vous avez bien suivi les TDs précédents, vous devriez déjà avoir cette factory. Vérifiez qu'elle existe :
+
+**Import** (doit déjà être présent) :
 ```python
-from src.application.usecases.assign_ticket import AssignTicketUseCase
+from src.application.usecases.start_ticket import StartTicketUseCase
 ```
 
-**Factory** (après `get_list_tickets_usecase()`) :
+**Factory** (doit déjà exister) :
 ```python
-def get_assign_ticket_usecase() -> AssignTicketUseCase:
-    return AssignTicketUseCase(
+def get_start_ticket_usecase() -> StartTicketUseCase:
+    return StartTicketUseCase(
         ticket_repository=ticket_repository,
-        user_repository=user_repository,
         clock=clock
     )
 ```
 
-💡 **Remarque** : Vous devez avoir déjà instancié `user_repository` et `clock` dans `main.py` (fait aux TDs précédents).
+💡 **Si cette factory n'existe pas**, créez-la maintenant. Vous devez avoir déjà instancié `ticket_repository` et `clock` dans `main.py` (fait au TD3).
 
-### Étape 3 : Créer le schéma Pydantic pour l'assignation
+### Étape 3 : Créer le schéma Pydantic pour démarrer un ticket
 
 **Fichier** : `src/adapters/api/ticket_router.py`
 
-Ajoutez le schéma d'entrée pour l'assignation :
+Ajoutez le schéma d'entrée pour démarrer un ticket :
 
 ```python
-class AssignmentIn(BaseModel):
-    """Schéma pour assigner un ticket à un utilisateur."""
-    user_id: str
+class StartTicketIn(BaseModel):
+    """Schéma pour démarrer le traitement d'un ticket."""
+    agent_id: str
 ```
 
-💡 **Pourquoi juste `user_id` ?** Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/assign`).
+💡 **Pourquoi juste `agent_id` ?** Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/start`).
 
 ### Étape 4 : Implémenter la route PATCH
 
@@ -269,18 +290,18 @@ class AssignmentIn(BaseModel):
 Ajoutez cette nouvelle route :
 
 ```python
-@router.patch("/{ticket_id}/assign", response_model=TicketOut)
-async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
-    """Assigner un ticket à un utilisateur."""
-    from src.main import get_assign_ticket_usecase
+@router.patch("/{ticket_id}/start", response_model=TicketOut)
+async def start_ticket(ticket_id: str, data: StartTicketIn):
+    """Démarrer le traitement d'un ticket."""
+    from src.main import get_start_ticket_usecase
     from fastapi import HTTPException
     
     try:
         # 1. Appeler le use case
-        usecase = get_assign_ticket_usecase()
+        usecase = get_start_ticket_usecase()
         ticket = usecase.execute(
             ticket_id=ticket_id,
-            user_id=assignment.user_id
+            agent_id=data.agent_id
         )
         
         # 2. Convertir en schéma de sortie
@@ -288,32 +309,34 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
             id=ticket.id,
             title=ticket.title,
             description=ticket.description,
-            status=ticket.status.value
+            status=ticket.status.value  # Devrait être "IN_PROGRESS"
         )
     
     except KeyError as e:
         # Ressource inexistante → 404
-        raise HTTPException(status_code=404, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e)) from e
     
     except ValueError as e:
         # Règle métier violée → 400
-        raise HTTPException(status_code=400, detail=str(e))
+        # Ex: ticket non assigné, mauvais agent, ticket pas en OPEN
+        raise HTTPException(status_code=400, detail=str(e)) from e
 ```
 
 **💡 Explication du code** :
 
-1. **`@router.patch("/{ticket_id}/assign")`** : Définit une route PATCH sur `/tickets/{ticket_id}/assign`
+1. **`@router.patch("/{ticket_id}/start")`** : Définit une route PATCH sur `/tickets/{ticket_id}/start`
 2. **`ticket_id: str`** : Paramètre d'URL (path parameter)
-3. **`assignment: AssignmentIn`** : Corps de la requête (body), validé par Pydantic
+3. **`data: StartTicketIn`** : Corps de la requête (body), validé par Pydantic
 4. **`try/except`** : Intercepte les exceptions et les traduit en codes HTTP
-   - `KeyError` → 404 Not Found
-   - `ValueError` → 400 Bad Request
+   - `KeyError` → 404 Not Found (ticket inexistant)
+   - `ValueError` → 400 Bad Request (règles métier violées : ticket non assigné, mauvais agent, statut invalide)
+5. **`from e`** : Chaînage d'exceptions pour traçabilité (requis par les linters)
 
 ### Étape 5 : Tester avec Swagger
 
 🌐 Ouvrez **http://127.0.0.1:8000/docs** et testez :
 
-**Scénario 1 : Assignation réussie**
+**Scénario 1 : Démarrage réussi**
 
 1. Créez un ticket avec `POST /tickets` :
    ```json
@@ -325,30 +348,44 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
    ```
    → Notez l'`id` retourné (ex: `"ticket-abc"`)
 
-2. Assignez-le avec `PATCH /tickets/{id}/assign` :
+2. **Assignez-le d'abord** (le ticket doit être assigné avant d'être démarré) :
+   - Si vous avez implémenté `AssignTicket` en bonus, utilisez cette route
+   - Sinon, vous devrez créer le ticket déjà assigné (modifiez votre CreateTicket temporairement)
+
+3. Démarrez-le avec `PATCH /tickets/{id}/start` :
    ```json
    {
-     "user_id": "user-456"
+     "agent_id": "agent-456"
    }
    ```
-   → ✅ **HTTP 200 OK** + ticket retourné
+   → ✅ **HTTP 200 OK** + ticket retourné avec `status: "IN_PROGRESS"`
 
 **Scénario 2 : Ticket inexistant (404)**
 
-Testez `PATCH /tickets/ticket-inexistant/assign` :
+Testez `PATCH /tickets/ticket-inexistant/start` :
 ```json
 {
-  "user_id": "user-456"
+  "agent_id": "agent-456"
 }
 ```
 → ❌ **HTTP 404 Not Found** + `{"detail": "Ticket ticket-inexistant not found"}`
 
-**Scénario 3 : Règle métier violée (400)**
+**Scénario 3 : Règles métier violées (400)**
 
-Si votre domaine interdit d'assigner un ticket fermé :
-1. Fermez d'abord un ticket (si vous avez implémenté cette logique)
-2. Essayez de l'assigner
-→ ❌ **HTTP 400 Bad Request** + `{"detail": "Cannot assign a ticket that is not open"}`
+**3a. Ticket non assigné** :
+1. Créez un ticket (sans l'assigner)
+2. Essayez de le démarrer
+→ ❌ **HTTP 400 Bad Request** + `{"detail": "Ticket not assigned"}`
+
+**3b. Mauvais agent** :
+1. Créez et assignez un ticket à `agent-456`
+2. Essayez de le démarrer avec `agent-789`
+→ ❌ **HTTP 400 Bad Request** + `{"detail": "Wrong agent"}`
+
+**3c. Ticket déjà démarré** :
+1. Démarrez un ticket avec succès
+2. Essayez de le démarrer à nouveau
+→ ❌ **HTTP 400 Bad Request** + `{"detail": "Ticket must be OPEN"}`
 
 💡 **Astuce débogage** : Si vous obtenez une erreur 500, consultez la console où uvicorn tourne. Les exceptions Python complètes y sont affichées.
 
@@ -450,44 +487,48 @@ assert isinstance(data, list)
 Ajoutez ces tests :
 
 ```python
-class TestAssignTicket:
-    """Tests de la route PATCH /tickets/{id}/assign"""
+class TestStartTicket:
+    """Tests de la route PATCH /tickets/{id}/start"""
     
-    def test_assign_ticket_success(self, client: TestClient):
-        """Assigner un ticket à un utilisateur doit retourner 200."""
-        # ARRANGE : Créer un ticket
+    def test_start_ticket_success(self, client: TestClient):
+        """Démarrer un ticket assigné doit retourner 200."""
+        # ARRANGE : Créer et assigner un ticket
+        # Note: Vous devrez adapter selon votre implémentation
+        # Option 1: Si vous avez PATCH /assign, utilisez-la
+        # Option 2: Modifiez CreateTicket pour créer un ticket déjà assigné
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
-            "creator_id": "user-123"
+            "creator_id": "user-123",
+            "assigned_to": "agent-456"  # Si votre CreateTicket supporte ce champ
         }
         create_response = client.post("/tickets/", json=ticket_data)
         assert create_response.status_code == 201
         ticket_id = create_response.json()["id"]
         
-        # ACT : Assigner le ticket
-        assignment_data = {"user_id": "user-456"}
-        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        # ACT : Démarrer le ticket
+        start_data = {"agent_id": "agent-456"}
+        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
         
         # ASSERT
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == ticket_id
-        assert data["status"] == "OPEN"  # ou "ASSIGNED" selon votre domaine
+        assert data["status"] == "IN_PROGRESS"
     
-    def test_assign_nonexistent_ticket_returns_404(self, client: TestClient):
-        """Assigner un ticket inexistant doit retourner 404."""
+    def test_start_nonexistent_ticket_returns_404(self, client: TestClient):
+        """Démarrer un ticket inexistant doit retourner 404."""
         # ACT
-        assignment_data = {"user_id": "user-456"}
-        response = client.patch("/tickets/ticket-inexistant/assign", json=assignment_data)
+        start_data = {"agent_id": "agent-456"}
+        response = client.patch("/tickets/ticket-inexistant/start", json=start_data)
         
         # ASSERT
         assert response.status_code == 404
         assert "not found" in response.json()["detail"].lower()
     
-    def test_assign_invalid_user_returns_404(self, client: TestClient):
-        """Assigner avec un utilisateur inexistant doit retourner 404."""
-        # ARRANGE : Créer un ticket
+    def test_start_unassigned_ticket_returns_400(self, client: TestClient):
+        """Démarrer un ticket non assigné doit retourner 400."""
+        # ARRANGE : Créer un ticket NON assigné
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
@@ -496,28 +537,49 @@ class TestAssignTicket:
         create_response = client.post("/tickets/", json=ticket_data)
         ticket_id = create_response.json()["id"]
         
-        # ACT : Assigner avec un user_id inexistant
-        assignment_data = {"user_id": "user-inexistant"}
-        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        # ACT : Essayer de démarrer sans assignation
+        start_data = {"agent_id": "agent-456"}
+        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
         
         # ASSERT
-        assert response.status_code == 404
-        assert "user" in response.json()["detail"].lower()
+        assert response.status_code == 400
+        assert "assigned" in response.json()["detail"].lower()
     
-    def test_assign_with_invalid_data_returns_422(self, client: TestClient):
-        """Envoyer des données invalides doit retourner 422."""
-        # ARRANGE : Créer un ticket
+    def test_start_with_wrong_agent_returns_400(self, client: TestClient):
+        """Démarrer avec un agent différent de celui assigné doit retourner 400."""
+        # ARRANGE : Créer un ticket assigné à agent-456
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
-            "creator_id": "user-123"
+            "creator_id": "user-123",
+            "assigned_to": "agent-456"
         }
         create_response = client.post("/tickets/", json=ticket_data)
         ticket_id = create_response.json()["id"]
         
-        # ACT : Envoyer un user_id de type invalide
-        assignment_data = {"user_id": 123}  # int au lieu de string
-        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        # ACT : Démarrer avec un autre agent
+        start_data = {"agent_id": "agent-789"}  # Mauvais agent
+        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
+        
+        # ASSERT
+        assert response.status_code == 400
+        assert "agent" in response.json()["detail"].lower()
+    
+    def test_start_with_invalid_data_returns_422(self, client: TestClient):
+        """Envoyer des données invalides doit retourner 422."""
+        # ARRANGE : Créer un ticket assigné
+        ticket_data = {
+            "title": "Bug critique",
+            "description": "Le serveur crash",
+            "creator_id": "user-123",
+            "assigned_to": "agent-456"
+        }
+        create_response = client.post("/tickets/", json=ticket_data)
+        ticket_id = create_response.json()["id"]
+        
+        # ACT : Envoyer un agent_id de type invalide
+        start_data = {"agent_id": 123}  # int au lieu de string
+        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
         
         # ASSERT
         assert response.status_code == 422
@@ -526,7 +588,7 @@ class TestAssignTicket:
 ### Étape 3 : Lancer les tests
 
 ```bash
-pytest tests/e2e/test_api.py::TestAssignTicket -v
+pytest tests/e2e/test_api.py::TestStartTicket -v
 ```
 
 ✅ **Vérification** : Tous les tests doivent passer.
@@ -550,7 +612,26 @@ Vous avez appris à :
 
 ## 🚀 Bonus : Améliorer l'API (optionnel)
 
-### 1. Ajouter un TicketOut enrichi
+### 1. Implémenter PATCH /tickets/{id}/assign (AssignTicket)
+
+Si vous avez du temps, implémentez la route d'assignation :
+
+```python
+class AssignmentIn(BaseModel):
+    """Schéma pour assigner un ticket à un agent."""
+    agent_id: str
+
+@router.patch("/{ticket_id}/assign", response_model=TicketOut)
+async def assign_ticket(ticket_id: str, data: AssignmentIn):
+    """Assigner un ticket à un agent."""
+    # TODO: Créer AssignTicketUseCase
+    # TODO: Gérer les erreurs (404, 400)
+    pass
+```
+
+💡 **Intérêt** : Permet de tester le scénario complet Créer → Assigner → Démarrer.
+
+### 2. Ajouter un TicketOut enrichi
 
 Actuellement, `TicketOut` ne retourne pas `assigned_to` ni `assigned_at`. Améliorez-le :
 
@@ -584,6 +665,7 @@ async def get_ticket(ticket_id: str):
 ### 3. Implémenter d'autres routes PATCH
 
 Si vous avez d'autres use cases (CloseTicket, ReopenTicket, ResolveTicket...), créez les routes correspondantes :
+- `PATCH /tickets/{id}/assign` (vu en bonus #1)
 - `PATCH /tickets/{id}/close`
 - `PATCH /tickets/{id}/reopen`
 - `PATCH /tickets/{id}/resolve`
@@ -610,7 +692,7 @@ Adaptez votre `ListTicketsUseCase` et votre repository pour supporter le filtrag
 
 ```bash
 git add .
-git commit -m "feat(api): Add PATCH /tickets/{id}/assign with error handling"
+git commit -m "feat(api): Add PATCH /tickets/{id}/start with error handling"
 git tag -a TD4b -m "TD4b: API REST avancée - Gestion d'erreurs"
 git push origin main --tags
 ```
