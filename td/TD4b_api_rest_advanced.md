@@ -182,9 +182,229 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
 
 ---
 
-## 🔌 Partie 3 : Implémenter PATCH /tickets/{id}/start
+## 🔌 Partie 3 : Implémenter les routes PATCH
 
-### Étape 1 : Rappel du use case StartTicket
+**🎯 Objectif** : Implémenter deux routes PATCH pour assigner et démarrer des tickets, en gérant correctement les erreurs.
+
+**💡 Stratégie** : Nous allons d'abord implémenter **PATCH /assign**, puis **PATCH /start**, car un ticket doit être assigné avant d'être démarré.
+
+**📝 Note importante sur les IDs utilisateurs** : Dans ce TD, nous utilisons des IDs fictifs ("user-123", "agent-456"). Par choix de simplicité, les use cases ne vérifient pas l'existence de ces utilisateurs en base (via un UserRepository). En production, `AssignTicketUseCase` devrait vérifier que l'agent existe avant l'assignation, et lever une exception appropriée (ex: `UserNotFoundError` → HTTP 404). Cela nous permet de nous concentrer sur la gestion d'erreurs REST sans dépendre d'un système de gestion des utilisateurs.
+
+---
+
+### 📦 Setup préalable : Le use case AssignTicket
+
+**Important** : Le use case `AssignTicket` est nécessaire pour ce TD mais n'a pas forcément été implémenté dans les TDs précédents (c'était un bonus optionnel au TD2).
+
+#### Si vous avez déjà implémenté AssignTicket (bonus TD2) :
+
+✅ **Passez directement à la section 3.1** - Vous êtes déjà prêts !
+
+#### Si vous n'avez PAS encore AssignTicket :
+
+📋 **Copiez le code ci-dessous** pour gagner du temps et vous concentrer sur REST/erreurs (cœur du TD4b).
+
+<details>
+<summary><strong>👉 Cliquez ici pour voir le code complet d'AssignTicket à copier-coller</strong></summary>
+
+**Fichier** : `src/application/usecases/assign_ticket.py` (à créer)
+
+```python
+"""
+Use case : Assigner un ticket à un agent.
+
+Ce use case gère l'assignation d'un ticket existant à un agent.
+"""
+
+from src.domain.exceptions import TicketNotFoundError
+from src.domain.ticket import Ticket
+from src.ports.clock import Clock
+from src.ports.ticket_repository import TicketRepository
+
+
+class AssignTicketUseCase:
+    """
+    Cas d'usage pour assigner un ticket à un agent.
+    """
+
+    def __init__(self, ticket_repo: TicketRepository, clock: Clock):
+        """
+        Initialise le use case.
+
+        Args:
+            ticket_repo: Le repository de tickets
+            clock: L'horloge pour obtenir le temps actuel
+        """
+        self.ticket_repo = ticket_repo
+        self.clock = clock
+
+    def execute(self, ticket_id: str, agent_id: str) -> Ticket:
+        """
+        Assigne un ticket à un agent.
+
+        Args:
+            ticket_id: ID du ticket à assigner
+            agent_id: ID de l'agent assigné
+
+        Returns:
+            Le ticket mis à jour
+
+        Raises:
+            TicketNotFoundError: Si le ticket n'existe pas
+        """
+        # Récupérer le ticket depuis le repository
+        ticket = self.ticket_repo.get_by_id(ticket_id)
+
+        # Vérifier que le ticket existe
+        if ticket is None:
+            raise TicketNotFoundError(f"Ticket {ticket_id} not found")
+
+        # Obtenir le temps actuel
+        current_time = self.clock.now()
+
+        # Appeler la méthode métier du domaine
+        ticket.assign(agent_id, current_time)
+
+        # Sauvegarder le ticket modifié
+        updated_ticket = self.ticket_repo.save(ticket)
+
+        # Retourner le ticket mis à jour
+        return updated_ticket
+```
+
+**Dans `src/main.py`**, ajoutez :
+
+```python
+# Import (avec les autres imports)
+from src.application.usecases.assign_ticket import AssignTicketUseCase
+
+# Factory (avec les autres factories)
+def get_assign_ticket_usecase() -> AssignTicketUseCase:
+    return AssignTicketUseCase(
+        ticket_repository=ticket_repository,
+        clock=clock
+    )
+```
+
+**💡 Point clé** : Le use case lève `TicketNotFoundError` (exception de l'application) si le ticket n'existe pas, et laisse remonter les `ValueError` du domaine pour les règles métier (ex: ticket déjà assigné, statut invalide).
+
+</details>
+
+---
+
+### 3.1 — Implémenter PATCH /tickets/{id}/assign
+
+💡 **Prérequis** : Le use case `AssignTicketUseCase` doit exister (voir section Setup ci-dessus).
+
+#### Étape 1 : Créer le schéma Pydantic
+
+**Fichier** : `src/adapters/api/ticket_router.py`
+
+Ajoutez le schéma d'entrée :
+
+```python
+class AssignmentIn(BaseModel):
+    """Schéma pour assigner un ticket à un agent."""
+    agent_id: str
+```
+
+💡 **Pourquoi juste `agent_id` ?** Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/assign`).
+
+#### Étape 2 : Implémenter la route PATCH /assign
+
+**Fichier** : `src/adapters/api/ticket_router.py`
+
+Ajoutez cette nouvelle route :
+
+```python
+@router.patch("/{ticket_id}/assign", response_model=TicketOut)
+async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
+    """
+    Assigner un ticket à un agent.
+
+    Args:
+        ticket_id: L'identifiant du ticket à assigner
+        assignment: Les données d'assignation contenant l'ID de l'agent
+
+    Returns:
+        Le ticket assigné
+
+    Raises:
+        HTTPException: 404 si le ticket n'existe pas
+        HTTPException: 400 si la règle métier est violée
+    """
+    from src.domain.exceptions import TicketNotFoundError
+    from src.main import get_assign_ticket_usecase
+
+    try:
+        usecase = get_assign_ticket_usecase()
+        ticket = usecase.execute(ticket_id=ticket_id, agent_id=assignment.agent_id)
+
+        return TicketOut(
+            id=ticket.id,
+            title=ticket.title,
+            description=ticket.description,
+            status=ticket.status.value,
+        )
+    except TicketNotFoundError as e:
+        raise HTTPException(status_code=404, detail=str(e)) from e
+    except ValueError as e:
+        # Règles métier violées (ticket déjà assigné, etc.)
+        raise HTTPException(status_code=400, detail=str(e)) from e
+```
+
+**💡 Explication** :
+- On intercepte `TicketNotFoundError` (exception personnalisée) → 404
+- On intercepte `ValueError` (exceptions du domaine) → 400
+- Le chaînage `from e` préserve la trace complète pour le débogage
+
+#### Étape 3 : Tester PATCH /assign avec Swagger
+
+🌐 Ouvrez **http://127.0.0.1:8000/docs** et testez :
+
+**Scénario 1 : Assignation réussie**
+
+1. Créez un ticket avec `POST /tickets` :
+   ```json
+   {
+     "title": "Bug critique",
+     "description": "Le serveur ne répond plus",
+     "creator_id": "user-123"
+   }
+   ```
+   → Notez l'`id` retourné (ex: `"ticket-abc"`)
+
+2. Assignez-le avec `PATCH /tickets/{id}/assign` :
+   ```json
+   {
+     "agent_id": "agent-456"
+   }
+   ```
+   → ✅ **HTTP 200 OK** + ticket retourné avec `status: "OPEN"` (toujours ouvert, mais maintenant assigné)
+
+**Scénario 2 : Ticket inexistant (404)**
+
+Testez `PATCH /tickets/ticket-inexistant/assign` :
+```json
+{
+  "agent_id": "agent-456"
+}
+```
+→ ❌ **HTTP 404 Not Found** + `{"detail": "Ticket ticket-inexistant not found"}`
+
+**Scénario 3 : Ticket déjà assigné (400)**
+
+1. Assignez un ticket avec succès
+2. Essayez de le réassigner
+→ ❌ **HTTP 400 Bad Request** + message d'erreur selon votre domaine
+
+💡 **Astuce** : Si vous obtenez une erreur 500, consultez la console uvicorn pour voir l'exception complète.
+
+---
+
+### 3.2 — Implémenter PATCH /tickets/{id}/start
+
+#### Étape 1 : Rappel du use case StartTicket
 
 **Fichier** : `src/application/usecases/start_ticket.py`
 
@@ -247,7 +467,74 @@ class StartTicketUseCase:
 
 **💡 Point clé** : Le use case lève `TicketNotFoundError` (exception de l'application) si le ticket n'existe pas, et laisse remonter les `ValueError` du domaine pour les règles métier (ex: ticket non assigné, mauvais agent, statut invalide).
 
-### Étape 2 : Vérifier la factory dans main.py
+---
+
+### 3.2 — Implémenter PATCH /tickets/{id}/start
+
+#### Étape 1 : Rappel du use case StartTicket
+
+**Fichier** : `src/application/usecases/start_ticket.py`
+
+💡 **Note** : Ce use case a été obligatoirement implémenté au TD2b. Vous devriez déjà avoir ce code dans votre projet.
+
+```python
+from src.domain.exceptions import TicketNotFoundError
+from src.domain.ticket import Ticket
+from src.ports.clock import Clock
+from src.ports.ticket_repository import TicketRepository
+
+
+class StartTicketUseCase:
+    """Cas d'usage pour démarrer le traitement d'un ticket."""
+
+    def __init__(self, ticket_repo: TicketRepository, clock: Clock):
+        """
+        Initialise le use case.
+
+        Args:
+            ticket_repo: Le repository de tickets
+            clock: L'horloge pour obtenir le temps actuel
+        """
+        self.ticket_repo = ticket_repo
+        self.clock = clock
+
+    def execute(self, ticket_id: str, agent_id: str) -> Ticket:
+        """
+        Démarre le traitement d'un ticket par un agent.
+
+        Args:
+            ticket_id: ID du ticket à démarrer
+            agent_id: ID de l'agent qui démarre le ticket
+
+        Returns:
+            Le ticket mis à jour
+
+        Raises:
+            TicketNotFoundError: Si le ticket n'existe pas
+        """
+        # 1. Récupérer le ticket depuis le repository
+        ticket = self.ticket_repo.get_by_id(ticket_id)
+        
+        # 2. Vérifier que le ticket existe
+        if ticket is None:
+            raise TicketNotFoundError(f"Ticket {ticket_id} not found")
+        
+        # 3. Obtenir le temps actuel
+        current_time = self.clock.now()
+        
+        # 4. Appeler la méthode métier du domaine
+        ticket.start(agent_id, current_time)
+        
+        # 5. Sauvegarder le ticket modifié
+        updated_ticket = self.ticket_repo.save(ticket)
+        
+        # 6. Retourner le ticket mis à jour
+        return updated_ticket
+```
+
+**💡 Point clé** : Le use case lève `TicketNotFoundError` (exception de l'application) si le ticket n'existe pas, et laisse remonter les `ValueError` du domaine pour les règles métier (ex: ticket non assigné, mauvais agent, statut invalide).
+
+#### Étape 2 : Vérifier la factory dans main.py
 
 **Fichier** : `src/main.py`
 
@@ -267,9 +554,9 @@ def get_start_ticket_usecase() -> StartTicketUseCase:
     )
 ```
 
-💡 **Si cette factory n'existe pas**, créez-la maintenant. Vous devez avoir déjà instancié `ticket_repository` et `clock` dans `main.py` (fait au TD3).
+💡 **Si cette factory n'existe pas**, créez-la maintenant.
 
-### Étape 3 : Créer le schéma Pydantic pour démarrer un ticket
+#### Étape 3 : Créer le schéma Pydantic
 
 **Fichier** : `src/adapters/api/ticket_router.py`
 
@@ -281,9 +568,9 @@ class StartTicketIn(BaseModel):
     agent_id: str
 ```
 
-💡 **Pourquoi juste `agent_id` ?** Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/start`).
+💡 Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/start`).
 
-### Étape 4 : Implémenter la route PATCH
+#### Étape 4 : Implémenter la route PATCH /start
 
 **Fichier** : `src/adapters/api/ticket_router.py`
 
@@ -292,33 +579,38 @@ Ajoutez cette nouvelle route :
 ```python
 @router.patch("/{ticket_id}/start", response_model=TicketOut)
 async def start_ticket(ticket_id: str, data: StartTicketIn):
-    """Démarrer le traitement d'un ticket."""
+    """
+    Démarrer le traitement d'un ticket.
+
+    Args:
+        ticket_id: L'identifiant du ticket à démarrer
+        data: Les données contenant l'ID de l'agent qui démarre le ticket
+
+    Returns:
+        Le ticket démarré avec le statut IN_PROGRESS
+
+    Raises:
+        HTTPException: 404 si le ticket n'existe pas
+        HTTPException: 400 si la règle métier est violée (ticket non assigné,
+                       mauvais agent, ticket pas en statut OPEN)
+    """
+    from src.domain.exceptions import TicketNotFoundError
     from src.main import get_start_ticket_usecase
-    from fastapi import HTTPException
-    
+
     try:
-        # 1. Appeler le use case
         usecase = get_start_ticket_usecase()
-        ticket = usecase.execute(
-            ticket_id=ticket_id,
-            agent_id=data.agent_id
-        )
-        
-        # 2. Convertir en schéma de sortie
+        ticket = usecase.execute(ticket_id=ticket_id, agent_id=data.agent_id)
+
         return TicketOut(
             id=ticket.id,
             title=ticket.title,
             description=ticket.description,
-            status=ticket.status.value  # Devrait être "IN_PROGRESS"
+            status=ticket.status.value,  # Devrait être "in_progress"
         )
-    
-    except KeyError as e:
-        # Ressource inexistante → 404
+    except TicketNotFoundError as e:
         raise HTTPException(status_code=404, detail=str(e)) from e
-    
     except ValueError as e:
-        # Règle métier violée → 400
-        # Ex: ticket non assigné, mauvais agent, ticket pas en OPEN
+        # Règles métier violées (ticket non assigné, mauvais agent, statut invalide)
         raise HTTPException(status_code=400, detail=str(e)) from e
 ```
 
@@ -328,17 +620,17 @@ async def start_ticket(ticket_id: str, data: StartTicketIn):
 2. **`ticket_id: str`** : Paramètre d'URL (path parameter)
 3. **`data: StartTicketIn`** : Corps de la requête (body), validé par Pydantic
 4. **`try/except`** : Intercepte les exceptions et les traduit en codes HTTP
-   - `KeyError` → 404 Not Found (ticket inexistant)
-   - `ValueError` → 400 Bad Request (règles métier violées : ticket non assigné, mauvais agent, statut invalide)
+   - `TicketNotFoundError` → 404 Not Found
+   - `ValueError` → 400 Bad Request (ticket non assigné, mauvais agent, statut invalide)
 5. **`from e`** : Chaînage d'exceptions pour traçabilité (requis par les linters)
 
-### Étape 5 : Tester avec Swagger
+#### Étape 5 : Tester le workflow complet avec Swagger
 
-🌐 Ouvrez **http://127.0.0.1:8000/docs** et testez :
+🌐 Ouvrez **http://127.0.0.1:8000/docs** et testez le **scénario complet** :
 
-**Scénario 1 : Démarrage réussi**
+**Scénario 1 : Workflow complet Créer → Assigner → Démarrer**
 
-1. Créez un ticket avec `POST /tickets` :
+1. **Créez** un ticket avec `POST /tickets` :
    ```json
    {
      "title": "Bug critique",
@@ -348,17 +640,21 @@ async def start_ticket(ticket_id: str, data: StartTicketIn):
    ```
    → Notez l'`id` retourné (ex: `"ticket-abc"`)
 
-2. **Assignez-le d'abord** (le ticket doit être assigné avant d'être démarré) :
-   - Si vous avez implémenté `AssignTicket` en bonus, utilisez cette route
-   - Sinon, vous devrez créer le ticket déjà assigné (modifiez votre CreateTicket temporairement)
-
-3. Démarrez-le avec `PATCH /tickets/{id}/start` :
+2. **Assignez-le** avec `PATCH /tickets/{id}/assign` :
    ```json
    {
      "agent_id": "agent-456"
    }
    ```
-   → ✅ **HTTP 200 OK** + ticket retourné avec `status: "IN_PROGRESS"`
+   → ✅ **HTTP 200 OK** + `status: "OPEN"`
+
+3. **Démarrez-le** avec `PATCH /tickets/{id}/start` :
+   ```json
+   {
+     "agent_id": "agent-456"
+   }
+   ```
+   → ✅ **HTTP 200 OK** + `status: "IN_PROGRESS"`
 
 **Scénario 2 : Ticket inexistant (404)**
 
@@ -368,24 +664,24 @@ Testez `PATCH /tickets/ticket-inexistant/start` :
   "agent_id": "agent-456"
 }
 ```
-→ ❌ **HTTP 404 Not Found** + `{"detail": "Ticket ticket-inexistant not found"}`
+→ ❌ **HTTP 404 Not Found**
 
 **Scénario 3 : Règles métier violées (400)**
 
 **3a. Ticket non assigné** :
 1. Créez un ticket (sans l'assigner)
-2. Essayez de le démarrer
-→ ❌ **HTTP 400 Bad Request** + `{"detail": "Ticket not assigned"}`
+2. Essayez de le démarrer directement
+→ ❌ **HTTP 400 Bad Request** + `{"detail": "...unassigned..."}`
 
 **3b. Mauvais agent** :
 1. Créez et assignez un ticket à `agent-456`
 2. Essayez de le démarrer avec `agent-789`
-→ ❌ **HTTP 400 Bad Request** + `{"detail": "Wrong agent"}`
+→ ❌ **HTTP 400 Bad Request** + message indiquant le mauvais agent
 
 **3c. Ticket déjà démarré** :
 1. Démarrez un ticket avec succès
 2. Essayez de le démarrer à nouveau
-→ ❌ **HTTP 400 Bad Request** + `{"detail": "Ticket must be OPEN"}`
+→ ❌ **HTTP 400 Bad Request** + message sur le statut invalide
 
 💡 **Astuce débogage** : Si vous obtenez une erreur 500, consultez la console où uvicorn tourne. Les exceptions Python complètes y sont affichées.
 
@@ -397,10 +693,10 @@ Testez `PATCH /tickets/ticket-inexistant/start` :
 
 FastAPI gère automatiquement les erreurs de validation :
 
-**Exemple** : Si vous envoyez un corps de requête invalide à `PATCH /tickets/{id}/assign` :
+**Exemple** : Si vous envoyez un corps de requête invalide à `PATCH /tickets/{id}/start` :
 ```json
 {
-  "user_id": 123
+  "agent_id": 123
 }
 ```
 
@@ -612,26 +908,7 @@ Vous avez appris à :
 
 ## 🚀 Bonus : Améliorer l'API (optionnel)
 
-### 1. Implémenter PATCH /tickets/{id}/assign (AssignTicket)
-
-Si vous avez du temps, implémentez la route d'assignation :
-
-```python
-class AssignmentIn(BaseModel):
-    """Schéma pour assigner un ticket à un agent."""
-    agent_id: str
-
-@router.patch("/{ticket_id}/assign", response_model=TicketOut)
-async def assign_ticket(ticket_id: str, data: AssignmentIn):
-    """Assigner un ticket à un agent."""
-    # TODO: Créer AssignTicketUseCase
-    # TODO: Gérer les erreurs (404, 400)
-    pass
-```
-
-💡 **Intérêt** : Permet de tester le scénario complet Créer → Assigner → Démarrer.
-
-### 2. Ajouter un TicketOut enrichi
+### 1. Ajouter un TicketOut enrichi
 
 Actuellement, `TicketOut` ne retourne pas `assigned_to` ni `assigned_at`. Améliorez-le :
 
@@ -645,7 +922,7 @@ class TicketOut(BaseModel):
     assigned_at: Optional[str] = None  # ISO 8601 timestamp
 ```
 
-Mettez à jour la route PATCH pour retourner ces champs.
+Mettez à jour vos routes PATCH pour retourner ces champs.
 
 ### 2. Implémenter GET /tickets/{id}
 
@@ -665,7 +942,6 @@ async def get_ticket(ticket_id: str):
 ### 3. Implémenter d'autres routes PATCH
 
 Si vous avez d'autres use cases (CloseTicket, ReopenTicket, ResolveTicket...), créez les routes correspondantes :
-- `PATCH /tickets/{id}/assign` (vu en bonus #1)
 - `PATCH /tickets/{id}/close`
 - `PATCH /tickets/{id}/reopen`
 - `PATCH /tickets/{id}/resolve`
