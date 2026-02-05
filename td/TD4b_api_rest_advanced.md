@@ -16,9 +16,7 @@
 
 ---
 
-## 🎬 Rappel : Contexte post-stage
-
-Vous reprenez le cours après **7 semaines de stage** (du 27/01 au 21/03/2026). 
+## 🎬 Rappel du contexte
 
 **Avant de commencer** : Prenons 15-20 minutes pour rafraîchir la mémoire.
 
@@ -46,7 +44,7 @@ src/
     └── api/         → Routes FastAPI (POST/GET /tickets)
 ```
 
-**Petit quiz rapide** (5 min, en groupe) :
+**Petit quiz rapide** :
 
 <details>
 <summary>❓ Où se trouve la logique métier "un ticket ne peut être assigné que s'il est OPEN" ?</summary>
@@ -72,7 +70,7 @@ src/
 <details>
 <summary>❓ Pourquoi `TicketOut` n'est pas la même classe que `Ticket` ?</summary>
 
-**Réponse** : **Séparation des préoccupations** :
+**Réponse** : **Séparation des respojsabilités** :
 - `Ticket` (domaine) = logique métier (règles, comportements)
 - `TicketOut` (API) = schéma de sortie (validation, sérialisation JSON)
 
