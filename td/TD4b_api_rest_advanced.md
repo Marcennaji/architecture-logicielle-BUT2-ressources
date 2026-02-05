@@ -1,0 +1,628 @@
+# TD4b — API REST avancée : Gestion d'erreurs (tag: TD4b)
+
+**Objectif** : Améliorer votre API REST avec des routes PATCH et une gestion d'erreurs appropriée.
+
+---
+
+## 🎯 Objectifs pédagogiques
+
+À la fin de ce TD, vous serez capable de :
+
+1. ✅ Implémenter des routes **PATCH** pour modifier des ressources
+2. ✅ Gérer les **erreurs HTTP** avec les codes appropriés (404, 400, 422)
+3. ✅ Traduire les **exceptions du domaine** en réponses HTTP cohérentes
+4. ✅ Utiliser **HTTPException** de FastAPI pour structurer les erreurs
+5. ✅ Tester la gestion d'erreurs avec **TestClient**
+
+---
+
+## 🎬 Rappel : Contexte post-stage
+
+Vous reprenez le cours après **7 semaines de stage** (du 27/01 au 21/03/2026). 
+
+**Avant de commencer** : Prenons 15-20 minutes pour rafraîchir la mémoire.
+
+### Où en êtes-vous dans le projet ?
+
+| Jalon | Contenu | Tag | Statut |
+|-------|---------|-----|--------|
+| **TD1** | Modélisation domaine (Ticket, User, Status) | `TD1` | ✅ |
+| **TD2** | Use cases + ports (CreateTicket, AssignTicket) | `TD2` | ✅ |
+| **TD3** | Repositories SQLite (persistence) | `TD3` | ✅ |
+| **TD4a** | API REST (POST/GET /tickets) | `TD4a` | ✅ |
+| **TD4b** | **API REST avancée (PATCH + erreurs)** | `TD4b` | ⏳ **Aujourd'hui** |
+
+### Architecture actuelle
+
+Vous avez construit une architecture hexagonale complète :
+
+```
+src/
+├── domain/           → Entités (Ticket, User, Status)
+├── application/      → Use cases (CreateTicket, AssignTicket, ListTickets)
+├── ports/           → Interfaces (TicketRepository, UserRepository, Clock)
+└── adapters/
+    ├── db/          → SQLiteTicketRepository, SQLiteUserRepository
+    └── api/         → Routes FastAPI (POST/GET /tickets)
+```
+
+**Petit quiz rapide** (5 min, en groupe) :
+
+<details>
+<summary>❓ Où se trouve la logique métier "un ticket ne peut être assigné que s'il est OPEN" ?</summary>
+
+**Réponse** : Dans le **domaine** (`src/domain/ticket.py`), pas dans l'API ni le repository.
+
+💡 **Pourquoi ?** Règle métier = indépendante de l'infrastructure (BDD, API).
+
+</details>
+
+<details>
+<summary>❓ Quel rôle joue le fichier `src/main.py` ?</summary>
+
+**Réponse** : C'est le **composition root** qui :
+- Instancie les adaptateurs (repository SQLite, clock système)
+- Injecte les dépendances dans les use cases
+- Configure FastAPI et inclut les routes
+
+💡 **Principe** : C'est le seul fichier qui connaît les implémentations concrètes.
+
+</details>
+
+<details>
+<summary>❓ Pourquoi `TicketOut` n'est pas la même classe que `Ticket` ?</summary>
+
+**Réponse** : **Séparation des préoccupations** :
+- `Ticket` (domaine) = logique métier (règles, comportements)
+- `TicketOut` (API) = schéma de sortie (validation, sérialisation JSON)
+
+💡 **Avantage** : On peut changer l'API sans toucher au domaine (ex: ajouter un champ `created_at` dans l'API sans modifier l'entité).
+
+</details>
+
+---
+
+## 🌐 Partie 1 : Les codes HTTP et la gestion d'erreurs
+
+### Codes HTTP : Rappel rapide
+
+Une API REST communique via des **codes de statut HTTP** :
+
+| Code | Signification | Quand l'utiliser ? |
+|------|---------------|-------------------|
+| **2xx (Succès)** | | |
+| 200 | OK | Requête réussie (GET, PUT) |
+| 201 | Created | Ressource créée (POST) |
+| 204 | No Content | Succès sans corps de réponse (DELETE) |
+| **4xx (Erreur client)** | | |
+| 400 | Bad Request | Requête malformée (logique invalide) |
+| 404 | Not Found | Ressource inexistante |
+| 422 | Unprocessable Entity | Données invalides (validation Pydantic échouée) |
+| **5xx (Erreur serveur)** | | |
+| 500 | Internal Server Error | Bug/exception non gérée côté serveur |
+
+**💡 Principe REST** : Les codes HTTP portent du sens métier. Un client bien conçu doit pouvoir réagir différemment selon le code reçu.
+
+### Gestion d'erreurs avec FastAPI
+
+FastAPI propose **HTTPException** pour lever des erreurs HTTP :
+
+```python
+from fastapi import HTTPException
+
+# Ressource inexistante → 404
+raise HTTPException(status_code=404, detail="Ticket not found")
+
+# Opération métier invalide → 400
+raise HTTPException(status_code=400, detail="Cannot assign closed ticket")
+```
+
+**💡 Différence avec les exceptions Python** :
+- `raise ValueError("...")` → Exception Python (500 Internal Server Error si non gérée)
+- `raise HTTPException(...)` → Réponse HTTP structurée avec code + message JSON
+
+**Exemple de réponse JSON** quand on lève `HTTPException(404, detail="Ticket not found")` :
+```json
+{
+  "detail": "Ticket not found"
+}
+```
+
+---
+
+## 🧩 Partie 2 : Traduire les exceptions domaine en codes HTTP
+
+### Le problème
+
+Votre **domaine** lève des exceptions Python quand une règle métier est violée :
+
+```python
+# src/domain/ticket.py
+def assign(self, user: User):
+    if self.status != Status.OPEN:
+        raise ValueError("Cannot assign a ticket that is not open")
+    self.assigned_to = user
+```
+
+Si cette exception remonte jusqu'à FastAPI **sans être interceptée**, le client reçoit :
+- **HTTP 500 Internal Server Error** (bug serveur)
+- Message d'erreur technique illisible pour un utilisateur
+
+**❌ Problème** : Le client ne peut pas distinguer :
+- Une vraie erreur serveur (bug)
+- Une erreur métier (règle violée)
+
+### La solution : Intercepter et traduire
+
+**Principe** : L'adaptateur API (couche `adapters/api`) doit attraper les exceptions du domaine et les convertir en `HTTPException`.
+
+```python
+# src/adapters/api/ticket_router.py
+
+@router.patch("/{ticket_id}/assign")
+async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
+    try:
+        usecase = get_assign_ticket_usecase()
+        ticket = usecase.execute(ticket_id=ticket_id, user_id=assignment.user_id)
+        return TicketOut(...)
+    
+    except ValueError as e:  # Exception domaine
+        # Traduire en HTTP 400 (Bad Request)
+        raise HTTPException(status_code=400, detail=str(e))
+    
+    except KeyError:  # Ticket ou utilisateur inexistant
+        # Traduire en HTTP 404 (Not Found)
+        raise HTTPException(status_code=404, detail="Ticket not found")
+```
+
+**💡 Responsabilité de la couche API** :
+- ✅ Appeler les use cases
+- ✅ Traduire les exceptions métier → codes HTTP appropriés
+- ✅ Convertir entités domaine → schémas Pydantic
+
+**💡 Le domaine reste pur** : Pas de dépendance vers FastAPI ou HTTP. Il lève des exceptions Python standard (`ValueError`, `KeyError`...).
+
+---
+
+## 🔌 Partie 3 : Implémenter PATCH /tickets/{id}/assign
+
+### Étape 1 : Rappel du use case AssignTicket
+
+Vous avez déjà implémenté ce use case au **TD2b** :
+
+**Fichier** : `src/application/usecases/assign_ticket.py`
+
+```python
+class AssignTicketUseCase:
+    def __init__(
+        self, 
+        ticket_repository: TicketRepository,
+        user_repository: UserRepository,
+        clock: Clock
+    ):
+        self.ticket_repository = ticket_repository
+        self.user_repository = user_repository
+        self.clock = clock
+    
+    def execute(self, ticket_id: str, user_id: str) -> Ticket:
+        # 1. Récupérer le ticket
+        ticket = self.ticket_repository.get_by_id(ticket_id)
+        if not ticket:
+            raise KeyError(f"Ticket {ticket_id} not found")
+        
+        # 2. Récupérer l'utilisateur
+        user = self.user_repository.get_by_id(user_id)
+        if not user:
+            raise KeyError(f"User {user_id} not found")
+        
+        # 3. Assigner (logique métier dans le domaine)
+        ticket.assign(user)
+        
+        # 4. Horodater
+        ticket.assigned_at = self.clock.now()
+        
+        # 5. Persister
+        self.ticket_repository.update(ticket)
+        
+        return ticket
+```
+
+**💡 Point clé** : Le use case lève `KeyError` (ressource inexistante) et laisse remonter les `ValueError` du domaine (règles métier).
+
+### Étape 2 : Ajouter la factory dans main.py
+
+**Fichier** : `src/main.py`
+
+**Import** (en haut avec les autres imports) :
+```python
+from src.application.usecases.assign_ticket import AssignTicketUseCase
+```
+
+**Factory** (après `get_list_tickets_usecase()`) :
+```python
+def get_assign_ticket_usecase() -> AssignTicketUseCase:
+    return AssignTicketUseCase(
+        ticket_repository=ticket_repository,
+        user_repository=user_repository,
+        clock=clock
+    )
+```
+
+💡 **Remarque** : Vous devez avoir déjà instancié `user_repository` et `clock` dans `main.py` (fait aux TDs précédents).
+
+### Étape 3 : Créer le schéma Pydantic pour l'assignation
+
+**Fichier** : `src/adapters/api/ticket_router.py`
+
+Ajoutez le schéma d'entrée pour l'assignation :
+
+```python
+class AssignmentIn(BaseModel):
+    """Schéma pour assigner un ticket à un utilisateur."""
+    user_id: str
+```
+
+💡 **Pourquoi juste `user_id` ?** Le `ticket_id` est déjà dans l'URL (`/tickets/{ticket_id}/assign`).
+
+### Étape 4 : Implémenter la route PATCH
+
+**Fichier** : `src/adapters/api/ticket_router.py`
+
+Ajoutez cette nouvelle route :
+
+```python
+@router.patch("/{ticket_id}/assign", response_model=TicketOut)
+async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
+    """Assigner un ticket à un utilisateur."""
+    from src.main import get_assign_ticket_usecase
+    from fastapi import HTTPException
+    
+    try:
+        # 1. Appeler le use case
+        usecase = get_assign_ticket_usecase()
+        ticket = usecase.execute(
+            ticket_id=ticket_id,
+            user_id=assignment.user_id
+        )
+        
+        # 2. Convertir en schéma de sortie
+        return TicketOut(
+            id=ticket.id,
+            title=ticket.title,
+            description=ticket.description,
+            status=ticket.status.value
+        )
+    
+    except KeyError as e:
+        # Ressource inexistante → 404
+        raise HTTPException(status_code=404, detail=str(e))
+    
+    except ValueError as e:
+        # Règle métier violée → 400
+        raise HTTPException(status_code=400, detail=str(e))
+```
+
+**💡 Explication du code** :
+
+1. **`@router.patch("/{ticket_id}/assign")`** : Définit une route PATCH sur `/tickets/{ticket_id}/assign`
+2. **`ticket_id: str`** : Paramètre d'URL (path parameter)
+3. **`assignment: AssignmentIn`** : Corps de la requête (body), validé par Pydantic
+4. **`try/except`** : Intercepte les exceptions et les traduit en codes HTTP
+   - `KeyError` → 404 Not Found
+   - `ValueError` → 400 Bad Request
+
+### Étape 5 : Tester avec Swagger
+
+🌐 Ouvrez **http://127.0.0.1:8000/docs** et testez :
+
+**Scénario 1 : Assignation réussie**
+
+1. Créez un ticket avec `POST /tickets` :
+   ```json
+   {
+     "title": "Bug critique",
+     "description": "Le serveur ne répond plus",
+     "creator_id": "user-123"
+   }
+   ```
+   → Notez l'`id` retourné (ex: `"ticket-abc"`)
+
+2. Assignez-le avec `PATCH /tickets/{id}/assign` :
+   ```json
+   {
+     "user_id": "user-456"
+   }
+   ```
+   → ✅ **HTTP 200 OK** + ticket retourné
+
+**Scénario 2 : Ticket inexistant (404)**
+
+Testez `PATCH /tickets/ticket-inexistant/assign` :
+```json
+{
+  "user_id": "user-456"
+}
+```
+→ ❌ **HTTP 404 Not Found** + `{"detail": "Ticket ticket-inexistant not found"}`
+
+**Scénario 3 : Règle métier violée (400)**
+
+Si votre domaine interdit d'assigner un ticket fermé :
+1. Fermez d'abord un ticket (si vous avez implémenté cette logique)
+2. Essayez de l'assigner
+→ ❌ **HTTP 400 Bad Request** + `{"detail": "Cannot assign a ticket that is not open"}`
+
+💡 **Astuce débogage** : Si vous obtenez une erreur 500, consultez la console où uvicorn tourne. Les exceptions Python complètes y sont affichées.
+
+---
+
+## 📋 Partie 4 : Autres cas d'erreur
+
+### Validation Pydantic → HTTP 422
+
+FastAPI gère automatiquement les erreurs de validation :
+
+**Exemple** : Si vous envoyez un corps de requête invalide à `PATCH /tickets/{id}/assign` :
+```json
+{
+  "user_id": 123
+}
+```
+
+Pydantic attend une **string**, pas un **int**.
+
+→ **HTTP 422 Unprocessable Entity** avec un message détaillé :
+```json
+{
+  "detail": [
+    {
+      "type": "string_type",
+      "loc": ["body", "user_id"],
+      "msg": "Input should be a valid string",
+      "input": 123
+    }
+  ]
+}
+```
+
+💡 **Vous n'avez rien à coder** : Pydantic et FastAPI gèrent automatiquement la validation et retournent 422.
+
+### Gérer les erreurs globalement (optionnel)
+
+Si vous voulez éviter de répéter les `try/except` dans chaque route, vous pouvez créer un **gestionnaire d'exception global** :
+
+**Fichier** : `src/main.py`
+
+```python
+from fastapi import Request, status
+from fastapi.responses import JSONResponse
+
+@app.exception_handler(ValueError)
+async def value_error_handler(request: Request, exc: ValueError):
+    """Convertir toutes les ValueError en HTTP 400."""
+    return JSONResponse(
+        status_code=status.HTTP_400_BAD_REQUEST,
+        content={"detail": str(exc)}
+    )
+
+@app.exception_handler(KeyError)
+async def key_error_handler(request: Request, exc: KeyError):
+    """Convertir toutes les KeyError en HTTP 404."""
+    return JSONResponse(
+        status_code=status.HTTP_404_NOT_FOUND,
+        content={"detail": str(exc)}
+    )
+```
+
+**💡 Avantage** : Vos routes deviennent plus simples (pas de `try/except` partout).
+
+**⚠️ Inconvénient** : Toutes les `ValueError` sont traduites en 400, même si certaines devraient être des 500. À utiliser avec discernement.
+
+---
+
+## 🧪 Partie 5 : Tester la gestion d'erreurs
+
+### Étape 1 : Comprendre TestClient
+
+**TestClient** de FastAPI permet de tester votre API **sans lancer le serveur** :
+
+```python
+from fastapi.testclient import TestClient
+from src.main import app
+
+client = TestClient(app)
+
+# Faire une requête
+response = client.get("/tickets")
+
+# Vérifier le code de statut
+assert response.status_code == 200
+
+# Vérifier le corps de la réponse
+data = response.json()
+assert isinstance(data, list)
+```
+
+💡 **Avantage** : Tests rapides, isolation complète, pas besoin de `uvicorn`.
+
+### Étape 2 : Créer les tests de la route PATCH
+
+**Fichier** : `tests/e2e/test_api.py`
+
+Ajoutez ces tests :
+
+```python
+class TestAssignTicket:
+    """Tests de la route PATCH /tickets/{id}/assign"""
+    
+    def test_assign_ticket_success(self, client: TestClient):
+        """Assigner un ticket à un utilisateur doit retourner 200."""
+        # ARRANGE : Créer un ticket
+        ticket_data = {
+            "title": "Bug critique",
+            "description": "Le serveur crash",
+            "creator_id": "user-123"
+        }
+        create_response = client.post("/tickets/", json=ticket_data)
+        assert create_response.status_code == 201
+        ticket_id = create_response.json()["id"]
+        
+        # ACT : Assigner le ticket
+        assignment_data = {"user_id": "user-456"}
+        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        
+        # ASSERT
+        assert response.status_code == 200
+        data = response.json()
+        assert data["id"] == ticket_id
+        assert data["status"] == "OPEN"  # ou "ASSIGNED" selon votre domaine
+    
+    def test_assign_nonexistent_ticket_returns_404(self, client: TestClient):
+        """Assigner un ticket inexistant doit retourner 404."""
+        # ACT
+        assignment_data = {"user_id": "user-456"}
+        response = client.patch("/tickets/ticket-inexistant/assign", json=assignment_data)
+        
+        # ASSERT
+        assert response.status_code == 404
+        assert "not found" in response.json()["detail"].lower()
+    
+    def test_assign_invalid_user_returns_404(self, client: TestClient):
+        """Assigner avec un utilisateur inexistant doit retourner 404."""
+        # ARRANGE : Créer un ticket
+        ticket_data = {
+            "title": "Bug critique",
+            "description": "Le serveur crash",
+            "creator_id": "user-123"
+        }
+        create_response = client.post("/tickets/", json=ticket_data)
+        ticket_id = create_response.json()["id"]
+        
+        # ACT : Assigner avec un user_id inexistant
+        assignment_data = {"user_id": "user-inexistant"}
+        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        
+        # ASSERT
+        assert response.status_code == 404
+        assert "user" in response.json()["detail"].lower()
+    
+    def test_assign_with_invalid_data_returns_422(self, client: TestClient):
+        """Envoyer des données invalides doit retourner 422."""
+        # ARRANGE : Créer un ticket
+        ticket_data = {
+            "title": "Bug critique",
+            "description": "Le serveur crash",
+            "creator_id": "user-123"
+        }
+        create_response = client.post("/tickets/", json=ticket_data)
+        ticket_id = create_response.json()["id"]
+        
+        # ACT : Envoyer un user_id de type invalide
+        assignment_data = {"user_id": 123}  # int au lieu de string
+        response = client.patch(f"/tickets/{ticket_id}/assign", json=assignment_data)
+        
+        # ASSERT
+        assert response.status_code == 422
+```
+
+### Étape 3 : Lancer les tests
+
+```bash
+pytest tests/e2e/test_api.py::TestAssignTicket -v
+```
+
+✅ **Vérification** : Tous les tests doivent passer.
+
+---
+
+## 🎓 Synthèse
+
+Vous avez appris à :
+
+1. ✅ **Traduire les exceptions domaine en codes HTTP** appropriés (404, 400)
+2. ✅ **Implémenter une route PATCH** pour modifier une ressource
+3. ✅ **Utiliser HTTPException** pour lever des erreurs structurées
+4. ✅ **Tester la gestion d'erreurs** avec TestClient
+
+**💡 Principe clé** : L'adaptateur API fait le pont entre le protocole HTTP et votre logique métier. Il traduit :
+- Requêtes HTTP → appels de use cases
+- Exceptions domaine → codes HTTP + messages JSON
+
+---
+
+## 🚀 Bonus : Améliorer l'API (optionnel)
+
+### 1. Ajouter un TicketOut enrichi
+
+Actuellement, `TicketOut` ne retourne pas `assigned_to` ni `assigned_at`. Améliorez-le :
+
+```python
+class TicketOut(BaseModel):
+    id: str
+    title: str
+    description: str
+    status: str
+    assigned_to: Optional[str] = None  # ID de l'utilisateur assigné
+    assigned_at: Optional[str] = None  # ISO 8601 timestamp
+```
+
+Mettez à jour la route PATCH pour retourner ces champs.
+
+### 2. Implémenter GET /tickets/{id}
+
+Créez une route pour récupérer un ticket spécifique :
+
+```python
+@router.get("/{ticket_id}", response_model=TicketOut)
+async def get_ticket(ticket_id: str):
+    try:
+        usecase = get_get_ticket_usecase()  # À créer
+        ticket = usecase.execute(ticket_id)
+        return TicketOut(...)
+    except KeyError:
+        raise HTTPException(status_code=404, detail="Ticket not found")
+```
+
+### 3. Implémenter d'autres routes PATCH
+
+Si vous avez d'autres use cases (CloseTicket, ReopenTicket, ResolveTicket...), créez les routes correspondantes :
+- `PATCH /tickets/{id}/close`
+- `PATCH /tickets/{id}/reopen`
+- `PATCH /tickets/{id}/resolve`
+
+**💡 Pattern** : Chaque route appelle un use case et traduit les exceptions.
+
+### 4. Filtrer les tickets par statut (GET /tickets?status=OPEN)
+
+Améliorez la route `GET /tickets` pour accepter un paramètre de requête :
+
+```python
+@router.get("/", response_model=list[TicketOut])
+async def list_tickets(status: Optional[str] = None):
+    usecase = get_list_tickets_usecase()
+    tickets = usecase.execute(status_filter=status)
+    return [TicketOut(...) for ticket in tickets]
+```
+
+Adaptez votre `ListTicketsUseCase` et votre repository pour supporter le filtrage.
+
+---
+
+## 📌 Finalisation : Commit final et tag Git
+
+```bash
+git add .
+git commit -m "feat(api): Add PATCH /tickets/{id}/assign with error handling"
+git tag -a TD4b -m "TD4b: API REST avancée - Gestion d'erreurs"
+git push origin main --tags
+```
+
+✅ **Félicitations !** Vous avez complété le TD4b.
+
+---
+
+## 📖 Ressources complémentaires
+
+- [Documentation FastAPI - Handling Errors](https://fastapi.tiangolo.com/tutorial/handling-errors/)
+- [HTTP Status Codes - Mozilla MDN](https://developer.mozilla.org/fr/docs/Web/HTTP/Status)
+- [REST API Best Practices - Microsoft](https://docs.microsoft.com/en-us/azure/architecture/best-practices/api-design)
