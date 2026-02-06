@@ -152,7 +152,7 @@ Si cette exception remonte jusqu'à FastAPI **sans être interceptée**, le clie
 
 ### La solution : Intercepter et traduire
 
-**Principe** : L'adaptateur API (couche `adapters/api`) doit attraper les exceptions du domaine et les convertir en `HTTPException`.
+**Principe** : L'adaptateur API doit attraper les exceptions (du domaine et de l'application) et les convertir en `HTTPException`.
 
 ```python
 # src/adapters/api/ticket_router.py
@@ -164,21 +164,21 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
         ticket = usecase.execute(ticket_id=ticket_id, user_id=assignment.user_id)
         return TicketOut(...)
     
+    except TicketNotFoundError as e:  # Exception application
+        # Traduire en HTTP 404 (Not Found)
+        raise HTTPException(status_code=404, detail=str(e))
+    
     except ValueError as e:  # Exception domaine
         # Traduire en HTTP 400 (Bad Request)
         raise HTTPException(status_code=400, detail=str(e))
-    
-    except KeyError:  # Ticket ou utilisateur inexistant
-        # Traduire en HTTP 404 (Not Found)
-        raise HTTPException(status_code=404, detail="Ticket not found")
 ```
 
-**💡 Responsabilité de la couche API** :
-- ✅ Appeler les use cases
-- ✅ Traduire les exceptions métier → codes HTTP appropriés
-- ✅ Convertir entités domaine → schémas Pydantic
+**💡 Responsabilités dans l'architecture hexagonale** :
+- **Domaine** : Règles métier pures (lève `ValueError`, `InvalidTicketStateError`, etc.)
+- **Application** (use cases) : Orchestre le domaine, vérifie l'existence des ressources (lève `TicketNotFoundError`, etc.)
+- **Adaptateurs API** : Traduisent exceptions → codes HTTP, convertissent entités domaine → schémas Pydantic
 
-**💡 Le domaine reste pur** : Pas de dépendance vers FastAPI ou HTTP. Il lève des exceptions Python standard (`ValueError`, `KeyError`...).
+**💡 Séparation des préoccupations** : Le domaine et l'application ne connaissent pas HTTP. Seul l'adaptateur API fait le pont avec le protocole HTTP.
 
 ---
 
