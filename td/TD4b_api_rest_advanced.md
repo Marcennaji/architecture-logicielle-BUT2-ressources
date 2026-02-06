@@ -1,4 +1,4 @@
-# TD4b — API REST avancée : Gestion d'erreurs (tag: TD4b)
+# TD4b — API REST : Gestion d'erreurs (tag: TD4b)
 
 **Objectif** : Améliorer votre API REST avec des routes PATCH et une gestion d'erreurs appropriée.
 
@@ -28,7 +28,7 @@
 | **TD2** | Use cases + ports (CreateTicket, StartTicket) | `TD2` | ✅ |
 | **TD3** | Repositories SQLite (persistence) | `TD3` | ✅ |
 | **TD4a** | API REST (POST/GET /tickets) | `TD4a` | ✅ |
-| **TD4b** | **API REST avancée (PATCH + erreurs)** | `TD4b` | ⏳ **Aujourd'hui** |
+| **TD4b** | **API REST (PATCH + erreurs)** | `TD4b` | ⏳ **Aujourd'hui** |
 
 ### Architecture actuelle
 
@@ -851,7 +851,7 @@ Vous avez appris à :
 ```bash
 git add .
 git commit -m "feat(api): Add PATCH /tickets/{id}/start with error handling"
-git tag -a TD4b -m "TD4b: API REST avancée - Gestion d'erreurs"
+git tag -a TD4b -m "TD4b: API REST - Gestion d'erreurs"
 git push origin main --tags
 ```
 
