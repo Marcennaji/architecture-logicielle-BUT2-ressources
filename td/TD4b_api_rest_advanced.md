@@ -44,7 +44,7 @@ src/
     └── api/         → Routes FastAPI (POST/GET /tickets)
 ```
 
-**Petit quiz rapide** :
+**Petit quiz rapide** (réfléchissez, puis cliquez sur les flèches pour afficher les réponses):
 
 <details>
 <summary>❓ Où se trouve la logique métier "un ticket ne peut être assigné que s'il est OPEN" ?</summary>
@@ -406,9 +406,12 @@ Testez `PATCH /tickets/ticket-inexistant/assign` :
 
 #### Étape 1 : Rappel du use case StartTicket
 
-**Fichier** : `src/application/usecases/start_ticket.py`
-
 💡 **Note** : Ce use case a été obligatoirement implémenté au TD2b. Vous devriez déjà avoir ce code dans votre projet.
+
+<details>
+<summary><strong>👉 Cliquez ici pour voir le rappel du code StartTicket (déjà implémenté au TD2b)</strong></summary>
+
+**Fichier** : `src/application/usecases/start_ticket.py`
 
 ```python
 from src.domain.exceptions import TicketNotFoundError
@@ -466,6 +469,8 @@ class StartTicketUseCase:
 ```
 
 **💡 Point clé** : Le use case lève `TicketNotFoundError` (exception de l'application) si le ticket n'existe pas, et laisse remonter les `ValueError` du domaine pour les règles métier (ex: ticket non assigné, mauvais agent, statut invalide).
+
+</details>
 
 ---
 
@@ -841,64 +846,6 @@ Vous avez appris à :
 
 ---
 
-## 🚀 Bonus : Améliorer l'API (optionnel)
-
-### 1. Ajouter un TicketOut enrichi
-
-Actuellement, `TicketOut` ne retourne pas `assigned_to` ni `assigned_at`. Améliorez-le :
-
-```python
-class TicketOut(BaseModel):
-    id: str
-    title: str
-    description: str
-    status: str
-    assigned_to: Optional[str] = None  # ID de l'utilisateur assigné
-    assigned_at: Optional[str] = None  # ISO 8601 timestamp
-```
-
-Mettez à jour vos routes PATCH pour retourner ces champs.
-
-### 2. Implémenter GET /tickets/{id}
-
-Créez une route pour récupérer un ticket spécifique :
-
-```python
-@router.get("/{ticket_id}", response_model=TicketOut)
-async def get_ticket(ticket_id: str):
-    try:
-        usecase = get_get_ticket_usecase()  # À créer
-        ticket = usecase.execute(ticket_id)
-        return TicketOut(...)
-    except KeyError:
-        raise HTTPException(status_code=404, detail="Ticket not found")
-```
-
-### 3. Implémenter d'autres routes PATCH
-
-Si vous avez d'autres use cases (CloseTicket, ReopenTicket, ResolveTicket...), créez les routes correspondantes :
-- `PATCH /tickets/{id}/close`
-- `PATCH /tickets/{id}/reopen`
-- `PATCH /tickets/{id}/resolve`
-
-**💡 Pattern** : Chaque route appelle un use case et traduit les exceptions.
-
-### 4. Filtrer les tickets par statut (GET /tickets?status=OPEN)
-
-Améliorez la route `GET /tickets` pour accepter un paramètre de requête :
-
-```python
-@router.get("/", response_model=list[TicketOut])
-async def list_tickets(status: Optional[str] = None):
-    usecase = get_list_tickets_usecase()
-    tickets = usecase.execute(status_filter=status)
-    return [TicketOut(...) for ticket in tickets]
-```
-
-Adaptez votre `ListTicketsUseCase` et votre repository pour supporter le filtrage.
-
----
-
 ## 📌 Finalisation : Commit final et tag Git
 
 ```bash
@@ -907,8 +854,6 @@ git commit -m "feat(api): Add PATCH /tickets/{id}/start with error handling"
 git tag -a TD4b -m "TD4b: API REST avancée - Gestion d'erreurs"
 git push origin main --tags
 ```
-
-✅ **Félicitations !** Vous avez complété le TD4b.
 
 ---
 
