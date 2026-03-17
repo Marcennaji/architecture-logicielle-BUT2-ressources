@@ -1,10 +1,10 @@
-# Travail autonome pendant le stage - Implémentation POST /users
+# Travail autonome - Implémentation POST /users
 
-**⏰ À réaliser avant le TD4b du 24/03/2026**
+** À réaliser avant le TD4b**
 
 ---
 
-## 🎯 Objectif
+## Objectif
 
 Implémenter la route `POST /users/` pour créer des utilisateurs via l'API REST.
 
@@ -12,7 +12,7 @@ Implémenter la route `POST /users/` pour créer des utilisateurs via l'API REST
 
 ---
 
-## 📋 Ce que vous devez faire
+## Ce que vous devez faire
 
 Vous allez reproduire le pattern utilisé pour `POST /tickets/` (fait au TD4a) mais pour les utilisateurs.
 
@@ -26,7 +26,7 @@ Vous allez reproduire le pattern utilisé pour `POST /tickets/` (fait au TD4a) m
 
 ---
 
-## 📖 Instructions détaillées
+## Instructions détaillées
 
 ### Étape 1 : Vérifier que CreateUserUseCase existe (TD3b)
 
@@ -42,7 +42,7 @@ Si ce fichier n'existe pas, vous devez le créer. Sinon, passez à l'étape 2.
 - Sauvegarder avec `user_repo.save(user)`
 - Retourner l'utilisateur créé
 
-**💡 Inspirez-vous de** : `src/application/usecases/create_ticket.py`
+**Inspirez-vous de** : `src/application/usecases/create_ticket.py`
 
 ---
 
@@ -55,7 +55,7 @@ Si ce fichier n'existe pas, vous devez le créer. Sinon, passez à l'étape 2.
 - Méthode `execute()` sans paramètre
 - Retourner `self.user_repo.list_all()`
 
-**💡 Inspirez-vous de** : `src/application/usecases/list_tickets.py` (quasi identique)
+**Inspirez-vous de** : `src/application/usecases/list_tickets.py` (quasi identique)
 
 ---
 
@@ -88,7 +88,7 @@ router = APIRouter(prefix="/users", tags=["users"])
 - Champs : `id` (str), `username` (str), `is_agent` (bool), `is_admin` (bool)
 - Hérite de `BaseModel`
 
-**💡 Astuce** : Comparez avec `TicketIn` et `TicketOut` dans `ticket_router.py`
+**Astuce** : Comparez avec `TicketIn` et `TicketOut` dans `ticket_router.py`
 
 #### 3.4 Route POST /users/
 
@@ -104,7 +104,7 @@ async def create_user(user_data: UserIn):
 4. Gérer les exceptions :
    - Si `ValueError` → lever `HTTPException(status_code=400, detail=str(e))`
 
-**💡 Structure identique à** : `create_ticket()` dans `ticket_router.py`
+**Structure identique à** : `create_ticket()` dans `ticket_router.py`
 
 #### 3.5 Route GET /users/
 
@@ -118,7 +118,7 @@ async def list_users():
 2. Appeler `usecase.execute()`
 3. Convertir chaque `User` en `UserOut` avec une list comprehension
 
-**💡 Structure identique à** : `list_tickets()` dans `ticket_router.py`
+**Structure identique à** : `list_tickets()` dans `ticket_router.py`
 
 ---
 
@@ -194,7 +194,7 @@ class TestUserAPI:
         # 3. Vérifier que la réponse est une liste
 ```
 
-**💡 Inspirez-vous de** : Les tests de `TestTicketAPI` juste au-dessus
+**Inspirez-vous de** : Les tests de `TestTicketAPI` juste au-dessus
 
 ---
 
@@ -232,7 +232,7 @@ Tous les tests doivent passer ✅
 
 ---
 
-## 💡 Conseils
+## Conseils
 
 1. **Procédez par étapes** : Faites un fichier à la fois, testez au fur et à mesure
 2. **Copiez le pattern tickets** : La structure est identique, changez juste les noms
@@ -244,7 +244,7 @@ Tous les tests doivent passer ✅
 
 ## ❓ Difficultés ?
 
-Si vous bloquez, contactez-moi **avant le 20/03** par mail en précisant :
+Si vous bloquez, contactez-moi par mail en précisant :
 - Où vous en êtes (quel fichier, quelle étape)
 - L'erreur que vous rencontrez (copier-coller le message d'erreur)
 - Ce que vous avez déjà essayé
@@ -259,4 +259,4 @@ Je vous débloquerai ou fournirai le code si nécessaire.
 - **Swagger UI** : Documentation interactive de votre API
 - **FastAPI docs** : https://fastapi.tiangolo.com/tutorial/first-steps/
 
-Bon courage ! 🚀
+Bon courage ! 
