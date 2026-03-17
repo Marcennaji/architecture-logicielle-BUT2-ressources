@@ -22,6 +22,7 @@ Ces guides sont à consulter tout au long du module :
 | 6 | TD3a : Ticket Repository | `TD3a` | [TD3a_sqlite_ticket_repository.md](TD3a_sqlite_ticket_repository.md) | ✅ Disponible |
 | 7 | TD3b : User Repository | `TD3b` | [TD3b_sqlite_user_repository.md](TD3b_sqlite_user_repository.md) | ✅ Disponible |
 | 8 | TD4a : API REST (1) | `TD4a` | [TD4a_api_rest.md](TD4a_api_rest.md) | ✅ Disponible |
+|   | TD4a : Travail autonome |  | [TD4a_travail_autonome.md](TD4a_travail_autonome.md) | ✅ Disponible |
 | 9 | TD4b : API REST (2) | `TD4b` | [TD4b_api_rest_advanced.md](TD4b_api_rest_advanced.md) | ✅ Disponible |
 | 10 | QCM (45mn) + Exercice pratique | 🔒 Bientôt | 🔒 Bientôt | 🔒 Bientôt |
 
