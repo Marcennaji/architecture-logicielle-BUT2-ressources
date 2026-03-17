@@ -1,6 +1,6 @@
 # Travail autonome - Implémentation POST /users
 
-** À réaliser avant le TD4b**
+**À réaliser avant le TD4b**
 
 ---
 
