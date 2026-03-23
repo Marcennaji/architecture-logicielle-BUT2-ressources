@@ -188,7 +188,9 @@ async def assign_ticket(ticket_id: str, assignment: AssignmentIn):
 
 **💡 Stratégie** : Nous allons d'abord implémenter **PATCH /assign**, puis **PATCH /start**, car un ticket doit être assigné avant d'être démarré.
 
-**📝 Note importante sur les IDs utilisateurs** : Dans ce TD, nous utilisons des IDs fictifs ("user-123", "agent-456"). Par choix de simplicité, les use cases ne vérifient pas l'existence de ces utilisateurs en base (via un UserRepository). En production, `AssignTicketUseCase` devrait vérifier que l'agent existe avant l'assignation, et lever une exception appropriée (ex: `UserNotFoundError` → HTTP 404). Cela nous permet de nous concentrer sur la gestion d'erreurs REST sans dépendre d'un système de gestion des utilisateurs.
+**📝 Note importante sur les IDs utilisateurs** : Dans ce TD, nous utilisons des IDs fictifs ("user-123", "agent-456"). Par choix de simplicité, les use cases ne vérifient pas l'existence de ces utilisateurs en base (via un `UserRepository`). Cela nous permet de nous concentrer sur la gestion d'erreurs REST sans dépendre d'un système de gestion des utilisateurs.
+
+> 💡 **Vous avez fait le travail autonome TD4a (`POST /users`) ?** Rendez-vous à la **[section Bonus](#-bonus--valider-lexistence-de-lutilisateur)** en fin de TD pour aller plus loin !
 
 ---
 
@@ -843,6 +845,176 @@ Vous avez appris à :
 **💡 Principe clé** : L'adaptateur API fait le pont entre le protocole HTTP et votre logique métier. Il traduit :
 - Requêtes HTTP → appels de use cases
 - Exceptions domaine → codes HTTP + messages JSON
+
+---
+
+## 🌟 Bonus : Valider l'existence de l'utilisateur
+
+> **Prérequis** : Cette section s'adresse aux étudiants qui ont implémenté `POST /users` dans le travail autonome TD4a (c'est-à-dire qui disposent de `CreateUserUseCase` et d'un `UserRepository` fonctionnel).
+
+### Problème actuel
+
+Actuellement, `AssignTicketUseCase` et `StartTicketUseCase` acceptent n'importe quel `agent_id`, même un identifiant qui n'existe pas en base. En production, cela créerait des incohérences de données.
+
+**Objectif** : Modifier ces deux use cases pour vérifier que l'utilisateur existe avant d'agir, et lever une erreur métier si ce n'est pas le cas.
+
+---
+
+### Étape 1 : Ajouter `UserNotFoundError` dans les exceptions
+
+**Fichier** : `src/domain/exceptions.py`
+
+Ajoutez la nouvelle exception :
+
+```python
+class UserNotFoundError(DomainError):
+    """Levée quand un utilisateur est introuvable."""
+    ...
+```
+
+---
+
+### Étape 2 : Modifier `AssignTicketUseCase`
+
+**Fichier** : `src/application/usecases/assign_ticket.py`
+
+Injectez le `UserRepository` et ajoutez la vérification :
+
+```python
+from src.domain.exceptions import TicketNotFoundError, UserNotFoundError
+from src.ports.ticket_repository import TicketRepository
+from src.ports.user_repository import UserRepository
+from src.ports.clock import Clock
+
+
+class AssignTicketUseCase:
+
+    def __init__(self, ticket_repo: TicketRepository, user_repo: UserRepository, clock: Clock):
+        self.ticket_repo = ticket_repo
+        self.user_repo = user_repo
+        self.clock = clock
+
+    def execute(self, ticket_id: str, agent_id: str):
+        ticket = self.ticket_repo.get_by_id(ticket_id)
+        if ticket is None:
+            raise TicketNotFoundError(f"Ticket {ticket_id} not found")
+
+        # Nouvelle vérification : l'agent doit exister
+        user = self.user_repo.get_by_id(agent_id)
+        if user is None:
+            raise UserNotFoundError(f"User {agent_id} not found")
+
+        current_time = self.clock.now()
+        ticket.assign(agent_id, current_time)
+        return self.ticket_repo.save(ticket)
+```
+
+---
+
+### Étape 3 : Modifier `StartTicketUseCase`
+
+**Fichier** : `src/application/usecases/start_ticket.py`
+
+Même principe :
+
+```python
+from src.domain.exceptions import TicketNotFoundError, UserNotFoundError
+from src.ports.ticket_repository import TicketRepository
+from src.ports.user_repository import UserRepository
+from src.ports.clock import Clock
+
+
+class StartTicketUseCase:
+
+    def __init__(self, ticket_repo: TicketRepository, user_repo: UserRepository, clock: Clock):
+        self.ticket_repo = ticket_repo
+        self.user_repo = user_repo
+        self.clock = clock
+
+    def execute(self, ticket_id: str, agent_id: str):
+        ticket = self.ticket_repo.get_by_id(ticket_id)
+        if ticket is None:
+            raise TicketNotFoundError(f"Ticket {ticket_id} not found")
+
+        # Nouvelle vérification : l'agent doit exister
+        user = self.user_repo.get_by_id(agent_id)
+        if user is None:
+            raise UserNotFoundError(f"User {agent_id} not found")
+
+        current_time = self.clock.now()
+        ticket.start(agent_id, current_time)
+        return self.ticket_repo.save(ticket)
+```
+
+---
+
+### Étape 4 : Mettre à jour les factories dans `main.py`
+
+**Fichier** : `src/main.py`
+
+Passez le `user_repository` aux deux factories :
+
+```python
+def get_assign_ticket_usecase() -> AssignTicketUseCase:
+    return AssignTicketUseCase(
+        ticket_repo=ticket_repository,
+        user_repo=user_repository,  # Ajouté
+        clock=clock
+    )
+
+def get_start_ticket_usecase() -> StartTicketUseCase:
+    return StartTicketUseCase(
+        ticket_repo=ticket_repository,
+        user_repo=user_repository,  # Ajouté
+        clock=clock
+    )
+```
+
+---
+
+### Étape 5 : Gérer `UserNotFoundError` dans le router
+
+**Fichier** : `src/adapters/api/ticket_router.py`
+
+Ajoutez le catch de `UserNotFoundError` dans les deux routes PATCH :
+
+```python
+from src.domain.exceptions import TicketNotFoundError, UserNotFoundError
+
+# Dans assign_ticket ET start_ticket :
+except UserNotFoundError as e:
+    raise HTTPException(status_code=404, detail=str(e)) from e
+```
+
+**💡 Responsabilités respectées** :
+- Le **domaine** (`exceptions.py`) définit `UserNotFoundError`
+- Les **use cases** (application) vérifient l'existence et lèvent l'exception
+- L'**adaptateur API** intercepte et traduit en HTTP 404
+
+Le domaine et l'application ne connaissent toujours pas HTTP. ✅
+
+---
+
+### Étape 6 : Tester le nouveau comportement
+
+Vous pouvez maintenant écrire un test e2e qui vérifie que l'assignation avec un `agent_id` inexistant retourne bien **HTTP 404** :
+
+```python
+def test_assign_with_unknown_user_returns_404(self, client: TestClient):
+    """Assigner à un utilisateur inexistant doit retourner 404."""
+    # ARRANGE : Créer un ticket
+    create_response = client.post("/tickets/", json={
+        "title": "Bug", "description": "Desc", "creator_id": "user-1"
+    })
+    ticket_id = create_response.json()["id"]
+
+    # ACT : Assigner à un agent inexistant
+    response = client.patch(f"/tickets/{ticket_id}/assign", json={"agent_id": "agent-fantome"})
+
+    # ASSERT
+    assert response.status_code == 404
+    assert "not found" in response.json()["detail"].lower()
+```
 
 ---
 
