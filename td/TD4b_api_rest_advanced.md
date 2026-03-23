@@ -70,7 +70,7 @@ src/
 <details>
 <summary>❓ Pourquoi `TicketOut` n'est pas la même classe que `Ticket` ?</summary>
 
-**Réponse** : **Séparation des respojsabilités** :
+**Réponse** : **Séparation des responsabilités** :
 - `Ticket` (domaine) = logique métier (règles, comportements)
 - `TicketOut` (API) = schéma de sortie (validation, sérialisation JSON)
 
