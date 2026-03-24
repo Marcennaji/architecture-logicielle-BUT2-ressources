@@ -722,111 +722,112 @@ assert isinstance(data, list)
 
 **Fichier** : `tests/e2e/test_api.py`
 
-Ajoutez ces tests :
+Ajoutez ces tests (le `client` est déjà défini au niveau du module dans ce fichier) :
 
 ```python
-class TestStartTicket:
+class TestStartTicketAPI:
     """Tests de la route PATCH /tickets/{id}/start"""
-    
-    def test_start_ticket_success(self, client: TestClient):
+
+    def test_start_ticket_success(self):
         """Démarrer un ticket assigné doit retourner 200."""
-        # ARRANGE : Créer et assigner un ticket
-        # Note: Vous devrez adapter selon votre implémentation
-        # Option 1: Si vous avez PATCH /assign, utilisez-la
-        # Option 2: Modifiez CreateTicket pour créer un ticket déjà assigné
+        # ARRANGE : Créer un ticket
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
             "creator_id": "user-123",
-            "assigned_to": "agent-456"  # Si votre CreateTicket supporte ce champ
         }
         create_response = client.post("/tickets/", json=ticket_data)
         assert create_response.status_code == 201
         ticket_id = create_response.json()["id"]
-        
+
+        # Assigner le ticket via PATCH /assign
+        client.patch(f"/tickets/{ticket_id}/assign", json={"agent_id": "agent-456"})
+
         # ACT : Démarrer le ticket
-        start_data = {"agent_id": "agent-456"}
-        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
-        
+        response = client.patch(f"/tickets/{ticket_id}/start", json={"agent_id": "agent-456"})
+
         # ASSERT
         assert response.status_code == 200
         data = response.json()
         assert data["id"] == ticket_id
-        assert data["status"] == "IN_PROGRESS"
-    
-    def test_start_nonexistent_ticket_returns_404(self, client: TestClient):
+        assert data["status"] == "in_progress"  # Valeur de Status.IN_PROGRESS.value
+
+    def test_start_nonexistent_ticket_returns_404(self):
         """Démarrer un ticket inexistant doit retourner 404."""
         # ACT
-        start_data = {"agent_id": "agent-456"}
-        response = client.patch("/tickets/ticket-inexistant/start", json=start_data)
-        
+        response = client.patch("/tickets/ticket-inexistant/start", json={"agent_id": "agent-456"})
+
         # ASSERT
         assert response.status_code == 404
         assert "not found" in response.json()["detail"].lower()
-    
-    def test_start_unassigned_ticket_returns_400(self, client: TestClient):
+
+    def test_start_unassigned_ticket_returns_400(self):
         """Démarrer un ticket non assigné doit retourner 400."""
         # ARRANGE : Créer un ticket NON assigné
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
-            "creator_id": "user-123"
+            "creator_id": "user-123",
         }
         create_response = client.post("/tickets/", json=ticket_data)
         ticket_id = create_response.json()["id"]
-        
-        # ACT : Essayer de démarrer sans assignation
-        start_data = {"agent_id": "agent-456"}
-        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
-        
+
+        # ACT : Essayer de démarrer sans assignation préalable
+        response = client.patch(f"/tickets/{ticket_id}/start", json={"agent_id": "agent-456"})
+
         # ASSERT
         assert response.status_code == 400
-        assert "assigned" in response.json()["detail"].lower()
-    
-    def test_start_with_wrong_agent_returns_400(self, client: TestClient):
+        assert "unassigned" in response.json()["detail"].lower()  # TicketNotAssignedError
+
+    def test_start_with_wrong_agent_returns_400(self):
         """Démarrer avec un agent différent de celui assigné doit retourner 400."""
-        # ARRANGE : Créer un ticket assigné à agent-456
+        # ARRANGE : Créer un ticket et l'assigner à agent-456
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
             "creator_id": "user-123",
-            "assigned_to": "agent-456"
         }
         create_response = client.post("/tickets/", json=ticket_data)
         ticket_id = create_response.json()["id"]
-        
+
+        client.patch(f"/tickets/{ticket_id}/assign", json={"agent_id": "agent-456"})
+
         # ACT : Démarrer avec un autre agent
-        start_data = {"agent_id": "agent-789"}  # Mauvais agent
-        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
-        
+        response = client.patch(f"/tickets/{ticket_id}/start", json={"agent_id": "agent-789"})
+
         # ASSERT
         assert response.status_code == 400
-        assert "agent" in response.json()["detail"].lower()
-    
-    def test_start_with_invalid_data_returns_422(self, client: TestClient):
+        assert "agent" in response.json()["detail"].lower()  # WrongAgentError
+
+    def test_start_with_invalid_data_returns_422(self):
         """Envoyer des données invalides doit retourner 422."""
-        # ARRANGE : Créer un ticket assigné
+        # ARRANGE : Créer et assigner un ticket
         ticket_data = {
             "title": "Bug critique",
             "description": "Le serveur crash",
             "creator_id": "user-123",
-            "assigned_to": "agent-456"
         }
         create_response = client.post("/tickets/", json=ticket_data)
         ticket_id = create_response.json()["id"]
-        
+
+        client.patch(f"/tickets/{ticket_id}/assign", json={"agent_id": "agent-456"})
+
         # ACT : Envoyer un agent_id de type invalide
-        start_data = {"agent_id": 123}  # int au lieu de string
-        response = client.patch(f"/tickets/{ticket_id}/start", json=start_data)
-        
+        response = client.patch(f"/tickets/{ticket_id}/start", json={"agent_id": 123})  # int au lieu de string
+
         # ASSERT
         assert response.status_code == 422
 ```
 
+💡 **Notes importantes** :
+- `TicketIn` n'accepte pas de champ `assigned_to` : l'assignation doit se faire via `PATCH /assign`
+- Le statut `IN_PROGRESS` est sérialisé en `"in_progress"` (minuscules) par Pydantic
+- Le message de `TicketNotAssignedError` contient `"unassigned"` (pas seulement `"assigned"`)
+
 ### Étape 3 : Lancer les tests
 
 ```bash
-pytest tests/e2e/test_api.py::TestStartTicket -v
+pytest tests/e2e/test_api.py::TestStartTicketAPI -v
 ```
 
 ✅ **Vérification** : Tous les tests doivent passer.
