@@ -24,7 +24,9 @@ Ces guides sont à consulter tout au long du module :
 | 8 | TD4a : API REST (1) | `TD4a` | [TD4a_api_rest.md](TD4a_api_rest.md) | ✅ Disponible |
 |   | TD4a : Travail autonome |  | [TD4a_travail_autonome.md](TD4a_travail_autonome.md) | ✅ Disponible |
 | 9 | TD4b : API REST (2) | `TD4b` | [TD4b_api_rest_advanced.md](TD4b_api_rest_advanced.md) | ✅ Disponible |
-| 10 | QCM (45mn) + Exercice pratique | 🔒 Bientôt | 🔒 Bientôt | 🔒 Bientôt |
+| 10 | QCM (45mn) |  |  |  |
+
+Exercice pratique final (1h15) : [projet Library](https://github.com/Marcennaji/library/blob/main/README.md)
 
 > 💡 **Volume total** : 20h de TD en présentiel.  
 > **Système d'évaluation** : Voir [evaluation.md](evaluation.md)
